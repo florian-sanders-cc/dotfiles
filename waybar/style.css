@@ -1,0 +1,18 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: "JetBrainsMonoNL NF Regular", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+}
+
+window#waybar {
+  background: transparent;
+  color: #ddd;
+}
+
+.modules-right,
+.modules-center {
+  padding: 5px 20px;
+  background: rgba(20, 20, 20, 0.8);
+  margin: 5px 5px;
+  border-radius: 15px;
+}

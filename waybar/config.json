@@ -1,0 +1,27 @@
+{
+  "layer": "top",
+  "include": [
+    "~/.config/waybar/modules.json"
+  ],
+  "modules-left": [],
+  "modules-center": [
+    "clock",
+    "tray"
+  ],
+  "modules-right": [
+    "group/hardware",
+    "network",
+    "pulseaudio",
+    "battery",
+    "custom/power"
+  ],
+  "group/hardware": {
+    "orientation": "horizontal",
+    "modules": [
+      "cpu",
+      "custom/gpu",
+      "memory"
+    ]
+  },
+  "spacing": 15
+}
