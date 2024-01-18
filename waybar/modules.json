@@ -37,7 +37,7 @@
       "<span color='#DD7EBD'>   </span>"
     ]
   },
-  "custom/gpu": {
+  "custom/gpu-nvidia": {
     "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
     "interval": 1,
     "format": "     {}%"

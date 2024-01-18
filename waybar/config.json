@@ -19,7 +19,7 @@
     "orientation": "horizontal",
     "modules": [
       "cpu",
-      "custom/gpu",
+      "custom/gpu-nvidia",
       "memory"
     ]
   },
