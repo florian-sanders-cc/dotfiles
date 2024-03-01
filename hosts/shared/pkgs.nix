@@ -2,6 +2,8 @@
 
 {
     environment.systemPackages = with pkgs; [
+        prefetch-npm-deps
+        nix-prefetch-git
         chromium
         discord
         firefox-wayland

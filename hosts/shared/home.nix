@@ -32,7 +32,6 @@ rec {
         ./programs/neovim.nix
     ];
 
-
     home.sessionVariables = {
       NPM_PREFIX = "${home.homeDirectory}/.npm-packages";
       PATH = "${home.homeDirectory}/.npm-packages/bin:$PATH";
