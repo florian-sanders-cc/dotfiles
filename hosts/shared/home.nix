@@ -35,7 +35,6 @@ rec {
     home.sessionVariables = {
       NPM_PREFIX = "${home.homeDirectory}/.npm-packages";
       PATH = "${home.homeDirectory}/.npm-packages/bin:$PATH";
-      NODE_PATH = "${home.homeDirectory}/.npm-packages/lib/node_modules";
       NIXOS_OZONE_WL= "1";
     };
 
