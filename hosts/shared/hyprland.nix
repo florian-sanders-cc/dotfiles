@@ -15,6 +15,7 @@
       waybar
       slurp
       grim
+      grimblast
     ];
 
     home.file.".config/waybar".source = ../../dotfiles/waybar;
