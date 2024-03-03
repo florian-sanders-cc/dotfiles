@@ -43,11 +43,14 @@
       grim
       grimblast
       kdePackages.qtwayland
-      kdePackages.kwallet
-      kdePackages.kwallet-pam
-      kdePackages.polkit-kde-agent-1
-      libsForQt5.kirigami2
+      lxqt.lxqt-policykit
     ];
+
+    programs.keychain = {
+      enable = true;
+      keys = [ "id_ed25519" ];
+      agents = [ "ssh" "gpg 22B2EAD482730FC2" ];
+    };
 
     home.file.".config/waybar".source = ../../dotfiles/waybar;
     home.file.".config/waybar/config.jsonc".source = ../../dotfiles/waybar/config.jsonc;
