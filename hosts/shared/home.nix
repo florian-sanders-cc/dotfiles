@@ -27,7 +27,7 @@ rec {
         ./programs/fzf.nix
         ./programs/starship.nix
         ./programs/direnv.nix
-        #./programs/vscode.nix
+        ./programs/vscode.nix
         ./programs/zsh.nix
         ./programs/neovim.nix
     ];

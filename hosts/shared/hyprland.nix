@@ -3,7 +3,7 @@
 {
   home.pointerCursor = {
     gtk.enable = true;
-    # x11.enable = true;
+    x11.enable = true;
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
     size = 13;
@@ -42,6 +42,11 @@
       slurp
       grim
       grimblast
+      kdePackages.qtwayland
+      kdePackages.kwallet
+      kdePackages.kwallet-pam
+      kdePackages.polkit-kde-agent-1
+      libsForQt5.kirigami2
     ];
 
     home.file.".config/waybar".source = ../../dotfiles/waybar;
