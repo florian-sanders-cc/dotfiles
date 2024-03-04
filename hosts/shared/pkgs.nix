@@ -16,6 +16,7 @@
         nodejs
         bun
         nvtop
+        obsidian
         (callPackage ./programs/random-labels.nix {})
         (callPackage ./programs/clever-tools.nix {})
     ];
