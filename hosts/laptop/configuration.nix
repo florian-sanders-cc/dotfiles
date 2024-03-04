@@ -29,6 +29,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.blueman.enable = true;
 
   # Allow unfree package
   nixpkgs.config.allowUnfree = true;
