@@ -7,15 +7,18 @@
     vimAlias = true;
     withNodeJs = true;
     defaultEditor = true;
-    
+
     extraPackages = with pkgs; [
       # LSP
       typescript
       nodePackages_latest.typescript-language-server
       lua-language-server
       nixd
-      (callPackage ./stylelint-lsp.nix {})
+      (callPackage ./stylelint-lsp.nix { })
       vscode-langservers-extracted
+
+      # Formatter
+      nixpkgs-fmt
 
       # Telescope
       ripgrep
@@ -68,7 +71,7 @@
           nvim-ts-autotag
           nvim-ts-context-commentstring
           nvim-treesitter-textobjects
-          nvim-treesitter.withAllGrammars
+          nvim-treesitter
           nvim-web-devicons
           persistence-nvim
           plenary-nvim
@@ -79,9 +82,10 @@
           vim-illuminate
           vim-startuptime
           which-key-nvim
-          SchemaStore-nvim
           nightfox-nvim
           toggleterm-nvim
+          emmet-vim
+          SchemaStore-nvim
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
@@ -90,6 +94,7 @@
           { name = "mini.indentscope"; path = mini-nvim; }
           { name = "mini.pairs"; path = mini-nvim; }
           { name = "mini.surround"; path = mini-nvim; }
+          (pkgs.callPackage ../vimPlugins/fileHistory.nix { inherit pkgs; })
         ];
         mkEntryFromDrv = drv:
           if lib.isDerivation drv then
@@ -112,7 +117,7 @@
           dev = {
             -- reuse files from pkgs.vimPlugins.*
             path = "${lazyPath}",
-            patterns = { "." },
+            patterns = { ".", "file-history" },
             -- fallback to download
             fallback = false,
           },
@@ -128,41 +133,36 @@
             -- disable mason.nvim, use programs.neovim.extraPackages
             { "williamboman/mason-lspconfig.nvim", enabled = false },
             { "williamboman/mason.nvim", enabled = false },
-            {
-              "nvim-treesitter/nvim-treesitter",
-              opts = {
-                auto_install = false,
-                ensure_installed = {},
-              },
-            },
             -- import/override with your plugins
             { import = "plugins" },
+            { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
           },
         })
       '';
-            #{ "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
   };
-
   # https://github.com/nvim-treesitter/nvim-treesitter#i-get-query-error-invalid-node-type-at-position
-  # xdg.configFile."nvim/parser".source =
-  #   let
-  #     parsers = pkgs.symlinkJoin {
-  #       name = "treesitter-parsers";
-  #       paths = (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: with plugins; [
-  #         c
-  #         lua
-  #         html
-  #         css
-  #         jsdoc
-  #         markdown
-  #         markdown_inline
-  #         hyprlang
-  #         nix
-  #       ])).dependencies;
-  #     };
-  #   in
-  #   "${parsers}/parser";
-  #
+  xdg.configFile."nvim/parser".source =
+    let
+      parsers = pkgs.symlinkJoin {
+        name = "treesitter-parsers";
+        paths = (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: with plugins; [
+          hyprlang
+          lua
+          nix
+          javascript
+          typescript
+          markdown
+          markdown_inline
+          html
+          css
+          json
+          json5
+          jsonc
+        ])).dependencies;
+      };
+    in
+    "${parsers}/parser";
+
   # Normal LazyVim config here, see https://github.com/LazyVim/starter/tree/main/lua
   xdg.configFile."nvim/lua".source = ../../../dotfiles/nvim/lua;
 }
