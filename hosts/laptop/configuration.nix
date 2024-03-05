@@ -30,6 +30,10 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.blueman.enable = true;
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="03f0", ATTR{idProduct}=="028c", ATTR{power/control}="-1"
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="03f0", ATTR{idProduct}=="0294", ATTR{power/control}="-1"
+  '';
 
   # Allow unfree package
   nixpkgs.config.allowUnfree = true;
