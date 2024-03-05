@@ -9,22 +9,27 @@
     defaultEditor = true;
     
     extraPackages = with pkgs; [
-      # LazyVim
+      # LSP
+      typescript
+      nodePackages_latest.typescript-language-server
       lua-language-server
-      stylua
+      nixd
+      (callPackage ./stylelint-lsp.nix {})
+      vscode-langservers-extracted
+
       # Telescope
       ripgrep
+
+      # LazyVim 
+      # TODO:
+      # clean this list
       lazygit
       fd
       ripgrep
       gcc
       libgcc
       libstdcxx5
-      nixd
-      (callPackage ./stylelint-lsp.nix {})
-      vscode-langservers-extracted
-      typescript
-      nodePackages_latest.typescript-language-server
+      stylua
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -59,22 +64,24 @@
           nvim-lspconfig
           nvim-notify
           nvim-spectre
-#          nvim-treesitter
-#          nvim-treesitter-context
-#          nvim-treesitter-textobjects
+          nvim-treesitter-context
           nvim-ts-autotag
           nvim-ts-context-commentstring
+          nvim-treesitter-textobjects
+          nvim-treesitter.withAllGrammars
           nvim-web-devicons
           persistence-nvim
           plenary-nvim
           telescope-fzf-native-nvim
           telescope-nvim
           todo-comments-nvim
-          tokyonight-nvim
           trouble-nvim
           vim-illuminate
           vim-startuptime
           which-key-nvim
+          SchemaStore-nvim
+          nightfox-nvim
+          toggleterm-nvim
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
@@ -96,12 +103,22 @@
           defaults = {
             lazy = true,
           },
+          performance = {
+            reset_packpath = false,
+            rtp = {
+                reset = false,
+            }
+          },
           dev = {
             -- reuse files from pkgs.vimPlugins.*
             path = "${lazyPath}",
             patterns = { "." },
             -- fallback to download
-            fallback = true,
+            fallback = false,
+          },
+          install = {
+            -- Safeguard in case we forget to install a plugin with Nix
+            missing = false,
           },
           spec = {
             { "LazyVim/LazyVim", import = "lazyvim.plugins" },
@@ -111,9 +128,15 @@
             -- disable mason.nvim, use programs.neovim.extraPackages
             { "williamboman/mason-lspconfig.nvim", enabled = false },
             { "williamboman/mason.nvim", enabled = false },
+            {
+              "nvim-treesitter/nvim-treesitter",
+              opts = {
+                auto_install = false,
+                ensure_installed = {},
+              },
+            },
             -- import/override with your plugins
             { import = "plugins" },
-            -- treesitter handled by xdg.configFile."nvim/parser", put this line at the end of spec to clear ensure_installed
           },
         })
       '';
