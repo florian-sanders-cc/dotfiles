@@ -90,6 +90,7 @@
           diffview-nvim
           neogit
           cmp-emoji
+          undotree
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
