@@ -87,6 +87,7 @@
           toggleterm-nvim
           emmet-vim
           SchemaStore-nvim
+          diffview-nvim
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
