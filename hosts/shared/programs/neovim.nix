@@ -89,6 +89,7 @@
           SchemaStore-nvim
           diffview-nvim
           neogit
+          cmp-emoji
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
