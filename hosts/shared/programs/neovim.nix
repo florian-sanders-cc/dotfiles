@@ -88,6 +88,7 @@
           emmet-vim
           SchemaStore-nvim
           diffview-nvim
+          neogit
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
@@ -96,7 +97,8 @@
           { name = "mini.indentscope"; path = mini-nvim; }
           { name = "mini.pairs"; path = mini-nvim; }
           { name = "mini.surround"; path = mini-nvim; }
-          (pkgs.callPackage ../vimPlugins/fileHistory.nix { inherit pkgs; })
+          (pkgs.callPackage ../vimPlugins/file-history.nix { inherit pkgs; })
+          (pkgs.callPackage ../vimPlugins/cmp-emmet-vim.nix { inherit pkgs; })
         ];
         mkEntryFromDrv = drv:
           if lib.isDerivation drv then
