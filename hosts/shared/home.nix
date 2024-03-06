@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, neovim-flake, ... }:
 
 rec {
 
@@ -20,22 +20,22 @@ rec {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-    imports = [
-        ./hyprland.nix
-        ./programs/git.nix
-        ./programs/alacritty.nix
-        ./programs/fzf.nix
-        ./programs/starship.nix
-        ./programs/direnv.nix
-        ./programs/vscode.nix
-        ./programs/zsh.nix
-        ./programs/neovim.nix
-    ];
+  imports = [
+    ./hyprland.nix
+    ./programs/git.nix
+    ./programs/alacritty.nix
+    ./programs/fzf.nix
+    ./programs/starship.nix
+    ./programs/direnv.nix
+    ./programs/vscode.nix
+    ./programs/zsh.nix
+    ./programs/neovim.nix
+  ];
 
-    home.sessionVariables = {
-      NPM_PREFIX = "${home.homeDirectory}/.npm-packages";
-      PATH = "${home.homeDirectory}/.npm-packages/bin:$PATH";
-      NIXOS_OZONE_WL= "1";
-    };
+  home.sessionVariables = {
+    NPM_PREFIX = "${home.homeDirectory}/.npm-packages";
+    PATH = "${home.homeDirectory}/.npm-packages/bin:$PATH";
+    NIXOS_OZONE_WL = "1";
+  };
 
 }

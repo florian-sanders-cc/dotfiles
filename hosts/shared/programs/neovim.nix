@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   programs.neovim = {
@@ -7,6 +7,7 @@
     vimAlias = true;
     withNodeJs = true;
     defaultEditor = true;
+    package = pkgs.neovim-nightly-pkgs;
 
     extraPackages = with pkgs; [
       # LSP
