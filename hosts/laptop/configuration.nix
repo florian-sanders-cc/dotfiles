@@ -3,19 +3,19 @@
 {
   imports =
     [
-        ./hardware-configuration.nix
-        ../shared/time-i18n.nix
-        ../shared/boot.nix
-        ./networking.nix
-        ../shared/pkgs.nix
-        ../shared/sound-pipewire.nix
-        ../shared/user-flo.nix
-        ./gpu.nix
-        #./nvidia.nix
+      ./hardware-configuration.nix
+      ../shared/time-i18n.nix
+      ../shared/boot.nix
+      ./networking.nix
+      ../shared/pkgs.nix
+      ../shared/sound-pipewire.nix
+      ../shared/user-flo.nix
+      ./gpu.nix
+      #./nvidia.nix
     ];
 
   nix.settings = {
-   experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [ "nix-command" "flakes" ];
   };
 
   # Configure keymap in X11
@@ -64,6 +64,11 @@
     text = ''
       auth include login
     '';
+  };
+
+  hardware.tuxedo-rs = {
+    enable = true;
+    tailor-gui.enable = true;
   };
 
   # This value determines the NixOS release from which the default

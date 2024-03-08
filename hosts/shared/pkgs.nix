@@ -17,8 +17,6 @@
     bun
     nvtop
     obsidian
-    tuxedo-rs
-    tailor-gui
     (callPackage ./programs/random-labels.nix { })
     (callPackage ./programs/clever-tools.nix { })
   ];
