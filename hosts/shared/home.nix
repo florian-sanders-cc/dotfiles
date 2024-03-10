@@ -37,5 +37,4 @@ rec {
     PATH = "${home.homeDirectory}/.npm-packages/bin:$PATH";
     NIXOS_OZONE_WL = "1";
   };
-
 }
