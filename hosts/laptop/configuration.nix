@@ -66,6 +66,13 @@
     '';
   };
 
+  nix.gc = {
+    automatic = true;
+    persistent = false;
+    dates = "weekly";
+    options = "--delete-older-than 15d";
+  };
+
   hardware.tuxedo-rs = {
     enable = true;
     tailor-gui.enable = true;
