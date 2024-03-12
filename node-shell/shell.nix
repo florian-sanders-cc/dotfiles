@@ -1,10 +1,10 @@
-{
-  pkgs ? import <nixpkgs> {},
-  nodeVersion ? "21.0.0",
-  npmVersion ? "10.5.0",
-  npmPackageHash ? "sha256-UUblNnFiTGcqjHR+0zxyohdc8oTx52YePCHLZGBxSlQ=",
-  npmDepsHash ? "sha256-+PMb4LsrYLuISXIkJxqKuEmxjRGDv3zYD6XncVvOQ+k=",
-}: 
+{ pkgs ? import <nixpkgs> { }
+, nodeVersion ? "21.0.0"
+, npmVersion ? "10.5.0"
+, npmPackageHash ? "sha256-UUblNnFiTGcqjHR+0zxyohdc8oTx52YePCHLZGBxSlQ="
+, npmDepsHash ? "sha256-+PMb4LsrYLuISXIkJxqKuEmxjRGDv3zYD6XncVvOQ+k="
+,
+}:
 
 pkgs.mkShell rec {
   name = "nodejs project";
@@ -18,12 +18,13 @@ pkgs.mkShell rec {
   ];
 
 
-  shellHook = ''
-    npm set prefix $NPM_PREFIX/npm-$PACKAGE_NPM_VERSION
-    PATH="$NPM_PREFIX/npm-$PACKAGE_NPM_VERSION/bin:$PATH";
-    if [ "$(npm -v)" != ${npmVersion} ]
-      then
-        npm i -g npm@$PACKAGE_NPM_VERSION
-    fi
-  '';
+  shellHook =
+    if npmVersion != "null" then ''
+      npm set prefix $NPM_PREFIX/npm-$PACKAGE_NPM_VERSION
+      PATH="$NPM_PREFIX/npm-$PACKAGE_NPM_VERSION/bin:$PATH";
+      if [ "$(npm -v)" != ${npmVersion} ]
+        then
+          npm i -g npm@$PACKAGE_NPM_VERSION
+      fi
+    '' else '''';
 }
