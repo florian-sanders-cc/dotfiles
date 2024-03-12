@@ -14,7 +14,7 @@
       typescript
       nodePackages_latest.typescript-language-server
       lua-language-server
-      nixd
+      # nixd
       (callPackage ./stylelint-lsp.nix { })
       vscode-langservers-extracted
 
@@ -165,6 +165,7 @@
           json
           json5
           jsonc
+          jsdoc
         ])).dependencies;
       };
     in

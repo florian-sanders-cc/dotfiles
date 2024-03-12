@@ -72,7 +72,7 @@
     options = "--delete-older-than 15d";
   };
 
-  # nix.optimise.automatic = true;
+  nix.optimise.automatic = true;
 
   hardware.tuxedo-rs = {
     enable = true;

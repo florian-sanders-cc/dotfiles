@@ -1,8 +1,8 @@
 return {
-  "neovim/nvim-lspconfig",
-  opts = {
-    servers = {
-      nixd = { }
-    }
-  }
+	"neovim/nvim-lspconfig",
+	opts = {
+		servers = {
+			nixd = { enabled = false },
+		},
+	},
 }
