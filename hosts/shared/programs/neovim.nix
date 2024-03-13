@@ -92,6 +92,7 @@
           cmp-emoji
           undotree
           neogen
+          aerial-nvim
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
@@ -143,6 +144,9 @@
             { "williamboman/mason.nvim", enabled = false },
             -- import/override with your plugins
             { import = "plugins" },
+            { import = "lazyvim.plugins.extras.ui.mini-animate" },
+            { import = "lazyvim.plugins.extras.editor.aerial" },
+            { import = "lazyvim.plugins.extras.editor.mini-files" },
             { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
           },
         })
