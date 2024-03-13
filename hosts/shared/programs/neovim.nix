@@ -93,6 +93,7 @@
           undotree
           neogen
           aerial-nvim
+          markdown-preview-nvim
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
