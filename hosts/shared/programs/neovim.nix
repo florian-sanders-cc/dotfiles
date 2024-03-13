@@ -100,6 +100,7 @@
           { name = "mini.indentscope"; path = mini-nvim; }
           { name = "mini.pairs"; path = mini-nvim; }
           { name = "mini.surround"; path = mini-nvim; }
+          { name = "mini.animate"; path = mini-nvim; }
           (pkgs.callPackage ../vimPlugins/file-history.nix { inherit pkgs; })
           (pkgs.callPackage ../vimPlugins/cmp-emmet-vim.nix { inherit pkgs; })
         ];
