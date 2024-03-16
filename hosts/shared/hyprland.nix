@@ -1,6 +1,15 @@
 { pkgs, ... }:
 
 {
+  services.gpg-agent = {
+    enable = true;
+  };
+
+  programs.keychain = {
+    enable = true;
+    keys = [ "id_ed25519" ];
+  };
+
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
@@ -47,12 +56,6 @@
     gtk4
     libadwaita
   ];
-
-  programs.keychain = {
-    enable = true;
-    keys = [ "id_ed25519" ];
-    agents = [ "ssh" "gpg 22B2EAD482730FC2" ];
-  };
 
   home.file.".config/waybar".source = ../../dotfiles/waybar;
   home.file.".config/waybar/config.jsonc".source = ../../dotfiles/waybar/config.jsonc;
