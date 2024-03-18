@@ -163,6 +163,7 @@
           lua
           nix
           javascript
+          styled
           typescript
           markdown
           markdown_inline
