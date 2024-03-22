@@ -15,7 +15,7 @@
     discord
     nodejs
     bun
-    nvtop
+    nvtopPackages.full
     obsidian
     (callPackage ./programs/random-labels.nix { })
     (callPackage ./programs/clever-tools.nix { })

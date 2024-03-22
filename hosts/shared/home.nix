@@ -1,4 +1,4 @@
-{ config, pkgs, neovim-flake, ... }:
+{ config, pkgs, ... }:
 
 rec {
 
@@ -21,7 +21,6 @@ rec {
   programs.home-manager.enable = true;
 
   imports = [
-    ./hyprland.nix
     ./programs/git.nix
     ./programs/alacritty.nix
     ./programs/fzf.nix
