@@ -33,7 +33,11 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.flo = { };
+              home-manager.users.flo = { 
+                imports = [
+                  ./hosts/shared/home.nix
+                ];
+              };
             }
           ];
         };
