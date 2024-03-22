@@ -24,15 +24,8 @@
     variant = "azerty";
   };
 
-  # services.gnome.gnome-keyring.enable = true;
-  # services.xserver.enable = true;
-  # services.xserver.displayManager.gdm.enable = true;
-  # security.pam.services.gdm.enableGnomeKeyring = true;
-
   # Configure console keymap
   console.keyMap = "fr";
-
-  services.gnome.gnome-keyring.enable = lib.mkForce false;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

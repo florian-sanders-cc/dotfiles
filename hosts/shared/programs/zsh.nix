@@ -10,7 +10,7 @@
     autosuggestion.enable = true;
     shellAliases = {
       ll = "ls -l -a";
-      upd-gnome = "sudo nix flake update '${config.home.homeDirectory}/.config/nixos-config/' && sudo nixos-rebuild switch --upgrade --flake '${config.home.homeDirectory}/.config/nixos-config/.#laptop-gnome'";
+      upd-gnome = "sudo nix flake update '${config.home.homeDirectory}/.config/nixos-config/' && sudo nixos-rebuild switch --upgrade --flake '${config.home.homeDirectory}/.config/nixos-config#laptop-gnome'";
       upd-hypr = "sudo nix flake update '${config.home.homeDirectory}/.config/nixos-config' && sudo nixos-rebuild switch --upgrade --flake '${config.home.homeDirectory}/.config/nixos-config#laptop-hypr'";
       clean = "sudo nix-collect-garbage -d && nix-collect-garbage";
       nxcfg = "cd ${config.home.homeDirectory}/.config/nixos-config";

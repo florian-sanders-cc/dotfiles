@@ -31,6 +31,7 @@
             ./hosts/laptop/security.nix
             home-manager.nixosModules.home-manager
             {
+              nixpkgs.overlays = overlays;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.flo = {
