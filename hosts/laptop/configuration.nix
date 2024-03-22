@@ -10,8 +10,7 @@
       ../shared/pkgs.nix
       ../shared/sound-pipewire.nix
       ../shared/user-flo.nix
-      ./gpu.nix
-      #./nvidia.nix
+      ./intel-gpu.nix
     ];
 
   nix.settings = {

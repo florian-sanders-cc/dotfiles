@@ -1,51 +1,59 @@
+{ config, pkgs, ... }:
+
 {
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.production;
 
-  # NVIDIA
-  # services.xserver.videoDrivers = [ "nvidia" ];
-  # hardware.opengl = {
-  #   enable = true;
-  #   driSupport = true;
-  #   driSupport32Bit = true;
-  #   extraPackages = with pkgs; [
-  #     # trying to fix `WLR_RENDERER=vulkan sway`
-  #     vulkan-validation-layers
-  #     # https://nixos.wiki/wiki/Accelerated_Video_Playback
-  #     intel-media-driver # LIBVA_DRIVER_NAME=iHD
-  #     vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-  #     vaapiVdpau
-  #     libvdpau-va-gl
-  #   ];
-  # };
+    # Modesetting is required.
+    modesetting.enable = true;
 
-  # hardware.nvidia = {
-  #
-  #   # Modesetting is needed for most Wayland compositors
-  #   modesetting.enable = true;
-  #
-  #   # Use the open source version of the kernel module
-  #   # Only available on driver 515.43.04+
-  #   open = false;
-  #
-  #   # Enable the nvidia settings menu
-  #   nvidiaSettings = true;
-  #
-  #   # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-  #   powerManagement.enable = false;
-  #   # Fine-grained power management. Turns off GPU when not in use.
-  #   # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-  #   powerManagement.finegrained = false;
-  #
-  #   # Optionally, you may need to select the appropriate driver version for your specific GPU.
-  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
-  #
-  #   prime = {
-  #     offload = {
-  #       enable = true;
-  #       enableOffloadCmd = true;
-  #     };
-  #
-  #     nvidiaBusId = "PCI:01:00:0";
-  #     intelBusId = "PCI:00:02:0";
-  #   };
-  # };
-  }
+    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    # Enable this if you have graphical corruption issues or application crashes after waking
+    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
+    # of just the bare essentials.
+    powerManagement.enable = false;
+
+    # Fine-grained power management. Turns off GPU when not in use.
+    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+    powerManagement.finegrained = false;
+
+    # Use the NVidia open source kernel module (not to be confused with the
+    # independent third-party "nouveau" open source driver).
+    # Support is limited to the Turing and later architectures. Full list of 
+    # supported GPUs is at: 
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+    # Only available from driver 515.43.04+
+    # Currently alpha-quality/buggy, so false is currently the recommended setting.
+    open = false;
+
+    # Enable the Nvidia settings menu,
+    # accessible via `nvidia-settings`.
+    nvidiaSettings = true;
+  };
+
+  hardware.nvidia.prime = {
+    offload = {
+      enable = true;
+      enableOffloadCmd = true;
+    };
+
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:46:0:0";
+  };
+
+  # Enable OpenGL
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
+
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+}
