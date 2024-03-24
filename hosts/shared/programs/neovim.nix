@@ -95,6 +95,7 @@
           markdown-preview-nvim
           transparent-nvim
           tokyonight-nvim
+          typescript-tools-nvim
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
