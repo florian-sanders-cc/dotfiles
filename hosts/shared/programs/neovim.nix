@@ -7,7 +7,7 @@
     vimAlias = true;
     withNodeJs = true;
     defaultEditor = true;
-    package = pkgs.neovim-nightly-pkgs;
+    # package = pkgs.neovim-nightly-pkgs;
 
     extraPackages = with pkgs; [
       # LSP
@@ -96,6 +96,7 @@
           transparent-nvim
           tokyonight-nvim
           typescript-tools-nvim
+          vim-visual-multi
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
