@@ -29,6 +29,7 @@ rec {
     ./programs/vscode.nix
     ./programs/zsh.nix
     ./programs/neovim.nix
+    ./programs/helix.nix
   ];
 
   home.sessionVariables = {

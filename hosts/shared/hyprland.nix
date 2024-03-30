@@ -65,7 +65,6 @@
     source = ../../dotfiles/waybar/launch.sh;
     executable = true;
   };
-  # home.file.".config/wleave".source = ../../dotfiles/wleave;
   home.file.".config/fuzzel".source = ../../dotfiles/fuzzel;
   home.file.".config/swaylock".source = ../../dotfiles/swaylock;
   home.file.".config/hypr/".source = ../../dotfiles/hypr;

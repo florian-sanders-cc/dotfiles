@@ -7,13 +7,18 @@
       url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    helix-flake = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, neovim-flake, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, neovim-flake, helix-flake, ... }:
     let
       overlays = [
         (final: prev: {
           neovim-nightly-pkgs = inputs.neovim-flake.packages.${prev.system}.default;
+          helix-editor-pkgs = inputs.helix-flake.packages.${prev.system}.default;
         })
       ];
     in

@@ -1,10 +1,9 @@
-{
-  stdenv,
-  fetchFromGitHub,
-  buildNpmPackage,
-  nodejs,
-  nodePackages,
-  makeWrapper
+{ stdenv
+, fetchFromGitHub
+, buildNpmPackage
+, nodejs
+, nodePackages
+, makeWrapper
 }:
 
 stdenv.mkDerivation (finalAttrs: rec {
@@ -35,8 +34,6 @@ stdenv.mkDerivation (finalAttrs: rec {
   };
 
   installPhase = ''
-    echo '----installing----'
-    ls
     cp -r ${stylelintLspBuilt} $out
   '';
 
