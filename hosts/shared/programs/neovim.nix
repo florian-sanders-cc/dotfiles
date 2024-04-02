@@ -93,7 +93,8 @@
           neogen
           aerial-nvim
           markdown-preview-nvim
-          transparent-nvim
+          # TODO: enable when going back to unstable
+          # transparent-nvim
           tokyonight-nvim
           typescript-tools-nvim
           vim-visual-multi
@@ -108,6 +109,7 @@
           { name = "mini.animate"; path = mini-nvim; }
           (pkgs.callPackage ../vimPlugins/file-history.nix { inherit pkgs; })
           (pkgs.callPackage ../vimPlugins/cmp-emmet-vim.nix { inherit pkgs; })
+          (pkgs.callPackage ../vimPlugins/transparent-nvim.nix { inherit pkgs; })
         ];
         mkEntryFromDrv = drv:
           if lib.isDerivation drv then
@@ -162,11 +164,13 @@
       parsers = pkgs.symlinkJoin {
         name = "treesitter-parsers";
         paths = (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: with plugins; [
-          hyprlang
+          # TODO: enable when going back to unstable
+          # hyprlang
           lua
           nix
           javascript
-          styled
+          # TODO: enable when going back to unstable
+          # styled
           typescript
           markdown
           markdown_inline

@@ -7,7 +7,7 @@
     enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
-    autosuggestion.enable = true;
+    enableAutosuggestions = true;
     shellAliases = {
       ll = "ls -l -a";
       upd-gnome = "sudo nix flake update '${config.home.homeDirectory}/.config/nixos-config/' && sudo nixos-rebuild switch --upgrade --flake '${config.home.homeDirectory}/.config/nixos-config#laptop-gnome'";

@@ -51,7 +51,6 @@
     slurp
     grim
     grimblast
-    kdePackages.qtwayland
     lxqt.lxqt-policykit
     gtk4
     libadwaita
