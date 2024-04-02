@@ -11,7 +11,7 @@
         completion-timeout = 50;
       };
       keys.normal = {
-        "C-s" = ":w";    
+        "C-s" = ":w";
       };
       keys.insert = {
         "C-s" = ":w";
@@ -31,6 +31,10 @@
     languages = {
       language = [{
         name = "javascript";
+        formatter = {
+          command = "stylelint";
+          args = [ "--fix" "--sdtin" ];
+        };
         language-servers = [ "typescript-language-server" "stylelint" ];
       }];
       language-server.typescript-language-server = {
@@ -43,6 +47,27 @@
       language-server.stylelint = {
         command = "stylelint-lsp";
         args = [ "--stdio" ];
+        config = {
+          root_file = [
+            ".stylelintrc"
+            ".stylelintrc.cjs"
+            ".stylelintrc.js"
+            ".stylelintrc.json"
+            ".stylelintrc.yaml"
+            ".stylelintrc.yml"
+            "stylelint.config.cjs"
+            "stylelint.config.js"
+          ];
+          autoFixOnSave = true;
+          autoFixOnFormat = true;
+          cssInJs = true;
+          customSyntax = "@stylelint/postcss-css-in-js";
+          validate = [
+            "css"
+            "less"
+            "postcss"
+          ];
+        };
       };
     };
   };
