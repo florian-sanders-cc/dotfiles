@@ -32,8 +32,4 @@
   ];
   security.pam.services.gdm.enableGnomeKeyring = true;
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-
-  gtk = {
-    enable = true;
-  };
 }

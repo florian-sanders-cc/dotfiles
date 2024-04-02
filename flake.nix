@@ -1,5 +1,7 @@
 {
   inputs = {
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # home-manager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -28,6 +30,25 @@
           system = "x86_64-linux";
           modules = [
             ./hosts/shared/gnome.nix
+            ./hosts/laptop/configuration.nix
+            ./hosts/laptop/security.nix
+            home-manager.nixosModules.home-manager
+            {
+              nixpkgs.overlays = overlays;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.flo = {
+                imports = [
+                  ./hosts/shared/home.nix
+                ];
+              };
+            }
+          ];
+        };
+        laptop-plasma = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/shared/kde-plasma.nix
             ./hosts/laptop/configuration.nix
             ./hosts/laptop/security.nix
             home-manager.nixosModules.home-manager
