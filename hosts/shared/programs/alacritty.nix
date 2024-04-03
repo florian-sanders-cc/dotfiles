@@ -12,16 +12,16 @@
       };
 
       keyboard.bindings = [
-        # {
-        #   key = "Q";
-        #   mods = "Control";
-        #   action = "Quit";
-        # }
-        # {
-        #   key = "N";
-        #   mods = "Control";
-        #   action = "SpawnNewInstance";
-        # }
+        {
+          key = "Q";
+          mods = "Control";
+          action = "Quit";
+        }
+        {
+          key = "N";
+          mods = "Control";
+          action = "SpawnNewInstance";
+        }
       ];
 
       font = {
