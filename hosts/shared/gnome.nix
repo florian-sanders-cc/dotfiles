@@ -14,6 +14,7 @@
     gnome-music
     geary # email reader
     gnome-characters
+    epiphany
     tali # poker game
     iagno # go game
     hitori # sudoku game
@@ -29,6 +30,7 @@
     gnomeExtensions.resource-monitor
     gnomeExtensions.appindicator
     gnome.adwaita-icon-theme
+    wl-clipboard
   ];
   security.pam.services.gdm.enableGnomeKeyring = true;
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];

@@ -178,6 +178,7 @@
           jsdoc
           bash
           regex
+          c
         ])).dependencies;
       };
     in
