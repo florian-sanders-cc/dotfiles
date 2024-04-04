@@ -15,8 +15,7 @@
     discord
     nodejs
     bun
-    # TODO: enable when going back to unstable
-    # obsidian
+    obsidian
     (callPackage ./programs/random-labels.nix { })
     (callPackage ./programs/clever-tools.nix { })
   ];
