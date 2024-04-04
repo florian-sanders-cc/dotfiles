@@ -176,6 +176,8 @@
           json5
           jsonc
           jsdoc
+          bash
+          regex
         ])).dependencies;
       };
     in
