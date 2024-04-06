@@ -1,11 +1,9 @@
 { stdenv
 , fetchFromGitHub
 , buildNpmPackage
-, nodejs
-,
 }:
 
-stdenv.mkDerivation (finalAttrs: rec {
+buildNpmPackage rec {
   pname = "random-labels";
   version = "1.0.1";
 
@@ -16,20 +14,6 @@ stdenv.mkDerivation (finalAttrs: rec {
     hash = "sha256-CBB2ZS/CvCHjKgnMd+LvJ/GPcWVq3T1iRd3iLZ/G7wM=";
   };
 
-  nativeBuildInputs = [ nodejs ];
-
-  buildInputs = [
-    nodejs
-  ];
-
-  randomLabelsBuilt = buildNpmPackage {
-    pname = "random-labels";
-    inherit version src;
-    npmDepsHash = "sha256-WrtYlsf7YtbQfKYFeuR3D3C6KcS6UktbbEOIJ7gIaVQ=";
-    dontNpmBuild = true;
-  };
-
-  installPhase = ''
-    cp -r ${randomLabelsBuilt} $out
-  '';
-})
+  npmDepsHash = "sha256-WrtYlsf7YtbQfKYFeuR3D3C6KcS6UktbbEOIJ7gIaVQ=";
+  dontNpmBuild = true;
+}

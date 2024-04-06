@@ -1,11 +1,11 @@
-{
-  lib,
-  stdenv,
-  fetchFromGitHub,
-  pkgs,
+{ lib
+, stdenv
+, fetchFromGitHub
+, pkgs
+,
 }:
 
-stdenv.mkDerivation (finalAttrs: {
+pkgs.vimUtils.buildVimPlugin {
   pname = "telescope-file-history.nvim";
   version = "2023-12-19";
 
@@ -16,21 +16,11 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-TgRixprsHRTH9lr2AEUh7xIX8w9JquOzFJV4K8OPJI8=";
   };
 
-  telescopeFileHistory = pkgs.vimUtils.buildVimPlugin {
-    pname = finalAttrs.pname;
-    version = finalAttrs.version;
-    src = finalAttrs.src;
-  };
-  
-  installPhase = ''
-    cp -r ${finalAttrs.telescopeFileHistory} $out
-  '';
-
   meta = {
     description = "File history backup for Neovim";
     homepage = "https://github.com/dawsers/telescope-file-history.nvim";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [  ];
+    maintainers = with lib.maintainers; [ ];
   };
-})
+}
 

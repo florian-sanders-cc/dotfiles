@@ -5,7 +5,7 @@
 ,
 }:
 
-stdenv.mkDerivation (finalAttrs: {
+pkgs.vimUtils.buildVimPlugin {
   pname = "cmp-emmet-vim";
   version = "2023-05-06";
 
@@ -16,19 +16,9 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-w37CmFNh33ACmWgYU2kM7MbuRdwi7URVquJgjRPE1gA=";
   };
 
-  cmpEmmetNvim = pkgs.vimUtils.buildVimPlugin {
-    pname = finalAttrs.pname;
-    version = finalAttrs.version;
-    src = finalAttrs.src;
-  };
-
-  installPhase = ''
-    cp -r ${finalAttrs.cmpEmmetNvim} $out
-  '';
-
   meta = {
     description = "emmet-vim completion source for nvim-cmp.";
     homepage = "https://github.com/dcampos/cmp-emmet-vim";
   };
-})
+}
 
