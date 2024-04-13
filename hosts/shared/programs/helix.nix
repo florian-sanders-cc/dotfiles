@@ -9,6 +9,7 @@
       theme = "kanagawa";
       editor = {
         completion-timeout = 50;
+        mouse = false;
       };
       keys.normal = {
         "C-s" = ":w";
@@ -23,6 +24,7 @@
       nodePackages_latest.typescript-language-server
       lua-language-server
       nixd
+      stylelint
       (callPackage ./stylelint-lsp.nix { })
       vscode-langservers-extracted
       nixpkgs-fmt
@@ -33,7 +35,7 @@
         name = "javascript";
         formatter = {
           command = "stylelint";
-          args = [ "--fix" "--sdtin" ];
+          args = [ "--fix" "--stdin" ];
         };
         language-servers = [ "typescript-language-server" "stylelint" ];
       }];
@@ -61,7 +63,7 @@
           autoFixOnSave = true;
           autoFixOnFormat = true;
           cssInJs = true;
-          customSyntax = "@stylelint/postcss-css-in-js";
+          customSyntax = "postcss-lit";
           validate = [
             "css"
             "less"
