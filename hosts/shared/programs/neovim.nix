@@ -7,7 +7,7 @@
     vimAlias = true;
     withNodeJs = true;
     defaultEditor = true;
-    # package = pkgs.neovim-nightly-pkgs;
+    package = pkgs.neovim-nightly-pkgs;
 
     extraPackages = with pkgs; [
       # LSP
@@ -93,7 +93,6 @@
           neogen
           aerial-nvim
           markdown-preview-nvim
-          transparent-nvim
           tokyonight-nvim
           typescript-tools-nvim
           vim-visual-multi

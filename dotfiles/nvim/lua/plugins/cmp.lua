@@ -8,7 +8,7 @@ return {
 	opts = function(_, opts)
 		local newSources = {
 			{ name = "emoji" },
-			{ name = "emmet_vim" },
+			-- { name = "emmet_vim" },
 		}
 
 		for _, value in pairs(newSources) do

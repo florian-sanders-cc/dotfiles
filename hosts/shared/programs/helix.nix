@@ -24,7 +24,6 @@
       nodePackages_latest.typescript-language-server
       lua-language-server
       nixd
-      stylelint
       (callPackage ./stylelint-lsp.nix { })
       vscode-langservers-extracted
       nixpkgs-fmt
@@ -33,10 +32,6 @@
     languages = {
       language = [{
         name = "javascript";
-        formatter = {
-          command = "stylelint";
-          args = [ "--fix" "--stdin" ];
-        };
         language-servers = [ "typescript-language-server" "stylelint" ];
       }];
       language-server.typescript-language-server = {

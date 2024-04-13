@@ -16,6 +16,7 @@
     nodejs
     bun
     obsidian
+    neovide
     (callPackage ./programs/random-labels.nix { })
     (callPackage ./programs/clever-tools.nix { })
   ];
