@@ -10,7 +10,8 @@
       ../shared/pkgs.nix
       ../shared/sound-pipewire.nix
       ../shared/user-flo.nix
-      ./intel-gpu.nix
+      # ./intel-gpu.nix
+      ./nvidia.nix
     ];
 
   nix.settings = {
@@ -28,7 +29,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  services.blueman.enable = true;
+  # services.blueman.enable = true;
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="03f0", ATTR{idProduct}=="028c", ATTR{power/control}="-1"
     ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="03f0", ATTR{idProduct}=="0294", ATTR{power/control}="-1"
@@ -58,11 +59,15 @@
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = false;
 
-  security.pam.services.swaylock = {
-    text = ''
-      auth include login
-    '';
-  };
+  # security.pam.services.swaylock = {
+  #   text = ''
+  #     auth include login
+  #   '';
+  # };
+
+  security.pam.services.sddm.enableKwallet = true;
+  security.pam.services.kdewallet.enableKwallet = true;
+  security.polkit.enable = true;
 
   nix.gc = {
     automatic = true;
