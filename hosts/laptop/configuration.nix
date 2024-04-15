@@ -58,14 +58,6 @@
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = false;
 
-  # security.pam.services.swaylock = {
-  #   text = ''
-  #     auth include login
-  #   '';
-  # };
-
-  security.pam.services.sddm.enableKwallet = true;
-  security.pam.services.kdewallet.enableKwallet = true;
   security.polkit.enable = true;
 
   nix.gc = {

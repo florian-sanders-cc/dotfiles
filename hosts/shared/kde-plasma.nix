@@ -7,17 +7,21 @@
 
   environment.systemPackages = with pkgs; [
     wl-clipboard
-    libnotify
+    kdePackages.ksshaskpass
   ];
+
+  programs.ssh = {
+    enableAskPassword = true;
+    askPassword = pkgs.lib.mkForce "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+    startAgent = true;
+  };
+  environment.sessionVariables.SSH_ASKPASS_REQUIRE = "prefer";
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
   ];
 
-  # qt = {
-  #   enable = true;
-  #   platformTheme = "gnome";
-  #   style = "adwaita-dark";
-  # };
-
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-kde ];
+  security.pam.services.sddm.enableKwallet = true;
+  security.pam.services.login.enableKwallet = true;
+  security.pam.services.kdewallet.enableKwallet = true;
 }
