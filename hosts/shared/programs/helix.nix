@@ -8,8 +8,10 @@
     settings = {
       theme = "kanagawa";
       editor = {
+        line-number = "relative";
         completion-timeout = 50;
         mouse = false;
+        color-modes = true;
       };
       keys.normal = {
         "C-s" = ":w";
@@ -30,22 +32,30 @@
     ];
 
     languages = {
-      language = [{
-        name = "javascript";
-        language-servers = [ "typescript-language-server" "stylelint" "eslint" ];
-        formatter = { 
-          command = "eslint"; 
-          args = ["--fix"]; 
-        };
-      }];
+      language = [
+        {
+          name = "javascript";
+          language-servers = [ "typescript-language-server" "stylelint" "eslint" ];
+          formatter = {
+            command = "eslint";
+            args = [ "--fix" ];
+          };
+        }
 
-      # language-server.typescript-language-server = {
-      #   command = "${pkgs.nodePackages.typescript-language-server}/lib/node_modules/.bin/typescript-language-server";
-      #   args = [ "--stdio" ];
-      #   config = {
-      #     hostInfo = "helix";
-      #   };
-      # };
+        {
+          name = "nix";
+          scope = "source.nix";
+          injection-regex = "nix";
+          file-types = [ "nix" ];
+          shebangs = [ ];
+          comment-token = "#";
+          language-servers = [ "nixd" ];
+          indent = {
+            tab-width = 2;
+            unit = "  ";
+          };
+        }
+      ];
 
       language-server.eslint = {
         command = "vscode-eslint-language-server";
@@ -122,6 +132,10 @@
             "postcss"
           ];
         };
+      };
+
+      language-server.nixd = {
+        command = "nixd";
       };
     };
   };
