@@ -32,15 +32,72 @@
     languages = {
       language = [{
         name = "javascript";
-        language-servers = [ "typescript-language-server" "stylelint" ];
+        language-servers = [ "typescript-language-server" "stylelint" "eslint" ];
+        formatter = { 
+          command = "eslint"; 
+          args = ["--fix"]; 
+        };
       }];
-      language-server.typescript-language-server = {
-        command = "${pkgs.nodePackages.typescript-language-server}/lib/node_modules/.bin/typescript-language-server";
+
+      # language-server.typescript-language-server = {
+      #   command = "${pkgs.nodePackages.typescript-language-server}/lib/node_modules/.bin/typescript-language-server";
+      #   args = [ "--stdio" ];
+      #   config = {
+      #     hostInfo = "helix";
+      #   };
+      # };
+
+      language-server.eslint = {
+        command = "vscode-eslint-language-server";
         args = [ "--stdio" ];
         config = {
-          hostInfo = "helix";
+          format = true;
+          options = {
+            rulePaths = [ "/home/flo/Projects/clever-components/eslint-rules" ];
+          };
+          nodePath = "";
+          onIgnoredFiles = "off";
+          packageManager = "yarn";
+          quiet = false;
+          rulesCustomizations = [ ];
+          run = "onType";
+          useESLintClass = false;
+          validate = "on";
+          codeAction = {
+            disableRuleComment = {
+              enable = true;
+              location = "separateLine";
+            };
+            showDocumentation = { enable = true; };
+          };
+          codeActionOnSave = {
+            enable = true;
+            mode = "fixAll";
+          };
+          experimental = { useFlatConfig = false; };
+          problems = {
+            shortenToSingleLine = false;
+          };
+          workingDirectory = {
+            mode = "auto";
+          };
+          root_file = [
+            ".eslintrc"
+            ".eslintrc.js"
+            ".eslintrc.cjs"
+            ".eslintrc.yaml"
+            ".eslintrc.yml"
+            ".eslintrc.json"
+            "eslint.config.js"
+            "eslint.config.mjs"
+            "eslint.config.cjs"
+            "eslint.config.ts"
+            "eslint.config.mts"
+            "eslint.config.cts"
+          ];
         };
       };
+
       language-server.stylelint = {
         command = "stylelint-lsp";
         args = [ "--stdio" ];
