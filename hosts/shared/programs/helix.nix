@@ -15,6 +15,7 @@
       };
       keys.normal = {
         "C-s" = ":w";
+        "C-m" = "save_selection";
       };
       keys.insert = {
         "C-s" = ":w";
