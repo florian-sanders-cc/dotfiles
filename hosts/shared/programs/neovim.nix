@@ -147,7 +147,6 @@
             { "williamboman/mason.nvim", enabled = false },
             -- import/override with your plugins
             { import = "plugins" },
-            { import = "lazyvim.plugins.extras.ui.mini-animate" },
             { import = "lazyvim.plugins.extras.editor.aerial" },
             { import = "lazyvim.plugins.extras.editor.mini-files" },
             { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
