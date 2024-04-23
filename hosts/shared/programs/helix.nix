@@ -12,6 +12,11 @@
         completion-timeout = 50;
         mouse = false;
         color-modes = true;
+        indent-guides = {
+          render = true;
+          character = "╎";
+          skip-levels = 1;
+        };
       };
       keys.normal = {
         "C-s" = ":w";
