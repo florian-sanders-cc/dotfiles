@@ -21,6 +21,7 @@
       nxcfg = "cd ${config.home.homeDirectory}/.config/nixos-config";
       ww = "cd ${config.home.homeDirectory}/Projects/";
       setnode = "cat ${config.home.homeDirectory}/.config/nixos-config/node-shell/.envrc-example >> .envrc && direnv allow";
+      cleverr = "/home/flo/Projects/clever-tools/bin/clever.js";
     };
     history = {
       size = 10000;
