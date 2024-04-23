@@ -20,6 +20,7 @@
     zellij
     (callPackage ./programs/random-labels.nix { })
     (callPackage ./programs/clever-tools.nix { })
+    zed-editor
   ];
 
   fonts.packages = with pkgs; [
