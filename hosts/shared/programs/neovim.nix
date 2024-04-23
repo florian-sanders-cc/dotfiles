@@ -10,6 +10,9 @@
     # package = pkgs.neovim-nightly-pkgs;
 
     extraPackages = with pkgs; [
+      fish
+      shfmt
+
       # LSP
       typescript
       nodePackages_latest.typescript-language-server
@@ -177,6 +180,7 @@
           bash
           regex
           c
+          vimdoc
         ])).dependencies;
       };
     in
