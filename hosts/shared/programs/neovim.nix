@@ -87,7 +87,6 @@
           which-key-nvim
           nightfox-nvim
           toggleterm-nvim
-          emmet-vim
           SchemaStore-nvim
           diffview-nvim
           neogit
@@ -108,8 +107,6 @@
           { name = "mini.pairs"; path = mini-nvim; }
           { name = "mini.surround"; path = mini-nvim; }
           { name = "mini.animate"; path = mini-nvim; }
-          (pkgs.callPackage ../vimPlugins/file-history.nix { inherit pkgs; })
-          (pkgs.callPackage ../vimPlugins/cmp-emmet-vim.nix { inherit pkgs; })
         ];
         mkEntryFromDrv = drv:
           if lib.isDerivation drv then
