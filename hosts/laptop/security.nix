@@ -33,7 +33,7 @@
     serviceConfig = {
       Type = "simple";
       ExecStartPre = "${pkgs.bash}/bin/bash -c \"while [ ! -S /run/clamav/clamd.ctl ]; do sleep 1; done\"";
-      ExecStart = "${pkgs.clamav}/bin/clamonacc --foreground --stream --move=/root/quarantine";
+      ExecStart = "${pkgs.clamav}/bin/clamonacc --foreground --stream --move=/var/lib/clamav/quarantine";
       Restart = "on-failure";
     };
     wantedBy = [ "multi-user.target" ];
