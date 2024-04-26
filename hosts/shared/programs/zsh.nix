@@ -21,7 +21,8 @@
       nxcfg = "cd ${config.home.homeDirectory}/.config/nixos-config";
       ww = "cd ${config.home.homeDirectory}/Projects/";
       setnode = "cat ${config.home.homeDirectory}/.config/nixos-config/node-shell/.envrc-example >> .envrc && direnv allow";
-      clever-dev = "/home/flo/Projects/clever-tools/bin/clever.js";
+      clever-dev = "${config.home.homeDirectory}/Projects/clever-tools/bin/clever.js";
+      clever-switch-account = "mv ${config.home.homeDirectory}/.config/clever-cloud/clever-tools.json ${config.home.homeDirectory}/.config/clever-cloud/clever-tools-tmp.json && mv ${config.home.homeDirectory}/.config/clever-cloud/clever-tools-alternative-account.json ${config.home.homeDirectory}/.config/clever-cloud/clever-tools.json && mv ${config.home.homeDirectory}/.config/clever-cloud/clever-tools-tmp.json ${config.home.homeDirectory}/.config/clever-cloud/clever-tools-alternative-account.json && clever profile";
     };
     history = {
       size = 10000;
