@@ -43,6 +43,8 @@
       lazy-nvim
     ];
 
+
+
     extraLuaConfig =
       let
         plugins = with pkgs.vimPlugins; [
@@ -185,6 +187,16 @@
 
   # Normal LazyVim config here, see https://github.com/LazyVim/starter/tree/main/lua
   xdg.configFile."nvim/lua".source = ../../../dotfiles/nvim/lua;
-  xdg.configFile."nvim/queries".source = ../../../dotfiles/nvim/queries;
 
+  # fix injection for CSS in JS with Lit (styled injection breaks comment strings)
+  xdg.configFile."nvim/after/queries/ecma/injections.scm".text = ''
+    ; extends
+    (call_expression
+      function: (identifier) @_name
+      (#any-of? @_name "css" "keyframes")
+      arguments: ((template_string) @injection.content
+        (#offset! @injection.content 0 1 0 -1)
+        (#set! injection.include-children)
+        (#set! injection.language "css")))
+  '';
 }
