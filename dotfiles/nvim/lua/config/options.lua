@@ -19,4 +19,5 @@ if vim.g.neovide then
 	vim.g.neovide_cursor_vfx_mode = "pixiedust"
 
 	vim.g.neovide_profiler = false
+	vim.o.guifont = "JetbrainsMonoNL Nerd Font Mono"
 end
