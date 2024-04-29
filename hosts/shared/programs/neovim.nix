@@ -16,6 +16,7 @@
       # LSP
       typescript
       nodePackages_latest.typescript-language-server
+      nodePackages_latest.prettier
       lua-language-server
       nixd
       (callPackage ./stylelint-lsp.nix { })
@@ -152,6 +153,7 @@
             { import = "lazyvim.plugins.extras.editor.aerial" },
             { import = "lazyvim.plugins.extras.editor.mini-files" },
             { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
+            { import = "lazyvim.plugins.extras.lazyrc" },
           },
         })
       '';
