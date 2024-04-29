@@ -6,31 +6,13 @@ return {
 		servers = {
 			---@type lspconfig.options.tsserver
 			tsserver = {
-				-- on_new_config = function(new_config, new_root_dir)
-				-- 	if string.find(new_root_dir, "console3") then
-				-- 		new_config.init_options = {
-				-- 			hostInfo = "neovim",
-				-- 			tsserver = {
-				-- 				-- FIXME:
-				-- 				-- decouple this from nixos, maybe through an environment variable?
-				-- 				path = string.gsub(
-				-- 					vim.fn.system("which tsserver"),
-				-- 					"/bin/tsserver",
-				-- 					"/lib/node_modules/typescript/lib/tsserver.js"
-				-- 				),
-				-- 			},
-				-- 		}
-				-- 	end
-				-- end,
 				settings = {
 					implicitProjectConfiguration = { checkJs = true, allowJs = true },
-					-- FIXME:
-					-- decouple this from nixos, maybe through an environment variable?
-					-- fallbackPath = string.gsub(
-					-- 	vim.fn.system("which tsserver"),
-					-- 	"/bin/tsserver",
-					-- 	"/lib/node_modules/typescript/lib/tsserver.js"
-					-- ),
+					fallbackPath = string.gsub(
+						vim.fn.system("which tsserver"),
+						"/bin/tsserver",
+						"/lib/node_modules/typescript/lib/tsserver.js"
+					),
 					importModuleSpecifierEnding = "js",
 					tsserver_plugins = {},
 					javascript = {
