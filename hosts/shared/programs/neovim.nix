@@ -100,7 +100,7 @@
           markdown-preview-nvim
           tokyonight-nvim
           typescript-tools-nvim
-          vim-visual-multi
+          nvim-colorizer-lua
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
@@ -121,7 +121,7 @@
       ''
         require("lazy").setup({
           defaults = {
-            lazy = true,
+            lazy = false,
           },
           performance = {
             reset_packpath = false,
