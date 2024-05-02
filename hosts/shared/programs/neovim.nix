@@ -7,7 +7,7 @@
     vimAlias = true;
     withNodeJs = true;
     defaultEditor = true;
-    package = pkgs.neovim-nightly-pkgs;
+    # package = pkgs.neovim-nightly-pkgs;
 
     extraPackages = with pkgs; [
       fish
@@ -121,7 +121,7 @@
       ''
         require("lazy").setup({
           defaults = {
-            lazy = false,
+            lazy = true,
           },
           performance = {
             reset_packpath = false,
