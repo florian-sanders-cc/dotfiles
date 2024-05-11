@@ -20,6 +20,7 @@
       lua-language-server
       nixd
       (callPackage ./stylelint-lsp.nix { })
+      # (callPackage ./css-variables-language-server.nix { })
       vscode-langservers-extracted
 
       # Formatter
@@ -43,8 +44,6 @@
     plugins = with pkgs.vimPlugins; [
       lazy-nvim
     ];
-
-
 
     extraLuaConfig =
       let
