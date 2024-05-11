@@ -102,6 +102,8 @@
           typescript-tools-nvim
           nvim-colorizer-lua
           kanagawa-nvim
+          sqlite-lua
+          yanky-nvim
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
@@ -111,6 +113,7 @@
           { name = "mini.pairs"; path = mini-nvim; }
           { name = "mini.surround"; path = mini-nvim; }
           { name = "mini.animate"; path = mini-nvim; }
+          { name = "mini-hipatterns"; path = mini-nvim; }
         ];
         mkEntryFromDrv = drv:
           if lib.isDerivation drv then
@@ -154,6 +157,9 @@
             { import = "lazyvim.plugins.extras.editor.aerial" },
             { import = "lazyvim.plugins.extras.editor.mini-files" },
             { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
+            { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
+            { import = "lazyvim.plugins.extras.ui.mini-animate" },
+            { import = "lazyvim.plugins.extras.coding.yanky" },
             { import = "lazyvim.plugins.extras.lazyrc" },
           },
         })
