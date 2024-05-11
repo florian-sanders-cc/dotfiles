@@ -9,6 +9,7 @@
     wl-clipboard
     kdePackages.ksshaskpass
     kdePackages.partitionmanager
+    xdotool
   ];
 
   programs.ssh = {
