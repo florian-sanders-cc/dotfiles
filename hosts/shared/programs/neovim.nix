@@ -157,7 +157,6 @@
             { import = "lazyvim.plugins.extras.editor.mini-files" },
             { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
             { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
-            { import = "lazyvim.plugins.extras.ui.mini-animate" },
             { import = "lazyvim.plugins.extras.coding.yanky" },
             { import = "lazyvim.plugins.extras.lazyrc" },
           },
