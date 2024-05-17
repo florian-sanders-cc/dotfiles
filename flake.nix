@@ -6,7 +6,7 @@
     # home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     neovim-flake = {
-      url = "github:neovim/neovim?dir=contrib";
+      url = "github:neovim/neovim/release-0.10?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     helix-flake = {
