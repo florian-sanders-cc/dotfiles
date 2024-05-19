@@ -5,21 +5,21 @@
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     # home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    neovim-flake = {
-      url = "github:neovim/neovim/release-0.10?dir=contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # neovim-flake = {
+    #   url = "github:neovim/neovim/release-0.10?dir=contrib";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     helix-flake = {
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, neovim-flake, helix-flake, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, helix-flake, ... }:
     let
       overlays = [
         (final: prev: {
-          neovim-nightly-pkgs = inputs.neovim-flake.packages.${prev.system}.default;
+          # neovim-nightly-pkgs = inputs.neovim-flake.packages.${prev.system}.default;
           helix-editor-pkgs = inputs.helix-flake.packages.${prev.system}.default;
         })
       ];
@@ -64,7 +64,7 @@
             }
           ];
         };
-        laptop-hypr = nixpkgs.lib.nixosSystem rec {
+        laptop-hypr = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./hosts/laptop/configuration.nix
