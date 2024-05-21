@@ -19,7 +19,8 @@
     neovide
     zellij
     (callPackage ./programs/random-labels.nix { })
-    (callPackage ./programs/clever-tools.nix { })
+    # (callPackage ./programs/clever-tools.nix { })
+    clever-tools
     zed-editor
   ];
 

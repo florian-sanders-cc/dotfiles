@@ -9,17 +9,22 @@
     #   url = "github:neovim/neovim/release-0.10?dir=contrib";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+    clever-tools-flake = {
+      url = "github:florian-sanders-cc/clever-tools-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     helix-flake = {
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, helix-flake, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, helix-flake, clever-tools-flake, ... }:
     let
       overlays = [
         (final: prev: {
           # neovim-nightly-pkgs = inputs.neovim-flake.packages.${prev.system}.default;
+          clever-tools = inputs.clever-tools-flake.packages.${prev.system}.default;
           helix-editor-pkgs = inputs.helix-flake.packages.${prev.system}.default;
         })
       ];
