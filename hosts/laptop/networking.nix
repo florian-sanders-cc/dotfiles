@@ -10,7 +10,7 @@
 
   # FIXME: 
   # Fixes npm install issues
-  networking.enableIPv6 = false;
+  networking.enableIPv6 = true;
   networking.firewall.enable = true;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ 6006 80 443 ];
