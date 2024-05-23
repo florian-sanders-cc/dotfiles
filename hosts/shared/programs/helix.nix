@@ -3,7 +3,7 @@
 {
   programs.helix = {
     enable = true;
-    package = pkgs.helix-editor-pkgs;
+    # package = pkgs.helix-editor-pkgs;
 
     settings = {
       theme = "kanagawa";
