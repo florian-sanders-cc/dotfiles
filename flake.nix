@@ -1,6 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:florian-sanders-cc/nixpkgs/clever-tools";
     home-manager.url = "github:nix-community/home-manager";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     # home-manager.url = "github:nix-community/home-manager/release-23.11";
@@ -13,19 +14,19 @@
     #   url = "github:helix-editor/helix";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    clever-tools-flake = {
-      url = "github:florian-sanders-cc/clever-tools-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # clever-tools-flake = {
+    #   url = "github:florian-sanders-cc/clever-tools-flake";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, clever-tools-flake, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, ... }:
     let
       overlays = [
         (final: prev: {
           # neovim-nightly-pkgs = inputs.neovim-flake.packages.${prev.system}.default;
           # helix-editor-pkgs = inputs.helix-flake.packages.${prev.system}.default;
-          clever-tools = inputs.clever-tools-flake.packages.${prev.system}.default;
+          # clever-tools = inputs.clever-tools-flake.packages.${prev.system}.default;
         })
       ];
     in

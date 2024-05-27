@@ -1,25 +1,5 @@
 {
   "nodes": {
-    "clever-tools-flake": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1716364159,
-        "narHash": "sha256-9gsxosZAe2TC+WYsVaypvbNPAvFat9jXnx4mVl8bkG8=",
-        "owner": "florian-sanders-cc",
-        "repo": "clever-tools-flake",
-        "rev": "98d5f617dd0dddf5072043bff0d9200923297917",
-        "type": "github"
-      },
-      "original": {
-        "owner": "florian-sanders-cc",
-        "repo": "clever-tools-flake",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -42,23 +22,22 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1716509168,
-        "narHash": "sha256-4zSIhSRRIoEBwjbPm3YiGtbd8HDWzFxJjw5DYSDy1n8=",
-        "owner": "nixos",
+        "lastModified": 1716833183,
+        "narHash": "sha256-2AcqA+ykSbDdEDq28vnOeceP+G6T1O9FTAc+S4fCb7k=",
+        "owner": "florian-sanders-cc",
         "repo": "nixpkgs",
-        "rev": "bfb7a882678e518398ce9a31a881538679f6f092",
+        "rev": "1dfdaafde39c01ca630f96394be17d41d0e90c40",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
+        "owner": "florian-sanders-cc",
+        "ref": "clever-tools",
         "repo": "nixpkgs",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "clever-tools-flake": "clever-tools-flake",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
       }
