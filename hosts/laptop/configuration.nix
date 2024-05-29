@@ -55,18 +55,18 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  system.autoUpgrade.enable = true;
+  system.autoUpgrade.enable = false;
   system.autoUpgrade.allowReboot = false;
 
   security.polkit.enable = true;
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 15d";
-  };
-
-  nix.optimise.automatic = true;
+  # nix.gc = {
+  #   automatic = true;
+  #   dates = "weekly";
+  #   options = "--delete-older-than 15d";
+  # };
+  #
+  # nix.optimise.automatic = true;
 
   # hardware.tuxedo-rs = {
   #   enable = true;
