@@ -104,6 +104,7 @@
           sqlite-lua
           yanky-nvim
           nvim-snippets
+          (pkgs.callPackage ../vimPlugins/ts-comments.nix { })
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
