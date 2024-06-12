@@ -1,8 +1,7 @@
-{
-  nodeVersion,
-  fetchurl,
-  autoPatchelfHook,
-  stdenv,
+{ nodeVersion
+, autoPatchelfHook
+, stdenv
+,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -24,21 +23,3 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 })
 
-# stdenv.mkDerivation rec {
-#   name = "node-binary";
-#
-#   src = builtins.fetchurl "https://nodejs.org/dist/v${nodeVersion}/node-v${nodeVersion}-linux-x64.tar.xz";
-#   sourceRoot = ".";
-#
-#   nativeBuildInputs = [
-#     autoPatchelfHook 
-#   ];
-#
-#   buildInputs = [ stdenv.cc.cc.lib ];
-#
-#   installPhase = ''
-#     mkdir -p $out
-#     cd $out
-#     tar -xvf $src --strip-components 1
-#   '';
-# }
