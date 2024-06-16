@@ -1,3 +1,4 @@
 .direnv/
 .envrc
 .lazy.lua
+.helix/

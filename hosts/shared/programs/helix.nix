@@ -63,9 +63,6 @@
         args = [ "--stdio" ];
         config = {
           format = true;
-          options = {
-            rulePaths = [ "/home/flo/Projects/clever-components/eslint-rules" ];
-          };
           nodePath = "";
           onIgnoredFiles = "off";
           packageManager = "yarn";
