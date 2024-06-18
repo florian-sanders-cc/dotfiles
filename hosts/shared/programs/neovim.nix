@@ -104,7 +104,8 @@
           sqlite-lua
           yanky-nvim
           nvim-snippets
-          (pkgs.callPackage ../vimPlugins/ts-comments.nix { })
+          ts-comments-nvim
+          lazydev-nvim
           { name = "LuaSnip"; path = luasnip; }
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
@@ -157,10 +158,10 @@
             { import = "plugins" },
             { import = "lazyvim.plugins.extras.editor.aerial" },
             { import = "lazyvim.plugins.extras.editor.mini-files" },
-            { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
             { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
             { import = "lazyvim.plugins.extras.coding.yanky" },
             { import = "lazyvim.plugins.extras.coding.mini-surround" },
+            { "nvim-treesitter/nvim-treesitter", opts = function(_, opts) opts.ensure_installed = {} end, },
           },
         })
       '';
@@ -195,7 +196,10 @@
     "${parsers}/parser";
 
   # Normal LazyVim config here, see https://github.com/LazyVim/starter/tree/main/lua
-  xdg.configFile."nvim/lua".source = ../../../dotfiles/nvim/lua;
+  xdg.configFile."nvim/lua" = {
+    source = ../../../dotfiles/nvim/lua;
+    recursive = true;
+  };
 
   # fix injection for CSS in JS with Lit (styled injection breaks comment strings)
   xdg.configFile."nvim/after/queries/ecma/injections.scm".text = ''
