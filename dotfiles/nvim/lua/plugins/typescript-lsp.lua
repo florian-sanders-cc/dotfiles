@@ -27,6 +27,7 @@ return {
 							enable = true,
 							semicolons = "insert",
 							insertSpaceBeforeFunctionParenthesis = true,
+							insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
 						},
 						suggest = {
 							completeFunctionCalls = false,
