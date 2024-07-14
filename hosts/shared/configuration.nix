@@ -1,18 +1,21 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, config, ... }:
 
+let
+  commonImports = [
+    ./time-i18n.nix
+    ./boot.nix
+    ./networking.nix
+    ./pkgs.nix
+    ./sound-pipewire.nix
+    ./user-flo.nix
+  ];
+
+in
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../shared/time-i18n.nix
-      ../shared/boot.nix
-      ./networking.nix
-      ../shared/pkgs.nix
-      ../shared/sound-pipewire.nix
-      ../shared/user-flo.nix
-      ./intel-gpu.nix
-      # ./nvidia.nix
-    ];
+  imports = [
+    ../hardware/hardware-configuration-pro.nix
+    ./intel-gpu.nix
+  ] ++ commonImports;
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
@@ -50,7 +53,10 @@
     enable = true;
   };
 
-  home-manager.backupFileExtension = "backup";
+  environment.shellInit = ''
+    gpg-connect-agent /bye
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+  '';
 
   # List services that you want to enable:
 
@@ -62,13 +68,13 @@
 
   security.polkit.enable = true;
 
-  # nix.gc = {
-  #   automatic = true;
-  #   dates = "weekly";
-  #   options = "--delete-older-than 15d";
-  # };
-  #
-  # nix.optimise.automatic = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 15d";
+  };
+
+  nix.optimise.automatic = true;
 
   # hardware.tuxedo-rs = {
   #   enable = true;

@@ -1,5 +1,6 @@
 {
-  networking.hostName = "laptop-nixos-flo";
+  networking.hostName = "nixos-flo-pro";
+  # networking.hostName = "nixos-flo-perso";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

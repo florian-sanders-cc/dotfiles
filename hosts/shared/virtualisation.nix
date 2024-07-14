@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   virtualisation.docker = {
@@ -8,7 +8,7 @@
     #   setSocketVariable = true;
     # };
   };
-  users.users.flo.extraGroups = [ "docker" ];
+  users.users.flo-pro.extraGroups = [ "docker" ];
 
   environment.systemPackages = with pkgs; [ qemu quickemu spice spice-gtk spice-vdagent ];
 }

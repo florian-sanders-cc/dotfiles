@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.flo = {
+  users.users.flo-pro = {
     isNormalUser = true;
     description = "flo";
     extraGroups = [ "networkmanager" "wheel" "audio" ];
@@ -15,7 +15,7 @@
   services.httpd.enablePHP = true; # oof... not a great idea in my opinion
 
   services.httpd.virtualHosts."example.org" = {
-    documentRoot = "/home/flo/test";
+    documentRoot = "/home/flo-pro/test";
   };
 
   services.mysql.enable = true;

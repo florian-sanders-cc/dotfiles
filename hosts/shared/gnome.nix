@@ -9,27 +9,27 @@
   services.gnome.gnome-keyring.enable = true;
   environment.gnome.excludePackages = (with pkgs; [
     gnome-tour
-  ]) ++ (with pkgs.gnome; [
+  ]) ++ (with pkgs; [
     cheese # webcam tool
-    gnome-music
+    gnome.gnome-music
     geary # email reader
-    gnome-characters
+    gnome.gnome-characters
     epiphany
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
+    gnome.tali # poker game
+    gnome.iagno # go game
+    gnome.hitori # sudoku game
+    gnome.atomix # puzzle game
     yelp # Help view
-    gnome-contacts
-    gnome-initial-setup
+    gnome.gnome-contacts
+    gnome.gnome-initial-setup
   ]);
   # programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [
-    gnome.gnome-tweaks
+    gnome-tweaks
     gnomeExtensions.dash-to-panel
     gnomeExtensions.resource-monitor
     gnomeExtensions.appindicator
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
     wl-clipboard
   ];
   security.pam.services.gdm.enableGnomeKeyring = true;
