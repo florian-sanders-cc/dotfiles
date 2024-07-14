@@ -21,6 +21,7 @@
     (callPackage ./programs/random-labels.nix { })
     clever-tools
     zed-editor
+    distrobox
   ];
 
   fonts.packages = with pkgs; [
