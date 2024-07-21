@@ -4,7 +4,6 @@
   # TODO sign key etc.
   options.user.email = with lib; mkOption {
     type = types.str;
-    default = "florian.sanders@clever-cloud.com";
   };
 
   config = {

@@ -56,6 +56,8 @@ in
       ./helix.nix
     ];
 
+    user.email = config.user.email;
+
     # Standard packages
     home.packages = lib.mkMerge [
       commonPackages
