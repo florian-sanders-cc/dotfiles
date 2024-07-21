@@ -58,14 +58,17 @@
       enable = true;
       extraPackages = with pkgs; [
         intel-media-driver # LIBVA_DRIVER_NAME=iHD
-        vaapiVdpau
-        libvdpau-va-gl
+        nvidia-vaapi-driver
       ];
     };
 
-    environment.sessionVariables = { LIBVA_DRIVER_NAME = "nvidia"; };
+    environment.sessionVariables = {
+      LIBVA_DRIVER_NAME = "nvidia";
+    };
+    # TODO: test fix for vaapi
+    environment.etc."egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
 
-    # Load nvidia driver for Xorg and Wayland
+    # Load nvidia driver for Xorg and Wayland - installs nvidia-vaapi-driver
     services.xserver.videoDrivers = [ "nvidia" ];
   };
 }
