@@ -1,11 +1,37 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 
+let
+  specs = import ../config-specifications.nix;
+
+in
 {
+  # Networking
+  networking.firewall.enable = true;
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ 6006 80 443 8080 ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+
+  # Polkit & rtkit
+  security.polkit.enable = true;
+  security.rtkit.enable = true;
+
+  # SSH & GPG
+  # TODO: sops maybe + Fix cause it doesn't work anyway
+  programs.gnupg.agent = {
+    enable = true;
+  };
+
+  environment.shellInit = ''
+    gpg-connect-agent /bye
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+  '';
+
+  # ClamAV
   services.clamav.daemon.enable = true;
   services.clamav.daemon.settings = {
     OnAccessExcludeUname = "clamav";
     OnAccessIncludePath = "~/Downloads";
-    VirusEvent = "/usr/sbin/clamav-notify-cc.sh";
+    VirusEvent = lib.mkIf (config.user.name == specs.users.pro.name) "/usr/sbin/clamav-notify-cc.sh";
   };
   services.clamav.updater.enable = true;
   systemd.services.clamav-freshclam.wants = [ "network-online.target" ];
