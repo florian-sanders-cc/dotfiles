@@ -19,6 +19,8 @@
     optimise.automatic = true;
   };
 
+
+  programs.nix-ld.enable = true;
   # Allow unfree package
   nixpkgs.config.allowUnfree = true;
 
