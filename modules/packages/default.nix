@@ -30,7 +30,11 @@ let
     obsidian
     neovide
     zellij
-    zed-editor
+    (buildFHSUserEnv {
+      name = "zed";
+      targetPkgs = pkgs: [ zed-editor ];
+      runScript = "zed";
+    })
     distrobox
   ];
   proPackages = with pkgs; [

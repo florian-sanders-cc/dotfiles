@@ -2,3 +2,4 @@
 .envrc
 .lazy.lua
 .helix/
+.zed/
