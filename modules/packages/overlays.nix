@@ -1,10 +1,12 @@
 # TODO: should we split into separate files & move random-labels.nix to overlay?
+{ inputs, ... }:
+
 {
   nixpkgs.overlays = [
     (final: prev: {
       # neovim-nightly = inputs.neovim-flake.packages.${prev.system}.default;
 
-      # helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
+      helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
 
       clever-tools = prev.clever-tools.overrideAttrs {
         postInstall = final.lib.optionalString (final.stdenv.buildPlatform.canExecute final.stdenv.hostPlatform) ''

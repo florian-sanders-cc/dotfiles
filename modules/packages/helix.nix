@@ -3,7 +3,7 @@
 {
   programs.helix = {
     enable = true;
-    # package = pkgs.helix-nightly;
+    package = pkgs.helix-nightly;
 
     settings = {
       theme = "kanagawa";

@@ -8,7 +8,7 @@
           ./modules
           { inherit user desktop; }
         ];
-        specialArgs = { inherit home-manager; };
+        specialArgs = { inherit home-manager inputs; };
       };
       specs = import ./config-specifications.nix;
 
@@ -41,10 +41,10 @@
       #   url = "github:neovim/neovim/release-0.10?dir=contrib";
       #   inputs.nixpkgs.follows = "nixpkgs";
       # };
-      # helix-flake = {
-      #   url = "github:helix-editor/helix";
-      #   inputs.nixpkgs.follows = "nixpkgs";
-      # };
+      helix-flake = {
+        url = "github:helix-editor/helix";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
 
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
     };
