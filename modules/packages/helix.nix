@@ -8,17 +8,41 @@
     settings = {
       theme = "kanagawa";
       editor = {
+        auto-format = true;
         line-number = "relative";
         completion-timeout = 50;
         mouse = false;
         color-modes = true;
+        true-color = true;
+        cursorline = true;
+        bufferline = "multiple";
+        cursor-shape = {
+          insert = "bar";
+          normal = "block";
+          select = "underline";
+        };
+        indent-guides = {
+          character = "╎";
+          render = true;
+        };
+        statusline = {
+          left = [ "mode" "spinner" "version-control" "file-name" ];
+        };
+        inline-diagnostics = {
+          cursor-line = "hint";
+          other-lines = "error";
+        };
       };
       keys.normal = {
         "C-s" = ":w";
         "C-m" = "save_selection";
+        A-x = "extend_to_line_bounds";
+        X = [ "extend_line_up" "extend_to_line_bounds" ];
       };
       keys.insert = {
         "C-s" = ":w";
+        A-x = "extend_to_line_bounds";
+        X = [ "extend_line_up" "extend_to_line_bounds" ];
       };
     };
 
@@ -36,11 +60,16 @@
       language = [
         {
           name = "javascript";
-          language-servers = [ "typescript-language-server" "stylelint" "eslint" ];
+          language-servers = [
+            { name = "typescript-language-server"; except-features = [ "format" ]; }
+            "stylelint"
+            "eslint"
+          ];
           formatter = {
-            command = "eslint";
-            args = [ "--fix" ];
+            command = "./node_modules/prettier/bin/prettier.cjs";
+            args = [ "--parser" "typescript" ];
           };
+          auto-format = true;
         }
 
         {
