@@ -8,20 +8,13 @@
 
       helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
 
-      clever-tools = prev.clever-tools.overrideAttrs {
-        postInstall = final.lib.optionalString (final.stdenv.buildPlatform.canExecute final.stdenv.hostPlatform) ''
-          installShellCompletion --cmd clever \
-            --bash <($out/bin/clever --bash-autocomplete-script $out/bin/clever) \
-            --zsh <($out/bin/clever --zsh-autocomplete-script $out/bin/clever)
-        '' + '' 
-          rm $out/bin/install-clever-completion
-          rm $out/bin/uninstall-clever-completion
-        '';
-      };
-
       random-labels = prev.callPackage ./random-labels.nix { };
 
       stylelint-lsp = prev.callPackage ./stylelint-lsp.nix { };
+
+      # FIX FOR Helix
+      vscode-eslint-2-4-2 = prev.callPackage ./vscode-eslint-2-4-2.nix { };
+      vscode-langservers-extracted-4-8-0 = prev.callPackage ./vscode-langservers-extracted-4-8-0.nix { vscode-eslint = final.vscode-eslint-2-4-2; };
     })
   ];
 }

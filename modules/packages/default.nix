@@ -6,6 +6,8 @@ let
     # Nix related
     prefetch-npm-deps
     nix-prefetch-git
+    nixd
+    nixfmt
 
     # Browsers
     chromium
@@ -56,7 +58,7 @@ in
       ./direnv.nix
       ./vscode.nix
       ./zsh.nix
-      ./neovim.nix
+      ./neovim-fhs.nix
       ./helix.nix
     ];
 

@@ -19,7 +19,7 @@
         cursor-shape = {
           insert = "bar";
           normal = "block";
-          select = "underline";
+              select = "underline";
         };
         indent-guides = {
           character = "╎";
@@ -52,7 +52,7 @@
       lua-language-server
       nixd
       stylelint-lsp
-      vscode-langservers-extracted
+      vscode-langservers-extracted-4-8-0
       nixpkgs-fmt
     ];
 
@@ -61,7 +61,10 @@
         {
           name = "javascript";
           language-servers = [
-            { name = "typescript-language-server"; except-features = [ "format" ]; }
+            {
+              name = "typescript-language-server";
+              except-features = [ "format" ];
+            }
             "stylelint"
             "eslint"
           ];
@@ -80,6 +83,10 @@
           shebangs = [ ];
           comment-token = "#";
           language-servers = [ "nixd" ];
+          formatter = {
+            command = "nixfmt";
+            args = [ ];
+          };
           indent = {
             tab-width = 2;
             unit = "  ";
@@ -92,11 +99,8 @@
         args = [ "--stdio" ];
         config = {
           format = true;
-          nodePath = "";
           onIgnoredFiles = "off";
-          packageManager = "yarn";
           quiet = false;
-          rulesCustomizations = [ ];
           run = "onType";
           useESLintClass = false;
           validate = "on";
@@ -112,12 +116,8 @@
             mode = "fixAll";
           };
           experimental = { useFlatConfig = false; };
-          problems = {
-            shortenToSingleLine = false;
-          };
-          workingDirectory = {
-            mode = "auto";
-          };
+          problems = { shortenToSingleLine = false; };
+          workingDirectory = { mode = "location"; };
           root_file = [
             ".eslintrc"
             ".eslintrc.js"
@@ -132,6 +132,10 @@
             "eslint.config.mts"
             "eslint.config.cts"
           ];
+          options = {
+            rulePaths =
+              [ "/home/flo-pro/Projects/clever-components/eslint-rules" ];
+          };
         };
       };
 
@@ -153,17 +157,11 @@
           autoFixOnFormat = true;
           cssInJs = true;
           customSyntax = "postcss-lit";
-          validate = [
-            "css"
-            "less"
-            "postcss"
-          ];
+          validate = [ "css" "less" "postcss" ];
         };
       };
 
-      language-server.nixd = {
-        command = "nixd";
-      };
+      language-server.nixd = { command = "nixd"; };
     };
   };
   xdg.configFile."helix/runtime".source = ../../dotfiles/helix/runtime;
