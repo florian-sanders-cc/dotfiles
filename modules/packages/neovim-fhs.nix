@@ -5,7 +5,17 @@
     [
       (buildFHSUserEnv {
         name = "nvim";
-        targetPkgs = pkgs: [ neovim-unwrapped gcc clang cargo unzip ];
+        targetPkgs = pkgs: [
+          neovim-unwrapped
+          gcc
+          clang
+          cargo
+          unzip
+          fd
+          ripgrep
+          bat
+          delta
+        ];
         runScript = "nvim";
       })
     ];
