@@ -7,7 +7,7 @@ let
     prefetch-npm-deps
     nix-prefetch-git
     nixd
-    nixfmt
+    nixfmt-rfc-style
 
     # Browsers
     chromium
@@ -39,12 +39,9 @@ let
     })
     distrobox
   ];
-  proPackages = with pkgs; [
-    random-labels
-  ];
+  proPackages = with pkgs; [ random-labels ];
 
-in
-{
+in {
   imports = [ ./overlays.nix ];
   fonts.packages = with pkgs; [ nerdfonts font-awesome ];
 

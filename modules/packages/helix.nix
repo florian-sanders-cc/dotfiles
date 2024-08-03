@@ -19,14 +19,19 @@
         cursor-shape = {
           insert = "bar";
           normal = "block";
-              select = "underline";
+          select = "underline";
         };
         indent-guides = {
           character = "╎";
           render = true;
         };
         statusline = {
-          left = [ "mode" "spinner" "version-control" "file-name" ];
+          left = [
+            "mode"
+            "spinner"
+            "version-control"
+            "file-name"
+          ];
         };
         inline-diagnostics = {
           cursor-line = "hint";
@@ -37,12 +42,18 @@
         "C-s" = ":w";
         "C-m" = "save_selection";
         A-x = "extend_to_line_bounds";
-        X = [ "extend_line_up" "extend_to_line_bounds" ];
+        X = [
+          "extend_line_up"
+          "extend_to_line_bounds"
+        ];
       };
       keys.insert = {
         "C-s" = ":w";
         A-x = "extend_to_line_bounds";
-        X = [ "extend_line_up" "extend_to_line_bounds" ];
+        X = [
+          "extend_line_up"
+          "extend_to_line_bounds"
+        ];
       };
     };
 
@@ -53,7 +64,7 @@
       nixd
       stylelint-lsp
       vscode-langservers-extracted-4-8-0
-      nixpkgs-fmt
+      nixfmt-rfc-style
     ];
 
     languages = {
@@ -70,7 +81,10 @@
           ];
           formatter = {
             command = "./node_modules/prettier/bin/prettier.cjs";
-            args = [ "--parser" "typescript" ];
+            args = [
+              "--parser"
+              "typescript"
+            ];
           };
           auto-format = true;
         }
@@ -109,15 +123,23 @@
               enable = true;
               location = "separateLine";
             };
-            showDocumentation = { enable = true; };
+            showDocumentation = {
+              enable = true;
+            };
           };
           codeActionOnSave = {
             enable = true;
             mode = "fixAll";
           };
-          experimental = { useFlatConfig = false; };
-          problems = { shortenToSingleLine = false; };
-          workingDirectory = { mode = "location"; };
+          experimental = {
+            useFlatConfig = false;
+          };
+          problems = {
+            shortenToSingleLine = false;
+          };
+          workingDirectory = {
+            mode = "location";
+          };
           root_file = [
             ".eslintrc"
             ".eslintrc.js"
@@ -133,8 +155,7 @@
             "eslint.config.cts"
           ];
           options = {
-            rulePaths =
-              [ "/home/flo-pro/Projects/clever-components/eslint-rules" ];
+            rulePaths = [ "/home/flo-pro/Projects/clever-components/eslint-rules" ];
           };
         };
       };
@@ -157,11 +178,17 @@
           autoFixOnFormat = true;
           cssInJs = true;
           customSyntax = "postcss-lit";
-          validate = [ "css" "less" "postcss" ];
+          validate = [
+            "css"
+            "less"
+            "postcss"
+          ];
         };
       };
 
-      language-server.nixd = { command = "nixd"; };
+      language-server.nixd = {
+        command = "nixd";
+      };
     };
   };
   xdg.configFile."helix/runtime".source = ../../dotfiles/helix/runtime;
