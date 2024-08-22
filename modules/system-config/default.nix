@@ -6,11 +6,14 @@
     ./time-i18n.nix
     ./networking.nix
     ./sound.nix
-    ./virtualisation.nix
+    # ./virtualisation.nix
   ];
 
   nix = {
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     gc = {
       automatic = true;
       dates = "weekly";
@@ -18,7 +21,6 @@
     };
     optimise.automatic = true;
   };
-
 
   programs.nix-ld.enable = true;
   # Allow unfree package
@@ -50,9 +52,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    wget
-  ];
+  environment.systemPackages = with pkgs; [ wget ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

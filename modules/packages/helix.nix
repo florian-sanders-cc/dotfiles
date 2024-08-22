@@ -3,7 +3,7 @@
 {
   programs.helix = {
     enable = true;
-    package = pkgs.helix-nightly;
+    # package = pkgs.helix-nightly;
 
     settings = {
       theme = "kanagawa";
@@ -63,7 +63,7 @@
       lua-language-server
       nixd
       stylelint-lsp
-      vscode-langservers-extracted-4-8-0
+      vscode-langservers-extracted
       nixfmt-rfc-style
     ];
 

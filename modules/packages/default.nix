@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 let
   specs = import ../../config-specifications.nix;
@@ -27,6 +32,8 @@ let
     vlc
 
     # Dev
+    rustup
+    gcc
     nodejs
     bun
     obsidian
@@ -41,9 +48,13 @@ let
   ];
   proPackages = with pkgs; [ random-labels ];
 
-in {
+in
+{
   imports = [ ./overlays.nix ];
-  fonts.packages = with pkgs; [ nerdfonts font-awesome ];
+  fonts.packages = with pkgs; [
+    nerdfonts
+    font-awesome
+  ];
 
   home-manager.users."${config.user.name}" = {
     # Packages with specific config
