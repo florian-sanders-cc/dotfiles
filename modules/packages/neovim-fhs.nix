@@ -1,24 +1,24 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs;
-    [
-      (buildFHSUserEnv {
-        name = "nvim";
-        targetPkgs = pkgs: [
-          neovim-unwrapped
-          gcc
-          clang
-          cargo
-          unzip
-          fd
-          ripgrep
-          bat
-          delta
-        ];
-        runScript = "nvim";
-      })
-    ];
+  home.packages = with pkgs; [
+    (buildFHSUserEnv {
+      name = "nvim";
+      targetPkgs = pkgs: [
+        neovim-unwrapped
+        gcc
+        clang
+        cargo
+        unzip
+        fd
+        ripgrep
+        bat
+        delta
+        rustup
+      ];
+      runScript = "nvim";
+    })
+  ];
 
   xdg.configFile."nvim" = {
     source = ../../dotfiles/nvim;

@@ -14,5 +14,6 @@
     plasma = "plasma";
     gnome = "gnome";
     hyprland = "hyprland";
+    cosmic = "cosmic";
   };
 }

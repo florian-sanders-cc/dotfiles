@@ -9,12 +9,23 @@
     #   setSocketVariable = true;
     # };
   };
+
+  virtualisation.libvirtd = {
+    enable = true;
+  };
+
+  programs.virt-manager.enable = true;
+
   users.users."${config.user.name}".extraGroups = [ "docker" ];
 
   environment.systemPackages = with pkgs; [
     # Emulator
-    qemu
-
+    (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
+      qemu-system-x86_64 \
+          -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
+          "$@"
+    '')
+    libvirt-glib
     # Simple CLI to manage VM
     quickemu
 
