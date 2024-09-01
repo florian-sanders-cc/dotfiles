@@ -18,7 +18,8 @@
 
   config = lib.mkIf (config.desktop == "cosmic") {
     services = {
-      displayManager.cosmic-greeter.enable = true;
+      # displayManager.cosmic-greeter.enable = true;
+      xserver.displayManager.gdm.enable = true;
       desktopManager.cosmic.enable = true;
     };
     system.nixos.tags = [ "cosmic" ];
