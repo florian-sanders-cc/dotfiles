@@ -34,7 +34,10 @@
   inputs = {
     # --- Unstable channels ---
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # --- Stable channels ---
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
@@ -54,6 +57,10 @@
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    niri = {
+      url = "github:YaLTeR/niri";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

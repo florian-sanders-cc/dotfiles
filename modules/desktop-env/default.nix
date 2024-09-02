@@ -4,5 +4,6 @@
     ./gnome.nix
     ./hyprland.nix
     ./cosmic.nix
+    ./niri.nix
   ];
 }
