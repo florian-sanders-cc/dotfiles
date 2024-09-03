@@ -1,24 +1,24 @@
 # This is Git's per-user configuration file.
 [user]
-name = "Florian Sanders"
-email = "sanders.florian@gmail.com"
-signingkey = D39E596F7894D42D
+	name = "Florian Sanders"
+	email = "florian.sanders@clever-cloud.com"
+	signingkey = B9A906E79574A89C
 
 [gpg]
-program = gpg
+	program = gpg
 
 [core]
-editor = "nvim"
-excludesFile = "~/.gitignore"
+	editor = "nvim"
+	excludesFile = "~/.gitignore"
 
 [init]
-defaultBranch = "main"
+	defaultBranch = "main"
 
 [push]
-autoSetupRemote = true
+	autoSetupRemote = true
 
 [pull]
-rebase = true
+	rebase = true
 
 [commit]
 	gpgSign = true
