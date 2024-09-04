@@ -39,11 +39,6 @@ let
     obsidian
     neovide
     zellij
-    (buildFHSUserEnv {
-      name = "zed";
-      targetPkgs = pkgs: [ zed-editor ];
-      runScript = "zed";
-    })
     distrobox
   ];
   proPackages = with pkgs; [ random-labels ];
@@ -68,6 +63,7 @@ in
       ./zsh.nix
       ./neovim-fhs.nix
       ./helix.nix
+      ./zed.nix
     ];
 
     user.email = config.user.email;
