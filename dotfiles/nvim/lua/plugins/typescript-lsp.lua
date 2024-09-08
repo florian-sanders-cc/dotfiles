@@ -6,8 +6,8 @@ return {
   opts = {
     inlay_hints = { enabled = true },
     servers = {
-      ---@type lspconfig.options.tsserver
-      tsserver = {
+      ---@type lspconfig.options.ts_ls
+      ts_ls = {
         settings = {
           implicitProjectConfiguration = { checkJs = true, allowJs = true },
           fallbackPath = string.gsub(

@@ -9,7 +9,7 @@ return {
         require("lazyvim.util").lsp.on_attach(function(client)
           if client.name == "eslint" then
             client.server_capabilities.documentFormattingProvider = true
-          elseif client.name == "typescript-tools" or client.name == "tsserver" then
+          elseif client.name == "typescript-tools" or client.name == "ts_ls" then
             client.server_capabilities.documentFormattingProvider = false
           end
         end)
