@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 {
   system.nixos.tags = [ "intel" ];
@@ -9,10 +14,16 @@
     ];
   };
 
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = lib.mkDefault "iHD"; };
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = lib.mkDefault "iHD";
+  };
 
   specialisation.nvidia.configuration = {
     system.nixos.tags = [ "nvidia" ];
+    environment.systemPackages = with pkgs; [
+      nvidia-system-monitor-qt
+    ];
+
     hardware.nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.production;
 

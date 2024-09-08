@@ -7,24 +7,14 @@
 // from the command palette.
 [
   {
-    "context": "Editor && !menu",
+    "context": "Dock || vim_mode == normal || vim_mode == visual || Terminal",
     "bindings": {
-      // "ctrl-c": "editor::Copy", // vim default: return to normal mode
-      // "ctrl-x": "editor::Cut", // vim default: decrement
-      // "ctrl-v": "editor::Paste", // vim default: visual block mode
-      // "ctrl-y": "editor::Undo", // vim default: line up
-      // "ctrl-f": "buffer_search::Deploy", // vim default: page down
-      // "ctrl-o": "workspace::Open", // vim default: go back
-      // "ctrl-a": "editor::SelectAll" // vim default: increment
-    }
-  },
-  {
-    "context": "Dock",
-    "bindings": {
-      "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
+      "ctrl-w": "pane::CloseActiveItem",
+      "ctrl-b": "pane::CloseAllItems"
     }
   },
   {

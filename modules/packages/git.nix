@@ -2,25 +2,31 @@
 
 {
   # TODO sign key etc.
-  options.user.email = with lib; mkOption {
-    type = types.str;
-  };
+  options.user.email =
+    with lib;
+    mkOption {
+      type = types.str;
+    };
 
   config = {
     programs.git = {
       enable = true;
-      userEmail = config.user.email;
-      userName = "Florian Sanders";
       extraConfig = {
-        core.editor = "nvim";
-        core.excludesFile = "~/.gitignore";
         init.defaultBranch = "main";
+        core = {
+          editor = "nvim";
+          excludesFile = "~/.gitignore";
+        };
+        user = {
+          name = "Florian Sanders";
+          email = config.user.email;
+          signingKey = "E94DAA3CD0C7151B";
+        };
+        commit.gpgSign = true;
+        tag.gpgSign = true;
+        gpg.program = "${config.programs.gpg.package}/bin/gpg2";
         push.autoSetupRemote = true;
         pull.rebase = true;
-        commit.gpgsign = false;
-        signing.key = "";
-        gpg.program = "gpg2";
-        tag.gpgsign = true;
       };
     };
     home.file.".gitignore".source = ../../dotfiles/gitignore;

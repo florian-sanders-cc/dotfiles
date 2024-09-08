@@ -32,10 +32,13 @@
     // c.f. https://github.com/jeffkreeftmeijer/vim-numbertoggle
     "toggle_relative_line_numbers": true
   },
+  "buffer_font_family": "JetBrainsMono Nerd Font",
   // use relative line numbers
   "relative_line_numbers": true,
   // hide the scroll bar
-  "scrollbar": { "show": "never" },
+  "scrollbar": {
+    "show": "never"
+  },
   // prevent the buffer from scrolling beyond the last line
   "scroll_beyond_last_line": "off",
   // allow cursor to reach edges of screen

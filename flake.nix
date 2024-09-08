@@ -22,7 +22,7 @@
       nixosConfigurations = {
         pro = mkNixosConfig {
           user = specs.users.pro;
-          desktop = specs.desktops.plasma;
+          desktop = specs.desktops.niri;
         };
 
         perso = mkNixosConfig {
@@ -64,9 +64,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri = {
-      url = "github:YaLTeR/niri";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # niri = {
+    #   url = "github:YaLTeR/niri";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 }

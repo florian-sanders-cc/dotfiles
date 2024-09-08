@@ -1,4 +1,9 @@
-{ pkgs, config, home-manager, ... }:
+{
+  pkgs,
+  config,
+  home-manager,
+  ...
+}:
 
 let
   lib = pkgs.lib;
@@ -47,12 +52,19 @@ in
     };
   };
 
+  users.defaultUserShell = pkgs.zsh;
+
   users.users."${user.name}" = {
     isNormalUser = true;
     description = "flo";
-    extraGroups = [ "networkmanager" "wheel" "audio" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "audio"
+    ];
+    shell = pkgs.fish;
   };
-  users.defaultUserShell = pkgs.zsh;
 
   programs.zsh.enable = true;
+  programs.fish.enable = true;
 }

@@ -1,6 +1,19 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    # keychain --quiet --agents ssh id_ed25519
 end
+
+# begin
+#     set -l HOSTNAME (hostname)
+#     if test -f ~/.keychain/$HOSTNAME-fish
+#         source ~/.keychain/$HOSTNAME-fish
+#     end
+
+# # Start or re-use a gpg-agent.
+# gpgconf --launch gpg-agent
+#
+# # Ensure that GPG Agent is used as the SSH agent
+# set -e SSH_AUTH_SOCK
+# set -U -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh end
 
 export EDITOR='nvim'
 
@@ -162,7 +175,7 @@ function work_in_progress
 end
 
 # these alias commit and uncomit wip branches
-alias gwip='git add -A; git ls-files --deleted -z | xargs -0 git rm; git commit -m "wip"'
+alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
 alias gunwip='git log -n 1 | grep -q -c wip; and git reset HEAD~1'
 
 function gcpr
@@ -182,3 +195,4 @@ direnv hook fish | source
 starship init fish | source
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH
+set -gx PATH "$HOME/dotfiles/scripts" $PATH

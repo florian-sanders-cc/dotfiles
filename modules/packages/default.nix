@@ -61,6 +61,8 @@ in
       ./direnv.nix
       ./vscode.nix
       ./zsh.nix
+      ./nushell.nix
+      ./fish.nix
       ./neovim-fhs.nix
       ./helix.nix
       ./zed.nix

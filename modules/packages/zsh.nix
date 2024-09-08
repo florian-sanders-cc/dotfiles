@@ -1,9 +1,8 @@
-{ config
-, ...
-}:
+{ ... }:
+
 {
   programs.zsh = {
-    enable = true;
+    enable = false;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     autosuggestion.enable = true;

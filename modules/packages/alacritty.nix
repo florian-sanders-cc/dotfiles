@@ -8,7 +8,7 @@
         dimensions.lines = 30;
         padding.x = 15;
         padding.y = 15;
-        # opacity = 0.9;
+        opacity = 0.9;
       };
 
       keyboard.bindings = [

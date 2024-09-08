@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 let
   specs = import ../config-specifications.nix;
@@ -21,10 +26,10 @@ in
     enable = true;
   };
 
-  environment.shellInit = ''
-    gpg-connect-agent /bye
-    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-  '';
+  # environment.shellInit = ''
+  #   gpg-connect-agent /bye
+  #   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+  # '';
 
   # ClamAV
   services.clamav.daemon.enable = true;
@@ -36,7 +41,13 @@ in
   services.clamav.updater.enable = true;
   systemd.services.clamav-freshclam.wants = [ "network-online.target" ];
   systemd.services.clamav-daemon = {
-    path = [ pkgs.bash pkgs.nix pkgs.coreutils-full pkgs.hostname pkgs.curl ];
+    path = [
+      pkgs.bash
+      pkgs.nix
+      pkgs.coreutils-full
+      pkgs.hostname
+      pkgs.curl
+    ];
     serviceConfig = pkgs.lib.mkForce {
       ExecStart = "${pkgs.clamav}/bin/clamd";
       ExecReload = "${pkgs.coreutils}/bin/kill -USR2 $MAINPID";
@@ -49,7 +60,10 @@ in
   };
   systemd.services.clamav-clamonacc = {
     enable = true;
-    path = [ pkgs.nix pkgs.bash ];
+    path = [
+      pkgs.nix
+      pkgs.bash
+    ];
     unitConfig = {
       Description = "ClamAV daemon for on-access scanning";
       Wants = "network-online.target";
