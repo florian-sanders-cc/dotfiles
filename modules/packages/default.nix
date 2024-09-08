@@ -1,6 +1,6 @@
 {
-  lib,
   config,
+  lib,
   pkgs,
   ...
 }:
@@ -9,10 +9,10 @@ let
   specs = import ../../config-specifications.nix;
   commonPackages = with pkgs; [
     # Nix related
-    prefetch-npm-deps
     nix-prefetch-git
     nixd
     nixfmt-rfc-style
+    prefetch-npm-deps
 
     # Browsers
     chromium
@@ -23,23 +23,24 @@ let
     slack
 
     # CLI
+    clever-tools
     htop
     jq
     s3cmd
-    clever-tools
 
     # Utility
     vlc
 
     # Dev
-    rustup
-    gcc
-    nodejs
     bun
-    obsidian
-    neovide
-    zellij
+    difftastic
     distrobox
+    gcc
+    neovide
+    nodejs
+    obsidian
+    rustup
+    zellij
   ];
   proPackages = with pkgs; [ random-labels ];
 
@@ -47,25 +48,25 @@ in
 {
   imports = [ ./overlays.nix ];
   fonts.packages = with pkgs; [
-    nerdfonts
     font-awesome
+    nerdfonts
   ];
 
   home-manager.users."${config.user.name}" = {
     # Packages with specific config
     imports = [
-      ./git.nix
       ./alacritty.nix
-      ./fzf.nix
-      ./starship.nix
       ./direnv.nix
-      ./vscode.nix
-      ./zsh.nix
-      ./nushell.nix
       ./fish.nix
-      ./neovim-fhs.nix
+      ./fzf.nix
+      ./git.nix
       ./helix.nix
+      ./neovim-fhs.nix
+      ./nushell.nix
+      ./starship.nix
+      ./vscode.nix
       ./zed.nix
+      ./zsh.nix
     ];
 
     user.email = config.user.email;
