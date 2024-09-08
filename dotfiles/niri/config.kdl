@@ -3,9 +3,6 @@
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
 
-// Input device configuration.
-// Find the full list of options on the wiki:
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 spawn-at-startup "waybar"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "swayosd-server"
@@ -13,46 +10,22 @@ spawn-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY X
 
 prefer-no-csd
 
+// Input device configuration.
+// Find the full list of options on the wiki:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 input {
     keyboard {
         xkb {
-            // You can set rules, model, layout, variant and options.
-            // For more information, see xkeyboard-config(7).
-
-            // For example:
             layout "fr"
-            // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
         }
     }
 
     // Next sections include libinput settings.
     // Omitting settings disables them, or leaves them at their default values.
     touchpad {
-        // off
         tap
-        // dwt
-        // dwtp
         natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "two-finger"
-        // disabled-on-external-mouse
     }
-
-    mouse {
-        // off
-        // natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "no-scroll"
-    }
-
-    // Uncomment this to make the mouse warp to the center of newly focused windows.
-    // warp-mouse-to-focus
-
-    // Focus windows and outputs automatically when moving the mouse into them.
-    // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
 }
 
 // You can configure outputs by their name, which you can find
@@ -61,7 +34,7 @@ input {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
-/-output "eDP-1" {
+output "eDP-1" {
     // Uncomment this line to disable this output.
     // off
 
@@ -90,6 +63,18 @@ input {
     // If the position is unset or results in an overlap, the output is instead placed
     // automatically.
     position x=1280 y=0
+}
+
+
+output "DP-3" {
+    mode "1920x1080@60.0"
+    position x=2050 y=0
+    scale 1
+}
+output "HDMI-A-1" {
+    mode "2560x1440@59.9"
+    position x=1 y=0
+    scale 1.25
 }
 
 cursor {
@@ -147,7 +132,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 4
+        width 3
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -167,13 +152,13 @@ layout {
         // You can use any CSS linear-gradient tool on the web to set these up.
         // Changing the color space is also supported, check the wiki for more info.
         //
-        // active-gradient from="#80c8ff" to="#bbddff" angle=45
+        active-gradient from="#289daa" to="#ba2187" angle=45
 
         // You can also color the gradient relative to the entire view
         // of the workspace, rather than relative to just the window itself.
         // To do that, set relative-to="workspace-view".
         //
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+        inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
     // You can also add a border. It's similar to the focus ring, but always visible.
@@ -241,7 +226,7 @@ animations {
 // by setting an empty default-column-width.
 window-rule {
     default-column-width {}
-    geometry-corner-radius 12
+    geometry-corner-radius 9
     clip-to-geometry true
     opacity 0.95
 }
@@ -264,7 +249,7 @@ environment {
 
 
 hotkey-overlay {
-    // skip-at-startup
+    skip-at-startup
 }
 
 binds {
@@ -301,6 +286,7 @@ binds {
     XF86MonBrightnessUp allow-when-locked=true { spawn "swayosd-client" "--brightness" "raise"; }
     // Brightness lower
     XF86MonBrightnessDown allow-when-locked=true { spawn "swayosd-client" "--brightness" "lower"; }
+    Caps_Lock allow-when-locked=true { spawn "swayosd-client" "--caps-lock"; }
 
     Mod+Q { close-window; }
 
