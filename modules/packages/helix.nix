@@ -33,10 +33,10 @@
             "file-name"
           ];
         };
-        inline-diagnostics = {
-          cursor-line = "hint";
-          other-lines = "error";
-        };
+        # inline-diagnostics = {
+        #   cursor-line = "hint";
+        #   other-lines = "error";
+        # };
       };
       keys.normal = {
         "C-s" = ":w";
