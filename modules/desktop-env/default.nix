@@ -3,7 +3,7 @@
     ./kde-plasma.nix
     ./gnome.nix
     ./hyprland.nix
-    ./cosmic.nix
+    # ./cosmic.nix
     ./niri.nix
   ];
 }
