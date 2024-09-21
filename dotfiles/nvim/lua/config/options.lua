@@ -7,6 +7,9 @@ vim.g.root_spec = { ".git", "cwd" }
 vim.g.markdown_fenced_languages = {
 	"ts=typescript",
 }
+
+vim.lsp.set_log_level("off")
+
 if vim.g.neovide then
 	vim.o.linespace = 5
 	vim.g.neovide_padding_top = 20
