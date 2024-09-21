@@ -3,7 +3,12 @@
 {
   programs.fish = {
     enable = true;
+    loginShellInit = ''
+      # Remove welcome message
+      function fish_greeting; end
+    '';
     interactiveShellInit = ''
+        function fish_greeting; end
       # Aliases
           alias g='git'
       #compdef g=git
