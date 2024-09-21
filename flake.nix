@@ -33,8 +33,8 @@
     };
   inputs = {
     # --- Unstable channels ---
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:florian-sanders-cc/nixpkgs/fix/fonts";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:florian-sanders-cc/nixpkgs/fix/fonts";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -56,7 +56,7 @@
     # };
 
     zed-flake = {
-      url = "github:zed-industries/zed?ref=refs/tags/v0.151.2";
+      url = "github:zed-industries/zed?ref=refs/tags/v0.153.6";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

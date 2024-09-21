@@ -65,11 +65,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1725863684,
-        "narHash": "sha256-HmdTBpuCsw35Ii35JUKO6AE6nae+kJliQb0XGd4hoLE=",
+        "lastModified": 1726814843,
+        "narHash": "sha256-dz6K+QWJsmkqPqbVfJNtwWio1v0WGMVL6Ov8x0NNShs=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "be47a2bdf278c57c2d05e747a13ed31cef54a037",
+        "rev": "2cf3abce034432cb357c0a6a670481819c55f564",
         "type": "github"
       },
       "original": {
@@ -80,16 +80,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1725522690,
-        "narHash": "sha256-axdwEnvtKsQVUgp+TrYuE7DBPAZtg4Mt2RYYZLxeN/I=",
-        "owner": "florian-sanders-cc",
+        "lastModified": 1726463316,
+        "narHash": "sha256-gI9kkaH0ZjakJOKrdjaI/VbaMEo9qBbSUl93DnU7f4c=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "197312cef5a66d653740f1ad1cb3c40449d13118",
+        "rev": "99dc8785f6a0adac95f5e2ab05cc2e1bf666d172",
         "type": "github"
       },
       "original": {
-        "owner": "florian-sanders-cc",
-        "ref": "fix/fonts",
+        "owner": "nixos",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -128,16 +128,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1725630773,
-        "narHash": "sha256-wIozmr3GKi4VdP+P5J2j3Fa/rIjfzpPQDHv8X3WBHZA=",
+        "lastModified": 1726758149,
+        "narHash": "sha256-8yu1xAN8GQXWXF4PHRbOx4oWK3EYc4POQlOYaDiPH+A=",
         "owner": "zed-industries",
         "repo": "zed",
-        "rev": "ba0115977da1824f2d89435e4845bcb861e81bd5",
+        "rev": "7234166077055e63911c36aad117e75f51edf3ea",
         "type": "github"
       },
       "original": {
         "owner": "zed-industries",
-        "ref": "refs/tags/v0.151.2",
+        "ref": "refs/tags/v0.153.6",
         "repo": "zed",
         "type": "github"
       }
