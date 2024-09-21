@@ -23,7 +23,7 @@
     "dark": "One Dark"
   },
   "vim": {
-    "use_system_clipboard": "always",
+    "use_system_clipboard": "on_yank",
     // Let `f` and `t` motions extend across multiple lines
     "use_multiline_find": true,
     // Let `f` and `t` motions match case insensitively if the target is lowercase

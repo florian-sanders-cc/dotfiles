@@ -14,7 +14,8 @@
       "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
       "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
       "ctrl-w": "pane::CloseActiveItem",
-      "ctrl-b": "pane::CloseAllItems"
+      "ctrl-shift-w": "pane::CloseAllItems",
+      "ctrl-b": "workspace::ToggleLeftDock"
     }
   },
   {
