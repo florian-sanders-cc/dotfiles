@@ -33,7 +33,7 @@
         flavor = "mocha";
         font = "Noto Sans";
         fontSize = "14";
-        background = ../../dotfiles/wallpapers/wallpaper-lines.png;
+        background = "${pkgs.wallpapers}/wallpaper-lines.png";
         loginBackground = true;
       })
     ];
@@ -146,7 +146,8 @@
             "--mode"
             "fill"
             "--image"
-            ../../dotfiles/wallpapers/wallpaper-waves.png
+            "${pkgs.wallpapers}/wallpaper-waves.png"
+            # ../../dotfiles/wallpapers/wallpaper-waves.png
           ];
         };
       };

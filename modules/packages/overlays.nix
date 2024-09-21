@@ -14,10 +14,10 @@
 
       stylelint-lsp = prev.callPackage ./stylelint-lsp.nix { };
 
-      clever-tools = prev.clever-tools.overrideAttrs (_: rec {
-        pname = "clever-tools";
+      wallpapers = prev.callPackage ./wallpapers.nix { };
+
       clever-switch-profile = prev.callPackage ./clever-switch-profile.nix { };
-        src = prev.fetchFromGitHub {
+
       # clever-tools = prev.clever-tools.overrideAttrs (_: rec {
       #   pname = "clever-tools";
       #   version = "3.8.3";
@@ -36,5 +36,6 @@
       #   };
       # });
     })
+
   ];
 }
