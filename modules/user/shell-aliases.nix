@@ -25,5 +25,6 @@ in
     nxcfg = "cd ${homeDirectory}/.config/nixos-config";
     ww = "cd ${homeDirectory}/Projects/";
     setnode = "cat ${homeDirectory}/.config/nixos-config/node-shell/.envrc-example >> .envrc; direnv allow";
+    cd = "z";
   };
 }
