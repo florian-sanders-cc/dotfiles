@@ -41,8 +41,12 @@ let
     obsidian
     rustup
     zellij
+    jless
   ];
-  proPackages = with pkgs; [ random-labels ];
+  proPackages = with pkgs; [
+    random-labels
+    clever-switch-profile
+  ];
 
 in
 {

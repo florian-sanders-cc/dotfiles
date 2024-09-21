@@ -16,7 +16,7 @@
 
       clever-tools = prev.clever-tools.overrideAttrs (_: rec {
         pname = "clever-tools";
-        version = "3.8.3";
+      clever-switch-profile = prev.callPackage ./clever-switch-profile.nix { };
         src = prev.fetchFromGitHub {
           owner = "CleverCloud";
           repo = "clever-tools";
