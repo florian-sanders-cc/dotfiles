@@ -36,7 +36,7 @@
   console.keyMap = "fr";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing.enable = false;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
