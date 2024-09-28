@@ -35,6 +35,11 @@
     "light": "One Light",
     "dark": "One Dark"
   },
+  "terminal": {
+    "env": {
+      "EDITOR": "zed --wait"
+    }
+  },
   "vim": {
     "use_system_clipboard": "on_yank",
     // Let `f` and `t` motions extend across multiple lines
