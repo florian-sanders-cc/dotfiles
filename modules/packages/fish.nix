@@ -23,7 +23,7 @@
           alias gup='git pull --rebase'
       #compdef _git gup=git-fetch
           alias gp='git push'
-          alias gpf='git push --force'
+          alias gpf='git push --force-with-lease'
       #compdef _git gp=git-push
           alias gd='git diff'
 
@@ -92,6 +92,7 @@
           alias grhh='git reset --hard'
           alias gclean='git reset --hard; git clean'
           alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
+          alias gbclean='git branch --merged | grep -v "main\|master\|develop\*" | xargs git branch -D'
 
       #remove the gf alias
       #alias gf='git ls-files | grep'
