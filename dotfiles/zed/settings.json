@@ -14,6 +14,19 @@
     },
     "version": "2"
   },
+  "tab_bar": {
+    "show": false
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware"
+  },
+  "project_panel": {
+    "button": true,
+    "dock": "left",
+    "git_status": true
+  },
+  "tabs": { "file_icons": true },
   "vim_mode": true,
   "ui_font_size": 16,
   "buffer_font_size": 16,
