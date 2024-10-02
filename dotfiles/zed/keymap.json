@@ -143,7 +143,7 @@
   },
   // Panel nagivation
   {
-    "context": "Dock || vim_mode == normal || vim_mode == visual || Terminal",
+    "context": "Dock || vim_mode == normal || vim_mode == visual",
     "bindings": {
       "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
       "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
@@ -154,6 +154,18 @@
       "ctrl-b": "workspace::ToggleLeftDock",
       "space b c": "tab_switcher::Toggle",
       "space space": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "terminal",
+    "bindings": {
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-j": "workspace::ToggleBottomDock",
+      "ctrl-w": "pane::CloseActiveItem",
+      "ctrl-shift-w": "pane::CloseAllItems",
+      "ctrl-b": "workspace::ToggleLeftDock"
     }
   },
   {
@@ -176,7 +188,7 @@
   },
   // Subword motion is not working really nice with `ciw`, disable for now
   {
-    "context": "VimControl && !menu",
+    "context": "VimControl && !menu && vim_mode != operator",
     "bindings": {
       "w": "vim::NextSubwordStart",
       "b": "vim::PreviousSubwordStart",
