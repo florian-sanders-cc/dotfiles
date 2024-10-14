@@ -195,6 +195,12 @@
       "e": "vim::NextSubwordEnd",
       "g e": "vim::PreviousSubwordEnd"
     }
+  },
+  {
+    "context": "Editor && mode == full",
+    "bindings": {
+      "shift-enter": ["editor::ExpandExcerpts", { "lines": 5 }]
+    }
   }
 ]
 // [

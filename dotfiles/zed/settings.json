@@ -45,10 +45,10 @@
     // Let `f` and `t` motions extend across multiple lines
     "use_multiline_find": true,
     // Let `f` and `t` motions match case insensitively if the target is lowercase
-    "use_smartcase_find": true,
+    "use_smartcase_find": true
     // Use relative line numbers in normal mode, absolute in insert mode
     // c.f. https://github.com/jeffkreeftmeijer/vim-numbertoggle
-    "toggle_relative_line_numbers": true
+    // "toggle_relative_line_numbers": true
   },
   "buffer_font_family": "JetBrainsMono Nerd Font",
   // use relative line numbers
