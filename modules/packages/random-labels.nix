@@ -1,6 +1,6 @@
-{ stdenv
-, fetchFromGitHub
-, buildNpmPackage
+{
+  fetchFromGitHub,
+  buildNpmPackage,
 }:
 
 buildNpmPackage rec {

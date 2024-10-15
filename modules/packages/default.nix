@@ -27,6 +27,7 @@ let
     htop
     jq
     s3cmd
+    jless
 
     # Utility
     vlc
@@ -36,12 +37,10 @@ let
     difftastic
     distrobox
     gcc
-    neovide
     nodejs
     obsidian
     rustup
     zellij
-    jless
   ];
   proPackages = with pkgs; [
     random-labels
