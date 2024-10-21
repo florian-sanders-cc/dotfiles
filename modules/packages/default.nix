@@ -75,6 +75,7 @@ in
     ];
 
     user.email = config.user.email;
+    user.name = config.user.name;
 
     # Standard packages
     home.packages = lib.mkMerge [
