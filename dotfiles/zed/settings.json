@@ -65,5 +65,16 @@
     "W": "w",
     "Wq": "wq",
     "Q": "q"
+  },
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "javascript": {
+          "preferences": {
+            "importModuleSpecifier": "relative"
+          }
+        }
+      }
+    }
   }
 }
