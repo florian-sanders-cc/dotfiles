@@ -28,6 +28,7 @@ let
     jq
     s3cmd
     jless
+    git-absorb
 
     # Utility
     vlc
