@@ -7,6 +7,11 @@
     mkOption {
       type = types.str;
     };
+  options.user.name =
+    with lib;
+    mkOption {
+      type = types.str;
+    };
 
   config = {
     programs.git = {
@@ -34,7 +39,10 @@
         user = {
           name = "Florian Sanders";
           email = config.user.email;
-          signingKey = "E94DAA3CD0C7151B";
+          signingKey = lib.mkMerge [
+            (lib.mkIf (config.user.name == "flo-pro") "E94DAA3CD0C7151B")
+            (lib.mkIf (config.user.name == "flo-perso") "32343690B0FD8FBE")
+          ];
         };
         commit.gpgSign = true;
         commit.verbose = true;
