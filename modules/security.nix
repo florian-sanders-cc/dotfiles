@@ -21,7 +21,6 @@ in
   security.rtkit.enable = true;
 
   # SSH & GPG
-  # TODO: sops maybe + Fix cause it doesn't work anyway
   programs.gnupg.agent = {
     enable = true;
   };
@@ -35,11 +34,12 @@ in
   services.clamav.daemon.enable = true;
   services.clamav.daemon.settings = {
     OnAccessExcludeUname = "clamav";
-    OnAccessIncludePath = "~/Downloads";
+    OnAccessIncludePath = "${config.user.homeDirectory}/Downloads";
+    LogSyslog = true;
+    LogTime = true;
     VirusEvent = lib.mkIf (config.user.name == specs.users.pro.name) "/usr/sbin/clamav-notify-cc.sh";
   };
   services.clamav.updater.enable = true;
-  systemd.services.clamav-freshclam.wants = [ "network-online.target" ];
   systemd.services.clamav-daemon = {
     path = [
       pkgs.bash
