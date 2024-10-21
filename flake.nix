@@ -27,7 +27,7 @@
 
         perso = mkNixosConfig {
           user = specs.users.perso;
-          desktop = specs.desktops.plasma;
+          desktop = specs.desktops.niri;
         };
       };
     };
