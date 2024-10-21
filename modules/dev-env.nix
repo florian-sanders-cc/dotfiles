@@ -15,4 +15,8 @@
   services.mysql.enable = true;
   services.mysql.package = pkgs.mariadb;
 
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
 }

@@ -19,6 +19,7 @@ in
     ./user
     ./desktop-env
     ./packages
+    ./dev-env.nix
     ./security.nix
   ];
 
