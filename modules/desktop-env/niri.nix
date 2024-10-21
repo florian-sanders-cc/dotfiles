@@ -10,25 +10,15 @@
     system.nixos.tags = [ "niri" ];
 
     environment.systemPackages = with pkgs; [
-      niri
-      wl-clipboard
+      adwaita-icon-theme
+      blueberry
       cliphist
       fuzzel
-      pavucontrol
       gtk4
-      libadwaita
-      xdg-desktop-portal-gtk
-      xdotool
-      xdg-desktop-portal-gnome
-      seahorse
-      polkit_gnome
-      nautilus
-      xwayland-satellite
-      wlogout
-      swaybg
-      swayosd
-      adwaita-icon-theme
       kdePackages.breeze-icons
+      libadwaita
+      nautilus
+      niri
       (pkgs.catppuccin-sddm.override {
         flavor = "mocha";
         font = "Noto Sans";
@@ -36,6 +26,17 @@
         background = "${pkgs.wallpapers}/wallpaper-lines.png";
         loginBackground = true;
       })
+      pavucontrol
+      polkit_gnome
+      seahorse
+      swaybg
+      swayosd
+      wl-clipboard
+      wlogout
+      xdg-desktop-portal-gnome
+      xdg-desktop-portal-gtk
+      xdotool
+      xwayland-satellite
     ];
 
     xdg.portal = {
