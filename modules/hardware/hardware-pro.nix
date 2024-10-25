@@ -1,4 +1,10 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 let
   specs = import ../../config-specifications.nix;
@@ -16,7 +22,13 @@ in
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
     # TODO: add keyboard / usb?
-    boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
+    boot.initrd.availableKernelModules = [
+      "xhci_pci"
+      "thunderbolt"
+      "nvme"
+      "usb_storage"
+      "sd_mod"
+    ];
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [ "kvm-intel" ];
     boot.extraModulePackages = [ ];
@@ -38,10 +50,13 @@ in
     fileSystems."/boot" = {
       device = "/dev/disk/by-uuid/41FF-2A42";
       fsType = "vfat";
-      options = [ "umask=0077" "defaults" ];
+      options = [
+        "umask=0077"
+        "defaults"
+      ];
     };
 
-    swapDevices = [{ device = "/dev/disk/by-uuid/ac4568f0-3f89-4ade-a012-a8ff3b24471e"; }];
+    swapDevices = [ { device = "/dev/disk/by-uuid/ac4568f0-3f89-4ade-a012-a8ff3b24471e"; } ];
 
     hardware.bluetooth.enable = true; # enables support for Bluetooth
     hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

@@ -1,19 +1,29 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 let
   specs = import ../../config-specifications.nix;
 
 in
 {
-  imports =
-    [
-      ./gpu.nix
-      (modulesPath + "/installer/scan/not-detected.nix")
-    ];
-
+  imports = [
+    ./gpu.nix
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
   config = lib.mkIf (config.user.name == specs.users.perso.name) {
-    boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
+    boot.initrd.availableKernelModules = [
+      "xhci_pci"
+      "thunderbolt"
+      "nvme"
+      "usb_storage"
+      "sd_mod"
+    ];
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [ "kvm-intel" ];
     boot.extraModulePackages = [ ];
@@ -29,10 +39,13 @@ in
     fileSystems."/boot" = {
       device = "/dev/disk/by-uuid/8C97-4233";
       fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+      options = [
+        "fmask=0077"
+        "dmask=0077"
+      ];
     };
 
-    swapDevices = [{ device = "/dev/disk/by-uuid/3abf49bc-70ed-4c84-b36d-dd50a48ed851"; }];
+    swapDevices = [ { device = "/dev/disk/by-uuid/3abf49bc-70ed-4c84-b36d-dd50a48ed851"; } ];
 
     # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
     # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -43,7 +56,7 @@ in
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     hardware.bluetooth.enable = true; # enables support for Bluetooth
-    hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot 
+    hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
     hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 }
