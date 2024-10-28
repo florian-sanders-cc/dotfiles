@@ -34,7 +34,7 @@
   inputs = {
     # --- Unstable channels ---
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "github:florian-sanders-cc/nixpkgs/fix/fonts";
+    # nixpkgs.url = "github:florian-sanders-cc/nixpkgs/clever-tools-3-9-0";
 
     home-manager = {
       url = "github:nix-community/home-manager";
