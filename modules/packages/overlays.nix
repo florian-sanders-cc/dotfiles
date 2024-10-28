@@ -34,8 +34,6 @@
           name = "${pname}-${version}-npm-deps";
           hash = npmDepsHash;
         };
-
-        dontNpmBuild = false;
       });
     })
 
