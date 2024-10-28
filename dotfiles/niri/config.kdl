@@ -3,8 +3,6 @@
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
 
-spawn-at-startup "waybar"
-spawn-at-startup "xwayland-satellite"
 spawn-at-startup "swayosd-server"
 spawn-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 
@@ -477,4 +475,6 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
+    Mod+Space { spawn "pkill" "-SIGUSR1" "waybar"; }
+    Mod+N { spawn "swaync-client" "-t" "-sw"; }
 }
