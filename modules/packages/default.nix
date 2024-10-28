@@ -42,6 +42,7 @@ let
     obsidian
     rustup
     zellij
+    dogdns
   ];
   proPackages = with pkgs; [
     random-labels
