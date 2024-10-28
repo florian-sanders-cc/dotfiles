@@ -1,18 +1,17 @@
 { pkgs, config, ... }:
 
 {
-  # move to php?
-  services.httpd.enable = true;
+  services.httpd.enable = false;
   services.httpd.adminAddr = "webmaster@example.org";
-  services.httpd.enablePHP = true; # oof... not a great idea in my opinion
+  services.httpd.enablePHP = false;
 
   # TODO: remove
-  # services.httpd.virtualHosts."example.org" = {
+  # services.httpd.virtualHosts."yahoo.com" = {
   #   documentRoot = "${config.user.homeDirectory}/test";
   # };
 
   # move to db?
-  services.mysql.enable = true;
+  services.mysql.enable = false;
   services.mysql.package = pkgs.mariadb;
 
   services.ollama = {
