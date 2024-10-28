@@ -1,7 +1,6 @@
 {
   stdenv,
   pkgs,
-  lib,
   ...
 }:
 
@@ -10,11 +9,11 @@ stdenv.mkDerivation {
   version = "0.1.0";
   src = ../../dotfiles/clever-tools;
   nativeBuildInputs = [ pkgs.makeWrapper ];
-  buildInputs = [ pkgs.nodejs-18_x ];
+
   installPhase = ''
-    mkdir -p $out/bin
-    cp clever-switch-profile.js $out/bin/clever-switch-profile
-    wrapProgram $out/bin/clever-switch-profile \
-      --prefix PATH : ${lib.makeBinPath [ pkgs.nodejs-18_x ]}
+    mkdir -p $out/bin $out/src
+    cp clever-switch-profile.js $out/src
+    makeWrapper ${pkgs.nodejs-18_x}/bin/node $out/bin/clever-switch-profile \
+      --add-flags "$out/src/clever-switch-profile.js"
   '';
 }
