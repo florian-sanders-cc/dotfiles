@@ -6,6 +6,9 @@
       name = "zed";
       targetPkgs = pkgs: [ zed-latest ];
       runScript = "zed";
+      extraInstallCommands = ''
+        ln -s "${zed-latest}/share" "$out/"
+      '';
     })
   ];
 
