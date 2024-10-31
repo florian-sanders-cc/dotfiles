@@ -56,7 +56,7 @@
     # };
 
     zed-flake = {
-      url = "github:zed-industries/zed?ref=refs/tags/v0.158.2";
+      url = "github:zed-industries/zed?ref=refs/tags/v0.159.5";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
