@@ -1,16 +1,25 @@
 {
   outputs =
-    inputs@{ nixpkgs, home-manager, ... }:
+    inputs@{
+      nixpkgs,
+      home-manager,
+      lix-module,
+      ...
+    }:
     let
       system = "x86_64-linux";
       mkNixosConfig =
         { user, desktop }:
+        let
+          # Determine modules based on user
+          extraModules = if user.name == "flo-perso" then [ lix-module.nixosModules.default ] else [ ];
+        in
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./modules
             { inherit user desktop; }
-          ];
+          ] ++ extraModules;
           specialArgs = {
             inherit home-manager inputs;
           };
@@ -38,6 +47,11 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
