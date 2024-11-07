@@ -32,6 +32,12 @@ in
       (lib.mkIf (user.name == specs.users.perso.name) shellAliases.persoAliases)
     ];
 
+    # config for nix CLI (allowUnfree for nix-shell -p command for instance)
+    xdg.configFile."nixpkgs" = {
+      source = ../../dotfiles/nixpkgs;
+      recursive = true;
+    };
+
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
     # when a new Home Manager release introduces backwards
