@@ -8,7 +8,7 @@ in
   # TODO: use function to generate update / rebuild aliases from user specs
   proAliases = {
     clever-dev = "${homeDirectory}/Projects/clever-tools/bin/clever.js";
-    rt = "random-labels Hubert Mathieu Florian Bob Pierre Hélène Clara --clipboard";
+    rt = "random-labels Hubert Mathieu Florian Bob Pierre Hélène Clara Marion --clipboard";
     SN = "s3cmd -c ${homeDirectory}/s3cfgs/flo-clever.s3cfg sync --delete-removed ${homeDirectory}/Notes/ s3://flo-clever-notes";
     SP = "s3cmd -c ${homeDirectory}/s3cfgs/flo-clever.s3cfg sync --delete-removed --exclude-from ${homeDirectory}/Projects/.s3ignore ${homeDirectory}/Projects s3://flo-projects-backup";
     upd-pro = "nix flake update --flake '${nixosConfigPath}'; nixos-rebuild switch --upgrade --flake '${nixosConfigPath}#pro' --use-remote-sudo";
