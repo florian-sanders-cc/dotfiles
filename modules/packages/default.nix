@@ -47,6 +47,7 @@ let
   proPackages = with pkgs; [
     random-labels
     clever-switch-profile
+    jetbrains.webstorm
   ];
 
 in
