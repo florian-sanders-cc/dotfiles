@@ -66,6 +66,7 @@
     "Wq": "wq",
     "Q": "q"
   },
+  "tab_size": 2,
   "lsp": {
     "vtsls": {
       "settings": {
