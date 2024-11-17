@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, currentUser, ... }:
 
 {
   virtualisation.docker = {
@@ -16,7 +16,7 @@
 
   programs.virt-manager.enable = true;
 
-  users.users."${config.user.name}".extraGroups = [ "docker" ];
+  users.users."${currentUser.name}".extraGroups = [ "docker" ];
 
   environment.systemPackages = with pkgs; [
     # Emulator

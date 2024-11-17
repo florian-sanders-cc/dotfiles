@@ -26,6 +26,20 @@ input {
     }
 }
 
+output "DP-2" {
+    mode "2560x1440@59.9"
+    position x=0 y=0
+    // scale 1.25
+    scale 1
+}
+
+output "DP-1" {
+    mode "1920x1080@60.0"
+    // position x=2050 y=0
+    position x=2560 y=0
+    scale 1
+}
+
 // You can configure outputs by their name, which you can find
 // by running `niri msg outputs` while inside a niri instance.
 // The built-in laptop monitor is usually called "eDP-1".
@@ -165,11 +179,11 @@ layout {
     border {
         // The settings are the same as for the focus ring.
         // If you enable the border, you probably want to disable the focus ring.
-        off
+        // off
 
         width 4
-        active-color "#ffc87f"
-        inactive-color "#505050"
+        active-color "#ffc87f00"
+        inactive-color "#50505000"
 
         // active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
@@ -193,11 +207,6 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 // spawn-at-startup "alacritty" "-e" "fish"
-
-// Uncomment this line to ask the clients to omit their client-side decorations if possible.
-// If the client will specifically ask for CSD, the request will be honored.
-// Additionally, clients will be informed that they are tiled, removing some rounded corners.
-// prefer-no-csd
 
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
@@ -228,6 +237,12 @@ window-rule {
     default-column-width {}
     geometry-corner-radius 9
     clip-to-geometry true
+}
+
+// Make inactive windows semitransparent.
+window-rule {
+    match is-active=false
+
     opacity 0.95
 }
 

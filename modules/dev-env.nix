@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, currentUser, ... }:
 
 {
   services.httpd.enable = false;
@@ -7,7 +7,7 @@
 
   # TODO: remove
   # services.httpd.virtualHosts."yahoo.com" = {
-  #   documentRoot = "${config.user.homeDirectory}/test";
+  #   documentRoot = "${currentUser.homeDirectory}/test";
   # };
 
   # move to db?

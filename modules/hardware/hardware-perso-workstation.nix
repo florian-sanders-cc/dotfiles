@@ -17,38 +17,31 @@ in
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-
-  config = lib.mkIf (currentUser.name == specs.users.perso.name) {
-
-    intel.enable = true;
-    nvidia = {
-        enable = true;
-        prime = {
-            enable = true;
-        };
-    };
-
+  config = lib.mkIf (currentUser.name == specs.users.perso-workstation.name) {
+    nvidia.enable = true;
     boot.initrd.availableKernelModules = [
       "xhci_pci"
-      "thunderbolt"
+      "ahci"
       "nvme"
       "usb_storage"
+      "usbhid"
       "sd_mod"
     ];
     boot.initrd.kernelModules = [ ];
-    boot.kernelModules = [ "kvm-intel" ];
+    boot.kernelModules = [ ];
     boot.extraModulePackages = [ ];
     boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.initrd.systemd.enable = true;
 
     fileSystems."/" = {
-      device = "/dev/disk/by-uuid/24f77d45-ced2-421c-bfa8-086f4a4aa793";
+      device = "/dev/disk/by-uuid/fb4ae496-4a29-46f8-b998-22acf24ae355";
       fsType = "ext4";
     };
 
-    boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/359b8a56-3030-4813-87d2-216f268b612a";
+    boot.initrd.luks.devices."luks-0276fde3-5e5b-4c53-9f43-11a7791bc073".device = "/dev/disk/by-uuid/0276fde3-5e5b-4c53-9f43-11a7791bc073";
 
     fileSystems."/boot" = {
-      device = "/dev/disk/by-uuid/8C97-4233";
+      device = "/dev/disk/by-uuid/8B79-AEB6";
       fsType = "vfat";
       options = [
         "fmask=0077"
@@ -56,18 +49,20 @@ in
       ];
     };
 
-    swapDevices = [ { device = "/dev/disk/by-uuid/3abf49bc-70ed-4c84-b36d-dd50a48ed851"; } ];
+    swapDevices = [ ];
 
     # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
     # (the default) this is the recommended approach. When using systemd-networkd it's
     # still possible to use this option, but it's recommended to use it in conjunction
     # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
     networking.useDHCP = lib.mkDefault true;
-    # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
+    # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-    hardware.bluetooth.enable = true; # enables support for Bluetooth
-    hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
     hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    hardware.graphics.enable = true;
+
+    services.xserver.videoDrivers = [ "nvidia" ];
+    hardware.nvidia.open = true; # Set to false for proprietary drivers
   };
 }

@@ -1,11 +1,11 @@
 # TODO: rely on specialisations and maybe spread this file content across others
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, currentUser, ... }:
 
 {
   config = lib.mkIf (config.desktop == "hypr") {
     programs.hyprland.enable = true;
     system.nixos.tags = [ "hyprland" ];
-    home-manager.users."${config.user.name}" = {
+    home-manager.users."${currentUser.name}" = {
       # TODO: move these to security
       services.gpg-agent = {
         enable = true;
@@ -76,5 +76,3 @@
     };
   };
 }
-
-

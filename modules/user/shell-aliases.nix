@@ -18,6 +18,10 @@ in
     upd-perso = "nix flake update --flake '${nixosConfigPath}'; nixos-rebuild switch --upgrade --flake '${nixosConfigPath}#perso' --use-remote-sudo";
     rebuild-perso = "nixos-rebuild switch --flake '${nixosConfigPath}#perso' --use-remote-sudo";
   };
+  persoWorkstationAliases = {
+    upd-perso-workstation = "nix flake update --flake '${nixosConfigPath}'; nixos-rebuild switch --upgrade --flake '${nixosConfigPath}#perso-workstation' --use-remote-sudo";
+    rebuild-perso-workstation = "nixos-rebuild switch --flake '${nixosConfigPath}#perso-workstation' --use-remote-sudo";
+  };
   commonAliases = {
     ll = "ls -l -a";
     nn = "cd ${homeDirectory}/Notes";

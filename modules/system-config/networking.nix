@@ -1,11 +1,7 @@
-{ config, ... }:
+{ config, currentUser, ... }:
 
-let
-  user = config.user;
-
-in
 {
-  networking.hostName = "nixos-${user.name}";
+  networking.hostName = "nixos-${currentUser.name}";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
