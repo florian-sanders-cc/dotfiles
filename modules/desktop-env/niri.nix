@@ -165,8 +165,7 @@
             "--mode"
             "fill"
             "--image"
-            "${pkgs.wallpapers}/wallpaper-waves.png"
-            # ../../dotfiles/wallpapers/wallpaper-waves.png
+            "${pkgs.wallpapers}/nixos-catppuccin-mocha.png"
           ];
         };
       };
