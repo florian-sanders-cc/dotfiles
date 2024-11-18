@@ -34,9 +34,9 @@
         LIBVA_DRIVER_NAME = "nvidia";
       };
 
-    # TODO: test fix for vaapi
-    environment.etc."egl/egl_external_platform.d".source = lib.mkIf (config.nvidia.enable) "/run/opengl-driver/share/egl/egl_external_platform.d/";
-
+    environment.etc = lib.mkIf (config.nvidia.enable) {
+      "egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
+    };
     # Load nvidia driver for Xorg and Wayland - installs nvidia-vaapi-driver
     # services.xserver.videoDrivers = lib.mkMerge [
     # (lib.mkIf (config.nvidia.enable) "nvidia")
