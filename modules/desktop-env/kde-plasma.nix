@@ -1,9 +1,9 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, currentUser, ... }:
 
 {
   config = lib.mkIf (config.desktop == "plasma") {
     system.nixos.tags = [ "plasma" ];
-    home-manager.users."${config.user.name}" = {
+    home-manager.users."${currentUser.name}" = {
       xdg.configFile."kglobalshortcutsrc" = {
         source = ../../dotfiles/plasma/kglobalshortcutsrc;
       };

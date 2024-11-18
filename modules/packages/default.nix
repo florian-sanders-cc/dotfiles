@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  currentUser,
   ...
 }:
 
@@ -52,13 +53,17 @@ let
 
 in
 {
-  imports = [ ./overlays.nix ];
+  imports = [
+    ./overlays.nix
+    ./steam.nix
+  ];
+
   fonts.packages = with pkgs; [
     font-awesome
     nerdfonts
   ];
 
-  home-manager.users."${config.user.name}" = {
+  home-manager.users."${currentUser.name}" = {
     # Packages with specific config
     imports = [
       ./alacritty.nix
@@ -76,13 +81,10 @@ in
       ./zsh.nix
     ];
 
-    user.email = config.user.email;
-    user.name = config.user.name;
-
     # Standard packages
     home.packages = lib.mkMerge [
       commonPackages
-      (lib.mkIf (config.user.name == specs.users.pro.name) proPackages)
+      (lib.mkIf (currentUser.name == specs.users.pro.name) proPackages)
     ];
   };
 }

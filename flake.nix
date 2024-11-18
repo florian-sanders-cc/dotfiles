@@ -18,10 +18,11 @@
           inherit system;
           modules = [
             ./modules
-            { inherit user desktop; }
+            { inherit desktop; }
           ] ++ extraModules;
           specialArgs = {
-            inherit home-manager inputs;
+            inherit home-manager inputs specs;
+            currentUser = user;
           };
         };
       specs = import ./config-specifications.nix;
@@ -36,6 +37,11 @@
 
         perso = mkNixosConfig {
           user = specs.users.perso;
+          desktop = specs.desktops.niri;
+        };
+
+        perso-workstation = mkNixosConfig {
+          user = specs.users.perso-workstation;
           desktop = specs.desktops.niri;
         };
       };

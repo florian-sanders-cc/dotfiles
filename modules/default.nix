@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  currentUser,
+  ...
+}:
 
 let
   specs = import ../config-specifications.nix;
@@ -23,6 +28,10 @@ in
     ./security.nix
   ];
 
+  config = {
+    steam.enable = lib.mkIf (currentUser.name == specs.users.perso-workstation.name) true;
+  };
+
   # TODO: options & default.nix within hardware
   options = {
     user = with lib; {
@@ -42,7 +51,7 @@ in
       # + it should be a path
       homeDirectory = mkOption {
         type = types.str;
-        default = "/home/${config.user.name}";
+        default = "/home/${currentUser.name}";
       };
     };
     desktop =

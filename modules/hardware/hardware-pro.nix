@@ -3,6 +3,7 @@
   lib,
   pkgs,
   modulesPath,
+  currentUser,
   ...
 }:
 
@@ -16,7 +17,8 @@ in
     ./gpu.nix
   ];
 
-  config = lib.mkIf (config.user.name == specs.users.pro.name) {
+  config = lib.mkIf (currentUser.name == specs.users.pro.name) {
+  intel.enable = true;
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

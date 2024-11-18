@@ -2,13 +2,13 @@
   pkgs,
   config,
   home-manager,
+  currentUser,
   ...
 }:
 
 let
   lib = pkgs.lib;
-  user = config.user;
-  shellAliases = import ./shell-aliases.nix { homeDirectory = user.homeDirectory; };
+  shellAliases = import ./shell-aliases.nix { homeDirectory = currentUser.homeDirectory; };
   specs = import ../../config-specifications.nix;
 
 in
@@ -17,25 +17,81 @@ in
     home-manager.nixosModules.home-manager
   ];
 
+  home-manager.extraSpecialArgs = {
+    inherit currentUser;
+  };
   home-manager.backupFileExtension = "backup";
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users."${user.name}" = rec {
+  home-manager.users."${currentUser.name}" = rec {
 
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
-    home.username = "${user.name}";
-    home.homeDirectory = user.homeDirectory;
+    home.username = "${currentUser.name}";
+    home.homeDirectory = currentUser.homeDirectory;
     home.shellAliases = lib.mkMerge [
       shellAliases.commonAliases
-      (lib.mkIf (user.name == specs.users.pro.name) shellAliases.proAliases)
-      (lib.mkIf (user.name == specs.users.perso.name) shellAliases.persoAliases)
+      (lib.mkIf (currentUser.name == specs.users.pro.name) shellAliases.proAliases)
+      (lib.mkIf (currentUser.name == specs.users.perso.name) shellAliases.persoAliases)
+      (lib.mkIf (
+        currentUser.name == specs.users.perso-workstation.name
+      ) shellAliases.persoWorkstationAliases)
     ];
 
     # config for nix CLI (allowUnfree for nix-shell -p command for instance)
     xdg.configFile."nixpkgs" = {
       source = ../../dotfiles/nixpkgs;
       recursive = true;
+    };
+
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/plain" = [ "zed.desktop" ];
+        "text/markdown" = [ "zed.desktop" ];
+        "text/html" = [ "firefox.desktop" ];
+        "text/x-csrc" = [ "zed.desktop" ];
+        "text/x-chdr" = [ "zed.desktop" ];
+        "text/x-c++src" = [ "zed.desktop" ];
+        "text/x-c++hdr" = [ "zed.desktop" ];
+        "text/x-python" = [ "zed.desktop" ];
+        "text/x-java" = [ "zed.desktop" ];
+        "text/javascript" = [ "zed.desktop" ];
+        "text/css" = [ "zed.desktop" ];
+        "text/xml" = [ "zed.desktop" ];
+        "text/x-shellscript" = [ "zed.desktop" ];
+        "application/x-shellscript" = [ "zed.desktop" ];
+        "application/json" = [ "zed.desktop" ];
+        "application/x-yaml" = [ "zed.desktop" ];
+        "application/x-php" = [ "zed.desktop" ];
+        "x-scheme-handler/http" = [ "firefox.desktop" ];
+        "x-scheme-handler/https" = [ "firefox.desktop" ];
+        "application/x-extension-htm" = [ "firefox.desktop" ];
+        "application/x-extension-html" = [ "firefox.desktop" ];
+        "application/x-extension-shtml" = [ "firefox.desktop" ];
+        "application/xhtml+xml" = [ "firefox.desktop" ];
+        "application/x-extension-xhtml" = [ "firefox.desktop" ];
+        "application/x-extension-xht" = [ "firefox.desktop" ];
+        "image/jpeg" = [ "firefox.desktop" ];
+        "image/png" = [ "firefox.desktop" ];
+        "image/gif" = [ "firefox.desktop" ];
+        "image/webp" = [ "firefox.desktop" ];
+        "image/tiff" = [ "firefox.desktop" ];
+        "image/bmp" = [ "firefox.desktop" ];
+        "application/pdf" = [ "firefox.desktop" ];
+        "application/xml" = [ "zed.desktop" ];
+        "application/toml" = [ "zed.desktop" ];
+        "text/csv" = [ "zed.desktop" ];
+        "text/x-sql" = [ "zed.desktop" ];
+        "text/x-rust" = [ "zed.desktop" ];
+        "text/x-go" = [ "zed.desktop" ];
+        "video/mp4" = [ "vlc.desktop" ];
+        "video/x-matroska" = [ "vlc.desktop" ];
+        "video/quicktime" = [ "vlc.desktop" ];
+        "audio/mpeg" = [ "vlc.desktop" ];
+        "audio/x-wav" = [ "vlc.desktop" ];
+        "audio/ogg" = [ "vlc.desktop" ];
+      };
     };
 
     # This value determines the Home Manager release that your
@@ -60,7 +116,7 @@ in
 
   users.defaultUserShell = pkgs.zsh;
 
-  users.users."${user.name}" = {
+  users.users."${currentUser.name}" = {
     isNormalUser = true;
     description = "flo";
     extraGroups = [

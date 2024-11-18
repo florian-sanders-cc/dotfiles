@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  currentUser,
   ...
 }:
 
@@ -38,6 +39,7 @@
       xdotool
       xwayland-satellite
       swaynotificationcenter
+      gnome-calculator
     ];
 
     xdg.portal = {
@@ -64,7 +66,7 @@
       swaylock = { };
     };
 
-    home-manager.users."${config.user.name}" = {
+    home-manager.users."${currentUser.name}" = {
 
       home.file.".config/niri" = {
         source = ../../dotfiles/niri;
@@ -165,8 +167,7 @@
             "--mode"
             "fill"
             "--image"
-            "${pkgs.wallpapers}/wallpaper-waves.png"
-            # ../../dotfiles/wallpapers/wallpaper-waves.png
+            "${pkgs.wallpapers}/nixos-catppuccin-mocha.png"
           ];
         };
       };

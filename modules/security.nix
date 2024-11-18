@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  currentUser,
   ...
 }:
 
@@ -34,10 +35,10 @@ in
   services.clamav.daemon.enable = true;
   services.clamav.daemon.settings = {
     OnAccessExcludeUname = "clamav";
-    OnAccessIncludePath = "${config.user.homeDirectory}/Downloads";
+    OnAccessIncludePath = "${currentUser.homeDirectory}/Downloads";
     LogSyslog = true;
     LogTime = true;
-    VirusEvent = lib.mkIf (config.user.name == specs.users.pro.name) "/usr/sbin/clamav-notify-cc.sh";
+    VirusEvent = lib.mkIf (currentUser.name == specs.users.pro.name) "/usr/sbin/clamav-notify-cc.sh";
   };
   services.clamav.updater.enable = true;
   systemd.services.clamav-daemon = {
