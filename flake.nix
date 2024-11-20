@@ -10,16 +10,12 @@
       system = "x86_64-linux";
       mkNixosConfig =
         { user, desktop }:
-        let
-          # Determine modules based on user
-          extraModules = if user.name == "flo-perso" then [ lix-module.nixosModules.default ] else [ ];
-        in
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./modules
             { inherit desktop; }
-          ] ++ extraModules;
+          ];
           specialArgs = {
             inherit home-manager inputs specs;
             currentUser = user;
