@@ -1,0 +1,11 @@
+node_modules/
+.idea/
+.env
+.env.smart
+.env.previews
+.env*
+dist/
+test-clients/
+vendor/
+target/
+direnv/

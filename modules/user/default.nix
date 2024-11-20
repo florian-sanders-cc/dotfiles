@@ -44,6 +44,8 @@ in
       recursive = true;
     };
 
+    home.file."Projects/.s3ignore".source = ../../dotfiles/.s3ignore;
+
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
