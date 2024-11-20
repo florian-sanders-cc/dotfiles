@@ -44,6 +44,7 @@ let
     rustup
     zellij
     dogdns
+    yazi
   ];
   proPackages = with pkgs; [
     random-labels
