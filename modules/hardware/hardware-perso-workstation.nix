@@ -30,7 +30,7 @@ in
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [ ];
     boot.extraModulePackages = [ ];
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_6_11;
     boot.initrd.systemd.enable = true;
 
     fileSystems."/" = {
