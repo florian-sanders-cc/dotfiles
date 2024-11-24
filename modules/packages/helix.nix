@@ -3,7 +3,7 @@
 {
   programs.helix = {
     enable = true;
-    # package = pkgs.helix-nightly;
+    package = pkgs.helix-nightly;
 
     settings = {
       theme = "kanagawa";
@@ -33,10 +33,10 @@
             "file-name"
           ];
         };
-        # inline-diagnostics = {
-        #   cursor-line = "hint";
-        #   other-lines = "error";
-        # };
+        inline-diagnostics = {
+          cursor-line = "hint";
+          other-lines = "error";
+        };
       };
       keys.normal = {
         "C-s" = ":w";
@@ -154,9 +154,6 @@
             "eslint.config.mts"
             "eslint.config.cts"
           ];
-          options = {
-            rulePaths = [ "/home/flo-pro/Projects/clever-components/eslint-rules" ];
-          };
         };
       };
 
