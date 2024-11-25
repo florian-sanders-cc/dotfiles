@@ -6,7 +6,7 @@
     (final: prev: {
       # neovim-nightly = inputs.neovim-flake.packages.${prev.system}.default;
 
-      # helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
+      helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
 
       # zed-latest = inputs.zed-flake.packages.${prev.system}.default;
 

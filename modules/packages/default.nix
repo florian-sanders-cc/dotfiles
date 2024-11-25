@@ -30,9 +30,11 @@ let
     s3cmd
     jless
     git-absorb
+    gh
 
     # Utility
     vlc
+    inkscape
 
     # Dev
     bun
