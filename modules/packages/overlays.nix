@@ -18,23 +18,23 @@
 
       clever-switch-profile = prev.callPackage ./clever-switch-profile.nix { };
 
-      # clever-tools = prev.clever-tools.overrideAttrs (_: rec {
-      #   pname = "clever-tools";
-      #   version = "3.9.0";
-      #   src = prev.fetchFromGitHub {
-      #     owner = "CleverCloud";
-      #     repo = "clever-tools";
-      #     rev = version;
-      #     hash = "sha256-nSTcJIZO/CMliAYFUGu/oA+VdtONDPwyj6vCr5Ry6ac=";
-      #   };
+      clever-tools = prev.clever-tools.overrideAttrs (_: rec {
+        pname = "clever-tools";
+        version = "3.10.1";
+        src = prev.fetchFromGitHub {
+          owner = "CleverCloud";
+          repo = "clever-tools";
+          rev = version;
+          hash = "sha256-dMSVw3buj0m2Ixir8rVeCg0PAVqXFBsBEohKfLsYhaI=";
+        };
 
-      #   npmDepsHash = "sha256-+3/zSsO5+s1MUome3CQ1p1tN3OtWp+XE9Z6GSdDiRh8=";
-      #   npmDeps = final.fetchNpmDeps {
-      #     inherit src;
-      #     name = "${pname}-${version}-npm-deps";
-      #     hash = npmDepsHash;
-      #   };
-      # });
+        npmDepsHash = "sha256-v0nCYRfmcGbePI838Yhb+XvpN4JItQn2D+AHyNoeZLw=";
+        npmDeps = final.fetchNpmDeps {
+          inherit src;
+          name = "${pname}-${version}-npm-deps";
+          hash = npmDepsHash;
+        };
+      });
     })
 
   ];
