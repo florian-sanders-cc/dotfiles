@@ -63,7 +63,12 @@ in
 
   fonts.packages = with pkgs; [
     font-awesome
-    nerdfonts
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.zed-mono
+    nerd-fonts.fira-mono
+    nerd-fonts.liberation
+    nerd-fonts.meslo-lg
+    nerd-fonts.noto
   ];
 
   home-manager.users."${currentUser.name}" = {
