@@ -30,7 +30,7 @@ in
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [ ];
     boot.extraModulePackages = [ ];
-    boot.kernelPackages = pkgs.linuxPackages_6_11;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.initrd.systemd.enable = true;
 
     fileSystems."/" = {
@@ -38,7 +38,8 @@ in
       fsType = "ext4";
     };
 
-    boot.initrd.luks.devices."luks-0276fde3-5e5b-4c53-9f43-11a7791bc073".device = "/dev/disk/by-uuid/0276fde3-5e5b-4c53-9f43-11a7791bc073";
+    boot.initrd.luks.devices."luks-0276fde3-5e5b-4c53-9f43-11a7791bc073".device =
+      "/dev/disk/by-uuid/0276fde3-5e5b-4c53-9f43-11a7791bc073";
 
     fileSystems."/boot" = {
       device = "/dev/disk/by-uuid/8B79-AEB6";

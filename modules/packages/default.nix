@@ -63,6 +63,7 @@ in
 
   fonts.packages = with pkgs; [
     font-awesome
+    montserrat
     nerd-fonts.jetbrains-mono
     nerd-fonts.zed-mono
     nerd-fonts.fira-mono
