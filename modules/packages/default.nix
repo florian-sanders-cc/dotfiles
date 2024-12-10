@@ -47,6 +47,7 @@ let
     zellij
     dogdns
     yazi
+    volta
   ];
   proPackages = with pkgs; [
     random-labels
