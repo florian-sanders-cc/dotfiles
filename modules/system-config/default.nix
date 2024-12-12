@@ -6,7 +6,7 @@
     ./time-i18n.nix
     ./networking.nix
     ./sound.nix
-    # ./virtualisation.nix
+    ./virtualisation.nix
   ];
 
   nix = {

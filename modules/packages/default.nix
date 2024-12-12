@@ -39,7 +39,6 @@ let
     # Dev
     bun
     difftastic
-    distrobox
     gcc
     nodejs
     obsidian

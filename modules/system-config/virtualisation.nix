@@ -1,22 +1,34 @@
-{ pkgs, config, currentUser, ... }:
+{
+  pkgs,
+  config,
+  currentUser,
+  ...
+}:
 
 {
-  virtualisation.docker = {
-    enable = true;
-    # Would be safer but does not work with Distrobox?
-    # rootless = {
-    #   enable = true;
-    #   setSocketVariable = true;
-    # };
-  };
+  virtualisation = {
+    containers.enable = true;
+    docker = {
+      enable = true;
+      # Would be safer but does not work with Distrobox?
+      # rootless = {
+      #   enable = true;
+      #   setSocketVariable = true;
+      # };
+    };
 
-  virtualisation.libvirtd = {
-    enable = true;
+    libvirtd = {
+      enable = true;
+    };
   };
 
   programs.virt-manager.enable = true;
 
-  users.users."${currentUser.name}".extraGroups = [ "docker" ];
+  users.users."${currentUser.name}".extraGroups = [
+    "docker"
+    "libvirt"
+    "kvm"
+  ];
 
   environment.systemPackages = with pkgs; [
     # Emulator
@@ -33,5 +45,9 @@
     spice
     spice-gtk
     spice-vdagent
+    distrobox
+
+    dive # look into docker image layers
+    docker-compose # start group of containers for dev
   ];
 }
