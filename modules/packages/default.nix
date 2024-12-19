@@ -35,6 +35,7 @@ let
     # Utility
     vlc
     inkscape
+    orca
 
     # Dev
     bun
