@@ -19,17 +19,17 @@
       (with pkgs; [ gnome-tour ])
       ++ (with pkgs; [
         cheese # webcam tool
-        gnome.gnome-music
+        gnome-music
         geary # email reader
-        gnome.gnome-characters
+        gnome-characters
         epiphany
-        gnome.tali # poker game
-        gnome.iagno # go game
-        gnome.hitori # sudoku game
-        gnome.atomix # puzzle game
+        tali # poker game
+        iagno # go game
+        hitori # sudoku game
+        atomix # puzzle game
         yelp # Help view
-        gnome.gnome-contacts
-        gnome.gnome-initial-setup
+        gnome-contacts
+        gnome-initial-setup
       ]);
     # programs.dconf.enable = true;
     environment.systemPackages = with pkgs; [
@@ -42,6 +42,6 @@
       xdotool
     ];
     security.pam.services.gdm.enableGnomeKeyring = true;
-    services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+    services.udev.packages = with pkgs; [ gnome-settings-daemon ];
   };
 }
