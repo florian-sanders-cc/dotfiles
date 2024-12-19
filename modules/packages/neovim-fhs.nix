@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    (buildFHSUserEnv {
+    (buildFHSEnv {
       name = "nvim";
       targetPkgs = pkgs: [
         neovim-unwrapped

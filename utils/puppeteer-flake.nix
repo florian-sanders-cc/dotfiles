@@ -8,7 +8,7 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      fhsEnv = pkgs.buildFHSUserEnv {
+      fhsEnv = pkgs.buildFHSEnv {
         name = "nodejs-project-env";
         targetPkgs =
           pkgs: with pkgs; [
