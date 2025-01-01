@@ -60,7 +60,7 @@
     #   url = "github:neovim/neovim/release-0.10?dir=contrib";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    
+
     helix-flake = {
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -69,6 +69,10 @@
     zed-flake = {
       url = "github:zed-industries/zed?ref=refs/tags/v0.161.1";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ghostty-flake = {
+      url = "github:ghostty-org/ghostty";
     };
 
     # nixos-cosmic = {

@@ -48,6 +48,7 @@ let
     dogdns
     yazi
     volta
+    ghostty
   ];
   proPackages = with pkgs; [
     random-labels
