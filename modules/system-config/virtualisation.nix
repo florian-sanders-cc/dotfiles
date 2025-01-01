@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   currentUser,
   ...
 }:
@@ -32,14 +31,14 @@
 
   environment.systemPackages = with pkgs; [
     # Emulator
-    (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
-      qemu-system-x86_64 \
-          -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
-          "$@"
-    '')
+    # (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
+    #   qemu-system-x86_64 \
+    #       -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
+    #       "$@"
+    # '')
     libvirt-glib
     # Simple CLI to manage VM
-    quickemu
+    # quickemu
 
     # screen & resolution
     spice
