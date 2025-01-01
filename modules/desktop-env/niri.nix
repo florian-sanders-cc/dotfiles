@@ -33,7 +33,6 @@
       swaybg
       swayosd
       wl-clipboard
-      wlogout
       xdg-desktop-portal-gnome
       xdg-desktop-portal-gtk
       xdotool
@@ -69,6 +68,8 @@
 
     home-manager.users."${currentUser.name}" = {
 
+      imports = [ ../packages/wlogout.nix ];
+
       home.file.".config/niri" = {
         source = ../../dotfiles/niri;
         recursive = true;
@@ -78,10 +79,7 @@
       home.file.".config/waybar/modules.jsonc".source = ../../dotfiles/waybar/modules.jsonc;
       home.file.".config/waybar/style.css".source = ../../dotfiles/waybar/style.css;
       home.file.".config/fuzzel".source = ../../dotfiles/fuzzel;
-      home.file.".config/wlogout" = {
-        source = ../../dotfiles/wlogout;
-        recursive = true;
-      };
+
       home.sessionVariables = {
         WAYLAND_DISPLAY = "wayland-1";
       };
