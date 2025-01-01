@@ -48,6 +48,7 @@ let
     yazi
     volta
     ghostty
+    bat
   ];
   proPackages = with pkgs; [
     random-labels
