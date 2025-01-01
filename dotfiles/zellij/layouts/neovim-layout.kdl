@@ -1,0 +1,10 @@
+layout {
+    pane split_direction="vertical" {
+        pane split_direction="horizontal" {
+            pane name="neovim" command="nvim"
+            pane name="custom_commands"
+        }
+        pane
+    }
+}
+

@@ -6,8 +6,8 @@
         decorations = "none";
         dimensions.columns = 120;
         dimensions.lines = 30;
-        padding.x = 15;
-        padding.y = 15;
+        padding.x = 0;
+        padding.y = 0;
         opacity = 0.9;
       };
 
@@ -37,7 +37,7 @@
           family = "JetBrainsMonoNL Nerd Font Mono";
           style = "SemiBold Italic";
         };
-        size = 15;
+        # size = 15;
       };
 
       colors = {
