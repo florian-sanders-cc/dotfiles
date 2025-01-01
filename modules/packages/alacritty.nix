@@ -41,6 +41,10 @@
       };
 
       colors = {
+        cursor = {
+          cursor = "#BD6062";
+          text = "#FEFEFE";
+        };
         primary = {
           background = "#242933";
           foreground = "#BBBDAF";
