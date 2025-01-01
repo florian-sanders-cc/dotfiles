@@ -44,7 +44,6 @@ let
     nodejs
     obsidian
     rustup
-    zellij
     dogdns
     yazi
     volta
@@ -89,6 +88,7 @@ in
       ./vscode.nix
       ./zed.nix
       ./zoxide.nix
+      ./zellij.nix
       ./zsh.nix
     ];
 
