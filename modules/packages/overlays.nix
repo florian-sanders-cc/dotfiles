@@ -18,7 +18,7 @@
 
       clever-switch-profile = prev.callPackage ./clever-switch-profile.nix { };
 
-      clever-tools = prev.clever-tools.overrideAttrs (_: rec {
+      ghostty = inputs.ghostty-flake.packages.${prev.system}.default;
         pname = "clever-tools";
         version = "3.10.1";
         src = prev.fetchFromGitHub {

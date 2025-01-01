@@ -40,6 +40,7 @@
       xwayland-satellite
       swaynotificationcenter
       gnome-calculator
+      gnome-disk-utility
     ];
 
     xdg.portal = {
