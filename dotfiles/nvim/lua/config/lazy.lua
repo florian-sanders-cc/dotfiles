@@ -12,8 +12,8 @@ require("lazy").setup({
 		-- add LazyVim and import its plugins
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
 		-- import any extras modules here
-		{ import = "lazyvim.plugins.extras.ai.copilot" },
-		{ import = "lazyvim.plugins.extras.ai.copilot-chat" },
+		-- { import = "lazyvim.plugins.extras.ai.copilot" },
+		-- { import = "lazyvim.plugins.extras.ai.copilot-chat" },
 		{ import = "lazyvim.plugins.extras.coding.mini-surround" },
 		{ import = "lazyvim.plugins.extras.editor.inc-rename" },
 		{ import = "lazyvim.plugins.extras.util.dot" },
@@ -23,6 +23,7 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.editor.aerial" },
 		{ import = "lazyvim.plugins.extras.editor.mini-files" },
 		{ import = "lazyvim.plugins.extras.editor.navic" },
+		{ import = "lazyvim.plugins.extras.formatting.prettier" },
 		{ import = "lazyvim.plugins.extras.lang.typescript" },
 		{ import = "lazyvim.plugins.extras.lang.rust" },
 		{ import = "lazyvim.plugins.extras.lang.json" },

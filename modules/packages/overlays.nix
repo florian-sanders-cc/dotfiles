@@ -4,7 +4,7 @@
 {
   nixpkgs.overlays = [
     (final: prev: {
-      # neovim-nightly = inputs.neovim-flake.packages.${prev.system}.default;
+      neovim-nightly = inputs.neovim-flake.packages.${prev.system}.default;
 
       helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
 
@@ -18,23 +18,25 @@
 
       clever-switch-profile = prev.callPackage ./clever-switch-profile.nix { };
 
-      clever-tools = prev.clever-tools.overrideAttrs (_: rec {
-        pname = "clever-tools";
-        version = "3.10.1";
-        src = prev.fetchFromGitHub {
-          owner = "CleverCloud";
-          repo = "clever-tools";
-          rev = version;
-          hash = "sha256-dMSVw3buj0m2Ixir8rVeCg0PAVqXFBsBEohKfLsYhaI=";
-        };
+      ghostty = inputs.ghostty-flake.packages.${prev.system}.default;
 
-        npmDepsHash = "sha256-v0nCYRfmcGbePI838Yhb+XvpN4JItQn2D+AHyNoeZLw=";
-        npmDeps = final.fetchNpmDeps {
-          inherit src;
-          name = "${pname}-${version}-npm-deps";
-          hash = npmDepsHash;
-        };
-      });
+      # clever-tools = prev.clever-tools.overrideAttrs (_: rec {
+      #   pname = "clever-tools";
+      #   version = "3.10.1";
+      #   src = prev.fetchFromGitHub {
+      #     owner = "CleverCloud";
+      #     repo = "clever-tools";
+      #     rev = version;
+      #     hash = "sha256-dMSVw3buj0m2Ixir8rVeCg0PAVqXFBsBEohKfLsYhaI=";
+      #   };
+      #
+      #   npmDepsHash = "sha256-v0nCYRfmcGbePI838Yhb+XvpN4JItQn2D+AHyNoeZLw=";
+      #   npmDeps = final.fetchNpmDeps {
+      #     inherit src;
+      #     name = "${pname}-${version}-npm-deps";
+      #     hash = npmDepsHash;
+      #   };
+      # });
     })
 
   ];

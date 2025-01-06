@@ -1,11 +1,20 @@
 # TODO: rely on specialisations and maybe spread this file content across others
-{ pkgs, lib, config, currentUser, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  currentUser,
+  ...
+}:
 
 {
   config = lib.mkIf (config.desktop == "hypr") {
     programs.hyprland.enable = true;
     system.nixos.tags = [ "hyprland" ];
     home-manager.users."${currentUser.name}" = {
+
+      imports = [ ../packages/wlogout.nix ];
+
       # TODO: move these to security
       services.gpg-agent = {
         enable = true;
@@ -51,7 +60,6 @@
         xfce.thunar
         swaynotificationcenter
         fuzzel
-        wlogout
         pavucontrol
         waybar
         slurp

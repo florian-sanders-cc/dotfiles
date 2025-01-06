@@ -7,6 +7,8 @@ vim.g.root_spec = { ".git", "cwd" }
 vim.g.markdown_fenced_languages = {
 	"ts=typescript",
 }
+-- If no prettier config file is found, the formatter will not be used
+vim.g.lazyvim_prettier_needs_config = true
 
 vim.lsp.set_log_level("off")
 

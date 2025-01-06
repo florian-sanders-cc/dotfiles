@@ -44,10 +44,11 @@ let
     nodejs
     obsidian
     rustup
-    zellij
     dogdns
     yazi
     volta
+    ghostty
+    bat
   ];
   proPackages = with pkgs; [
     random-labels
@@ -88,6 +89,7 @@ in
       ./vscode.nix
       ./zed.nix
       ./zoxide.nix
+      ./zellij.nix
       ./zsh.nix
     ];
 
