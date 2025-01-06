@@ -15,8 +15,6 @@
         bat
         delta
         rustup
-        gnumake
-        gnutar
       ];
       runScript = "nvim";
     })
