@@ -37,7 +37,7 @@
           family = "JetBrainsMonoNL Nerd Font Mono";
           style = "SemiBold Italic";
         };
-        # size = 15;
+        size = 15;
       };
 
       colors = {
