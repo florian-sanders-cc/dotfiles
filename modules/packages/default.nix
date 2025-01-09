@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   currentUser,
@@ -47,7 +46,6 @@ let
     dogdns
     yazi
     volta
-    ghostty
     bat
   ];
   proPackages = with pkgs; [
@@ -91,6 +89,7 @@ in
       ./zoxide.nix
       ./zellij.nix
       ./zsh.nix
+      ./ghostty.nix
     ];
 
     # Standard packages
