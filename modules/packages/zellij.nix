@@ -11,8 +11,8 @@
       # default_layout = "compact";
       pane_frames = false;
     };
-    enableFishIntegration = false;
-    enableZshIntegration = false;
+    enableFishIntegration = true;
+    enableZshIntegration = true;
   };
 
   xdg.configFile."zellij/layouts" = {
