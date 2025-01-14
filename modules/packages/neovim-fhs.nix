@@ -20,6 +20,11 @@
     })
   ];
 
+  # TODO: could make this one dynamic
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
   xdg.configFile."nvim" = {
     source = ../../dotfiles/nvim;
     recursive = true;
