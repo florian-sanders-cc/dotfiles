@@ -6,7 +6,7 @@
     (final: prev: {
       neovim-nightly = inputs.neovim-flake.packages.${prev.system}.default;
 
-      helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
+      # helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
 
       # zed-latest = inputs.zed-flake.packages.${prev.system}.default;
 
@@ -18,7 +18,7 @@
 
       clever-switch-profile = prev.callPackage ./clever-switch-profile.nix { };
 
-      ghostty = inputs.ghostty-flake.packages.${prev.system}.default;
+      # ghostty-nightly = inputs.ghostty-flake.packages.${prev.system}.default;
 
       # clever-tools = prev.clever-tools.overrideAttrs (_: rec {
       #   pname = "clever-tools";
