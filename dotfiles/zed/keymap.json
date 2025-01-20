@@ -100,8 +100,18 @@
       "r": "project_panel::Rename",
       "d": "project_panel::Delete",
       "x": "project_panel::Cut",
-      "c": "project_panel::Copy",
-      "p": "project_panel::Paste"
+      "y": "project_panel::Copy",
+      "p": "project_panel::Paste",
+      "left": "project_panel::CollapseSelectedEntry",
+      "right": "project_panel::ExpandSelectedEntry",
+      "ctrl-y": "project_panel::CopyPath",
+      "ctrl-shift-y": "project_panel::CopyRelativePath",
+      "ctrl-f": "project_panel::NewSearchInDirectory",
+      "escape": "menu::Cancel",
+      "l": "project_panel::ExpandSelectedEntry",
+      "h": "project_panel::CollapseSelectedEntry",
+      "shift-h": "project_panel::CollapseAllEntries",
+      "ctrl-p": "file_finder::Toggle"
     }
   },
   // Panel nagivation
