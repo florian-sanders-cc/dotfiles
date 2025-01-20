@@ -7,17 +7,6 @@
 
 {
   home.packages = with pkgs; [
-    # (buildFHSUserEnv {
-    #   name = "zed";
-    #   targetPkgs = pkgs: [
-    #     zed-latest
-    #     openssl
-    #   ];
-    #   runScript = "zed";
-    #   extraInstallCommands = ''
-    #     ln -s "${zed-latest}/share" "$out/"
-    #   '';
-    # })
     zed-editor
   ];
 
