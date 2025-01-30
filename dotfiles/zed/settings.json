@@ -50,7 +50,7 @@
     // c.f. https://github.com/jeffkreeftmeijer/vim-numbertoggle
     // "toggle_relative_line_numbers": true
   },
-  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_family": "FiraCode Nerd Font Mono",
   // use relative line numbers
   "relative_line_numbers": true,
   // hide the scroll bar
