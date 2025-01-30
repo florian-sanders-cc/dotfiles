@@ -70,6 +70,7 @@ in
     nerd-fonts.liberation
     nerd-fonts.meslo-lg
     nerd-fonts.noto
+    nerd-fonts.fira-code
   ];
 
   home-manager.users."${currentUser.name}" = {
