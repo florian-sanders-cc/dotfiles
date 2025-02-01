@@ -15,6 +15,7 @@
         bat
         delta
         rustup
+        go
       ];
       runScript = "nvim";
     })
