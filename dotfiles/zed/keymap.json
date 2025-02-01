@@ -56,7 +56,13 @@
       "[ h": "editor::GoToPrevHunk",
 
       // Save file
-      "ctrl-s": "workspace::Save"
+      "ctrl-s": "workspace::Save",
+
+      // git
+      "ctrl-shift-g": [
+        "task::Spawn",
+        { "task_name": "Neogit", "target": "center" }
+      ]
     }
   },
   // Empty pane, set of keybindings that are available when there is no active editor
@@ -111,7 +117,12 @@
       "l": "project_panel::ExpandSelectedEntry",
       "h": "project_panel::CollapseSelectedEntry",
       "shift-h": "project_panel::CollapseAllEntries",
-      "ctrl-p": "file_finder::Toggle"
+      "ctrl-p": "file_finder::Toggle",
+      // git
+      "ctrl-shift-g": [
+        "task::Spawn",
+        { "task_name": "Neogit", "target": "center" }
+      ]
     }
   },
   // Panel nagivation
