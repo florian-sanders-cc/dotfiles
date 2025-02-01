@@ -2,6 +2,8 @@
 
 const readline = require("node:readline");
 
+const { argv } = require("node:process");
+
 const fs = require("node:fs/promises");
 const { spawnSync } = require("node:child_process");
 
@@ -82,10 +84,18 @@ async function prompt() {
       console.log("");
     }
 
-    console.table(choices);
-    console.log("");
-    const choiceIndex = await prompt();
-    const profileToSwitch = profiles[choiceIndex];
+    let profileToSwitch;
+
+    if (argv[2] != null) {
+      profileToSwitch = profiles.find((profile) => profile.id === argv[2]);
+    } else {
+      console.table(choices);
+      console.log("");
+
+      const choiceIndex = await prompt();
+      profileToSwitch = profiles[choiceIndex];
+    }
+
     if (profileToSwitch == null) {
       console.log("Invalid choice :-(");
     } else {
