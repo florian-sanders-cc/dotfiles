@@ -47,6 +47,7 @@ let
     yazi
     volta
     bat
+    usage
   ];
   proPackages = with pkgs; [
     random-labels

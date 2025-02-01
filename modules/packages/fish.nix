@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.fish = {
@@ -177,4 +177,5 @@
           end
     '';
   };
+  xdg.configFile."fish/completions/clever.fish".source = ../../dotfiles/fish/completions/clever.fish;
 }
