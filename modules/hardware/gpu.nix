@@ -44,7 +44,7 @@
     # ];
 
     hardware.nvidia = lib.mkIf (config.nvidia.enable) {
-      package = config.boot.kernelPackages.nvidiaPackages.production;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
 
       # Modesetting is required.
       modesetting.enable = true;
