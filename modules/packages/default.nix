@@ -60,6 +60,7 @@ in
   imports = [
     ./overlays.nix
     ./steam.nix
+    ./lutris.nix
   ];
 
   fonts.packages = with pkgs; [
