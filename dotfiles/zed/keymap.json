@@ -11,10 +11,6 @@
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
       // put key-bindings here if you want them to work in normal & visual mode
-      // Git
-      "ctrl g h d": "editor::ToggleHunkDiff",
-      "ctrl g h r": "editor::RevertSelectedHunks",
-
       // Toggle inlay hints
       "ctrl i": "editor::ToggleInlayHints",
 
@@ -30,6 +26,8 @@
   {
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
+      "ctrl-+": ["zed::IncreaseBufferFontSize", { "persist": true }],
+      "ctrl--": ["zed::DecreaseBufferFontSize", { "persist": true }],
       // +LSP
       "ctrl-r": "editor::Rename",
       "g d": "editor::GoToDefinition",
@@ -40,10 +38,10 @@
       "g T": "editor::GoToTypeDefinitionSplit",
       "g r": "editor::FindAllReferences",
       "] d": "editor::GoToDiagnostic",
-      "[ d": "editor::GoToPrevDiagnostic",
+      "[ d": "editor::GoToPreviousDiagnostic",
       // TODO: Go to next/prev error
       "] e": "editor::GoToDiagnostic",
-      "[ e": "editor::GoToPrevDiagnostic",
+      "[ e": "editor::GoToPreviousDiagnostic",
       // Symbol search
       "s s": "outline::Toggle",
       "s S": "project_symbols::Toggle",
@@ -53,7 +51,7 @@
       // +Git
       // Git prev/next hunk
       "] h": "editor::GoToHunk",
-      "[ h": "editor::GoToPrevHunk",
+      "[ h": "editor::GoToPreviousHunk",
 
       // Save file
       "ctrl-s": "workspace::Save",
@@ -110,8 +108,8 @@
       "p": "project_panel::Paste",
       "left": "project_panel::CollapseSelectedEntry",
       "right": "project_panel::ExpandSelectedEntry",
-      "ctrl-y": "project_panel::CopyPath",
-      "ctrl-shift-y": "project_panel::CopyRelativePath",
+      "ctrl-y": "workspace::CopyPath",
+      "ctrl-shift-y": "workspace::CopyRelativePath",
       "ctrl-f": "project_panel::NewSearchInDirectory",
       "escape": "menu::Cancel",
       "l": "project_panel::ExpandSelectedEntry",
@@ -129,9 +127,9 @@
   {
     "context": "Dock || vim_mode == normal || vim_mode == visual",
     "bindings": {
-      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-j": "workspace::ToggleBottomDock",
       "ctrl-w": "pane::CloseActiveItem",
       "ctrl-shift-w": "pane::CloseAllItems",
@@ -141,9 +139,9 @@
   {
     "context": "terminal",
     "bindings": {
-      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-j": "workspace::ToggleBottomDock",
       "ctrl-w": "pane::CloseActiveItem",
       "ctrl-shift-w": "pane::CloseAllItems",
@@ -155,19 +153,8 @@
     "bindings": {
       "alt-o": "editor::SelectLargerSyntaxNode",
       "alt-i": "editor::SelectSmallerSyntaxNode",
-      "s": ["vim::PushOperator", { "Sneak": {} }],
-      "S": ["vim::PushOperator", { "SneakBackward": {} }]
-    }
-  },
-  {
-    "context": "vim_mode == visual",
-    "bindings": {
-      "shift-s": [
-        "vim::PushOperator",
-        {
-          "AddSurrounds": {}
-        }
-      ]
+      "s": "vim::PushSneak",
+      "S": "vim::PushSneakBackward"
     }
   },
   // Subword motion is not working really nice with `ciw`, disable for now
