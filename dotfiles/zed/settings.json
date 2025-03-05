@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
   "assistant": {
     "default_model": {
       "provider": "zed.dev",
@@ -50,9 +53,9 @@
     // c.f. https://github.com/jeffkreeftmeijer/vim-numbertoggle
     // "toggle_relative_line_numbers": true
   },
-  "buffer_font_family": "FiraCode Nerd Font Mono",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
   // use relative line numbers
-  "relative_line_numbers": true,
+  "relative_line_numbers": false,
   // hide the scroll bar
   "scrollbar": {
     "show": "never"
