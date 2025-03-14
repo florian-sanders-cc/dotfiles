@@ -53,6 +53,7 @@ let
     random-labels
     clever-switch-profile
     jetbrains.webstorm
+    windsurf
   ];
 
 in
