@@ -36,7 +36,7 @@
       #   };
       # });
 
-      zed-preview = prev.callPackage ./zed-preview.nix { };
+      # zed-preview = prev.callPackage ./zed-preview.nix { };
     })
 
   ];
