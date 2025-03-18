@@ -57,7 +57,8 @@
       "ctrl-s": "workspace::Save",
 
       // git
-      "ctrl-shift-g": [
+      "ctrl-shift-g": "git_panel::ToggleFocus",
+      "ctrl-shift-n": [
         "task::Spawn",
         { "task_name": "Neogit", "target": "center" }
       ]
