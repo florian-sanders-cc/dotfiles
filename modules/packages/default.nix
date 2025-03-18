@@ -15,7 +15,7 @@ let
     prefetch-npm-deps
 
     # Browsers
-    chromium
+    ungoogled-chromium
     firefox-wayland
 
     # Community
