@@ -35,7 +35,6 @@
       wl-clipboard
       xdg-desktop-portal-gnome
       xdg-desktop-portal-gtk
-      xdotool
       xwayland-satellite
       swaynotificationcenter
       gnome-calculator
