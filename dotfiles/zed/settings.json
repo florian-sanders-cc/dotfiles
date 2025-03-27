@@ -8,6 +8,7 @@
 // command palette
 {
   "show_edit_predictions": true,
+  "edit_predictions": { "mode": "subtle" },
   "features": {
     "edit_prediction_provider": "zed"
   },
