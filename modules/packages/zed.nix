@@ -7,8 +7,8 @@
 
 {
   home.packages = with pkgs; [
-    # zed-preview
-    zed-editor
+    zed-preview
+    # zed-editor
   ];
 
   xdg.configFile."zed/settings.json".source =
