@@ -8,6 +8,13 @@
 // keymap.json, generated at Tue Sep 17 2024 12:50:50 GMT+0800 (Singapore Standard Time)
 [
   {
+    "bindings": {
+      "ctrl-shift-w": "workspace::CloseAllDocks",
+      "ctrl-+": ["zed::IncreaseBufferFontSize", { "persist": true }],
+      "ctrl--": ["zed::DecreaseBufferFontSize", { "persist": true }]
+    }
+  },
+  {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
       // put key-bindings here if you want them to work in normal & visual mode
@@ -26,8 +33,6 @@
   {
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
-      "ctrl-+": ["zed::IncreaseBufferFontSize", { "persist": true }],
-      "ctrl--": ["zed::DecreaseBufferFontSize", { "persist": true }],
       // +LSP
       "ctrl-r": "editor::Rename",
       "g d": "editor::GoToDefinition",
@@ -134,7 +139,8 @@
       "ctrl-j": "workspace::ToggleBottomDock",
       "ctrl-w": "pane::CloseActiveItem",
       "ctrl-shift-w": "pane::CloseAllItems",
-      "ctrl-b": "workspace::ToggleLeftDock"
+      "ctrl-b": "workspace::ToggleLeftDock",
+      "ctrl-shift-b": "workspace::ToggleRightDock"
     }
   },
   {
