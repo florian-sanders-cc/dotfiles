@@ -13,9 +13,14 @@
     "edit_prediction_provider": "zed"
   },
   "assistant": {
+    "default_profile": "write",
+    "inline_assistant_model": {
+      "provider": "google",
+      "model": "gemini-2.5-pro-exp-03-25"
+    },
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-latest"
+      "model": "claude-3-7-sonnet-thinking-latest"
     },
     "version": "2"
   },
