@@ -13,7 +13,7 @@ stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out/bin $out/src
     cp clever-switch-profile.js $out/src
-    makeWrapper ${pkgs.nodejs-18_x}/bin/node $out/bin/clever-switch-profile \
+    makeWrapper ${pkgs.nodejs_22}/bin/node $out/bin/clever-switch-profile \
       --add-flags "$out/src/clever-switch-profile.js"
   '';
 }
