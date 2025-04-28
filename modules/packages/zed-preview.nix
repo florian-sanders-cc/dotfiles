@@ -14,7 +14,7 @@
 }:
 
 let
-  version = "0.184.2-pre";
+  version = "0.184.4-pre";
 in
 stdenv.mkDerivation rec {
   pname = "zed-preview";
@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
   # Fetch the Linux binary tarball
   src = fetchurl {
     url = "https://github.com/zed-industries/zed/releases/download/v${version}/zed-linux-x86_64.tar.gz";
-    sha256 = "sha256-tj8t6Yrdr6dw6RRW4Pn2akX9LtHbpoezEKmL8x4xTIg=";
+    sha256 = "sha256-FvUaV92i8F/R4X43DARHRG5q+wXFZfYfhcnzCcj08TQ=";
   };
 
   nativeBuildInputs = [
