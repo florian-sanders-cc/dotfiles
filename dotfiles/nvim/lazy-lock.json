@@ -4,7 +4,7 @@
   "aerial.nvim": { "branch": "master", "commit": "2e00d1d4248f08dddfceacb8d2996e51e13e00f6" },
   "blink.cmp": { "branch": "main", "commit": "4f38ce99a472932d5776337f08f7a8180f1f571a" },
   "catppuccin": { "branch": "main", "commit": "1bf070129c0b6f77cc23f6a2212dcdc868308c52" },
-  "codecompanion.nvim": { "branch": "main", "commit": "a53b6f5aa2b229f217932f66b750e80de425f9c4" },
+  "codecompanion.nvim": { "branch": "main", "commit": "7aea2c485852e56a58170796260584c2db4f2b19" },
   "conform.nvim": { "branch": "master", "commit": "372fc521f8421b7830ea6db4d6ea3bae1c77548c" },
   "crates.nvim": { "branch": "main", "commit": "2c8f4fab02e3e9ea42c6ad9b547e4207a914a397" },
   "ctrlsf.vim": { "branch": "master", "commit": "50186c529c881b7844bcd66c7b8e9826eb8990a4" },
