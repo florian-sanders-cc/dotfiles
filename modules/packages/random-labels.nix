@@ -5,15 +5,15 @@
 
 buildNpmPackage rec {
   pname = "random-labels";
-  version = "1.0.2";
+  version = "1.0.3";
 
   src = fetchFromGitHub {
     owner = "CleverCloud";
     repo = "random-labels";
     rev = "v${version}";
-    hash = "sha256-SMxyo8cuJeTqXvHkxdNuU9643RB1pyalZb9vA9l+Ohk=";
+    hash = "sha256-mB2sUIOpzC0fevqCDOL5eWO5vVm9jpI4vKEDy8UCt1Q=";
   };
 
-  npmDepsHash = "sha256-i8AbJmpWAH3775WPRv+jCii89KJ1R5fA/CKaeevyuMw=";
+  npmDepsHash = "sha256-j+5d/5prtZeyl5D5WMhT/Y/txAs1y6jnTqvWChOqSj0=";
   dontNpmBuild = true;
 }
