@@ -55,14 +55,16 @@ let
     jetbrains.webstorm
     windsurf
   ];
+  isGamingEnabled = currentUser.name == specs.users.perso-workstation.name;
 
 in
 {
-  imports = [
-    ./overlays.nix
-    ./steam.nix
-    ./lutris.nix
-  ];
+  imports =
+    [
+      ./overlays.nix
+    ]
+    ++ lib.optional isGamingEnabled ./steam.nix
+    ++ lib.optional isGamingEnabled ./lutris.nix;
 
   fonts.packages = with pkgs; [
     font-awesome

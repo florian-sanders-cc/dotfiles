@@ -28,10 +28,10 @@ in
     ./security.nix
   ];
 
-  config = {
-    steam.enable = lib.mkIf (currentUser.name == specs.users.perso-workstation.name) true;
-    lutris.enable = lib.mkIf (currentUser.name == specs.users.perso-workstation.name) true;
-  };
+  # config = {
+  #   steam.enable = lib.mkIf (currentUser.name == specs.users.perso-workstation.name) true;
+  #   lutris.enable = lib.mkIf (currentUser.name == specs.users.perso-workstation.name) true;
+  # };
 
   # TODO: options & default.nix within hardware
   options = {
