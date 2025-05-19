@@ -3,3 +3,4 @@
 .lazy.lua
 .helix/
 .zed/
+.env.*
