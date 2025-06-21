@@ -51,9 +51,18 @@ output "eDP-1" {
     position x=4480 y=0
 }
 
-// TODO Flo workstation: check ??
+// HUAWEI - Flo workstation context
 output "DP-3" {
-    mode "1920x1080@60.0"
+    mode "2560x1440@120.0"
+    // position x=2050 y=0
+    position x=0 y=0
+    scale 1
+}
+
+
+// ASUS - Flo workstation context
+output "DP-2" {
+    mode "1920x1080@59.9"
     // position x=2050 y=0
     position x=2560 y=0
     scale 1
