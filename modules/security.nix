@@ -31,6 +31,17 @@ in
   #   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   # '';
 
+  services.openssh = {
+    enable = true;
+    ports = [ 5432 ];
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+      AllowUsers = [ currentUser.name ];
+    };
+  };
+
   # ClamAV
   services.clamav.daemon.enable = true;
   services.clamav.daemon.settings = {

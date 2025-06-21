@@ -38,9 +38,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = false;
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
   system.autoUpgrade.enable = false;
   system.autoUpgrade.allowReboot = false;
 

@@ -39,6 +39,7 @@
       swaynotificationcenter
       gnome-calculator
       gnome-disk-utility
+      seahorse
     ];
 
     xdg.portal = {
@@ -55,13 +56,14 @@
         theme = "catppuccin-mocha";
       };
       displayManager.sessionPackages = [ pkgs.niri ];
+      gnome.gnome-keyring.enable = true;
     };
 
     programs.xwayland.enable = true;
     programs.dconf.enable = true;
 
     security.pam.services = {
-      login.enableGnomeKeyring = true;
+      sddm.enableGnomeKeyring = true;
       swaylock = { };
     };
 
@@ -125,14 +127,11 @@
         gnome-keyring = {
           enable = true;
           components = [
-            "pkcs11"
             "secrets"
             "ssh"
           ];
         };
       };
-
-      home.sessionVariables.SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/keyring/ssh";
 
       systemd.user.services.niri = {
         Unit = {
