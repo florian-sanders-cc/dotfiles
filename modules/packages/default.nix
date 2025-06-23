@@ -53,7 +53,6 @@ let
     random-labels
     clever-switch-profile
     jetbrains.webstorm
-    windsurf
   ];
   isGamingEnabled = currentUser.name == specs.users.perso-workstation.name;
 
