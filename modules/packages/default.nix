@@ -35,6 +35,7 @@ let
     vlc
     inkscape
     orca
+    geeqie
 
     # Dev
     bun
