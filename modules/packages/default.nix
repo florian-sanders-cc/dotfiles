@@ -50,6 +50,9 @@ let
     bat
     usage
   ];
+  persoPackages = with pkgs; [
+    google-chrome
+  ];
   proPackages = with pkgs; [
     random-labels
     clever-switch-profile
@@ -59,12 +62,11 @@ let
 
 in
 {
-  imports =
-    [
-      ./overlays.nix
-    ]
-    ++ lib.optional isGamingEnabled ./steam.nix
-    ++ lib.optional isGamingEnabled ./lutris.nix;
+  imports = [
+    ./overlays.nix
+  ]
+  ++ lib.optional isGamingEnabled ./steam.nix
+  ++ lib.optional isGamingEnabled ./lutris.nix;
 
   fonts.packages = with pkgs; [
     font-awesome
@@ -101,6 +103,8 @@ in
     # Standard packages
     home.packages = lib.mkMerge [
       commonPackages
+      (lib.mkIf (currentUser.name == specs.users.perso-workstation.name) persoPackages)
+      (lib.mkIf (currentUser.name == specs.users.perso.name) persoPackages)
       (lib.mkIf (currentUser.name == specs.users.pro.name) proPackages)
     ];
   };
