@@ -8,13 +8,13 @@
 
       # helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
 
-      ghostty = prev.ghostty.overrideAttrs (_: {
-        preBuild = ''
-          shopt -s globstar
-          sed -i 's/^const xev = @import("xev");$/const xev = @import("xev").Epoll;/' **/*.zig
-          shopt -u globstar
-        '';
-      });
+      # ghostty = prev.ghostty.overrideAttrs (_: {
+      #   preBuild = ''
+      #     shopt -s globstar
+      #     sed -i 's/^const xev = @import("xev");$/const xev = @import("xev").Epoll;/' **/*.zig
+      #     shopt -u globstar
+      #   '';
+      # });
 
       random-labels = prev.callPackage ./random-labels.nix { };
 
