@@ -35,7 +35,7 @@ let
     vlc
     inkscape
     orca
-    geeqie
+    qimgv
 
     # Dev
     bun
@@ -53,18 +53,17 @@ let
   proPackages = with pkgs; [
     random-labels
     clever-switch-profile
-    jetbrains.webstorm
+    # jetbrains.webstorm
   ];
   isGamingEnabled = currentUser.name == specs.users.perso-workstation.name;
 
 in
 {
-  imports =
-    [
-      ./overlays.nix
-    ]
-    ++ lib.optional isGamingEnabled ./steam.nix
-    ++ lib.optional isGamingEnabled ./lutris.nix;
+  imports = [
+    ./overlays.nix
+  ]
+  ++ lib.optional isGamingEnabled ./steam.nix
+  ++ lib.optional isGamingEnabled ./lutris.nix;
 
   fonts.packages = with pkgs; [
     font-awesome
@@ -96,6 +95,7 @@ in
       ./zellij.nix
       ./zsh.nix
       ./ghostty.nix
+      ./opencode.nix
     ];
 
     # Standard packages
