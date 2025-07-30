@@ -49,6 +49,7 @@ let
     volta
     bat
     usage
+    neovide
   ];
   proPackages = with pkgs; [
     random-labels
@@ -75,6 +76,7 @@ in
     nerd-fonts.meslo-lg
     nerd-fonts.noto
     nerd-fonts.fira-code
+    nerd-fonts.iosevka
   ];
 
   home-manager.users."${currentUser.name}" = {
