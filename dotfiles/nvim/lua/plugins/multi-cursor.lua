@@ -1,48 +1,92 @@
 return {
-	"brenton-leighton/multiple-cursors.nvim",
-	version = "*", -- Use the latest tagged version
-	opts = {
-		match_visible_only = false,
-		custom_key_maps = {
-			{
-				"n",
-				"<M-l>",
-				function()
-					require("multiple-cursors").align()
-				end,
-			},
-		},
-	}, -- This causes the plugin setup function to be called
-	keys = {
-		{ "<C-j>", "<Cmd>MultipleCursorsAddDown<CR>", mode = { "n", "x" }, desc = "Add cursor and move down" },
-		{ "<C-k>", "<Cmd>MultipleCursorsAddUp<CR>", mode = { "n", "x" }, desc = "Add cursor and move up" },
+	"jake-stewart/multicursor.nvim",
+	branch = "1.0",
+	config = function()
+		local mc = require("multicursor-nvim")
 
-		{ "<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>", mode = { "n", "i", "x" }, desc = "Add cursor and move up" },
-		{ "<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>", mode = { "n", "i", "x" }, desc = "Add cursor and move down" },
+		mc.setup()
 
-		{
-			"<C-LeftMouse>",
-			"<Cmd>MultipleCursorsMouseAddDelete<CR>",
-			mode = { "n", "i" },
-			desc = "Add or remove cursor",
-		},
+		local set = vim.keymap.set
 
-		{ "<M-a>", "<Cmd>MultipleCursorsAddMatches<CR>", mode = { "n", "x" }, desc = "Add cursors to cword" },
-		{
-			"<M-A>",
-			"<Cmd>MultipleCursorsAddMatchesV<CR>",
-			mode = { "n", "x" },
-			desc = "Add cursors to cword in previous area",
-		},
+		-- Add cursors above/below the main cursor
+		set({ "n", "v" }, "<M-k>", function()
+			mc.lineAddCursor(-1)
+		end, { desc = "Add cursor above" })
+		set({ "n", "v" }, "<M-j>", function()
+			mc.lineAddCursor(1)
+		end, { desc = "Add cursor below" })
 
-		{
-			"<M-n>",
-			"<Cmd>MultipleCursorsAddJumpNextMatch<CR>",
-			mode = { "n", "x" },
-			desc = "Add cursor and jump to next cword",
-		},
-		{ "<M-N>", "<Cmd>MultipleCursorsJumpNextMatch<CR>", mode = { "n", "x" }, desc = "Jump to next cword" },
+		-- Add cursor to each word that matches the word under the cursor
+		set({ "n", "v" }, "<M-n>", function()
+			mc.matchAddCursor(1)
+		end, { desc = "Add cursor to next match" })
+		set({ "n", "v" }, "<M-s>", function()
+			mc.matchAddCursor(-1)
+		end, { desc = "Add cursor to prev match" })
 
-		{ "<M-L>", "<Cmd>MultipleCursorsLock<CR>", mode = { "n", "x" }, desc = "Lock virtual cursors" },
-	},
+		-- Add a cursor for all matches of cursor word/selection in the document.
+		set({ "n", "x" }, "<M-a>", mc.matchAllAddCursors)
+
+		-- Rotate the main cursor
+		set({ "n", "v" }, "<left>", mc.nextCursor, { desc = "Next cursor" })
+		set({ "n", "v" }, "<right>", mc.prevCursor, { desc = "Previous cursor" })
+
+		-- Delete the main cursor
+		set({ "n", "v" }, "<leader>x", mc.deleteCursor, { desc = "Delete cursor" })
+
+		-- Add and remove cursors with control + left click
+		set("n", "<M-leftmouse>", mc.handleMouse, { desc = "Add/remove cursor" })
+
+		-- Easy way to add and remove cursors using the main cursor
+		set({ "n", "v" }, "<c-q>", function()
+			if mc.cursorsEnabled() then
+				mc.disableCursors()
+			else
+				mc.addCursor()
+			end
+		end, { desc = "Toggle cursor" })
+
+		-- clone every cursor and disable the originals
+		set({ "n", "v" }, "<leader><c-q>", mc.duplicateCursors, { desc = "Duplicate cursors" })
+
+		set("n", "<esc>", function()
+			if not mc.cursorsEnabled() then
+				mc.enableCursors()
+			elseif mc.hasCursors() then
+				mc.clearCursors()
+			else
+				-- Default <esc> handler
+			end
+		end, { desc = "Clear cursors" })
+
+		-- Align cursor columns
+		set("v", "<M-l>", mc.alignCursors, { desc = "Align cursors" })
+
+		-- Split visual selections by regex
+		set("v", "S", mc.splitCursors, { desc = "Split cursors" })
+
+		-- Append/insert for each line of visual selections
+		set("v", "I", mc.insertVisual, { desc = "Insert at start" })
+		set("v", "A", mc.appendVisual, { desc = "Append at end" })
+
+		-- match new cursors within visual selections by regex
+		set("v", "M", mc.matchCursors, { desc = "Match cursors" })
+
+		-- Rotate visual selection contents
+		set("v", "<leader>t", function()
+			mc.transposeCursors(1)
+		end, { desc = "Transpose cursors" })
+		set("v", "<leader>T", function()
+			mc.transposeCursors(-1)
+		end, { desc = "Transpose cursors backwards" })
+
+		-- Customize how cursors look
+		local hl = vim.api.nvim_set_hl
+		hl(0, "MultiCursorCursor", { link = "Cursor" })
+		hl(0, "MultiCursorVisual", { link = "Visual" })
+		hl(0, "MultiCursorSign", { link = "SignColumn" })
+		hl(0, "MultiCursorDisabledCursor", { link = "Visual" })
+		hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
+		hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
+	end,
 }
