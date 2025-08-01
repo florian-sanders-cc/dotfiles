@@ -51,6 +51,7 @@ let
     usage
     neovide
     claude-code
+    stu
   ];
   proPackages = with pkgs; [
     random-labels
