@@ -3,3 +3,5 @@ resize-overlay=never
 cursor-color = #BD6062
 window-padding-x = 8
 window-padding-y = 8
+adjust-cell-height = 40%
+font-family = JetBrainsMonoNL Nerd Font Mono
