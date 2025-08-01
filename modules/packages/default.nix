@@ -50,6 +50,7 @@ let
     bat
     usage
     neovide
+    claude-code
   ];
   proPackages = with pkgs; [
     random-labels
