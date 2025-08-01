@@ -11,6 +11,9 @@ vim.g.markdown_fenced_languages = {
 vim.g.lazyvim_prettier_needs_config = true
 
 vim.lsp.set_log_level("off")
+vim.opt.laststatus = 0
+vim.opt.list = false
+vim.opt.listchars = ""
 
 if vim.g.neovide then
 	vim.o.linespace = 5
