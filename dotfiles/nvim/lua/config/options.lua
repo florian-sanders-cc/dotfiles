@@ -17,10 +17,10 @@ vim.opt.listchars = ""
 
 if vim.g.neovide then
 	vim.o.linespace = 5
-	vim.g.neovide_padding_top = 20
-	vim.g.neovide_padding_bottom = 20
-	vim.g.neovide_padding_right = 20
-	vim.g.neovide_padding_left = 20
+	vim.g.neovide_padding_top = 10
+	vim.g.neovide_padding_bottom = 10
+	vim.g.neovide_padding_right = 10
+	vim.g.neovide_padding_left = 10
 
 	vim.g.neovide_cursor_trail_size = 0.1
 	vim.g.neovide_scroll_animation_length = 0.1
