@@ -4,5 +4,8 @@ return {
     completion = {
       ghost_text = { enabled = false },
     },
+    sources = {
+      default = { "lsp", "path", "snippets" },
+    },
   },
 }
