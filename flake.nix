@@ -61,10 +61,10 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    # helix-flake = {
-    #   url = "github:helix-editor/helix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    helix-flake = {
+      url = "github:SofusA/helix-pull-diagnostics/pull-diagnostics";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # zed-flake = {
     #   url = "github:zed-industries/zed?rev=1b1c2e55f32d10d351dae213f1c9af26b17cc630";

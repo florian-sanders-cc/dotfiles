@@ -6,7 +6,7 @@
     (final: prev: {
       # neovim-nightly = inputs.neovim-flake.packages.${prev.system}.default;
 
-      # helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
+      helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
 
       # ghostty = prev.ghostty.overrideAttrs (_: {
       #   preBuild = ''

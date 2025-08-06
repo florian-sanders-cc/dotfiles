@@ -6,6 +6,58 @@
   arguments: (template_string) @injection.content
   (#set! injection.include-children))
 
+; Parse the contents of template strings for specific languages
+
+((call_expression
+   function: (identifier) @_template_function_name
+   arguments: (template_string) @injection.content)
+ (#eq? @_template_function_name "html")
+ (#set! injection.language "html"))
+
+((call_expression
+   function: (identifier) @_template_function_name
+   arguments: (template_string) @injection.content)
+ (#eq? @_template_function_name "css")
+ (#set! injection.language "css"))
+
+((call_expression
+   function: (identifier) @_template_function_name
+   arguments: (template_string) @injection.content)
+ (#eq? @_template_function_name "json")
+ (#set! injection.language "json"))
+
+((call_expression
+   function: (identifier) @_template_function_name
+   arguments: (template_string) @injection.content)
+ (#eq? @_template_function_name "sql")
+ (#set! injection.language "sql"))
+
+((call_expression
+   function: (identifier) @_template_function_name
+   arguments: (template_string) @injection.content)
+ (#eq? @_template_function_name "js")
+ (#set! injection.language "javascript"))
+
+((call_expression
+   function: (identifier) @_template_function_name
+   arguments: (template_string) @injection.content)
+ (#eq? @_template_function_name "ts")
+ (#set! injection.language "typescript"))
+
+((call_expression
+   function: (identifier) @_template_function_name
+   arguments: (template_string) @injection.content)
+ (#eq? @_template_function_name "bash")
+ (#set! injection.language "bash"))
+
+; Parse shell command template literals
+
+((call_expression
+   function: (member_expression) @_template_function_name
+   arguments: (template_string) @injection.content)
+ (#match? @_template_function_name "\\$\\$?$")
+ (#set! injection.language "bash"))
+
 ; Parse the contents of gql template literals
 
 ((call_expression

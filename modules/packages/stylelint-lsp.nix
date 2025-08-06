@@ -1,18 +1,47 @@
-{ stdenv
-, fetchFromGitHub
-, buildNpmPackage
+{
+  lib,
+  stdenv,
+  fetchurl,
+  unzip,
+  nodejs,
 }:
 
-buildNpmPackage rec {
+stdenv.mkDerivation rec {
   pname = "stylelint-lsp";
-  version = "e54cdeabc7f2c19d47323b54c188037489792f78";
+  version = "1.5.3";
 
-  src = fetchFromGitHub {
-    owner = "florian-sanders-cc";
-    repo = "stylelint-lsp";
-    rev = "${version}";
-    hash = "sha256-Y5t1rpxU5ZMj65xAxQwE7zRDl50rv00aLUTXldekeEs=";
+  src = fetchurl {
+    url = "https://open-vsx.org/api/stylelint/vscode-stylelint/${version}/file/stylelint.vscode-stylelint-${version}.vsix";
+    sha256 = "1bsia43dpxbx6nky1lybnf64lvn0qgsdwknvarqnkyihvqixnk5w";
   };
 
-  npmDepsHash = "sha256-CUW4DZ5oDUXgqWu5najC3Mgstl7OfELMBWECtCyuAgg=";
+  nativeBuildInputs = [ unzip ];
+
+  unpackPhase = ''
+    unzip -q $src
+  '';
+
+  installPhase = ''
+        mkdir -p $out/bin
+        mkdir -p $out/lib/stylelint-lsp
+        
+        # Copy the extension files
+        cp -r extension/* $out/lib/stylelint-lsp/
+        
+        # Create wrapper script
+        cat > $out/bin/stylelint-lsp << EOF
+    #!/bin/sh
+    exec ${nodejs}/bin/node $out/lib/stylelint-lsp/dist/start-server.js --stdio "\$@"
+    EOF
+        
+        chmod +x $out/bin/stylelint-lsp
+  '';
+
+  meta = with lib; {
+    description = "Stylelint language server extracted from VSCode extension";
+    homepage = "https://github.com/stylelint/vscode-stylelint";
+    license = licenses.mit;
+    platforms = platforms.all;
+    maintainers = [ ];
+  };
 }

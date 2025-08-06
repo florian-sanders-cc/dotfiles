@@ -12,7 +12,7 @@
   "features": {
     "edit_prediction_provider": "zed"
   },
-  "assistant": {
+  "agent": {
     "default_profile": "ask",
     "inline_assistant_model": {
       "provider": "google",
@@ -21,14 +21,14 @@
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-7-sonnet-thinking-latest"
-    },
-    "version": "2"
+    }
   },
   "tab_bar": {
     "show": false
   },
   "indent_guides": {
     "enabled": true,
+    "line_width": 1,
     "coloring": "indent_aware"
   },
   "project_panel": {
@@ -52,8 +52,6 @@
   },
   "vim": {
     "use_system_clipboard": "on_yank",
-    // Let `f` and `t` motions extend across multiple lines
-    "use_multiline_find": true,
     // Let `f` and `t` motions match case insensitively if the target is lowercase
     "use_smartcase_find": true
     // Use relative line numbers in normal mode, absolute in insert mode
@@ -82,7 +80,7 @@
       "settings": {
         "javascript": {
           "preferences": {
-            "importModuleSpecifier": "relative"
+            "importModuleSpecifier": "non-relative"
           }
         }
       }

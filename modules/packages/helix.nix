@@ -3,7 +3,7 @@
 {
   programs.helix = {
     enable = true;
-    # package = pkgs.helix-nightly;
+    package = pkgs.helix-nightly;
 
     settings = {
       theme = "kanagawa";
@@ -22,8 +22,9 @@
           select = "underline";
         };
         indent-guides = {
-          character = "╎";
+          character = "‧";
           render = true;
+          skip-levels = 1;
         };
         statusline = {
           left = [
@@ -59,7 +60,7 @@
 
     extraPackages = with pkgs; [
       typescript
-      nodePackages_latest.typescript-language-server
+      vtsls
       lua-language-server
       nixd
       stylelint-lsp
@@ -73,7 +74,7 @@
           name = "javascript";
           language-servers = [
             {
-              name = "typescript-language-server";
+              name = "vtsls";
               except-features = [ "format" ];
             }
             "stylelint"
@@ -88,7 +89,41 @@
           };
           auto-format = true;
         }
-
+        {
+          name = "nix";
+          scope = "source.nix";
+          injection-regex = "nix";
+          file-types = [ "nix" ];
+          shebangs = [ ];
+          comment-token = "#";
+          language-servers = [ "nixd" ];
+          formatter = {
+            command = "nixfmt";
+            args = [ ];
+          };
+          indent = {
+            tab-width = 2;
+            unit = "  ";
+          };
+        }   {
+          name = "typescript";
+          language-servers = [
+            {
+              name = "vtsls";
+              except-features = [ "format" ];
+            }
+            "stylelint"
+            "eslint"
+          ];
+          formatter = {
+            command = "./node_modules/prettier/bin/prettier.cjs";
+            args = [
+              "--parser"
+              "typescript"
+            ];
+          };
+          auto-format = true;
+        }
         {
           name = "nix";
           scope = "source.nix";
@@ -107,7 +142,6 @@
           };
         }
       ];
-
       language-server.eslint = {
         command = "vscode-eslint-language-server";
         args = [ "--stdio" ];
@@ -156,7 +190,6 @@
           ];
         };
       };
-
       language-server.stylelint = {
         command = "stylelint-lsp";
         args = [ "--stdio" ];
@@ -174,7 +207,7 @@
           autoFixOnSave = true;
           autoFixOnFormat = true;
           cssInJs = true;
-          customSyntax = "postcss-lit";
+          customSyntax = "postcss-styled-syntax";
           validate = [
             "css"
             "less"
@@ -186,7 +219,12 @@
       language-server.nixd = {
         command = "nixd";
       };
+      language-server.vtsls = {
+        command = "vtsls";
+        args = [ "--stdio" ];
+        config.hostInfo = "helix";
+      };
     };
   };
-  xdg.configFile."helix/runtime".source = ../../dotfiles/helix/runtime;
+  # xdg.configFile."helix/runtime".source = ../../dotfiles/helix/runtime;
 }
