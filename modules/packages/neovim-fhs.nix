@@ -16,6 +16,7 @@
         delta
         rustup
         go
+        stylelint-lsp
       ];
       runScript = "nvim";
     })
