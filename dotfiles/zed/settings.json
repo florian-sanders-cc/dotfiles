@@ -7,29 +7,28 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
-  "show_edit_predictions": true,
+  "show_edit_predictions": false,
   "edit_predictions": { "mode": "subtle" },
   "features": {
     "edit_prediction_provider": "zed"
   },
-  "assistant": {
+  "agent": {
     "default_profile": "ask",
     "inline_assistant_model": {
       "provider": "google",
       "model": "gemini-2.5-pro-exp-03-25"
     },
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-thinking-latest"
-    },
-    "version": "2"
+      "provider": "google",
+      "model": "gemini-2.5-flash"
+    }
   },
   "tab_bar": {
     "show": false
   },
   "indent_guides": {
     "enabled": true,
-    "coloring": "indent_aware"
+    "coloring": "fixed"
   },
   "project_panel": {
     "button": true,
@@ -40,6 +39,7 @@
   "vim_mode": true,
   "ui_font_size": 16,
   "buffer_font_size": 16.0,
+  "buffer_line_height": { "custom": 2.3 },
   "theme": {
     "mode": "system",
     "light": "One Light",
@@ -52,8 +52,6 @@
   },
   "vim": {
     "use_system_clipboard": "on_yank",
-    // Let `f` and `t` motions extend across multiple lines
-    "use_multiline_find": true,
     // Let `f` and `t` motions match case insensitively if the target is lowercase
     "use_smartcase_find": true
     // Use relative line numbers in normal mode, absolute in insert mode
@@ -77,11 +75,48 @@
     "Q": "q"
   },
   "tab_size": 2,
+  "experimental.theme_overrides": {
+    "editor.indent_guide_active": "#5B616C",
+    "editor.indent_guide": "#282c33"
+  },
   "lsp": {
     "vtsls": {
       "settings": {
-        "javascript": {
+        "typescript": {
+          "tsserver": {
+            "maxTsServerMemory": 16184
+          },
           "preferences": {
+            "includePackageJsonAutoImports": "off",
+            "useAliasesForRenames": false,
+            "format": {
+              "enable": false
+            },
+            "importModuleSpecifier": "relative"
+          }
+        },
+        "javascript": {
+          "tsserver": {
+            "maxTsServerMemory": 16184
+          },
+          "experimental": {
+            "completion": {
+              "enableServerSideFuzzyMatch": true,
+              "entriesLimit": 50
+            }
+          },
+          "preferences": {
+            "includePackageJsonAutoImports": "off",
+            "useAliasesForRenames": false,
+            "format": {
+              "enable": false
+            },
+            "experimental": {
+              "completion": {
+                "enableServerSideFuzzyMatch": true,
+                "entriesLimit": 50
+              }
+            },
             "importModuleSpecifier": "relative"
           }
         }
