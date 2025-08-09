@@ -1,27 +1,17 @@
 {
   pkgs,
-  lib,
-  config,
   currentUser,
   ...
 }:
 
 {
-  options = {
-    lutris = {
-      enable = lib.mkEnableOption "Lutris";
-    };
-  };
+  home-manager.users."${currentUser.name}" = {
 
-  config = {
-    home-manager.users."${currentUser.name}" = {
-
-      # Standard packages
-      home.packages = [
-        pkgs.lutris
-        pkgs.wineWowPackages.waylandFull
-        pkgs.winetricks
-      ];
-    };
+    # Standard packages
+    home.packages = [
+      pkgs.lutris
+      pkgs.wineWowPackages.waylandFull
+      pkgs.winetricks
+    ];
   };
 }
