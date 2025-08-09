@@ -1,27 +1,20 @@
 {
-  inputs,
-  config,
-  lib,
+  currentUser,
   ...
 }:
 
 {
-  imports = [
-    {
-      nix.settings = {
-        substituters = [ "https://cosmic.cachix.org/" ];
-        trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-      };
-    }
-    inputs.nixos-cosmic.nixosModules.default
-  ];
+  # Enable the COSMIC login manager
+  services.displayManager.cosmic-greeter.enable = true;
 
-  config = lib.mkIf (config.desktop == "cosmic") {
-    services = {
-      # displayManager.cosmic-greeter.enable = true;
-      xserver.displayManager.gdm.enable = true;
-      desktopManager.cosmic.enable = true;
+  # Enable the COSMIC desktop environment
+  services.desktopManager.cosmic.enable = true;
+
+  # Dark theme preference
+  home-manager.users."${currentUser.name}" = {
+    dconf = {
+      enable = true;
+      settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
     };
-    system.nixos.tags = [ "cosmic" ];
   };
 }
