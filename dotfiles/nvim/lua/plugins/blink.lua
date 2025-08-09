@@ -6,6 +6,9 @@ return {
     },
     sources = {
       default = { "lsp", "path", "snippets" },
+      providers = {
+        buffer = { enabled = false },
+      },
     },
   },
 }
