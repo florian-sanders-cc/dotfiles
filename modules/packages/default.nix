@@ -17,6 +17,7 @@ let
     # Browsers
     ungoogled-chromium
     firefox-wayland
+    google-chrome
 
     # Community
     discord

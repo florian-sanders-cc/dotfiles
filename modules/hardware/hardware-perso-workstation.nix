@@ -30,6 +30,16 @@ in
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [ ];
     boot.extraModulePackages = [ ];
+
+    # Kernel parameters to fix DisplayPort EDID detection
+    boot.kernelParams = [
+      "nvidia-drm.modeset=1"
+      # Force DisplayPort link training and disable problematic features
+      "nvidia.NVreg_EnableMSI=0"
+      # DisplayPort-specific fixes for EDID detection
+      "nvidia.NVreg_RegistryDwords=RMUseSwI2c=0x01;RMI2cSpeed=100"
+      "nvidia.NVreg_EnableGpuFirmware=1"
+    ];
     boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.initrd.systemd.enable = true;
 
@@ -63,7 +73,7 @@ in
     hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     hardware.graphics.enable = true;
 
-    services.xserver.videoDrivers = [ "nvidia" ];
-    hardware.nvidia.open = true; # Set to false for proprietary drivers
+    # NVIDIA configuration is handled by gpu.nix
+    # Remove duplicate videoDrivers and nvidia.open settings
   };
 }
