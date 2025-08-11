@@ -13,11 +13,11 @@
           inherit system;
           modules = [
             ./modules
-            { inherit desktop; }
           ];
           specialArgs = {
             inherit home-manager inputs specs;
             currentUser = user;
+            currentDesktop = desktop;
           };
         };
       specs = import ./config-specifications.nix;
