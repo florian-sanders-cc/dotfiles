@@ -3,6 +3,7 @@
     inputs@{
       nixpkgs,
       home-manager,
+      stylix,
       ...
     }:
     let
@@ -13,6 +14,7 @@
           inherit system;
           modules = [
             ./modules
+            stylix.nixosModules.stylix
           ];
           specialArgs = {
             inherit home-manager inputs specs;
@@ -47,6 +49,11 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    stylix = {
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

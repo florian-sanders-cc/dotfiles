@@ -67,16 +67,15 @@
 
   home-manager.users."${currentUser.name}" = {
 
-    imports = [ ../packages/wlogout.nix ];
+    imports = [
+      ../packages/wlogout.nix
+      ../packages/waybar.nix
+    ];
 
     home.file.".config/niri" = {
       source = ../../dotfiles/niri;
       recursive = true;
     };
-    home.file.".config/waybar".source = ../../dotfiles/waybar;
-    home.file.".config/waybar/config.jsonc".source = ../../dotfiles/waybar/config.jsonc;
-    home.file.".config/waybar/modules.jsonc".source = ../../dotfiles/waybar/modules.jsonc;
-    home.file.".config/waybar/style.css".source = ../../dotfiles/waybar/style.css;
     home.file.".config/fuzzel".source = ../../dotfiles/fuzzel;
 
     home.sessionVariables = {
@@ -115,7 +114,6 @@
 
     dconf = {
       enable = true;
-      settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
     };
 
     services = {
@@ -164,21 +162,6 @@
           "--image"
           "${pkgs.wallpapers}/nixos-catppuccin-mocha.png"
         ];
-      };
-    };
-
-    systemd.user.services.waybar = {
-      Unit = {
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session.target" ];
-        Requisite = [ "graphical-session.target" ];
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-      Service = {
-        Restart = "on-failure";
-        ExecStart = "${pkgs.waybar}/bin/waybar";
       };
     };
 

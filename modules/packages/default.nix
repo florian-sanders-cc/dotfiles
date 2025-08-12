@@ -36,7 +36,9 @@ let
     vlc
     inkscape
     orca
-    qimgv
+    loupe
+    btop
+    catppuccin
 
     # Dev
     bun
@@ -101,6 +103,7 @@ in
       ./zsh.nix
       ./ghostty.nix
       ./opencode.nix
+      ./waybar.nix
     ];
 
     # Standard packages

@@ -28,8 +28,6 @@
       enable = true;
       settings = {
         "org/gnome/desktop/interface".color-scheme = "prefer-dark";
-        # Enable tiling mode by default
-        "com/system76/cosmic/comp".tiling-enabled = true;
       };
     };
 
