@@ -7,20 +7,75 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "context_servers": {
+    "claude-code": {
+      "source": "custom",
+      "enabled": true,
+      "command": "claude",
+      "args": [
+        "mcp",
+        "serve"
+      ],
+      "env": {}
+    }
+  },
   "show_edit_predictions": false,
   "edit_predictions": { "mode": "subtle" },
   "features": {
     "edit_prediction_provider": "zed"
   },
   "agent": {
+    "always_allow_tool_actions": true,
+    "profiles": {
+      "ask": {
+        "name": "Ask",
+        "tools": {
+          "contents": true,
+          "diagnostics": true,
+          "fetch": true,
+          "list_directory": true,
+          "project_notifications": false,
+          "now": true,
+          "find_path": true,
+          "read_file": true,
+          "open": true,
+          "grep": true,
+          "thinking": true,
+          "web_search": true
+        },
+        "enable_all_context_servers": false,
+        "context_servers": {
+          "claude-code": {
+            "tools": {
+              "Write": true,
+              "WebSearch": true,
+              "WebFetch": true,
+              "TodoWrite": true,
+              "Task": true,
+              "Read": true,
+              "NotebookEdit": true,
+              "MultiEdit": true,
+              "LS": true,
+              "KillBash": true,
+              "Grep": true,
+              "Glob": true,
+              "ExitPlanMode": true,
+              "Edit": true,
+              "BashOutput": true,
+              "Bash": true
+            }
+          }
+        }
+      }
+    },
     "default_profile": "ask",
     "inline_assistant_model": {
       "provider": "google",
       "model": "gemini-2.5-pro-exp-03-25"
     },
     "default_model": {
-      "provider": "google",
-      "model": "gemini-2.5-flash"
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4"
     }
   },
   "tab_bar": {
