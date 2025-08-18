@@ -34,8 +34,8 @@
           ];
         };
         inline-diagnostics = {
-          cursor-line = "hint";
-          other-lines = "error";
+          cursor-line = "error";
+          other-lines = "disable";
         };
       };
       keys.normal = {
@@ -59,21 +59,30 @@
 
     extraPackages = with pkgs; [
       typescript
-      nodePackages_latest.typescript-language-server
+      vtsls
       lua-language-server
       nixd
       stylelint-lsp
       vscode-langservers-extracted
       nixfmt-rfc-style
+      typescript-go
+      (callPackage ./wc-language-server.nix { })
     ];
 
     languages = {
       language = [
         {
+          name = "typescript";
+          language-servers = [
+            "vtsls"
+            "eslint"
+          ];
+        }
+        {
           name = "javascript";
           language-servers = [
             {
-              name = "typescript-language-server";
+              name = "tsgo";
               except-features = [ "format" ];
             }
             "stylelint"
@@ -106,7 +115,73 @@
             unit = "  ";
           };
         }
+        {
+          name = "html";
+          language-servers = [
+            "wc-language-server"
+            "vscode-html-language-server"
+          ];
+        }
       ];
+
+      language-server.tsgo = {
+        command = "tsgo";
+        args = [
+          "--lsp"
+          "--stdio"
+        ];
+      };
+
+      language-server.vtsls = {
+        command = "vtsls";
+        args = [ "--stdio" ];
+        config = {
+          vtsls = {
+            enableMoveToFileCodeAction = true;
+          };
+          tsserver = {
+            maxTsServerMemory = 8192;
+          };
+          experimental = {
+            completion = {
+              enableServerSideFuzzyMatch = true;
+              entriesLimit = 50;
+            };
+          };
+          typescript = {
+            preferences = {
+              importModuleSpecifier = "relative";
+              includePackageJsonAutoImports = "off";
+              useAliasesForRenames = false;
+              format = {
+                enable = false;
+              };
+            };
+            suggest = {
+              completeFunctionCalls = true;
+            };
+            updateImportsOnFileMove = {
+              enabled = "always";
+            };
+          };
+          javascript = {
+            preferences = {
+              importModuleSpecifier = "relative";
+              includePackageJsonAutoImports = "off";
+              useAliasesForRenames = false;
+              format = {
+                enable = false;
+              };
+            };
+            suggest = {
+              completeFunctionCalls = true;
+            };
+            updateImportsOnFileMove = {
+              enabled = "always";
+            };
+          };
+        };
+      };
 
       language-server.eslint = {
         command = "vscode-eslint-language-server";
@@ -185,6 +260,11 @@
 
       language-server.nixd = {
         command = "nixd";
+      };
+
+      language-server.wc-language-server = {
+        command = "wc-language-server";
+        args = [ "--stdio" ];
       };
     };
   };
