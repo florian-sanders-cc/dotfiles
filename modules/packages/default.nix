@@ -1,8 +1,7 @@
-{
-  lib,
-  pkgs,
-  currentUser,
-  ...
+{ lib
+, pkgs
+, currentUser
+, ...
 }:
 
 let
@@ -39,6 +38,7 @@ let
     loupe
     btop
     catppuccin
+    cachix
 
     # Dev
     bun
@@ -55,6 +55,8 @@ let
     neovide
     claude-code
     stu
+    vscode-langservers-extracted
+    lsof
   ];
   proPackages = with pkgs; [
     random-labels
@@ -93,7 +95,8 @@ in
       ./fzf.nix
       ./git.nix
       ./helix.nix
-      ./neovim-fhs.nix
+      # ./neovim.nix
+      ./neovim-native.nix
       ./nushell.nix
       ./starship.nix
       ./vscode.nix

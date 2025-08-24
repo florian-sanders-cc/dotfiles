@@ -1,13 +1,13 @@
-{
-  lib,
-  stdenv,
-  fetchurl,
-  unzip,
-  nodejs,
+{ lib
+, stdenv
+, fetchurl
+, unzip
+, nodejs
+,
 }:
 
 stdenv.mkDerivation rec {
-  pname = "stylelint-lsp";
+  pname = "stylelint-ls";
   version = "1.5.3";
 
   src = fetchurl {
@@ -23,18 +23,18 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
         mkdir -p $out/bin
-        mkdir -p $out/lib/stylelint-lsp
+        mkdir -p $out/lib/stylelint-ls
         
         # Copy the extension files
-        cp -r extension/* $out/lib/stylelint-lsp/
+        cp -r extension/* $out/lib/stylelint-ls/
         
         # Create wrapper script
-        cat > $out/bin/stylelint-lsp << EOF
+        cat > $out/bin/stylelint-ls << EOF
     #!/bin/sh
-    exec ${nodejs}/bin/node $out/lib/stylelint-lsp/dist/start-server.js --stdio "\$@"
+    exec ${nodejs}/bin/node $out/lib/stylelint-ls/dist/start-server.js --stdio "\$@"
     EOF
         
-        chmod +x $out/bin/stylelint-lsp
+        chmod +x $out/bin/stylelint-ls
   '';
 
   meta = with lib; {

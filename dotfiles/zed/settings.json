@@ -68,7 +68,7 @@
         }
       }
     },
-    "default_profile": "ask",
+    "default_profile": "write",
     "inline_assistant_model": {
       "provider": "google",
       "model": "gemini-2.5-pro-exp-03-25"

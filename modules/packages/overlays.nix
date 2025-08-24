@@ -4,7 +4,7 @@
 {
   nixpkgs.overlays = [
     (final: prev: {
-      # neovim-nightly = inputs.neovim-flake.packages.${prev.system}.default;
+      neovim-nightly = inputs.neovim-nightly-overlay.packages.${prev.system}.default;
 
       # helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
 
@@ -18,7 +18,7 @@
 
       random-labels = prev.callPackage ./random-labels.nix { };
 
-      stylelint-lsp = prev.callPackage ./stylelint-lsp.nix { };
+      stylelint-ls = prev.callPackage ./stylelint-ls.nix { };
 
       wallpapers = prev.callPackage ./wallpapers.nix { };
 
