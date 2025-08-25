@@ -80,11 +80,11 @@ require("which-key").setup()
 require("nvim-web-devicons").setup({})
 require("todo-comments").setup({})
 
-vim.keymap.set("n", "<leader>st", function()
+vim.keymap.set("n", "<leader>xt", function()
   require("snacks").picker.todo_comments({ cwd = vim.fn.expand("%:p:h") })
 end, { desc = "Todo Comments (Buffer)" })
 
-vim.keymap.set("n", "<leader>sT", function()
+vim.keymap.set("n", "<leader>xT", function()
   require("snacks").picker.todo_comments()
 end, { desc = "Todo Comments (Workspace)" })
 

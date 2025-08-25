@@ -22,12 +22,7 @@ local function apply_keymaps(keymaps)
 end
 
 -- Merge all configs
-local config = vim.tbl_deep_extend("force",
-  picker.config,
-  buffers.config,
-  explorer.config,
-  ui.config
-)
+local config = vim.tbl_deep_extend("force", picker.config, buffers.config, explorer.config, ui.config)
 
 -- Set up snacks with merged configuration
 require("snacks").setup(config)
@@ -37,3 +32,4 @@ apply_keymaps(picker.keymaps)
 apply_keymaps(buffers.keymaps)
 apply_keymaps(explorer.keymaps)
 apply_keymaps(ui.keymaps)
+ui.init()

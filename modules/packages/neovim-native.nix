@@ -35,7 +35,6 @@ let
     nvim-lspconfig
     lazydev-nvim
     SchemaStore-nvim
-    live-rename-nvim
 
     # Completion & Snippets
     blink-cmp
