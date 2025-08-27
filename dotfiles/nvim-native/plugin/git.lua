@@ -65,6 +65,8 @@ require("diffview").setup({
   },
 })
 
+vim.opt.fillchars:append({ diff = "" })
+
 require("gitsigns").setup({})
 
 -- =====================================================
@@ -83,4 +85,3 @@ vim.keymap.set("n", "<leader>gq", "<cmd>DiffviewClose<cr>", { desc = "Close Diff
 vim.keymap.set("n", "<leader>ge", "<cmd>DiffviewToggleFiles<cr>", { desc = "Toggle Diffview Files" })
 
 -- Note: Git picker operations (gb, gl, gL, gs, gS, gd, gf) are handled by snacks/git.lua
-

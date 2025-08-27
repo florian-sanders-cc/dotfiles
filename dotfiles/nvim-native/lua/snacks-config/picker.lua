@@ -294,7 +294,30 @@ M.keymaps = {
     { "n", "v" },
     "<leader>ss",
     function()
-      require("snacks").picker.lsp_symbols()
+      require("snacks").picker.lsp_symbols({
+        finder = "lsp_symbols",
+        format = "lsp_symbol",
+        tree = true,
+        filter = {
+          default = {
+            "Class",
+            "Constructor",
+            "Enum",
+            "Function",
+            "Interface",
+            "Method",
+            "Module",
+            "Namespace",
+            "Package",
+            -- "Property",
+            "Struct",
+            "Trait",
+          },
+          -- set to `true` to include all symbols
+          markdown = true,
+          help = true,
+        },
+      })
     end,
     { desc = "LSP Symbols" },
   },

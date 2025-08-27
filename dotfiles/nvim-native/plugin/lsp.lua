@@ -2,8 +2,18 @@ require("inc_rename").setup({
   input_buffer_type = "snacks",
 })
 
-vim.lsp.enable({ "nil_ls", "gopls", "emmylua_ls", "rust_analyzer", "marksman", "eslint", "vtsls" })
-vim.diagnostic.config({ virtual_text = false })
+vim.lsp.enable({ "nil_ls", "gopls", "lua_ls", "rust_analyzer", "marksman", "eslint", "vtsls" })
+vim.diagnostic.config({
+  virtual_lines = { current_line = true },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.HINT] = "󰌵",
+      [vim.diagnostic.severity.INFO] = "",
+    },
+  },
+})
 
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
 vim.keymap.set({ "n", "v" }, "<leader>cA", function()
@@ -14,4 +24,4 @@ vim.keymap.set({ "n", "v" }, "<leader>cA", function()
     },
   })
 end, { desc = "Source Action" })
-vim.keymap.set({ "n", "v" }, "<leader>rn", ":IncRename ", { desc = "Rename" })
+vim.keymap.set({ "n", "v" }, "<leader>cr", ":IncRename ", { desc = "Rename" })

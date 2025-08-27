@@ -15,8 +15,8 @@ require("lualine").setup({
   options = {
     icons_enabled = true,
     theme = "auto",
-    section_separators = { left = "", right = "" },
-    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
+    component_separators = { left = "", right = "" },
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -54,11 +54,11 @@ require("lualine").setup({
         icon = "", -- f013
         symbols = {
           -- Standard unicode symbols to cycle through for LSP progress:
-          spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+          spinner = { "", "", "", "", "", "" },
           -- Standard unicode symbol for when LSP is done:
           done = "✓",
           -- Delimiter inserted between LSP names:
-          separator = " ",
+          separator = "  ",
         },
         -- List of LSP names to ignore (e.g., `null-ls`):
         ignore_lsp = {},

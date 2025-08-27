@@ -1,3 +1,10 @@
+function get_fold_text()
+  local line = vim.fn.getline(vim.v.foldstart)
+  -- Remove /*, */, and {{{ with optional digits
+  local sub = line:gsub("/%*", ""):gsub("%*/", ""):gsub("{{{%d*", "")
+  return vim.v.folddashes .. sub
+end
+
 require("nvim-treesitter.configs").setup({
   -- Use only Nix-provided parsers, disable installation
   ensure_installed = {},
@@ -42,15 +49,9 @@ vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
   end,
 })
 
-function GetFoldText()
-  local line = vim.fn.getline(vim.v.foldstart)
-  -- Remove /*, */, and {{{ with optional digits
-  local sub = line:gsub("/%*", ""):gsub("%*/", ""):gsub("{{{%d*", "")
-  return vim.v.folddashes .. sub
-end
-vim.opt.fillchars = { fold = " " }
+vim.opt.fillchars:append({ fold = " " })
 vim.opt.foldcolumn = "0"
-vim.opt.foldtext = GetFoldText()
+vim.opt.foldtext = get_fold_text()
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true

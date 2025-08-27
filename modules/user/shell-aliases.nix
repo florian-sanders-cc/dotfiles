@@ -27,7 +27,7 @@ in
   commonAliases = {
     ll = "ls -l -a";
     nn = "cd ${homeDirectory}/Notes";
-    clean = "sudo nix-collect-garbage -d; nix-collect-garbage";
+    clean = "sudo nix-collect-garbage --delete-older-than 7d; nix-collect-garbage --delete-older-than 7d";
     nxcfg = "cd ${homeDirectory}/.config/nixos-config";
     ww = "cd ${homeDirectory}/Projects/";
     setnode = "cat ${homeDirectory}/.config/nixos-config/node-shell/.envrc-example >> .envrc; direnv allow";
