@@ -1,12 +1,13 @@
-{
-  lib,
-  pkgs,
-  currentUser,
-  ...
+{ lib
+, pkgs
+, currentUser
+, ...
 }:
 
 {
   system.nixos.tags = [ "niri" ];
+
+  programs.niri.enable = true;
 
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
@@ -17,22 +18,12 @@
     kdePackages.breeze-icons
     libadwaita
     nautilus
-    niri
-    (pkgs.catppuccin-sddm.override {
-      flavor = "mocha";
-      font = "Noto Sans";
-      fontSize = "14";
-      background = "${pkgs.wallpapers}/wallpaper-lines.png";
-      loginBackground = true;
-    })
     pavucontrol
     polkit_gnome
     seahorse
     swaybg
     swayosd
     wl-clipboard
-    xdg-desktop-portal-gnome
-    xdg-desktop-portal-gtk
     xwayland-satellite
     swaynotificationcenter
     gnome-calculator
@@ -40,28 +31,15 @@
     seahorse
   ];
 
-  xdg.portal = {
+  services.displayManager.gdm = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
-    configPackages = [ pkgs.niri ];
-  };
-
-  services = {
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      package = pkgs.kdePackages.sddm;
-      theme = "catppuccin-mocha";
-    };
-    displayManager.sessionPackages = [ pkgs.niri ];
-    gnome.gnome-keyring.enable = true;
+    wayland = true;
   };
 
   programs.xwayland.enable = true;
   programs.dconf.enable = true;
 
   security.pam.services = {
-    sddm.enableGnomeKeyring = true;
     swaylock = { };
   };
 
@@ -100,7 +78,7 @@
       enable = true;
       theme = {
         name = "Breeze-Dark";
-        package = pkgs.libsForQt5.breeze-gtk;
+        package = pkgs.kdePackages.breeze-gtk;
       };
       iconTheme = {
         name = "Adwaita";

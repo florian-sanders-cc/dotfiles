@@ -1,15 +1,18 @@
 ---@type vim.lsp.Config
 return {
-  cmd = { 'vtsls', '--stdio' },
+  cmd = { "vtsls", "--stdio" },
   filetypes = {
-    'javascript',
-    'javascriptreact',
-    'javascript.jsx',
-    'typescript',
-    'typescriptreact',
-    'typescript.tsx',
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
   },
   settings = {
+    complete_function_calls = true,
+    enableMoveToFileCodeAction = true,
+    autoUseWorkspaceTsdk = true,
     tsserver = {
       maxTsServerMemory = 8192,
     },

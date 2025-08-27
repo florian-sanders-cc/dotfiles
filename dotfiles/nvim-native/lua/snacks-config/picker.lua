@@ -359,10 +359,33 @@ M.keymaps = {
     { "n", "v" },
     "gD",
     function()
-      require("snacks").picker.lsp_declarations()
+      vim.lsp.buf.definition({
+        on_list = function(options)
+          if #options.items == 0 then
+            vim.notify("No definition found", vim.log.levels.INFO)
+            return
+          end
+
+          -- Always open in vertical split
+          vim.cmd("vsplit")
+
+          -- Jump to the first definition
+          local item = options.items[1]
+          vim.cmd("edit " .. item.filename)
+          vim.api.nvim_win_set_cursor(0, { item.lnum, item.col - 1 })
+        end,
+      })
     end,
-    { desc = "Goto Declaration" },
+    { desc = "Goto Definition (Vertical Split)" },
   },
+  -- {
+  --   { "n", "v" },
+  --   "gD",
+  --   function()
+  --     require("snacks").picker.lsp_declarations()
+  --   end,
+  --   { desc = "Goto Declaration" },
+  -- },
   {
     { "n", "v" },
     "gr",
@@ -384,6 +407,16 @@ M.keymaps = {
     "gy",
     function()
       require("snacks").picker.lsp_type_definitions()
+    end,
+    { desc = "Goto T[y]pe Definition" },
+  },
+  {
+    { "n", "v" },
+    "gY",
+    function()
+      require("snacks").picker.lsp_type_definitions({
+        jump = { tagstack = true, reuse_win = false },
+      })
     end,
     { desc = "Goto T[y]pe Definition" },
   },

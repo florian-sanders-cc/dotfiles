@@ -30,8 +30,8 @@ stdenv.mkDerivation rec {
         
         # Create wrapper script
         cat > $out/bin/stylelint-ls << EOF
-    #!/bin/sh
-    exec ${nodejs}/bin/node $out/lib/stylelint-ls/dist/start-server.js --stdio "\$@"
+    #!/usr/bin/env sh
+    exec env node $out/lib/stylelint-ls/dist/start-server.js --stdio "\$@"
     EOF
         
         chmod +x $out/bin/stylelint-ls

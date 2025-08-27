@@ -54,8 +54,10 @@ let
     usage
     neovide
     claude-code
+    gemini-cli
     stu
     vscode-langservers-extracted
+    stylelint-ls
     lsof
   ];
   proPackages = with pkgs; [

@@ -12,10 +12,7 @@
       "source": "custom",
       "enabled": true,
       "command": "claude",
-      "args": [
-        "mcp",
-        "serve"
-      ],
+      "args": ["mcp", "serve"],
       "env": {}
     }
   },
@@ -183,7 +180,7 @@
       "show_edit_predictions": false
     },
     "Nix": {
-      "language_servers": ["nixd", "!nil"]
+      "language_servers": ["nil"]
     }
   }
 }
