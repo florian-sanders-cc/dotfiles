@@ -7,7 +7,7 @@ local M = {}
 M.config = {
   explorer = {
     enabled = true,
-    replace_netrw = true,
+    replace_netrw = false,
   }
 }
 

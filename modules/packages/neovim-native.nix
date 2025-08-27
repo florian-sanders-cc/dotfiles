@@ -49,6 +49,8 @@ let
     todo-comments-nvim
     trouble-nvim
     persistence-nvim
+    multicursors-nvim
+    grug-far-nvim
 
     # Git Integration
     neogit
