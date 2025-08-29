@@ -7,17 +7,19 @@ local M = {}
 M.config = {
   explorer = {
     enabled = true,
-    replace_netrw = false,
-  }
+    replace_netrw = true,
+  },
 }
 
 M.keymaps = {
   -- File Explorer
   {
-    { "n",                   "v" },
+    { "n", "v" },
     "<leader>e",
-    function() require("snacks").explorer() end,
-    { desc = "File Explorer" }
+    function()
+      require("snacks").explorer()
+    end,
+    { desc = "File Explorer" },
   },
 }
 

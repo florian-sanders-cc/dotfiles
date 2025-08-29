@@ -17,6 +17,7 @@ let
     stylelint-ls
     vscode-langservers-extracted
     wc-ls
+    kdePackages.full
   ];
 
   formatters = with pkgs; [
@@ -148,6 +149,7 @@ in
               bash
               go
               scheme
+              qmljs
             ]
           )).dependencies;
       };

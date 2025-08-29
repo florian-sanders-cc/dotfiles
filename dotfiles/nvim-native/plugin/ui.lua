@@ -10,6 +10,17 @@ function isRecording()
   return "q@" .. reg
 end
 
+require("mini.files").setup({
+  options = {
+    -- Whether to use for editing directories
+    use_as_default_explorer = false,
+  },
+})
+
+vim.keymap.set({ "n" }, "<leader>fM", function()
+  require("mini.files").open(vim.uv.cwd(), true)
+end, { desc = "Open mini.files (cwd)" })
+
 -- Configure Lualine (Status line)
 require("lualine").setup({
   options = {
@@ -139,9 +150,6 @@ autocmd("TextYankPost", {
   end,
   group = highlight_group,
 })
-
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_netrw = 1
 
 require("noice").setup({
   lsp = {

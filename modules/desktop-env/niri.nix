@@ -29,6 +29,7 @@
     gnome-calculator
     gnome-disk-utility
     seahorse
+    quickshell
   ];
 
   services.displayManager.gdm = {
@@ -55,6 +56,10 @@
       recursive = true;
     };
     home.file.".config/fuzzel".source = ../../dotfiles/fuzzel;
+    home.file.".config/swaync" = {
+      source = ../../dotfiles/swaync;
+      recursive = true;
+    };
 
     home.sessionVariables = {
       WAYLAND_DISPLAY = "wayland-1";
