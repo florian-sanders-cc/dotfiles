@@ -15,7 +15,7 @@ require("inc_rename").setup({
   input_buffer_type = "snacks",
 })
 
-vim.lsp.enable({ "nil_ls", "gopls", "lua_ls", "rust_analyzer", "marksman", "eslint", "vtsls" })
+vim.lsp.enable({ "nil_ls", "gopls", "lua_ls", "rust_analyzer", "marksman", "eslint", "vtsls", "html-ls" })
 vim.diagnostic.config({
   virtual_lines = { current_line = true },
   signs = {
@@ -46,6 +46,7 @@ vim.keymap.set("n", "gS", function()
     local client = clients[1]
     clients[1]:exec_cmd({
       command = "typescript.goToSourceDefinition",
+      title = "Go to Source Definition",
       arguments = {
         vim.uri_from_bufnr(0),
         vim.lsp.util.make_position_params(0, client.offset_encoding).position,

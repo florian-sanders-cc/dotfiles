@@ -20,6 +20,10 @@
 
       stylelint-ls = prev.callPackage ./stylelint-ls.nix { };
 
+      wc-ls = prev.callPackage ./wc-ls.nix { };
+
+      html-ls = prev.callPackage ./html-ls.nix { };
+
       wallpapers = prev.callPackage ./wallpapers.nix { };
 
       clever-switch-profile = prev.callPackage ./clever-switch-profile.nix { };

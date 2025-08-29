@@ -1,5 +1,5 @@
 #!/bin/sh
 # Start / Reload waybar
 
-pkill waybar
-waybar
+pkill cosmic-panel
+cosmic-panel

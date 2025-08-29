@@ -56,8 +56,8 @@ let
     claude-code
     gemini-cli
     stu
-    vscode-langservers-extracted
     stylelint-ls
+    html-ls
     lsof
   ];
   proPackages = with pkgs; [

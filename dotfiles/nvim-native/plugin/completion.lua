@@ -36,5 +36,7 @@ require("blink.cmp").setup({
     },
   },
 
-  sources = { default = { "lsp", "buffer", "snippets", "path" } },
+  sources = {
+    default = { "lsp", "buffer", "snippets", "path" },
+  },
 })

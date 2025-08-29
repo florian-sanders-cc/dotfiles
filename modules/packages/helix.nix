@@ -22,7 +22,7 @@
           select = "underline";
         };
         indent-guides = {
-          character = "╎";
+          character = "⸽";
           render = true;
         };
         statusline = {
@@ -46,6 +46,13 @@
           "extend_line_up"
           "extend_to_line_bounds"
         ];
+        "g" = {
+          "D" = [
+            "hsplit"
+            "jump_view_up"
+            "goto_definition"
+          ];
+        };
       };
       keys.insert = {
         "C-s" = ":w";
@@ -66,7 +73,7 @@
       vscode-langservers-extracted
       nixfmt-rfc-style
       typescript-go
-      (callPackage ./wc-language-server.nix { })
+      wc-ls
     ];
 
     languages = {
@@ -82,8 +89,7 @@
           name = "javascript";
           language-servers = [
             {
-              name = "tsgo";
-              except-features = [ "format" ];
+              name = "vtsls";
             }
             "stylelint"
             "eslint"
@@ -135,6 +141,7 @@
       language-server.vtsls = {
         command = "vtsls";
         args = [ "--stdio" ];
+        required-root-patterns = [ "tsconfig.json" ];
         config = {
           vtsls = {
             enableMoveToFileCodeAction = true;

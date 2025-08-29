@@ -4,6 +4,45 @@
 -- =====================================================
 
 -- Configure Neogit (Magit-like git interface)
+require("mini.diff").setup({
+  view = {
+    -- Visualization style. Possible values are 'sign' and 'number'.
+    -- Default: 'number' if line numbers are enabled, 'sign' otherwise.
+    style = "sign",
+
+    -- Signs used for hunks with 'sign' view
+    signs = { add = "", change = "", delete = "󰛲" },
+
+    -- Priority of used visualization extmarks
+    priority = 199,
+  },
+
+  -- Delays (in ms) defining asynchronous processes
+  delay = {
+    -- How much to wait before update following every text change
+    text_change = 200,
+  },
+
+  -- Module mappings. Use `''` (empty string) to disable one.
+  mappings = {
+    -- Apply hunks inside a visual/operator region
+    apply = "gha",
+
+    -- Reset hunks inside a visual/operator region
+    reset = "ghr",
+
+    -- Hunk range textobject to be used inside operator
+    -- Works also in Visual mode if mapping differs from apply and reset
+    textobject = "gh",
+
+    -- Go to hunk range in corresponding direction
+    goto_first = "[H",
+    goto_prev = "[h",
+    goto_next = "]h",
+    goto_last = "]H",
+  },
+})
+
 require("neogit").setup({
   auto_refresh = true,
   disable_hint = false,
@@ -67,7 +106,7 @@ require("diffview").setup({
 
 vim.opt.fillchars:append({ diff = "" })
 
-require("gitsigns").setup({})
+-- require("gitsigns").setup({})
 
 -- =====================================================
 -- GIT KEYMAPS

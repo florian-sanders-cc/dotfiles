@@ -10,19 +10,24 @@ return {
     "typescript.tsx",
   },
   settings = {
-    complete_function_calls = true,
     enableMoveToFileCodeAction = true,
-    autoUseWorkspaceTsdk = true,
+    vtsls = {
+      autoUseWorkspaceTsdk = true,
+      enableMoveToFileCodeAction = true,
+      experimental = {
+        completion = {
+          enableServerSideFuzzyMatch = true,
+          entriesLimit = 50,
+        },
+      },
+    },
     tsserver = {
       maxTsServerMemory = 8192,
     },
-    experimental = {
-      completion = {
-        enableServerSideFuzzyMatch = true,
-        entriesLimit = 50,
-      },
-    },
     typescript = {
+      suggest = {
+        completeFunctionCalls = true,
+      },
       preferences = {
         importModuleSpecifier = "relative",
         includePackageJsonAutoImports = "off",
@@ -33,6 +38,9 @@ return {
       },
     },
     javascript = {
+      suggest = {
+        completeFunctionCalls = true,
+      },
       preferences = {
         importModuleSpecifier = "relative",
         includePackageJsonAutoImports = "off",

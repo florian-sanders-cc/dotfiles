@@ -3,6 +3,7 @@
 let
   lspServers = with pkgs; [
     emmylua-ls
+    lua-language-server
     nil
     nodePackages.bash-language-server
     nodePackages.yaml-language-server
@@ -15,6 +16,7 @@ let
     vtsls
     stylelint-ls
     vscode-langservers-extracted
+    wc-ls
   ];
 
   formatters = with pkgs; [
@@ -51,6 +53,7 @@ let
     persistence-nvim
     multicursors-nvim
     grug-far-nvim
+    quicker-nvim
 
     # Git Integration
     neogit

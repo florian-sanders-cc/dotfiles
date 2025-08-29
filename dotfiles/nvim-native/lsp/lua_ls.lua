@@ -11,11 +11,4 @@ return {
     "selene.yml",
     ".git",
   },
-  settings = {
-    Lua = {
-      runtime = {
-        version = "LuaJIT",
-      },
-    },
-  },
 }

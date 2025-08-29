@@ -61,7 +61,6 @@
     };
 
     programs.waybar = {
-      enable = true;
       systemd.enable = true;
       systemd.target = "niri.service";
     };
@@ -88,10 +87,6 @@
         name = "Adwaita";
         package = pkgs.adwaita-icon-theme;
       };
-    };
-
-    dconf = {
-      enable = true;
     };
 
     services = {

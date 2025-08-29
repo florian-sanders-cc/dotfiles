@@ -74,6 +74,8 @@ require("lualine").setup({
   extensions = {},
 })
 
+vim.o.showtabline = 0
+
 -- Configure Which-key (Key binding help)
 require("which-key").setup()
 
