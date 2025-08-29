@@ -97,8 +97,7 @@ in
       ./fzf.nix
       ./git.nix
       ./helix.nix
-      # ./neovim.nix
-      ./neovim-native.nix
+      ./neovim.nix
       ./nushell.nix
       ./starship.nix
       ./vscode.nix
@@ -109,6 +108,7 @@ in
       ./ghostty.nix
       ./opencode.nix
       ./waybar.nix
+      ./yazi.nix
     ];
 
     # Standard packages

@@ -6,15 +6,9 @@
     (final: prev: {
       neovim-nightly = inputs.neovim-nightly-overlay.packages.${prev.system}.default;
 
-      # helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
+      noctalia-qs = inputs.noctalia.defaultPackage.${prev.system};
 
-      # ghostty = prev.ghostty.overrideAttrs (_: {
-      #   preBuild = ''
-      #     shopt -s globstar
-      #     sed -i 's/^const xev = @import("xev");$/const xev = @import("xev").Epoll;/' **/*.zig
-      #     shopt -u globstar
-      #   '';
-      # });
+      # helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
 
       random-labels = prev.callPackage ./random-labels.nix { };
 

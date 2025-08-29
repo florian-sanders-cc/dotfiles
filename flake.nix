@@ -1,9 +1,8 @@
 {
   outputs =
-    inputs@{
-      nixpkgs,
-      home-manager,
-      ...
+    inputs@{ nixpkgs
+    , home-manager
+    , ...
     }:
     let
       system = "x86_64-linux";
@@ -47,6 +46,11 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell?ref=v2.3.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

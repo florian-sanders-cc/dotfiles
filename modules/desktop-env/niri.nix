@@ -1,5 +1,4 @@
-{ lib
-, pkgs
+{ pkgs
 , currentUser
 , ...
 }:
@@ -11,9 +10,7 @@
 
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
-    blueberry
     cliphist
-    fuzzel
     gtk4
     kdePackages.breeze-icons
     libadwaita
@@ -21,15 +18,13 @@
     pavucontrol
     polkit_gnome
     seahorse
-    swaybg
-    swayosd
     wl-clipboard
     xwayland-satellite
-    swaynotificationcenter
     gnome-calculator
     gnome-disk-utility
     seahorse
-    quickshell
+    noctalia-qs
+    swww
   ];
 
   services.displayManager.gdm = {
@@ -43,39 +38,21 @@
   security.pam.services = {
     swaylock = { };
   };
+  services.upower.enable = true;
 
   home-manager.users."${currentUser.name}" = {
 
     imports = [
       ../packages/wlogout.nix
-      ../packages/waybar.nix
     ];
 
     home.file.".config/niri" = {
       source = ../../dotfiles/niri;
       recursive = true;
     };
-    home.file.".config/fuzzel".source = ../../dotfiles/fuzzel;
-    home.file.".config/swaync" = {
-      source = ../../dotfiles/swaync;
-      recursive = true;
-    };
 
     home.sessionVariables = {
       WAYLAND_DISPLAY = "wayland-1";
-    };
-
-    programs.waybar = {
-      systemd.enable = true;
-      systemd.target = "niri.service";
-    };
-
-    programs.swaylock = {
-      enable = true;
-      settings = {
-        image = "${../../dotfiles/wallpapers/wallpaper-lines.png}";
-        indicator-caps-lock = true;
-      };
     };
 
     gtk = {
@@ -95,9 +72,6 @@
     };
 
     services = {
-      swaync = {
-        enable = true;
-      };
       gnome-keyring = {
         enable = true;
         components = [
@@ -119,27 +93,6 @@
         Slice = "session.slice";
         Type = "notify";
         ExecStart = "${pkgs.niri}/bin/niri --session";
-      };
-    };
-
-    systemd.user.services.swaybg = {
-      Unit = {
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session.target" ];
-        Requisite = [ "graphical-session.target" ];
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-      Service = {
-        Restart = "on-failure";
-        ExecStart = lib.escapeShellArgs [
-          (lib.getExe pkgs.swaybg)
-          "--mode"
-          "fill"
-          "--image"
-          "${pkgs.wallpapers}/nixos-catppuccin-mocha.png"
-        ];
       };
     };
 
