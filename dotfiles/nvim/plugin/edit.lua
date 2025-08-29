@@ -67,7 +67,7 @@ vim.keymap.set({ "n", "x", "o" }, "gs", function()
   require("flash").jump()
 end, { desc = "Flash" })
 
-vim.keymap.set({ "n", "x", "o" }, "gS", function()
+vim.keymap.set({ "n", "x", "o" }, "gt", function()
   require("flash").treesitter()
 end, { desc = "Flash Treesitter" })
 
@@ -88,3 +88,5 @@ vim.keymap.set({ "n", "v" }, "<leader>sr", function()
     },
   })
 end, { desc = "Search and Replace" })
+
+vim.keymap.set({ "n", "v" }, "s", "<Nop>")

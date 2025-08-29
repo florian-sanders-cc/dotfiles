@@ -25,6 +25,7 @@
     seahorse
     noctalia-qs
     swww
+    niri-smart-focus
   ];
 
   services.displayManager.gdm = {
@@ -33,8 +34,6 @@
   };
 
   programs.xwayland.enable = true;
-  programs.dconf.enable = true;
-
   security.pam.services = {
     swaylock = { };
   };
@@ -68,6 +67,13 @@
       cursorTheme = {
         name = "Adwaita";
         package = pkgs.adwaita-icon-theme;
+      };
+    };
+
+    dconf = {
+      enable = true;
+      settings = {
+        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
       };
     };
 

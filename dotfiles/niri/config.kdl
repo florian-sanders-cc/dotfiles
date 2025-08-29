@@ -124,10 +124,12 @@ hotkey-overlay {
 binds {
     Mod+Shift+Colon { show-hotkey-overlay; }
 
-    Mod+T { spawn "/home/flo-perso/.config/nixos-config/dotfiles/niri/scripts/smart-focus-ghostty"; }
-    Mod+Shift+T { spawn "/home/flo-perso/.config/nixos-config/dotfiles/niri/scripts/smart-focus-ghostty" "true"; }
-    Mod+B { spawn "/home/flo-perso/.config/nixos-config/dotfiles/niri/scripts/smart-focus-firefox"; }
-    Mod+Shift+B { spawn "/home/flo-perso/.config/nixos-config/dotfiles/niri/scripts/smart-focus-firefox" "true"; }
+    Mod+T { spawn "smart-focus-ghostty"; }
+    Mod+Shift+T { spawn "smart-focus-ghostty" "true"; }
+    Mod+B { spawn "smart-focus-firefox"; }
+    Mod+Shift+B { spawn "smart-focus-firefox" "true"; }
+    Mod+C { spawn "smart-focus-chromium"; }
+    Mod+Shift+C { spawn "smart-focus-chromium" "true"; }
     Mod+D { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Super+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "toggle"; }
 
@@ -231,7 +233,7 @@ binds {
     Mod+Ctrl+8 { move-column-to-workspace 8; }
     Mod+Ctrl+9 { move-column-to-workspace 9; }
 
-    Mod+Shift+C  { consume-window-into-column; }
+    Mod+Shift+S  { consume-window-into-column; }
     Mod+Shift+E { expel-window-from-column; }
 
     Mod+Alt+Left  { consume-or-expel-window-left; }
@@ -241,7 +243,6 @@ binds {
     Mod+Shift+R { reset-window-height; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
-    Mod+C { center-column; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }

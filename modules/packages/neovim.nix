@@ -110,7 +110,7 @@ in
     };
 
   xdg.configFile."nvim" = {
-    source = ../../dotfiles/nvim-native;
+    source = ../../dotfiles/nvim;
     recursive = true;
   };
 
@@ -146,7 +146,6 @@ in
               vim
               vimdoc
               python
-              bash
               go
               scheme
               fish

@@ -15,7 +15,7 @@ require("inc_rename").setup({
   input_buffer_type = "snacks",
 })
 
-vim.lsp.enable({ "nil_ls", "gopls", "lua_ls", "rust_analyzer", "marksman", "eslint", "vtsls", "html-ls" })
+vim.lsp.enable({ "nil_ls", "gopls", "lua_ls", "rust_analyzer", "marksman", "eslint", "vtsls" })
 vim.diagnostic.config({
   virtual_lines = { current_line = true },
   signs = {
@@ -56,3 +56,10 @@ vim.keymap.set("n", "gS", function()
     vim.lsp.buf.declaration()
   end
 end, { desc = "Go to Source Definition" })
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MiniFilesActionRename",
+  callback = function(event)
+    Snacks.rename.on_rename_file(event.data.from, event.data.to)
+  end,
+})

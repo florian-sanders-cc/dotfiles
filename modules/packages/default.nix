@@ -57,7 +57,6 @@ let
     gemini-cli
     stu
     stylelint-ls
-    html-ls
     lsof
   ];
   proPackages = with pkgs; [

@@ -16,11 +16,11 @@
 
       wc-ls = prev.callPackage ./wc-ls.nix { };
 
-      html-ls = prev.callPackage ./html-ls.nix { };
-
       wallpapers = prev.callPackage ./wallpapers.nix { };
 
       clever-switch-profile = prev.callPackage ./clever-switch-profile.nix { };
+
+      niri-smart-focus = prev.callPackage ./niri-smart-focus.nix { };
 
       # ghostty-nightly = inputs.ghostty-flake.packages.${prev.system}.default;
 
