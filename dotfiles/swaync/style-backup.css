@@ -1,0 +1,206 @@
+* {
+  font-family: "JetBrains Mono", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Nord Theme Colors */
+@define-color nord0 #2e3440;   /* Polar Night - darkest */
+@define-color nord1 #3b4252;   /* Polar Night */
+@define-color nord2 #434c5e;   /* Polar Night */
+@define-color nord3 #4c566a;   /* Polar Night - lightest */
+@define-color nord4 #d8dee9;   /* Snow Storm */
+@define-color nord5 #e5e9f0;   /* Snow Storm */
+@define-color nord6 #eceff4;   /* Snow Storm - lightest */
+@define-color nord7 #8fbcbb;   /* Frost - teal */
+@define-color nord8 #88c0d0;   /* Frost - light blue */
+@define-color nord9 #81a1c1;   /* Frost - blue */
+@define-color nord10 #5e81ac;  /* Frost - dark blue */
+@define-color nord11 #bf616a;  /* Aurora - red */
+@define-color nord12 #d08770;  /* Aurora - orange */
+@define-color nord13 #ebcb8b;  /* Aurora - yellow */
+@define-color nord14 #a3be8c;  /* Aurora - green */
+@define-color nord15 #b48ead;  /* Aurora - purple */
+
+.notification-row {
+  outline: none;
+  margin: 6px;
+}
+
+.notification-row:focus,
+.notification-row:hover {
+  background: alpha(@nord2, 0.3);
+}
+
+.notification {
+  border-radius: 8px;
+  margin: 4px 8px;
+  box-shadow: 0 2px 8px alpha(@nord0, 0.3);
+  border: 1px solid @nord3;
+  background: @nord1;
+  padding: 0;
+}
+
+.notification-content {
+  background: transparent;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.notification-default-action,
+.notification-action {
+  border-radius: 6px;
+  color: @nord6;
+  background: transparent;
+  border: 1px solid @nord3;
+  margin: 4px;
+}
+
+.notification-default-action:hover,
+.notification-action:hover {
+  background: @nord2;
+  color: @nord6;
+}
+
+.notification-default-action {
+  border-radius: 8px;
+}
+
+.close-button {
+  background: @nord11;
+  color: @nord6;
+  text-shadow: none;
+  padding: 0;
+  border-radius: 50%;
+  margin-top: 6px;
+  margin-right: 8px;
+  box-shadow: none;
+  border: none;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.close-button:hover {
+  background: alpha(@nord11, 0.8);
+  transition: all 150ms ease-out;
+}
+
+.notification-action {
+  color: @nord6;
+  border: 1px solid @nord3;
+  border-top: none;
+  border-radius: 0px 0px 8px 8px;
+  background: @nord2;
+}
+
+.notification-action:hover {
+  background: @nord3;
+  color: @nord6;
+}
+
+.inline-reply-entry {
+  background: @nord2;
+  color: @nord6;
+  caret-color: @nord8;
+  border: 1px solid @nord3;
+  border-radius: 6px;
+}
+
+.inline-reply-button {
+  margin-left: 4px;
+  background: @nord8;
+  border: 1px solid @nord8;
+  border-radius: 6px;
+  color: @nord0;
+}
+
+.inline-reply-button:hover {
+  background: @nord10;
+}
+
+.summary {
+  font-size: 15px;
+  font-weight: 600;
+  color: @nord6;
+  text-shadow: none;
+}
+
+.time {
+  font-size: 11px;
+  font-weight: 400;
+  color: @nord4;
+  text-shadow: none;
+  margin-right: 12px;
+}
+
+.body {
+  font-size: 13px;
+  font-weight: 400;
+  color: @nord5;
+  text-shadow: none;
+}
+
+.control-center {
+  background: @nord0;
+  border: 1px solid @nord3;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px alpha(@nord0, 0.5);
+  margin: 8px;
+  padding: 12px;
+}
+
+.control-center-list {
+  background: transparent;
+}
+
+.floating-notifications {
+  background: transparent;
+}
+
+.blank-window {
+  background: alpha(black, 0.05);
+}
+
+.widget-title {
+  color: @nord6;
+  margin: 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.widget-title > button {
+  font-size: 13px;
+  color: @nord6;
+  text-shadow: none;
+  background: @nord2;
+  border: 1px solid @nord3;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.widget-title > button:hover {
+  background: @nord3;
+}
+
+.widget-dnd {
+  margin: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: @nord6;
+}
+
+.widget-dnd > switch {
+  background: @nord2;
+  border: 1px solid @nord3;
+  border-radius: 6px;
+}
+
+.widget-dnd > switch:checked {
+  background: @nord11;
+}
+
+.widget-dnd > switch slider {
+  background: @nord6;
+  border-radius: 6px;
+  border: none;
+}

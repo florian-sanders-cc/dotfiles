@@ -1,7 +1,7 @@
 window-decoration = false
 resize-overlay=never
-cursor-color = #BD6062
+cursor-color = #D08770
 window-padding-x = 8
-window-padding-y = 8
+window-padding-y = 0
 adjust-cell-height = 40%
 font-family = JetBrainsMonoNL Nerd Font Mono

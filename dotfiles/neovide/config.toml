@@ -1,0 +1,17 @@
+[font]
+size = 16
+hinting = "full"
+edging = "antialias"
+
+# You can set a different font for fallback
+[[font.normal]]
+family = "JetBrainsMono NFP Light"
+
+[[font.bold]]
+family = "JetBrainsMono NFP Light"
+
+# No need to specify fallback in every variant, if omitted or specified here
+# but not found, it will fallback to normal font with this weight which is bold
+# in this case.
+[[font.bold]]
+family = "JetBrainsMono NFP Light"
