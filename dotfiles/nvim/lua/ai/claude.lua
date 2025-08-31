@@ -1,0 +1,2 @@
+require("claudecode").setup({})
+

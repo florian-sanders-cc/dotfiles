@@ -1,9 +1,8 @@
 {
   outputs =
-    inputs@{
-      nixpkgs,
-      home-manager,
-      ...
+    inputs@{ nixpkgs
+    , home-manager
+    , ...
     }:
     let
       system = "x86_64-linux";
@@ -13,11 +12,11 @@
           inherit system;
           modules = [
             ./modules
-            { inherit desktop; }
           ];
           specialArgs = {
             inherit home-manager inputs specs;
             currentUser = user;
+            currentDesktop = desktop;
           };
         };
       specs = import ./config-specifications.nix;
@@ -44,10 +43,19 @@
   inputs = {
     # --- Unstable channels ---
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "github:florian-sanders-cc/nixpkgs/clever-tools-3-9-0";
 
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell?ref=v2.3.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -56,28 +64,13 @@
     # home-manager.url = "github:nix-community/home-manager/release-23.11";
 
     # --- Dev Flakes ---
-    # neovim-flake = {
-    #   url = "github:neovim/neovim/release-0.10?dir=contrib";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     # helix-flake = {
     #   url = "github:helix-editor/helix";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    # zed-flake = {
-    #   url = "github:zed-industries/zed?rev=1b1c2e55f32d10d351dae213f1c9af26b17cc630";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     # ghostty-flake = {
     #   url = "github:ghostty-org/ghostty";
-    # };
-
-    # nixos-cosmic = {
-    #   url = "github:lilyinstarlight/nixos-cosmic";
-    #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
     # niri = {

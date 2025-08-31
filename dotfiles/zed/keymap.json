@@ -89,7 +89,6 @@
   {
     "context": "Editor && vim_operator == c",
     "bindings": {
-      "c": "vim::CurrentLine",
       "r": "editor::Rename" // zed specific
     }
   },

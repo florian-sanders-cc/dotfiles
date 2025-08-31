@@ -1,9 +1,8 @@
-{
-  pkgs,
-  config,
-  home-manager,
-  currentUser,
-  ...
+{ pkgs
+, config
+, home-manager
+, currentUser
+, ...
 }:
 
 let
@@ -29,13 +28,28 @@ in
     # paths it should manage.
     home.username = "${currentUser.name}";
     home.homeDirectory = currentUser.homeDirectory;
+
+
+    nix = {
+      settings.experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      };
+    };
     home.shellAliases = lib.mkMerge [
       shellAliases.commonAliases
       (lib.mkIf (currentUser.name == specs.users.pro.name) shellAliases.proAliases)
       (lib.mkIf (currentUser.name == specs.users.perso.name) shellAliases.persoAliases)
-      (lib.mkIf (
-        currentUser.name == specs.users.perso-workstation.name
-      ) shellAliases.persoWorkstationAliases)
+      (lib.mkIf
+        (
+          currentUser.name == specs.users.perso-workstation.name
+        )
+        shellAliases.persoWorkstationAliases)
     ];
 
     # config for nix CLI (allowUnfree for nix-shell -p command for instance)
@@ -131,4 +145,10 @@ in
 
   programs.zsh.enable = true;
   programs.fish.enable = true;
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 }

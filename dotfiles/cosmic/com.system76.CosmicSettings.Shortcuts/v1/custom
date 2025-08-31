@@ -1,0 +1,107 @@
+{
+    // Application launchers
+    (modifiers: [Super], key: "t"): System(Terminal),
+    (modifiers: [Super], key: "d"): System(Launcher),
+    
+    // Window management
+    (modifiers: [Super], key: "q"): Close,
+    (modifiers: [Super], key: "f"): Maximize,
+    (modifiers: [Super, Shift], key: "f"): Fullscreen,
+    
+    // Focus navigation (arrow keys)
+    (modifiers: [Super], key: "Left"): Focus(Left),
+    (modifiers: [Super], key: "Right"): Focus(Right),
+    (modifiers: [Super], key: "Up"): Focus(Up),
+    (modifiers: [Super], key: "Down"): Focus(Down),
+    
+    // Focus navigation (hjkl)
+    (modifiers: [Super], key: "h"): Focus(Left),
+    (modifiers: [Super], key: "l"): Focus(Right),
+    (modifiers: [Super], key: "k"): Focus(Up),
+    (modifiers: [Super], key: "j"): Focus(Down),
+    
+    // Window movement (arrow keys)
+    (modifiers: [Super, Ctrl], key: "Left"): Move(Left),
+    (modifiers: [Super, Ctrl], key: "Right"): Move(Right),
+    (modifiers: [Super, Ctrl], key: "Up"): Move(Up),
+    (modifiers: [Super, Ctrl], key: "Down"): Move(Down),
+    
+    // Window movement (hjkl)
+    (modifiers: [Super, Ctrl], key: "h"): Move(Left),
+    (modifiers: [Super, Ctrl], key: "l"): Move(Right),
+    (modifiers: [Super, Ctrl], key: "k"): Move(Up),
+    (modifiers: [Super, Ctrl], key: "j"): Move(Down),
+    
+    // Monitor focus (arrow keys)
+    (modifiers: [Super, Shift], key: "Left"): SwitchOutput(Left),
+    (modifiers: [Super, Shift], key: "Right"): SwitchOutput(Right),
+    (modifiers: [Super, Shift], key: "Up"): SwitchOutput(Up),
+    (modifiers: [Super, Shift], key: "Down"): SwitchOutput(Down),
+    
+    // Monitor focus (hjkl)
+    (modifiers: [Super, Shift], key: "h"): SwitchOutput(Left),
+    (modifiers: [Super, Shift], key: "l"): SwitchOutput(Right),
+    (modifiers: [Super, Shift], key: "k"): SwitchOutput(Up),
+    (modifiers: [Super, Shift], key: "j"): SwitchOutput(Down),
+    
+    // Move window to monitor (arrow keys)
+    (modifiers: [Super, Shift, Ctrl], key: "Left"): MoveToOutput(Left),
+    (modifiers: [Super, Shift, Ctrl], key: "Right"): MoveToOutput(Right),
+    (modifiers: [Super, Shift, Ctrl], key: "Up"): MoveToOutput(Up),
+    (modifiers: [Super, Shift, Ctrl], key: "Down"): MoveToOutput(Down),
+    
+    // Move window to monitor (hjkl)
+    (modifiers: [Super, Shift, Ctrl], key: "h"): MoveToOutput(Left),
+    (modifiers: [Super, Shift, Ctrl], key: "l"): MoveToOutput(Right),
+    (modifiers: [Super, Shift, Ctrl], key: "k"): MoveToOutput(Up),
+    (modifiers: [Super, Shift, Ctrl], key: "j"): MoveToOutput(Down),
+    
+    // Workspace navigation
+    (modifiers: [Super], key: "1"): WorkspaceSwitch(1),
+    (modifiers: [Super], key: "2"): WorkspaceSwitch(2),
+    (modifiers: [Super], key: "3"): WorkspaceSwitch(3),
+    (modifiers: [Super], key: "4"): WorkspaceSwitch(4),
+    (modifiers: [Super], key: "5"): WorkspaceSwitch(5),
+    (modifiers: [Super], key: "6"): WorkspaceSwitch(6),
+    (modifiers: [Super], key: "7"): WorkspaceSwitch(7),
+    (modifiers: [Super], key: "8"): WorkspaceSwitch(8),
+    (modifiers: [Super], key: "9"): WorkspaceSwitch(9),
+    
+    // Move to workspace
+    (modifiers: [Super, Ctrl], key: "1"): MoveToWorkspace(1),
+    (modifiers: [Super, Ctrl], key: "2"): MoveToWorkspace(2),
+    (modifiers: [Super, Ctrl], key: "3"): MoveToWorkspace(3),
+    (modifiers: [Super, Ctrl], key: "4"): MoveToWorkspace(4),
+    (modifiers: [Super, Ctrl], key: "5"): MoveToWorkspace(5),
+    (modifiers: [Super, Ctrl], key: "6"): MoveToWorkspace(6),
+    (modifiers: [Super, Ctrl], key: "7"): MoveToWorkspace(7),
+    (modifiers: [Super, Ctrl], key: "8"): MoveToWorkspace(8),
+    (modifiers: [Super, Ctrl], key: "9"): MoveToWorkspace(9),
+    
+    // Workspace navigation (niri style)
+    (modifiers: [Super], key: "Page_Down"): NextWorkspace,
+    (modifiers: [Super], key: "Page_Up"): PreviousWorkspace,
+    (modifiers: [Super], key: "u"): NextWorkspace,
+    (modifiers: [Super], key: "i"): PreviousWorkspace,
+    (modifiers: [Super, Ctrl], key: "Page_Down"): MoveToLastWorkspace,
+    (modifiers: [Super, Ctrl], key: "Page_Up"): MoveToLastWorkspace,
+    (modifiers: [Super, Ctrl], key: "u"): MoveToLastWorkspace,
+    (modifiers: [Super, Ctrl], key: "i"): MoveToLastWorkspace,
+    
+    // Screenshots
+    (modifiers: [], key: "Print"): System(Screenshot),
+    
+    // System actions
+    (modifiers: [Super, Alt], key: "l"): System(LockScreen),
+    (modifiers: [Super, Shift], key: "q"): System(LogOut),
+    
+    // Column/window management (niri-specific)
+    (modifiers: [Super], key: "r"): ToggleWindowFloating,
+    (modifiers: [Super], key: "c"): Focus(In),
+    
+    // First and last column
+    (modifiers: [Super], key: "Home"): Focus(Out),
+    (modifiers: [Super], key: "End"): Focus(Out),
+    (modifiers: [Super, Ctrl], key: "Home"): Focus(Out),
+    (modifiers: [Super, Ctrl], key: "End"): Focus(Out),
+}
