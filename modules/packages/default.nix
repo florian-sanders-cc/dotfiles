@@ -1,8 +1,7 @@
-{
-  lib,
-  pkgs,
-  currentUser,
-  ...
+{ lib
+, pkgs
+, currentUser
+, ...
 }:
 
 let
@@ -17,6 +16,7 @@ let
     # Browsers
     ungoogled-chromium
     firefox-wayland
+    google-chrome
 
     # Community
     discord
@@ -35,7 +35,8 @@ let
     vlc
     inkscape
     orca
-    qimgv
+    loupe
+    btop
 
     # Dev
     bun
@@ -51,7 +52,10 @@ let
     usage
     neovide
     claude-code
+    gemini-cli
     stu
+    stylelint-ls
+    lsof
   ];
   proPackages = with pkgs; [
     random-labels
@@ -90,7 +94,7 @@ in
       ./fzf.nix
       ./git.nix
       ./helix.nix
-      ./neovim-fhs.nix
+      ./neovim.nix
       ./nushell.nix
       ./starship.nix
       ./vscode.nix
@@ -100,6 +104,8 @@ in
       ./zsh.nix
       ./ghostty.nix
       ./opencode.nix
+      ./waybar.nix
+      ./yazi.nix
     ];
 
     # Standard packages

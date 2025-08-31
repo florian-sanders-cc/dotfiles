@@ -1,10 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  currentUser,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, currentUser
+, ...
 }:
 
 let
@@ -30,6 +29,8 @@ in
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [ ];
     boot.extraModulePackages = [ ];
+
+    # Kernel parameters to fix DisplayPort EDID detection
     boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.initrd.systemd.enable = true;
 
@@ -63,7 +64,7 @@ in
     hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     hardware.graphics.enable = true;
 
-    services.xserver.videoDrivers = [ "nvidia" ];
-    hardware.nvidia.open = true; # Set to false for proprietary drivers
+    # NVIDIA configuration is handled by gpu.nix
+    # Remove duplicate videoDrivers and nvidia.open settings
   };
 }
