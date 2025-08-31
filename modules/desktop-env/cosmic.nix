@@ -1,27 +1,38 @@
 {
-  inputs,
-  config,
-  lib,
+  currentUser,
+  pkgs,
   ...
 }:
 
 {
-  imports = [
-    {
-      nix.settings = {
-        substituters = [ "https://cosmic.cachix.org/" ];
-        trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-      };
-    }
-    inputs.nixos-cosmic.nixosModules.default
-  ];
+  # Enable the COSMIC login manager
+  services.displayManager.cosmic-greeter.enable = true;
 
-  config = lib.mkIf (config.desktop == "cosmic") {
-    services = {
-      # displayManager.cosmic-greeter.enable = true;
-      xserver.displayManager.gdm.enable = true;
-      desktopManager.cosmic.enable = true;
+  # Configure keyboard layout for COSMIC greeter
+  services.xserver.displayManager.sessionCommands = ''
+    ${pkgs.xorg.setxkbmap}/bin/setxkbmap fr
+  '';
+
+  # Enable the COSMIC desktop environment
+  services.desktopManager.cosmic = {
+    enable = true;
+  };
+
+  # Dark theme preference and tiling mode
+  home-manager.users."${currentUser.name}" = {
+    home.packages = with pkgs; [
+      wl-clipboard
+    ];
+
+    dconf = {
+      enable = true;
+      settings = {
+        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+      };
     };
-    system.nixos.tags = [ "cosmic" ];
+
+    xdg.configFile."cosmic/com.system76.CosmicSettings.Shortcuts/v1/custom" = {
+      source = ../../dotfiles/cosmic/com.system76.CosmicSettings.Shortcuts/v1/custom;
+    };
   };
 }
