@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+
+# Smart focus script for Firefox
+# Cycles through existing Firefox windows or spawns a new one if none exist
+
+set -euo pipefail
+
+# Function to get all window information from niri
+get_windows() {
+    niri msg --json windows
+}
+
+# Function to get currently focused window
+get_focused_window() {
+    get_windows | jq -r '.[] | select(.is_focused == true) | .id'
+}
+
+# Function to get all Firefox windows
+get_firefox_windows() {
+    get_windows | jq -r '.[] | select(.app_id == "firefox" or (.title | type == "string" and (test("firefox"; "i") or test("Mozilla Firefox"; "i")))) | .id'
+}
+
+# Function to focus window by ID
+focus_window() {
+    local window_id="$1"
+    niri msg action focus-window --id="$window_id"
+}
+
+# Function to spawn new Firefox instance
+spawn_firefox() {
+    firefox &
+    disown
+}
+
+main() {
+    local force_spawn="${1:-false}"
+    
+    if [[ "$force_spawn" == "true" ]]; then
+        spawn_firefox
+        exit 0
+    fi
+    
+    # Get all Firefox windows
+    local firefox_windows
+    firefox_windows=$(get_firefox_windows)
+    
+    # If no Firefox windows exist, spawn one
+    if [[ -z "$firefox_windows" ]]; then
+        spawn_firefox
+        exit 0
+    fi
+    
+    # Convert to array
+    readarray -t window_array <<< "$firefox_windows"
+    
+    # Remove empty elements
+    window_array=("${window_array[@]//}")
+    
+    # If only one window, focus it
+    if [[ ${#window_array[@]} -eq 1 ]]; then
+        focus_window "${window_array[0]}"
+        exit 0
+    fi
+    
+    # Multiple windows exist - cycle through them
+    local current_focused
+    current_focused=$(get_focused_window)
+    
+    # Find current Firefox window in the array
+    local current_index=-1
+    for i in "${!window_array[@]}"; do
+        if [[ "${window_array[$i]}" == "$current_focused" ]]; then
+            current_index=$i
+            break
+        fi
+    done
+    
+    # If current focused window is a Firefox window, focus next one
+    if [[ $current_index -ne -1 ]]; then
+        local next_index=$(( (current_index + 1) % ${#window_array[@]} ))
+        focus_window "${window_array[$next_index]}"
+    else
+        # Current focused window is not Firefox, focus the first Firefox window
+        focus_window "${window_array[0]}"
+    fi
+}
+
+main "$@"

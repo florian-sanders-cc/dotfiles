@@ -4,25 +4,23 @@
 {
   nixpkgs.overlays = [
     (final: prev: {
-      # neovim-nightly = inputs.neovim-flake.packages.${prev.system}.default;
+      neovim-nightly = inputs.neovim-nightly-overlay.packages.${prev.system}.default;
+
+      noctalia-qs = inputs.noctalia.defaultPackage.${prev.system};
 
       # helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
 
-      # ghostty = prev.ghostty.overrideAttrs (_: {
-      #   preBuild = ''
-      #     shopt -s globstar
-      #     sed -i 's/^const xev = @import("xev");$/const xev = @import("xev").Epoll;/' **/*.zig
-      #     shopt -u globstar
-      #   '';
-      # });
-
       random-labels = prev.callPackage ./random-labels.nix { };
 
-      stylelint-lsp = prev.callPackage ./stylelint-lsp.nix { };
+      stylelint-ls = prev.callPackage ./stylelint-ls.nix { };
+
+      wc-ls = prev.callPackage ./wc-ls.nix { };
 
       wallpapers = prev.callPackage ./wallpapers.nix { };
 
       clever-switch-profile = prev.callPackage ./clever-switch-profile.nix { };
+
+      niri-smart-focus = prev.callPackage ./niri-smart-focus.nix { };
 
       # ghostty-nightly = inputs.ghostty-flake.packages.${prev.system}.default;
 
