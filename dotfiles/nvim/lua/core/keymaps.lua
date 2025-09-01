@@ -319,7 +319,7 @@ end, { desc = "Flash Treesitter" })
 -- Multi-cursor keymaps
 vim.keymap.set(
   { "v", "n" },
-  "<C-m>",
+  "<leader>j",
   "<cmd>MCstart<cr>",
   { desc = "Create a selection for selected text or word under the cursor" }
 )
@@ -400,83 +400,86 @@ vim.keymap.set("n", "<leader>qq", require("lib.session-quit").quit_with_session_
 -- OCTO/GITHUB KEYMAPS
 -- =====================================================
 
+vim.keymap.set({ "n", "v" }, "<leader>o", "<cmd>Octo<cr>", { desc = "Octo GitHub" })
+
 -- GitHub/Octo operations - all start with "o" for easy recall
-vim.keymap.set({ "n" }, "<leader>oo", function()
-  vim.ui.input({ prompt = "Issue/PR URL or number: " }, function(input)
-    if input and input ~= "" then
-      vim.cmd("Octo " .. input)
-    end
-  end)
-end, { desc = "Open Issue/PR" })
-vim.keymap.set({ "n", "v" }, "<leader>oa", "<cmd>Octo actions<cr>", { desc = "Actions" })
-
--- Issues (o + i + action)
-vim.keymap.set({ "n" }, "<leader>oil", "<cmd>Octo issue list<cr>", { desc = "Issue List" })
-vim.keymap.set({ "n" }, "<leader>ois", "<cmd>Octo issue search<cr>", { desc = "Issue Search" })
-vim.keymap.set({ "n" }, "<leader>oic", "<cmd>Octo issue create<cr>", { desc = "Issue Create" })
-vim.keymap.set({ "n" }, "<leader>oie", "<cmd>Octo issue edit<cr>", { desc = "Issue Edit" })
-vim.keymap.set({ "n" }, "<leader>oir", "<cmd>Octo issue reload<cr>", { desc = "Issue Reload" })
-vim.keymap.set({ "n" }, "<leader>oib", "<cmd>Octo issue browser<cr>", { desc = "Issue Browser" })
-vim.keymap.set({ "n" }, "<leader>oiu", "<cmd>Octo issue url<cr>", { desc = "Issue URL" })
-vim.keymap.set({ "n" }, "<leader>oix", "<cmd>Octo issue close<cr>", { desc = "Issue Close" })
-vim.keymap.set({ "n" }, "<leader>oio", "<cmd>Octo issue reopen<cr>", { desc = "Issue Open" })
-
--- Pull Requests (o + p + action)
-vim.keymap.set({ "n" }, "<leader>opl", "<cmd>Octo pr list<cr>", { desc = "PR List" })
-vim.keymap.set({ "n" }, "<leader>ops", "<cmd>Octo pr search<cr>", { desc = "PR Search" })
-vim.keymap.set({ "n" }, "<leader>opc", "<cmd>Octo pr create<cr>", { desc = "PR Create" })
-vim.keymap.set({ "n" }, "<leader>ope", "<cmd>Octo pr edit<cr>", { desc = "PR Edit" })
-vim.keymap.set({ "n" }, "<leader>opk", "<cmd>Octo pr checkout<cr>", { desc = "PR Checkout" })
-vim.keymap.set({ "n" }, "<leader>opm", "<cmd>Octo pr merge<cr>", { desc = "PR Merge" })
-vim.keymap.set({ "n" }, "<leader>opd", "<cmd>Octo pr diff<cr>", { desc = "PR Diff" })
-vim.keymap.set({ "n" }, "<leader>opt", "<cmd>Octo pr commits<cr>", { desc = "PR Commits" })
-vim.keymap.set({ "n" }, "<leader>opg", "<cmd>Octo pr changes<cr>", { desc = "PR Changes" })
-vim.keymap.set({ "n" }, "<leader>opj", "<cmd>Octo pr checks<cr>", { desc = "PR Checks" })
-vim.keymap.set({ "n" }, "<leader>opb", "<cmd>Octo pr browser<cr>", { desc = "PR Browser" })
-vim.keymap.set({ "n" }, "<leader>opx", "<cmd>Octo pr close<cr>", { desc = "PR Close" })
-vim.keymap.set({ "n" }, "<leader>opo", "<cmd>Octo pr reopen<cr>", { desc = "PR Open" })
-
--- Repository (o + r + action)
-vim.keymap.set({ "n" }, "<leader>orl", "<cmd>Octo repo list<cr>", { desc = "Repo List" })
-vim.keymap.set({ "n" }, "<leader>orf", "<cmd>Octo repo fork<cr>", { desc = "Repo Fork" })
-vim.keymap.set({ "n" }, "<leader>orb", "<cmd>Octo repo browser<cr>", { desc = "Repo Browser" })
-vim.keymap.set({ "n" }, "<leader>oru", "<cmd>Octo repo url<cr>", { desc = "Repo URL" })
-
--- Comments (o + c + action)
-vim.keymap.set({ "n" }, "<leader>oca", "<cmd>Octo comment add<cr>", { desc = "Comment Add" })
-vim.keymap.set({ "n" }, "<leader>ocd", "<cmd>Octo comment delete<cr>", { desc = "Comment Delete" })
-
--- Reviews (o + v + action)
-vim.keymap.set({ "n" }, "<leader>ovs", "<cmd>Octo review start<cr>", { desc = "Review Start" })
-vim.keymap.set({ "n" }, "<leader>ovr", "<cmd>Octo review resume<cr>", { desc = "Review Resume" })
-vim.keymap.set({ "n" }, "<leader>ovd", "<cmd>Octo review discard<cr>", { desc = "Review Discard" })
-vim.keymap.set({ "n" }, "<leader>ovb", "<cmd>Octo review submit<cr>", { desc = "Review Submit" })
-vim.keymap.set({ "n" }, "<leader>ovc", "<cmd>Octo review comments<cr>", { desc = "Review Comments" })
-
--- Reactions (o + e + reaction)
-vim.keymap.set({ "n" }, "<leader>oe+", "<cmd>Octo reaction +1<cr>", { desc = "👍 Reaction" })
-vim.keymap.set({ "n" }, "<leader>oe-", "<cmd>Octo reaction -1<cr>", { desc = "👎 Reaction" })
-vim.keymap.set({ "n" }, "<leader>oeh", "<cmd>Octo reaction heart<cr>", { desc = "❤️ Reaction" })
-vim.keymap.set({ "n" }, "<leader>oel", "<cmd>Octo reaction laugh<cr>", { desc = "😄 Reaction" })
-vim.keymap.set({ "n" }, "<leader>oef", "<cmd>Octo reaction confused<cr>", { desc = "😕 Reaction" })
-vim.keymap.set({ "n" }, "<leader>oer", "<cmd>Octo reaction rocket<cr>", { desc = "🚀 Reaction" })
-vim.keymap.set({ "n" }, "<leader>oey", "<cmd>Octo reaction eyes<cr>", { desc = "👀 Reaction" })
-
--- Labels (o + l + action)
-vim.keymap.set({ "n" }, "<leader>ola", "<cmd>Octo label add<cr>", { desc = "Label Add" })
-vim.keymap.set({ "n" }, "<leader>olr", "<cmd>Octo label remove<cr>", { desc = "Label Remove" })
-vim.keymap.set({ "n" }, "<leader>olc", "<cmd>Octo label create<cr>", { desc = "Label Create" })
-
--- Assignees (o + a + action)
-vim.keymap.set({ "n" }, "<leader>oaa", "<cmd>Octo assignee add<cr>", { desc = "Assignee Add" })
-vim.keymap.set({ "n" }, "<leader>oar", "<cmd>Octo assignee remove<cr>", { desc = "Assignee Remove" })
-
--- Search (o + s + type)
-vim.keymap.set({ "n" }, "<leader>oss", "<cmd>Octo search<cr>", { desc = "Search" })
-
--- Threads/Discussions (o + t + action)
-vim.keymap.set({ "n" }, "<leader>otr", "<cmd>Octo thread resolve<cr>", { desc = "Thread Resolve" })
-vim.keymap.set({ "n" }, "<leader>otu", "<cmd>Octo thread unresolve<cr>", { desc = "Thread Unresolve" })
+-- vim.keymap.set({ "n" }, "<leader>oo", function()
+--   vim.ui.input({ prompt = "Issue/PR URL or number: " }, function(input)
+--     if input and input ~= "" then
+--       vim.cmd("Octo " .. input)
+--     end
+--   end)
+-- end, { desc = "Open Issue/PR" })
+-- vim.keymap.set({ "n", "v" }, "<leader>oa", "<cmd>Octo actions<cr>", { desc = "Actions" })
+--
+-- -- Issues (o + i + action)
+-- vim.keymap.set({ "n" }, "<leader>oil", "<cmd>Octo issue list<cr>", { desc = "Issue List" })
+-- vim.keymap.set({ "n" }, "<leader>ois", "<cmd>Octo issue search<cr>", { desc = "Issue Search" })
+-- vim.keymap.set({ "n" }, "<leader>oic", "<cmd>Octo issue create<cr>", { desc = "Issue Create" })
+-- vim.keymap.set({ "n" }, "<leader>oie", "<cmd>Octo issue edit<cr>", { desc = "Issue Edit" })
+-- vim.keymap.set({ "n" }, "<leader>oir", "<cmd>Octo issue reload<cr>", { desc = "Issue Reload" })
+-- vim.keymap.set({ "n" }, "<leader>oib", "<cmd>Octo issue browser<cr>", { desc = "Issue Browser" })
+-- vim.keymap.set({ "n" }, "<leader>oiu", "<cmd>Octo issue url<cr>", { desc = "Issue URL" })
+-- vim.keymap.set({ "n" }, "<leader>oix", "<cmd>Octo issue close<cr>", { desc = "Issue Close" })
+-- vim.keymap.set({ "n" }, "<leader>oio", "<cmd>Octo issue reopen<cr>", { desc = "Issue Open" })
+--
+-- -- Pull Requests (o + p + action)
+-- vim.keymap.set({ "n" }, "<leader>opl", "<cmd>Octo pr list<cr>", { desc = "PR List" })
+-- vim.keymap.set({ "n" }, "<leader>ops", "<cmd>Octo pr search<cr>", { desc = "PR Search" })
+-- vim.keymap.set({ "n" }, "<leader>opc", "<cmd>Octo pr create<cr>", { desc = "PR Create" })
+-- vim.keymap.set({ "n" }, "<leader>ope", "<cmd>Octo pr edit<cr>", { desc = "PR Edit" })
+-- vim.keymap.set({ "n" }, "<leader>opk", "<cmd>Octo pr checkout<cr>", { desc = "PR Checkout" })
+-- vim.keymap.set({ "n" }, "<leader>opm", "<cmd>Octo pr merge<cr>", { desc = "PR Merge" })
+-- vim.keymap.set({ "n" }, "<leader>opd", "<cmd>Octo pr diff<cr>", { desc = "PR Diff" })
+-- vim.keymap.set({ "n" }, "<leader>opt", "<cmd>Octo pr commits<cr>", { desc = "PR Commits" })
+-- vim.keymap.set({ "n" }, "<leader>opg", "<cmd>Octo pr changes<cr>", { desc = "PR Changes" })
+-- vim.keymap.set({ "n" }, "<leader>opj", "<cmd>Octo pr checks<cr>", { desc = "PR Checks" })
+-- vim.keymap.set({ "n" }, "<leader>opb", "<cmd>Octo pr browser<cr>", { desc = "PR Browser" })
+-- vim.keymap.set({ "n" }, "<leader>opx", "<cmd>Octo pr close<cr>", { desc = "PR Close" })
+-- vim.keymap.set({ "n" }, "<leader>opo", "<cmd>Octo pr reopen<cr>", { desc = "PR Open" })
+--
+-- -- Repository (o + r + action)
+-- vim.keymap.set({ "n" }, "<leader>orl", "<cmd>Octo repo list<cr>", { desc = "Repo List" })
+-- vim.keymap.set({ "n" }, "<leader>orf", "<cmd>Octo repo fork<cr>", { desc = "Repo Fork" })
+-- vim.keymap.set({ "n" }, "<leader>orb", "<cmd>Octo repo browser<cr>", { desc = "Repo Browser" })
+-- vim.keymap.set({ "n" }, "<leader>oru", "<cmd>Octo repo url<cr>", { desc = "Repo URL" })
+--
+-- -- Comments (o + c + action)
+-- vim.keymap.set({ "n" }, "<leader>oca", "<cmd>Octo comment add<cr>", { desc = "Comment Add" })
+-- vim.keymap.set({ "n" }, "<leader>ocd", "<cmd>Octo comment delete<cr>", { desc = "Comment Delete" })
+--
+-- -- Reviews (o + v + action)
+-- vim.keymap.set({ "n" }, "<leader>ovs", "<cmd>Octo review start<cr>", { desc = "Review Start" })
+-- vim.keymap.set({ "n" }, "<leader>ovr", "<cmd>Octo review resume<cr>", { desc = "Review Resume" })
+-- vim.keymap.set({ "n" }, "<leader>ovd", "<cmd>Octo review discard<cr>", { desc = "Review Discard" })
+-- vim.keymap.set({ "n" }, "<leader>ovb", "<cmd>Octo review submit<cr>", { desc = "Review Submit" })
+-- vim.keymap.set({ "n" }, "<leader>ovc", "<cmd>Octo review comments<cr>", { desc = "Review Comments" })
+-- vim.keymap.set({ "n" }, "<leader>ovc", "<cmd>Octo review <cr>", { desc = "Review Comments" })
+--
+-- -- Reactions (o + e + reaction)
+-- vim.keymap.set({ "n" }, "<leader>oe+", "<cmd>Octo reaction +1<cr>", { desc = "👍 Reaction" })
+-- vim.keymap.set({ "n" }, "<leader>oe-", "<cmd>Octo reaction -1<cr>", { desc = "👎 Reaction" })
+-- vim.keymap.set({ "n" }, "<leader>oeh", "<cmd>Octo reaction heart<cr>", { desc = "❤️ Reaction" })
+-- vim.keymap.set({ "n" }, "<leader>oel", "<cmd>Octo reaction laugh<cr>", { desc = "😄 Reaction" })
+-- vim.keymap.set({ "n" }, "<leader>oef", "<cmd>Octo reaction confused<cr>", { desc = "😕 Reaction" })
+-- vim.keymap.set({ "n" }, "<leader>oer", "<cmd>Octo reaction rocket<cr>", { desc = "🚀 Reaction" })
+-- vim.keymap.set({ "n" }, "<leader>oey", "<cmd>Octo reaction eyes<cr>", { desc = "👀 Reaction" })
+--
+-- -- Labels (o + l + action)
+-- vim.keymap.set({ "n" }, "<leader>ola", "<cmd>Octo label add<cr>", { desc = "Label Add" })
+-- vim.keymap.set({ "n" }, "<leader>olr", "<cmd>Octo label remove<cr>", { desc = "Label Remove" })
+-- vim.keymap.set({ "n" }, "<leader>olc", "<cmd>Octo label create<cr>", { desc = "Label Create" })
+--
+-- -- Assignees (o + a + action)
+-- vim.keymap.set({ "n" }, "<leader>oaa", "<cmd>Octo assignee add<cr>", { desc = "Assignee Add" })
+-- vim.keymap.set({ "n" }, "<leader>oar", "<cmd>Octo assignee remove<cr>", { desc = "Assignee Remove" })
+--
+-- -- Search (o + s + type)
+-- vim.keymap.set({ "n" }, "<leader>oss", "<cmd>Octo search<cr>", { desc = "Search" })
+--
+-- -- Threads/Discussions (o + t + action)
+-- vim.keymap.set({ "n" }, "<leader>otr", "<cmd>Octo thread resolve<cr>", { desc = "Thread Resolve" })
+-- vim.keymap.set({ "n" }, "<leader>otu", "<cmd>Octo thread unresolve<cr>", { desc = "Thread Unresolve" })
 
 -- =====================================================
 -- AI/CLAUDE CODE KEYMAPS
