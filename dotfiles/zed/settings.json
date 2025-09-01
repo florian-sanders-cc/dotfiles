@@ -19,7 +19,7 @@
   "context_servers": {
     "claude-code": {
       "source": "custom",
-      "enabled": true,
+      "enabled": false,
       "command": "claude",
       "args": ["mcp", "serve"],
       "env": {}
