@@ -30,7 +30,6 @@ return {
       },
       preferences = {
         importModuleSpecifier = "relative",
-        includePackageJsonAutoImports = "off",
         useAliasesForRenames = false,
         format = {
           enable = false,
