@@ -21,12 +21,17 @@
       "source": "custom",
       "enabled": false,
       "command": "claude",
-      "args": ["mcp", "serve"],
+      "args": [
+        "mcp",
+        "serve"
+      ],
       "env": {}
     }
   },
   "show_edit_predictions": false,
-  "edit_predictions": { "mode": "subtle" },
+  "edit_predictions": {
+    "mode": "subtle"
+  },
   "features": {
     "edit_prediction_provider": "zed"
   },
@@ -96,11 +101,15 @@
     "dock": "left",
     "git_status": true
   },
-  "tabs": { "file_icons": true },
+  "tabs": {
+    "file_icons": true
+  },
   "vim_mode": true,
   "ui_font_size": 16,
   "buffer_font_size": 16.0,
-  "buffer_line_height": { "custom": 2.1 },
+  "buffer_line_height": {
+    "custom": 2.1
+  },
   "theme": {
     "mode": "system",
     "light": "One Dark",
@@ -148,7 +157,6 @@
             "maxTsServerMemory": 16184
           },
           "preferences": {
-            "includePackageJsonAutoImports": "off",
             "useAliasesForRenames": false,
             "format": {
               "enable": false
@@ -167,7 +175,6 @@
             }
           },
           "preferences": {
-            "includePackageJsonAutoImports": "off",
             "useAliasesForRenames": false,
             "format": {
               "enable": false
@@ -189,7 +196,9 @@
       "show_edit_predictions": false
     },
     "Nix": {
-      "language_servers": ["nil"]
+      "language_servers": [
+        "nil"
+      ]
     }
   }
 }
