@@ -7,27 +7,6 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
-  "agent_servers": {
-    "claude_code": {
-      "command": "node",
-      "args": [
-        "/home/flo-perso-workstation/.npm-packages/npm-11.4.2/lib/node_modules/@zed-industries/claude-code-acp/dist/index.js"
-      ],
-      "env": {}
-    }
-  },
-  "context_servers": {
-    "claude-code": {
-      "source": "custom",
-      "enabled": false,
-      "command": "claude",
-      "args": [
-        "mcp",
-        "serve"
-      ],
-      "env": {}
-    }
-  },
   "show_edit_predictions": false,
   "edit_predictions": {
     "mode": "subtle"
@@ -196,9 +175,7 @@
       "show_edit_predictions": false
     },
     "Nix": {
-      "language_servers": [
-        "nil"
-      ]
+      "language_servers": ["nil"]
     }
   }
 }
