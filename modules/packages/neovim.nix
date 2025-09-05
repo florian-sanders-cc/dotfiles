@@ -54,7 +54,7 @@ let
     todo-comments-nvim
     trouble-nvim
     persistence-nvim
-    multicursors-nvim
+    multicursor-nvim
     grug-far-nvim
     quicker-nvim
     markdown-nvim

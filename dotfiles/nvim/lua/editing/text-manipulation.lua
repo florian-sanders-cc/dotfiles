@@ -47,22 +47,7 @@ require("quicker").setup({
     },
   },
 })
-require("multicursors").setup({
-  hint_config = {
-    float_opts = {
-      border = "rounded",
-    },
-    position = "bottom-right",
-  },
-  generate_hints = {
-    normal = true,
-    insert = true,
-    extend = true,
-    config = {
-      column_count = 1,
-    },
-  },
-})
+require("multicursor-nvim").setup({})
 require("markdown").setup({
   mappings = {
     inline_surround_toggle = "<leader>mgs", -- (string|boolean) toggle inline style

@@ -78,6 +78,10 @@ require("which-key").add({
   { "<leader>x", group = "Diagnostics/Trouble" },
   { "<leader>x_", hidden = true },
 
+  -- Alt/Meta key groups for multicursor operations
+  { "<M-", group = "Multi-cursor" },
+  { "<M-/", group = "Multi-cursor Search" },
+
   -- Single key items
   { "<leader>e", desc = "File Explorer" },
   { "<leader>n", desc = "Notification History" },
@@ -317,15 +321,131 @@ vim.keymap.set({ "n", "x", "o" }, "gt", function()
 end, { desc = "Flash Treesitter" })
 
 -- Multi-cursor keymaps
+-- Pressing `gaip` will add a cursor on each line of a paragraph.
+vim.keymap.set("n", "<M-%>", require("multicursor-nvim").addCursorOperator, { desc = "Add cursor with text object" })
+
+vim.keymap.set({ "n", "v" }, "<M-q>", function()
+  if not require("multicursor-nvim").cursorsEnabled() then
+    require("multicursor-nvim").enableCursors()
+  else
+    require("multicursor-nvim").clearCursors()
+  end
+end, { desc = "Remove multicursors" })
+
+-- Align cursor columns.
+vim.keymap.set("n", "<M-A>", require("multicursor-nvim").alignCursors, { desc = "Align cursor columns" })
+
+-- bring back cursors if you accidentally clear them
+vim.keymap.set("n", "<M-u>", require("multicursor-nvim").restoreCursors, { desc = "Restore cleared cursors" })
+
+-- Add a cursor for all matches of cursor word/selection in the document.
 vim.keymap.set(
-  { "v", "n" },
-  "<leader>j",
-  "<cmd>MCstart<cr>",
-  { desc = "Create a selection for selected text or word under the cursor" }
+  { "n", "x" },
+  "<M-a>",
+  require("multicursor-nvim").matchAllAddCursors,
+  { desc = "Add cursor for all word matches" }
 )
 
+-- Rotate the text contained in each visual selection between cursors.
+vim.keymap.set("x", "<M-t>", function()
+  require("multicursor-nvim").transposeCursors(1)
+end, { desc = "Rotate cursor text forward" })
+vim.keymap.set("x", "<M-T>", function()
+  require("multicursor-nvim").transposeCursors(-1)
+end, { desc = "Rotate cursor text backward" })
+
+-- Append/insert for each line of visual selections.
+-- Similar to block selection insertion.
+vim.keymap.set("x", "I", require("multicursor-nvim").insertVisual, { desc = "Insert at cursor start" })
+vim.keymap.set("x", "A", require("multicursor-nvim").appendVisual, { desc = "Append at cursor end" })
+
+-- Increment/decrement sequences, treaing all cursors as one sequence.
+vim.keymap.set(
+  { "n", "x" },
+  "<M-ca>",
+  require("multicursor-nvim").sequenceIncrement,
+  { desc = "Increment cursor sequence" }
+)
+vim.keymap.set(
+  { "n", "x" },
+  "<M-cx>",
+  require("multicursor-nvim").sequenceDecrement,
+  { desc = "Decrement cursor sequence" }
+)
+
+-- Add a cursor and jump to the next/previous search result.
+vim.keymap.set("n", "<M-/n>", function()
+  require("multicursor-nvim").searchAddCursor(1)
+end, { desc = "Add cursor at next search match" })
+vim.keymap.set("n", "<M-/N>", function()
+  require("multicursor-nvim").searchAddCursor(-1)
+end, { desc = "Add cursor at previous search match" })
+
+-- Jump to the next/previous search result without adding a cursor.
+vim.keymap.set("n", "<M-/s>", function()
+  require("multicursor-nvim").searchSkipCursor(1)
+end, { desc = "Skip to next search match" })
+vim.keymap.set("n", "<M-/S>", function()
+  require("multicursor-nvim").searchSkipCursor(-1)
+end, { desc = "Skip to previous search match" })
+
+-- Add a cursor to every search result in the buffer.
+vim.keymap.set(
+  "n",
+  "<M-/A>",
+  require("multicursor-nvim").searchAllAddCursors,
+  { desc = "Add cursors to all search matches" }
+)
+
+vim.keymap.set({ "n", "x" }, "<M-k>", function()
+  require("multicursor-nvim").lineAddCursor(-1)
+end, { desc = "Add cursor to line above" })
+vim.keymap.set({ "n", "x" }, "<M-j>", function()
+  require("multicursor-nvim").lineAddCursor(1)
+end, { desc = "Add cursor to line below" })
+vim.keymap.set({ "n", "x" }, "<M-up>", function()
+  require("multicursor-nvim").lineSkipCursor(-1)
+end, { desc = "Skip cursor to line above" })
+vim.keymap.set({ "n", "x" }, "<M-down>", function()
+  require("multicursor-nvim").lineSkipCursor(1)
+end, { desc = "Skip cursor to line below" })
+
+-- Add or skip adding a new cursor by matching word/selection
+vim.keymap.set({ "n", "x", "v" }, "<M-n>", function()
+  require("multicursor-nvim").matchAddCursor(1)
+end, { desc = "Add cursor at next word match" })
+vim.keymap.set({ "n", "x", "v" }, "<M-s>", function()
+  require("multicursor-nvim").matchSkipCursor(1)
+end, { desc = "Skip cursor at next word match" })
+vim.keymap.set({ "n", "x", "v" }, "<M-N>", function()
+  require("multicursor-nvim").matchAddCursor(-1)
+end, { desc = "Add cursor at previous word match" })
+vim.keymap.set({ "n", "x", "v" }, "<M-S>", function()
+  require("multicursor-nvim").matchSkipCursor(-1)
+end, { desc = "Skip cursor at previous word match" })
+
+-- Add or skip adding a new cursor by matching diagnostics.
+vim.keymap.set({ "n", "x", "v" }, "<M-]d>", function()
+  require("multicursor-nvim").diagnosticAddCursor(1)
+end, { desc = "Add cursor at next diagnostic" })
+vim.keymap.set({ "n", "x", "v" }, "<M-[d>", function()
+  require("multicursor-nvim").diagnosticAddCursor(-1)
+end, { desc = "Add cursor at previous diagnostic" })
+vim.keymap.set({ "n", "x", "v" }, "<M-]s>", function()
+  require("multicursor-nvim").diagnosticSkipCursor(1)
+end, { desc = "Skip cursor at next diagnostic" })
+vim.keymap.set({ "n", "x", "v" }, "<M-[S>", function()
+  require("multicursor-nvim").diagnosticSkipCursor(-1)
+end, { desc = "Skip cursor at previous diagnostic" })
+
+-- Press `mdip` to add a cursor for every error diagnostic in the range `ip`.
+vim.keymap.set({ "n", "x", "v" }, "<M-md>", function()
+  -- See `:h vim.diagnostic.GetOpts`.
+  require("multicursor-nvim").diagnosticMatchCursors({ severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Add cursors to all error diagnostics" })
+
 -- Search and Replace
-vim.keymap.set({ "n", "v" }, "<leader>sr", function()
+vim.keymap.set({ "n", "v" }, "<leadersr", function()
   local grug = require("grug-far")
   local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
   grug.open({
