@@ -17,3 +17,9 @@ opt.mouse = "" -- Disable mouse
 
 -- Clipboard
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
+
+-- Shell
+opt.shell = vim.env.SHELL or "/usr/bin/sh"
+opt.shellcmdflag = "-c"
+opt.shellquote = '"'
+opt.shellxquote = ""

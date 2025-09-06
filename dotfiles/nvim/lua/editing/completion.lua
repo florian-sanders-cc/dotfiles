@@ -35,9 +35,23 @@ require("blink.cmp").setup({
   },
 
   cmdline = {
+    enabled = true,
     keymap = {
-      preset = "inherit",
-      ["<CR>"] = { "accept_and_enter", "fallback" },
+      preset = "cmdline",
+      ["<Down>"] = { "select_next", "fallback" },
+      ["<Up>"] = { "select_prev", "fallback" },
+    },
+    completion = {
+      ghost_text = { enabled = false },
+      menu = { auto_show = true },
+      list = {
+        selection = {
+          -- When `true`, will automatically select the first item in the completion list
+          preselect = false,
+          -- When `true`, inserts the completion item automatically when selecting it
+          auto_insert = false,
+        },
+      },
     },
   },
 
