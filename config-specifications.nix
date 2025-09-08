@@ -4,7 +4,7 @@
       id = "pro";
       name = "flo-pro";
       email = "florian.sanders@clever-cloud.com";
-      signingKey = "E94DAA3CD0C7151B";
+      signingKey = "684168075E28E749";
       homeDirectory = "/home/flo-pro";
     };
     perso = {
