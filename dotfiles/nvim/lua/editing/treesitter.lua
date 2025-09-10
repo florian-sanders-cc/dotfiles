@@ -32,7 +32,7 @@ require("nvim-treesitter.configs").setup({
       init_selection = "<M-o>", -- Start selection with Alt+O
       node_incremental = "<M-o>", -- Expand with Alt+O
       node_decremental = "<M-i>", -- Shrink with Alt+I
-      scope_incremental = "<M-n>", -- Expand scope with Alt+N
+      scope_incremental = "<M-space>", -- Expand scope with Alt+N
     },
   },
 })

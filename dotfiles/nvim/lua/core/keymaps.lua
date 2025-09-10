@@ -373,30 +373,6 @@ vim.keymap.set(
   { desc = "Decrement cursor sequence" }
 )
 
--- Add a cursor and jump to the next/previous search result.
-vim.keymap.set("n", "<M-/n>", function()
-  require("multicursor-nvim").searchAddCursor(1)
-end, { desc = "Add cursor at next search match" })
-vim.keymap.set("n", "<M-/N>", function()
-  require("multicursor-nvim").searchAddCursor(-1)
-end, { desc = "Add cursor at previous search match" })
-
--- Jump to the next/previous search result without adding a cursor.
-vim.keymap.set("n", "<M-/s>", function()
-  require("multicursor-nvim").searchSkipCursor(1)
-end, { desc = "Skip to next search match" })
-vim.keymap.set("n", "<M-/S>", function()
-  require("multicursor-nvim").searchSkipCursor(-1)
-end, { desc = "Skip to previous search match" })
-
--- Add a cursor to every search result in the buffer.
-vim.keymap.set(
-  "n",
-  "<M-/A>",
-  require("multicursor-nvim").searchAllAddCursors,
-  { desc = "Add cursors to all search matches" }
-)
-
 vim.keymap.set({ "n", "x" }, "<M-k>", function()
   require("multicursor-nvim").lineAddCursor(-1)
 end, { desc = "Add cursor to line above" })
@@ -411,35 +387,38 @@ vim.keymap.set({ "n", "x" }, "<M-down>", function()
 end, { desc = "Skip cursor to line below" })
 
 -- Add or skip adding a new cursor by matching word/selection
-vim.keymap.set({ "n", "x", "v" }, "<M-n>", function()
+vim.keymap.set({ "n", "x" }, "<M-n>", function()
   require("multicursor-nvim").matchAddCursor(1)
 end, { desc = "Add cursor at next word match" })
-vim.keymap.set({ "n", "x", "v" }, "<M-s>", function()
+-- vim.keymap.set({ "x" }, "<M-,>", function()
+--   require("multicursor-nvim").matchAddCursor(1)
+-- end, { desc = "Add cursor at next word match" })
+vim.keymap.set({ "n", "x" }, "<M-s>", function()
   require("multicursor-nvim").matchSkipCursor(1)
 end, { desc = "Skip cursor at next word match" })
-vim.keymap.set({ "n", "x", "v" }, "<M-N>", function()
+vim.keymap.set({ "n", "x" }, "<M-N>", function()
   require("multicursor-nvim").matchAddCursor(-1)
 end, { desc = "Add cursor at previous word match" })
-vim.keymap.set({ "n", "x", "v" }, "<M-S>", function()
+vim.keymap.set({ "n", "x" }, "<M-S>", function()
   require("multicursor-nvim").matchSkipCursor(-1)
 end, { desc = "Skip cursor at previous word match" })
 
 -- Add or skip adding a new cursor by matching diagnostics.
-vim.keymap.set({ "n", "x", "v" }, "<M-]d>", function()
+vim.keymap.set({ "n", "x" }, "<M-]d>", function()
   require("multicursor-nvim").diagnosticAddCursor(1)
 end, { desc = "Add cursor at next diagnostic" })
-vim.keymap.set({ "n", "x", "v" }, "<M-[d>", function()
+vim.keymap.set({ "n", "x" }, "<M-[d>", function()
   require("multicursor-nvim").diagnosticAddCursor(-1)
 end, { desc = "Add cursor at previous diagnostic" })
-vim.keymap.set({ "n", "x", "v" }, "<M-]s>", function()
+vim.keymap.set({ "n", "x" }, "<M-]s>", function()
   require("multicursor-nvim").diagnosticSkipCursor(1)
 end, { desc = "Skip cursor at next diagnostic" })
-vim.keymap.set({ "n", "x", "v" }, "<M-[S>", function()
+vim.keymap.set({ "n", "x" }, "<M-[S>", function()
   require("multicursor-nvim").diagnosticSkipCursor(-1)
 end, { desc = "Skip cursor at previous diagnostic" })
 
 -- Press `mdip` to add a cursor for every error diagnostic in the range `ip`.
-vim.keymap.set({ "n", "x", "v" }, "<M-md>", function()
+vim.keymap.set({ "n", "x" }, "<M-md>", function()
   -- See `:h vim.diagnostic.GetOpts`.
   require("multicursor-nvim").diagnosticMatchCursors({ severity = vim.diagnostic.severity.ERROR })
 end, { desc = "Add cursors to all error diagnostics" })
