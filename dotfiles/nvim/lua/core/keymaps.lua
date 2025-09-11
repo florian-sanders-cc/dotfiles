@@ -641,6 +641,22 @@ Snacks.toggle.indent():map("<leader>ug")
 Snacks.toggle.zen():map("<leader>uz")
 Snacks.toggle.dim():map("<leader>uD")
 
+-- Custom formatting toggle
+Snacks.toggle({
+  name = "Auto Formatting",
+  get = function()
+    return not vim.g.disable_autoformat and not vim.b.disable_autoformat
+  end,
+  set = function(state)
+    if state then
+      vim.g.disable_autoformat = false
+      vim.b.disable_autoformat = false
+    else
+      vim.g.disable_autoformat = true
+    end
+  end,
+}):map("<leader>uf")
+
 -- =====================================================
 -- GIT KEYMAPS
 -- =====================================================
