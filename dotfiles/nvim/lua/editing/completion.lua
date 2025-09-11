@@ -49,7 +49,7 @@ require("blink.cmp").setup({
           -- When `true`, will automatically select the first item in the completion list
           preselect = false,
           -- When `true`, inserts the completion item automatically when selecting it
-          auto_insert = false,
+          auto_insert = true,
         },
       },
     },
