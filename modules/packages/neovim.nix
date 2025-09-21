@@ -24,7 +24,7 @@ let
   formatters = with pkgs; [
     stylua
     prettierd
-    nixpkgs-fmt
+    nixfmt-rfc-style
   ];
 
   plugins = with pkgs.vimPlugins; [
