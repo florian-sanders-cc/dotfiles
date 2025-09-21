@@ -1,6 +1,6 @@
 require("blink.cmp").setup({
   fuzzy = { implementation = "rust" },
-  signature = { enabled = true },
+  signature = { enabled = false },
   keymap = {
     preset = "enter",
     ["<C-k>"] = { "show", "show_documentation", "hide_documentation" },
