@@ -185,6 +185,19 @@
               end
               rm -f -- "$tmp"
           end
+
+          function auto_start_zellij
+              if test "$TERM" = "alacritty"
+                or test "$TERM" = "foot" 
+                  if not set -q ZELLIJ
+                      if command -v zellij > /dev/null
+                          exec zellij
+                      end
+                  end
+              end
+          end
+
+          auto_start_zellij
       '';
   };
   xdg.configFile."fish/completions/clever.fish".source = ../../dotfiles/fish/completions/clever.fish;
