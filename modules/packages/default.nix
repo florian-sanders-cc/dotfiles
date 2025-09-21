@@ -76,13 +76,6 @@ in
     font-awesome
     montserrat
     nerd-fonts.jetbrains-mono
-    nerd-fonts.zed-mono
-    nerd-fonts.fira-mono
-    nerd-fonts.liberation
-    nerd-fonts.meslo-lg
-    nerd-fonts.noto
-    nerd-fonts.fira-code
-    nerd-fonts.iosevka
   ];
 
   home-manager.users."${currentUser.name}" = {
