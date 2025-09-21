@@ -152,6 +152,7 @@ in
               scheme
               fish
               qmljs
+              ron
             ]
           )).dependencies;
       };
