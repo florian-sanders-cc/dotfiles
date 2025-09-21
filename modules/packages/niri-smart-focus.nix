@@ -1,9 +1,9 @@
-{ lib
-, stdenv
-, makeWrapper
-, jq
-, bash
-,
+{
+  lib,
+  stdenv,
+  makeWrapper,
+  jq,
+  bash,
 }:
 
 stdenv.mkDerivation rec {
@@ -29,8 +29,8 @@ stdenv.mkDerivation rec {
 
     mkdir -p $out/bin
 
-    # Install smart-focus-ghostty
-    install -Dm755 $src/smart-focus-ghostty $out/bin/smart-focus-ghostty
+    # Install smart-focus-terminal
+    install -Dm755 $src/smart-focus-terminal $out/bin/smart-focus-terminal
 
     # Install smart-focus-firefox  
     install -Dm755 $src/smart-focus-firefox $out/bin/smart-focus-firefox
@@ -55,7 +55,7 @@ stdenv.mkDerivation rec {
       Collection of smart focus scripts for the niri window manager.
       Provides intelligent window cycling and spawning for Ghostty terminal
       and Firefox browser applications.
-      
+
       These scripts integrate with the niri compositor to provide smart
       window management - they will cycle through existing windows of the
       target application or spawn a new instance if none exist.
@@ -66,4 +66,3 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
   };
 }
-
