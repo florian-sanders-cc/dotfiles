@@ -108,6 +108,7 @@
     // "toggle_relative_line_numbers": true
   },
   "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_weight": 300,
   // use relative line numbers
   "relative_line_numbers": false,
   // hide the scroll bar
@@ -176,6 +177,9 @@
     },
     "Nix": {
       "language_servers": ["nil"]
+    },
+    "HTML": {
+      "language_servers": ["vscode-html-language-server", "vtsls"]
     }
   }
 }
