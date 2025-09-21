@@ -2,7 +2,6 @@
 
 let
   lspServers = with pkgs; [
-    emmylua-ls
     lua-language-server
     nil
     nodePackages.bash-language-server
