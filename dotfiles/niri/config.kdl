@@ -124,12 +124,12 @@ hotkey-overlay {
 binds {
     Mod+Shift+Colon { show-hotkey-overlay; }
 
-    Mod+T { spawn "smart-focus-ghostty"; }
-    Mod+Shift+T { spawn "smart-focus-ghostty" "true"; }
-    Mod+B { spawn "smart-focus-firefox"; }
-    Mod+Shift+B { spawn "smart-focus-firefox" "true"; }
-    Mod+C { spawn "smart-focus-chromium"; }
-    Mod+Shift+C { spawn "smart-focus-chromium" "true"; }
+    Mod+ampersand { spawn "smart-focus-terminal"; }
+    Mod+Shift+ampersand { spawn "smart-focus-terminal" "alacritty"; }
+    Mod+eacute { spawn "smart-focus-firefox"; }
+    Mod+Shift+eacute { spawn "smart-focus-firefox" "true"; }
+    Mod+quotedbl { spawn "smart-focus-chromium"; }
+    Mod+Shift+quotedbl { spawn "smart-focus-chromium" "true"; }
     Mod+D { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Super+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "toggle"; }
 
