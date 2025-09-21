@@ -1,0 +1,60 @@
+// Theme configuration
+theme "nord"
+
+show_startup_tips false
+
+// Default layout to use on startup
+default_layout "neovim-layout"
+
+// Disable pane frames
+pane_frames false
+
+// Set scrollback editor
+scrollback_editor "nvim"
+
+session_serialization false
+
+// Custom keybinds - clear defaults to use only these bindings
+keybinds clear-defaults=true {
+    normal {
+        // Tabs
+        bind "Ctrl Shift t" { NewTab; }
+        bind "Ctrl Tab" { GoToNextTab; }
+        bind "Ctrl Shift Tab" { GoToPreviousTab; }
+        bind "Ctrl Shift w" { CloseTab; }
+
+        // Panes
+        // bind "Ctrl Shift v" { NewPane "Right"; }
+        // bind "Ctrl Shift h" { NewPane "Down"; }
+        // bind "Ctrl Shift Up" { MoveFocus "Up"; }
+        // bind "Ctrl Shift Down" { MoveFocus "Down"; }
+        // bind "Ctrl Shift Left" { MoveFocus "Left"; }
+        // bind "Ctrl Shift Right" { MoveFocus "Right"; }
+        // bind "Ctrl Shift q" { CloseFocus; }
+
+        // Search/Edit
+        bind "Ctrl Shift e" { EditScrollback; }
+
+        // Essential keybinds for basic functionality
+        bind "Ctrl Shift s" { SwitchToMode "Scroll"; }
+        bind "Ctrl q" { Quit; }
+    }
+
+    scroll {
+        bind "Ctrl s" { SwitchToMode "Normal"; }
+        bind "j" "Down" { ScrollDown; }
+        bind "k" "Up" { ScrollUp; }
+        bind "Ctrl f" "PageDown" "Right" "l" { PageScrollDown; }
+        bind "Ctrl b" "PageUp" "Left" "h" { PageScrollUp; }
+        bind "d" { HalfPageScrollDown; }
+        bind "u" { HalfPageScrollUp; }
+    }
+}
+
+ui {
+    pane_frames {
+        hide_session_name true
+        rounded_corners true
+    }
+}
+
