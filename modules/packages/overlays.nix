@@ -38,23 +38,40 @@
 
       # ghostty-nightly = inputs.ghostty-flake.packages.${prev.system}.default;
 
-      # clever-tools = prev.clever-tools.overrideAttrs (_: rec {
-      #   pname = "clever-tools";
-      #   version = "3.10.1";
-      #   src = prev.fetchFromGitHub {
-      #     owner = "CleverCloud";
-      #     repo = "clever-tools";
-      #     rev = version;
-      #     hash = "sha256-dMSVw3buj0m2Ixir8rVeCg0PAVqXFBsBEohKfLsYhaI=";
-      #   };
-      #
-      #   npmDepsHash = "sha256-v0nCYRfmcGbePI838Yhb+XvpN4JItQn2D+AHyNoeZLw=";
-      #   npmDeps = final.fetchNpmDeps {
-      #     inherit src;
-      #     name = "${pname}-${version}-npm-deps";
-      #     hash = npmDepsHash;
-      #   };
-      # });
+      clever-tools = prev.clever-tools.overrideAttrs (_: rec {
+        pname = "clever-tools";
+        version = "4.1.0";
+        src = prev.fetchFromGitHub {
+          owner = "CleverCloud";
+          repo = "clever-tools";
+          rev = version;
+          hash = "sha256-ntKxMlRBE0WoaO2Fmpymhm7y7kCwe197sotNzpK92C4=";
+        };
+
+        nodejs = prev.pkgs.nodejs_22;
+
+        buildPhase = ''
+          node scripts/bundle-cjs.js ${version} false
+        '';
+
+        installPhase = ''
+          mkdir -p $out/bin $out/lib/clever-tools
+          cp build/${version}/clever.cjs $out/lib/clever-tools/clever.cjs
+
+          makeWrapper ${nodejs}/bin/node $out/bin/clever \
+            --add-flags "$out/lib/clever-tools/clever.cjs" \
+            --set NO_UPDATE_NOTIFIER true
+
+          runHook postInstall
+        '';
+
+        npmDepsHash = "sha256-GsJlrz41q9GvFpYZcauuGXgMCG6mqSuI5gy+hxlJfUQ=";
+        npmDeps = final.fetchNpmDeps {
+          inherit src;
+          name = "${pname}-${version}-npm-deps";
+          hash = npmDepsHash;
+        };
+      });
 
       zed-preview = prev.callPackage ./zed-preview.nix { };
     })
