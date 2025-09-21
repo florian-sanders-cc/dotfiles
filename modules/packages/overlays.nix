@@ -10,6 +10,20 @@
 
       # helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
 
+      opencode = prev.opencode.overrideAttrs (oldAttrs: rec {
+        version = "v0.10.2";
+        src = prev.fetchFromGitHub {
+          owner = "sst";
+          repo = "opencode";
+          rev = version;
+          hash = "sha256-pKlw4DPGygEwLuF+s1BDrLn3lnFZIe7HDp6eWmPUItU=";
+        };
+
+        node_modules = oldAttrs.node_modules.overrideAttrs (_: {
+          outputHash = "sha256-fGf2VldMlxbr9pb3B6zVL+fW1S8bRjefJW+jliTO73A=";
+        });
+      });
+
       random-labels = prev.callPackage ./random-labels.nix { };
 
       stylelint-ls = prev.callPackage ./stylelint-ls.nix { };
