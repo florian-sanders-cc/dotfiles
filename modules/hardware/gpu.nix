@@ -1,8 +1,7 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
+{ pkgs
+, lib
+, config
+, ...
 }:
 
 {
@@ -17,15 +16,31 @@
   };
 
   config = {
+    # Disable hardware acceleration to test startup delays
     hardware.graphics = {
       enable = true;
       extraPackages = lib.mkIf (config.intel.enable) [
         pkgs.intel-media-driver # LIBVA_DRIVER_NAME=iHD
+        pkgs.vpl-gpu-rt
       ];
     };
 
+    # Reduce Intel GPU power management delays
+    # boot.kernelParams = lib.mkIf (config.intel.enable) [
+    #   "i915.enable_dc=0" # Disable display C-states
+    #   "i915.disable_power_well=0" # Keep power wells always on
+    #   "i915.enable_psr=0" # Disable Panel Self Refresh
+    # ];
+
+    boot.kernelParams = lib.mkIf (config.intel.enable) [
+      "i915.force_probe=!9a49"
+      "xe.force_probe=*"
+      "xe.enable_guc=0"
+    ];
+
     services.xserver.videoDrivers = lib.mkIf (config.nvidia.enable) [ "nvidia" ];
 
+    # Disable VA-API hardware acceleration drivers
     environment.sessionVariables = {
       LIBVA_DRIVER_NAME = lib.mkDefault "iHD";
     }
