@@ -1,7 +1,8 @@
-{ lib
-, pkgs
-, currentUser
-, ...
+{
+  lib,
+  pkgs,
+  currentUser,
+  ...
 }:
 
 let
@@ -88,7 +89,6 @@ in
       ./git.nix
       ./helix.nix
       ./neovim.nix
-      ./nushell.nix
       ./starship.nix
       ./vscode.nix
       ./zed.nix
