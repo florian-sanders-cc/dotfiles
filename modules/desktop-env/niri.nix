@@ -28,9 +28,13 @@
     niri-smart-focus
   ];
 
-  services.displayManager.gdm = {
-    enable = true;
-    wayland = true;
+  services.displayManager = {
+    gdm = {
+      enable = true;
+      wayland = true;
+    };
+    defaultSession = "niri";
+    sessionPackages = [ pkgs.niri ];
   };
 
   programs.xwayland.enable = true;
