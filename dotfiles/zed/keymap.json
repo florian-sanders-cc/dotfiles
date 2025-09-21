@@ -1,12 +1,14 @@
-// Zed keymap
+// Zed keymap - Aligned with Neovim configuration
 //
 // For information on binding keys, see the Zed
 // documentation: https://zed.dev/docs/key-bindings
 //
 // To see the default key bindings run `zed: open default keymap`
 // from the command palette.
-// keymap.json, generated at Tue Sep 17 2024 12:50:50 GMT+0800 (Singapore Standard Time)
 [
+  // =====================================================
+  // GLOBAL BINDINGS
+  // =====================================================
   {
     "bindings": {
       "ctrl-shift-w": "workspace::CloseAllDocks",
@@ -14,93 +16,174 @@
       "ctrl--": ["zed::DecreaseBufferFontSize", { "persist": true }]
     }
   },
+
+  // =====================================================
+  // TERMINAL MODE ESCAPE (matches Neovim)
+  // =====================================================
+  {
+    "context": "Terminal",
+    "bindings": {
+      // "escape escape": "terminal::SendText",
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ToggleBottomDock",
+      "ctrl-w": "pane::CloseActiveItem",
+      "ctrl-shift-w": "pane::CloseAllItems",
+      "ctrl-b": "workspace::ToggleLeftDock"
+    }
+  },
+
+  // =====================================================
+  // WINDOW NAVIGATION (matches Neovim <C-h/j/k/l>)
+  // =====================================================
+  {
+    "context": "Dock || vim_mode == normal || vim_mode == visual",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-w": "pane::CloseActiveItem",
+      "ctrl-shift-w": "pane::CloseAllItems",
+      "ctrl-b": "workspace::ToggleLeftDock",
+      "ctrl-shift-b": "workspace::ToggleRightDock"
+    }
+  },
+
+  // =====================================================
+  // NORMAL & VISUAL MODE BINDINGS
+  // =====================================================
   {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
-      // put key-bindings here if you want them to work in normal & visual mode
+      // Window splits (matches Neovim <leader>_ and <leader>-)
+      "space _": "pane::SplitRight",
+      "space -": "pane::SplitDown",
+
+      // File explorer (matches Neovim <leader>e)
+      "space e": "workspace::ToggleLeftDock",
+
+      // File finding (matches Neovim)
+      "space space": "file_finder::Toggle", // <leader><space>
+      "space f f": "file_finder::Toggle", // <leader>ff
+      "space f r": "projects::OpenRecent", // <leader>fr
+      "space f g": "file_finder::Toggle", // <leader>fg (approximate)
+      "space ,": "buffer_search::Deploy", // <leader>, for buffers
+
+      // Search operations (matches Neovim)
+      "space /": "buffer_search::Deploy", // <leader>/
+      "space s g": "project_panel::NewSearchInDirectory", // <leader>sg
+
+      // Git operations (matches Neovim)
+      "space g g": "git_panel::ToggleFocus", // <leader>gg
+      "space g c": "git_panel::ToggleFocus", // <leader>gc (approximate)
+
+      // Buffer management (matches Neovim)
+      "space b d": "pane::CloseActiveItem", // <leader>bd
+      "space b o": "pane::CloseOtherItems", // <leader>bo
+
+      // Center screen on scroll (matches Neovim <C-d>zz and <C-u>zz)
+      "ctrl-d": ["vim::ScrollDown", { "center_cursor": true }],
+      "ctrl-u": ["vim::ScrollUp", { "center_cursor": true }],
+
+      // Better j/k movement with count
+      "j": "vim::Down",
+      "k": "vim::Up",
+
+      // Save file (matches Neovim <C-s>)
+      "ctrl-s": "workspace::Save",
+
       // Toggle inlay hints
       "ctrl i": "editor::ToggleInlayHints",
 
-      // Open recent project
-      "ctrl f p": "projects::OpenRecent",
-
-      // Go to file with `gf`
+      // Go to file with gf
       "g f": "editor::OpenExcerpts",
 
+      // Toggle relative line numbers
       "ctrl l": "editor::ToggleRelativeLineNumbers"
     }
   },
+
+  // =====================================================
+  // NORMAL MODE SPECIFIC BINDINGS
+  // =====================================================
   {
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
-      // +LSP
-      "ctrl-r": "editor::Rename",
+      // LSP Navigation (matches Neovim)
       "g d": "editor::GoToDefinition",
-      "g D": "editor::GoToDefinitionSplit",
-      "g i": "editor::GoToImplementation",
-      "g I": "editor::GoToImplementationSplit",
-      "g t": "editor::GoToTypeDefinition",
-      "g T": "editor::GoToTypeDefinitionSplit",
-      "g r": "editor::FindAllReferences",
+      "g D": "editor::GoToDefinitionSplit", // matches Neovim gD
+      "g r": "editor::FindAllReferences", // matches Neovim gr
+      "g I": "editor::GoToImplementation", // matches Neovim gI
+      "g y": "editor::GoToTypeDefinition", // matches Neovim gy
+      "g S": "editor::GoToDefinition", // matches Neovim gS (approximate)
+
+      // Code actions (matches Neovim <leader>ca)
+      "space c a": "editor::ToggleCodeActions",
+      "space c r": "editor::Rename", // matches Neovim <leader>cr
+
+      // Diagnostics navigation
       "] d": "editor::GoToDiagnostic",
       "[ d": "editor::GoToPreviousDiagnostic",
-      // TODO: Go to next/prev error
       "] e": "editor::GoToDiagnostic",
       "[ e": "editor::GoToPreviousDiagnostic",
-      // Symbol search
-      "s s": "outline::Toggle",
-      "s S": "project_symbols::Toggle",
-      // Diagnostic
-      "ctrl x": "diagnostics::Deploy",
 
-      // +Git
-      // Git prev/next hunk
+      // Git hunks
       "] h": "editor::GoToHunk",
       "[ h": "editor::GoToPreviousHunk",
 
-      // Save file
-      "ctrl-s": "workspace::Save",
+      // Symbol search
+      "space s s": "outline::Toggle", // matches Neovim <leader>ss
+      "space s S": "project_symbols::Toggle", // matches Neovim <leader>sS
 
-      // git
-      "ctrl-shift-g": "git_panel::ToggleFocus",
-      "ctrl-shift-n": [
-        "task::Spawn",
-        { "task_name": "Neogit", "target": "center" }
-      ]
+      // Diagnostics
+      "space x d": "diagnostics::Deploy", // matches Neovim diagnostics
+
+      // AI/Assistant (matches Neovim Claude keybinds)
+      "space a c": "agent::ToggleFocus", // <leader>ac
+      "space a f": "agent::ToggleFocus", // <leader>af
+
+      // Rename with inc-rename style
+      "ctrl-r": "editor::Rename",
+
+      // Git panel
+      "ctrl-shift-g": "git_panel::ToggleFocus"
     }
   },
-  // Empty pane, set of keybindings that are available when there is no active editor
-  {
-    "context": "EmptyPane || SharedScreen",
-    "bindings": {
-      // Open recent project
-      "ctrl f p": "projects::OpenRecent"
-    }
-  },
-  // Comment code
+
+  // =====================================================
+  // VISUAL MODE BINDINGS
+  // =====================================================
   {
     "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
     "bindings": {
-      // visual, visual line & visual block modes
-      "g c": "editor::ToggleComments"
+      // Comment toggle
+      "g c": "editor::ToggleComments",
+
+      // Paste without yanking (approximate to Neovim <leader>p)
+      "space p": "editor::Paste",
+
+      // Copy to system clipboard (matches Neovim y in visual)
+      "y": "editor::Copy"
     }
   },
-  // Rename
+
+  // =====================================================
+  // VIM OPERATOR BINDINGS
+  // =====================================================
   {
     "context": "Editor && vim_operator == c",
     "bindings": {
-      "r": "editor::Rename" // zed specific
-    }
-  },
-  // Code Action
-  {
-    "context": "Editor && vim_operator == c",
-    "bindings": {
+      "r": "editor::Rename",
       "c": "vim::CurrentLine",
-      "a": "editor::ToggleCodeActions" // zed specific
+      "a": "editor::ToggleCodeActions"
     }
   },
-  // File panel (netrw)
+
+  // =====================================================
+  // PROJECT PANEL (File Explorer)
+  // =====================================================
   {
     "context": "ProjectPanel && not_editing",
     "bindings": {
@@ -113,57 +196,61 @@
       "p": "project_panel::Paste",
       "left": "project_panel::CollapseSelectedEntry",
       "right": "project_panel::ExpandSelectedEntry",
+      "l": "project_panel::ExpandSelectedEntry",
+      "h": "project_panel::CollapseSelectedEntry",
+      "shift-h": "project_panel::CollapseAllEntries",
       "ctrl-y": "workspace::CopyPath",
       "ctrl-shift-y": "workspace::CopyRelativePath",
       "ctrl-f": "project_panel::NewSearchInDirectory",
       "escape": "menu::Cancel",
-      "l": "project_panel::ExpandSelectedEntry",
-      "h": "project_panel::CollapseSelectedEntry",
-      "shift-h": "project_panel::CollapseAllEntries",
-      "ctrl-p": "file_finder::Toggle",
-      // git
-      "ctrl-shift-g": [
-        "task::Spawn",
-        { "task_name": "Neogit", "target": "center" }
-      ]
+      "ctrl-p": "file_finder::Toggle"
     }
   },
-  // Panel nagivation
+
+  // =====================================================
+  // EMPTY PANE BINDINGS
+  // =====================================================
   {
-    "context": "Dock || vim_mode == normal || vim_mode == visual",
+    "context": "EmptyPane || SharedScreen",
     "bindings": {
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-j": "workspace::ToggleBottomDock",
-      "ctrl-w": "pane::CloseActiveItem",
-      "ctrl-shift-w": "pane::CloseAllItems",
-      "ctrl-b": "workspace::ToggleLeftDock",
-      "ctrl-shift-b": "workspace::ToggleRightDock"
+      "space f r": "projects::OpenRecent",
+      "space f f": "file_finder::Toggle",
+      "space space": "file_finder::Toggle"
     }
   },
+
   {
-    "context": "terminal",
+    "context": "VimControl && !menu",
     "bindings": {
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-j": "workspace::ToggleBottomDock",
-      "ctrl-w": "pane::CloseActiveItem",
-      "ctrl-shift-w": "pane::CloseAllItems",
-      "ctrl-b": "workspace::ToggleLeftDock"
+      "g n": "vim::SelectNextMatch",
+      "g shift-n": "vim::SelectPreviousMatch",
+      "g l": "vim::SelectNext",
+      "g shift-l": "vim::SelectPrevious",
+      "g >": ["editor::SelectNext", { "replace_newest": true }],
+      "g <": ["editor::SelectPrevious", { "replace_newest": true }],
+      "g a": "editor::SelectAllMatches"
     }
   },
+
+  // =====================================================
+  // VIM MOTION ENHANCEMENTS
+  // =====================================================
   {
     "context": "vim_mode == normal || vim_mode == visual",
     "bindings": {
+      // Text object selection
       "alt-o": "editor::SelectLargerSyntaxNode",
       "alt-i": "editor::SelectSmallerSyntaxNode",
+
+      // Flash/Sneak-like navigation
       "s": "vim::PushSneak",
       "S": "vim::PushSneakBackward"
     }
   },
-  // Subword motion is not working really nice with `ciw`, disable for now
+
+  // =====================================================
+  // SUBWORD MOTION
+  // =====================================================
   {
     "context": "VimControl && !menu && vim_mode != operator",
     "bindings": {
@@ -173,6 +260,10 @@
       "g e": "vim::PreviousSubwordEnd"
     }
   },
+
+  // =====================================================
+  // EDITOR FULL MODE
+  // =====================================================
   {
     "context": "Editor && mode == full",
     "bindings": {
