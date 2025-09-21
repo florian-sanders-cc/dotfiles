@@ -8,7 +8,6 @@
         dimensions.lines = 30;
         padding.x = 0;
         padding.y = 0;
-        opacity = 0.9;
       };
 
       keyboard.bindings = [
@@ -25,24 +24,31 @@
       ];
 
       font = {
+        offset = {
+          y = 12;
+        };
+        glyph_offset = {
+          y = 6;
+        };
+        size = 12;
         normal = {
-          family = "JetbrainsMonoNL Nerd Font Mono";
-          style = "Regular";
+          family = "JetBrainsMono Nerd Font Mono";
+          style = "Light";
         };
         bold = {
-          family = "JetBrainsMonoNL Nerd Font Mono";
-          style = "SemiBold";
+          family = "JetBrainsMono Nerd Font Mono";
+          style = "Regular";
         };
         bold_italic = {
-          family = "JetBrainsMonoNL Nerd Font Mono";
-          style = "SemiBold Italic";
+          family = "JetBrainsMono Nerd Font Mono";
+          style = "Regular Italic";
         };
       };
 
       colors = {
         cursor = {
-          cursor = "#BD6062";
-          text = "#FEFEFE";
+          cursor = "#a3be8c";
+          text = "#191C1D";
         };
         primary = {
           background = "#242933";
