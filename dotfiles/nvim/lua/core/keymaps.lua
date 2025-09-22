@@ -8,6 +8,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Terminal mode escape
+vim.keymap.set({ "n", "v" }, "<leader>T", "<cmd>term fish<cr>", { desc = "Open terminal in buffer" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Window navigation
@@ -585,15 +586,47 @@ vim.keymap.set({ "n", "v" }, "<leader>o", "<cmd>Octo<cr>", { desc = "Octo GitHub
 -- =====================================================
 
 -- Claude Code AI integration
-vim.keymap.set("n", "<leader>ac", "<cmd>ClaudeCode<cr>", { desc = "Toggle Claude" })
-vim.keymap.set("n", "<leader>af", "<cmd>ClaudeCodeFocus<cr>", { desc = "Focus Claude" })
-vim.keymap.set("n", "<leader>ar", "<cmd>ClaudeCode --resume<cr>", { desc = "Resume Claude" })
-vim.keymap.set("n", "<leader>aC", "<cmd>ClaudeCode --continue<cr>", { desc = "Continue Claude" })
-vim.keymap.set("n", "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", { desc = "Select Claude model" })
-vim.keymap.set("n", "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", { desc = "Add current buffer" })
-vim.keymap.set("v", "<leader>as", "<cmd>ClaudeCodeSend<cr>", { desc = "Send to Claude" })
+-- vim.keymap.set("n", "<leader>ac", "<cmd>ClaudeCode<cr>", { desc = "Toggle Claude" })
+-- vim.keymap.set("n", "<leader>af", "<cmd>ClaudeCodeFocus<cr>", { desc = "Focus Claude" })
+-- vim.keymap.set("n", "<leader>ar", "<cmd>ClaudeCode --resume<cr>", { desc = "Resume Claude" })
+-- vim.keymap.set("n", "<leader>aC", "<cmd>ClaudeCode --continue<cr>", { desc = "Continue Claude" })
+-- vim.keymap.set("n", "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", { desc = "Select Claude model" })
+-- vim.keymap.set("n", "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", { desc = "Add current buffer" })
+-- vim.keymap.set("v", "<leader>as", "<cmd>ClaudeCodeSend<cr>", { desc = "Send to Claude" })
 vim.keymap.set({ "n", "v" }, "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", { desc = "Accept diff" })
 vim.keymap.set({ "n", "v" }, "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", { desc = "Deny diff" })
+
+-- Codecompanion AI integration
+vim.keymap.set(
+  { "n", "v" },
+  "<leader>ai",
+  ":CodeCompanion ",
+  { desc = "CodeCompanion: Inline Assistant", noremap = true, silent = true }
+)
+vim.keymap.set(
+  { "n", "v" },
+  "<leader>ac",
+  "<cmd>CodeCompanionChat<CR>",
+  { desc = "CodeCompanion: Chat Buffer", noremap = true, silent = true }
+)
+vim.keymap.set(
+  { "n", "v" },
+  "<leader>am",
+  "<cmd>CodeCompanionCmd<CR>",
+  { desc = "CodeCompanion: Command Generator", noremap = true, silent = true }
+)
+vim.keymap.set(
+  { "n", "v" },
+  "<leader>aA",
+  "<cmd>CodeCompanionActions<CR>",
+  { desc = "CodeCompanion: Action Palette", noremap = true, silent = true }
+)
+vim.keymap.set(
+  { "n", "v" },
+  "<leader>ag",
+  ":CodeCompanion <CR>",
+  { desc = "CodeCompanion: Resume Session", noremap = true, silent = true }
+)
 
 -- =====================================================
 -- UI/FILES KEYMAPS

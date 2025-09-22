@@ -80,41 +80,40 @@ let
 
     # AI Integration
     claudecode-nvim
-    opencode-nvim
+    codecompanion-nvim
+    copilot-vim
   ];
 
 in
 {
-  programs.neovim =
-    {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      withNodeJs = true;
-      defaultEditor = true;
-      # package = pkgs.neovim-nightly;
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    withNodeJs = true;
+    defaultEditor = true;
+    # package = pkgs.neovim-nightly;
 
-      extraPackages =
-        with pkgs;
-        [
-          git
-          ripgrep
-          fd
-          unzip
-          gcc
-          ast-grep
-        ]
-        ++ lspServers
-        ++ formatters;
+    extraPackages =
+      with pkgs;
+      [
+        git
+        ripgrep
+        fd
+        unzip
+        gcc
+        ast-grep
+      ]
+      ++ lspServers
+      ++ formatters;
 
-      plugins = plugins;
-    };
+    plugins = plugins;
+  };
 
   xdg.configFile."nvim" = {
     source = ../../dotfiles/nvim;
     recursive = true;
   };
-
 
   xdg.configFile."nvim/parser".source =
     let
@@ -158,10 +157,8 @@ in
     in
     "${parsers}/parser";
 
-
   xdg.configFile."neovide" = {
     source = ../../dotfiles/neovide;
     recursive = true;
   };
 }
-

@@ -27,3 +27,4 @@ require("lsp.lsp")
 
 -- AI integration
 require("ai.claude")
+require("ai.codecompanion")
