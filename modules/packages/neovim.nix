@@ -82,6 +82,7 @@ let
     claudecode-nvim
     codecompanion-nvim
     copilot-vim
+    blink-copilot
   ];
 
 in
