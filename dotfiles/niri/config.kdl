@@ -263,7 +263,7 @@ binds {
     Mod+P { spawn "noctalia-shell" "ipc" "call" "sidePanel" "toggle"; }
     Mod+V { spawn "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
     Mod+Shift+X { spawn "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
-    Mod+Shift+P { spawn "noctalia-shell" "ipc" "call" "powerPanel" "toggle"; }
+    Mod+Shift+P { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
     // Mod+Shift+I { spawn "noctalia-shell" "ipc" "call" "idleInhibitor" "toggle"; }
     Mod+Comma { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
     Mod+Shift+N { spawn "noctalia-shell" "ipc" "call" "notifications" "toggleHistory"; }
