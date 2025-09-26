@@ -57,6 +57,7 @@ let
     stu
     stylelint-ls
     lsof
+    copilot-cli
   ];
   proPackages = with pkgs; [
     random-labels
