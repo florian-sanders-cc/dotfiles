@@ -37,7 +37,6 @@ keybinds clear-defaults=true {
 
         // Essential keybinds for basic functionality
         bind "Ctrl Shift s" { SwitchToMode "Scroll"; }
-        bind "Ctrl q" { Quit; }
     }
 
     scroll {

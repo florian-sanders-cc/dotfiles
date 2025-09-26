@@ -12,14 +12,14 @@
 
       keyboard.bindings = [
         {
-          key = "Q";
-          mods = "Control|Shift";
-          action = "Quit";
-        }
-        {
           key = "N";
           mods = "Control|Shift";
           action = "SpawnNewInstance";
+        }
+        {
+          key = "Q";
+          mods = "Control";
+          action = "ReceiveChar";
         }
       ];
 
