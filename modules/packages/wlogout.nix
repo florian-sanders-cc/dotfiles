@@ -72,41 +72,35 @@
       }
 
       #lock {
-          background-image: image(url("${pkgs.wallpapers}/icons/lock.png"), url("./icons/lock.png"));
       }
 
       #logout {
           background-image: image(
-              url("${pkgs.wallpapers}/assets/logout.svg"),
-              url("${pkgs.wallpapers}/icons/logout.png")
+              url("${pkgs.icons}/logout.png")
           );
       }
 
       #suspend {
           background-image: image(
-              url("${pkgs.wallpapers}/assets/suspend.svg"),
-              url("${pkgs.wallpapers}/icons/suspend.png")
+              url("${pkgs.icons}/suspend.png")
           );
       }
 
       #hibernate {
           background-image: image(
-              url("${pkgs.wallpapers}/assets/hibernate.svg"),
-              url("${pkgs.wallpapers}/icons/hibernate.png")
+              url("${pkgs.icons}/hibernate.png")
           );
       }
 
       #shutdown {
           background-image: image(
-              url("${pkgs.wallpapers}/assets/shutdown.svg"),
-              url("${pkgs.wallpapers}/icons/shutdown.png")
+              url("${pkgs.icons}/shutdown.png")
           );
       }
 
       #reboot {
           background-image: image(
-              url("${pkgs.wallpapers}/assets/reboot.svg"),
-              url("${pkgs.wallpapers}/icons/reboot.png")
+              url("${pkgs.icons}/reboot.png")
           );
       }
     '';

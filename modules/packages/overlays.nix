@@ -8,7 +8,15 @@
 
       noctalia-qs = inputs.noctalia.defaultPackage.${prev.system};
 
+      # claude-code =
+      #   (import inputs.nixpkgs-claude-bin {
+      #     system = "x86_64-linux";
+      #     config.allowUnfree = true;
+      #   }).claude-code;
+
       # helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
+
+      sidekick-nvim = (import ./sidekick-nvim-overlay.nix) final prev;
 
       # opencode = prev.opencode.overrideAttrs (oldAttrs: rec {
       #   version = "v0.10.2";
@@ -26,13 +34,13 @@
       #
       random-labels = prev.callPackage ./random-labels.nix { };
 
-      copilot-cli = prev.callPackage ./copilot-cli.nix { };
-
       stylelint-ls = prev.callPackage ./stylelint-ls.nix { };
 
       wc-ls = prev.callPackage ./wc-ls.nix { };
 
       wallpapers = prev.callPackage ./wallpapers.nix { };
+
+      icons = prev.callPackage ./icons.nix { };
 
       clever-switch-profile = prev.callPackage ./clever-switch-profile.nix { };
 
