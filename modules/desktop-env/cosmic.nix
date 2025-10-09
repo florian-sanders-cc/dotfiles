@@ -22,7 +22,16 @@
   home-manager.users."${currentUser.name}" = {
     home.packages = with pkgs; [
       wl-clipboard
+      seahorse
     ];
+
+    services.gnome-keyring = {
+      enable = true;
+      components = [
+        "secrets"
+        "ssh"
+      ];
+    };
 
     dconf = {
       enable = true;

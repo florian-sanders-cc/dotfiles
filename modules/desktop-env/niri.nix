@@ -1,6 +1,7 @@
-{ pkgs
-, currentUser
-, ...
+{
+  pkgs,
+  currentUser,
+  ...
 }:
 
 {
@@ -17,7 +18,6 @@
     nautilus
     pavucontrol
     polkit_gnome
-    seahorse
     wl-clipboard
     xwayland-satellite
     gnome-calculator
@@ -65,12 +65,12 @@
         package = pkgs.kdePackages.breeze-gtk;
       };
       iconTheme = {
-        name = "Adwaita";
-        package = pkgs.adwaita-icon-theme;
+        name = "Breeze-Dark";
+        package = pkgs.kdePackages.breeze-gtk;
       };
       cursorTheme = {
-        name = "Adwaita";
-        package = pkgs.adwaita-icon-theme;
+        name = "Breeze-Dark";
+        package = pkgs.kdePackages.breeze-gtk;
       };
     };
 
@@ -78,6 +78,10 @@
       enable = true;
       settings = {
         "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+        "org/gnome/desktop/default-applications/terminal" = {
+          exec = "alacritty";
+          exec-arg = "-e";
+        };
       };
     };
 
