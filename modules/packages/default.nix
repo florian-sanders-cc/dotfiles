@@ -18,6 +18,7 @@ let
     ungoogled-chromium
     firefox-wayland
     google-chrome
+    epiphany
 
     # Community
     discord
@@ -57,7 +58,7 @@ let
     stu
     stylelint-ls
     lsof
-    copilot-cli
+    github-copilot-cli
   ];
   proPackages = with pkgs; [
     random-labels
@@ -70,6 +71,7 @@ in
 {
   imports = [
     ./overlays.nix
+    ./fwupd.nix
   ]
   ++ lib.optional isGamingEnabled ./steam.nix
   ++ lib.optional isGamingEnabled ./lutris.nix;
