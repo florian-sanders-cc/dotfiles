@@ -12,10 +12,10 @@ vim.api.nvim_create_user_command("SelectTSVersion", function()
 end, {})
 
 require("inc_rename").setup({
-  input_buffer_type = "snacks",
+  input_buffer_type = nil, -- Use inc_rename's default input
 })
 
-vim.lsp.enable({ "nil_ls", "gopls", "lua_ls", "rust_analyzer", "marksman", "eslint", "vtsls", "json-ls" })
+vim.lsp.enable({ "nil_ls", "gopls", "lua_ls", "rust_analyzer", "marksman", "eslint", "vtsls", "json-ls", "copilot" })
 vim.diagnostic.config({
   virtual_lines = { current_line = true },
   signs = {

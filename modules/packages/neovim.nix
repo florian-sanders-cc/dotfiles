@@ -19,6 +19,7 @@ let
     wc-ls
     kdePackages.full
     typescript
+    copilot-language-server
   ];
 
   formatters = with pkgs; [
@@ -82,6 +83,8 @@ let
     claudecode-nvim
     codecompanion-nvim
     copilot-vim
+    blink-copilot
+    # sidekick-nvim
   ];
 
 in
