@@ -1,9 +1,10 @@
-{ config
-, lib
-, pkgs
-, modulesPath
-, currentUser
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  currentUser,
+  ...
 }:
 
 let
@@ -31,7 +32,7 @@ in
     boot.extraModulePackages = [ ];
 
     # Kernel parameters to fix DisplayPort EDID detection
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_zen;
     boot.initrd.systemd.enable = true;
 
     fileSystems."/" = {
