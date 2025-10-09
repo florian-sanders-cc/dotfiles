@@ -5,18 +5,6 @@
 
 -- Configure Neogit (Magit-like git interface)
 require("mini.diff").setup({
-  view = {
-    -- Visualization style. Possible values are 'sign' and 'number'.
-    -- Default: 'number' if line numbers are enabled, 'sign' otherwise.
-    style = "sign",
-
-    -- Signs used for hunks with 'sign' view
-    signs = { add = "", change = "", delete = "󰛲" },
-
-    -- Priority of used visualization extmarks
-    priority = 199,
-  },
-
   -- Delays (in ms) defining asynchronous processes
   delay = {
     -- How much to wait before update following every text change
@@ -71,8 +59,9 @@ require("diffview").setup({
       layout = "diff2_horizontal",
     },
     merge_tool = {
-      layout = "diff3_horizontal",
+      layout = "diff3_mixed",
       disable_diagnostics = false,
+      winbar_info = true,
     },
     file_history = {
       layout = "diff2_horizontal",
@@ -106,7 +95,4 @@ require("diffview").setup({
 
 vim.opt.fillchars:append({ diff = "" })
 
--- require("gitsigns").setup({})
-
--- Note: Git picker operations (gb, gl, gL, gs, gS, gd, gf) are handled by snacks/git.lua
--- Git keymaps are now consolidated in plugin/keymaps.lua
+require("gitsigns").setup({})

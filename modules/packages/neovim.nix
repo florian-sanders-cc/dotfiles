@@ -84,7 +84,6 @@ let
     codecompanion-nvim
     copilot-vim
     blink-copilot
-    # sidekick-nvim
   ];
 
 in

@@ -1,4 +1,4 @@
-{ config, currentUser, ... }:
+{ currentUser, ... }:
 
 {
   networking.hostName = "nixos-${currentUser.name}";

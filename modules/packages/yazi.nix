@@ -1,5 +1,4 @@
-{ ...
-}:
+{ pkgs, ... }:
 
 {
   programs.yazi = {
@@ -21,4 +20,3 @@
     source = ../../dotfiles/yazi/theme.toml;
   };
 }
-

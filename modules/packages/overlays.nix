@@ -8,15 +8,7 @@
 
       noctalia-qs = inputs.noctalia.defaultPackage.${prev.system};
 
-      # claude-code =
-      #   (import inputs.nixpkgs-claude-bin {
-      #     system = "x86_64-linux";
-      #     config.allowUnfree = true;
-      #   }).claude-code;
-
       # helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
-
-      sidekick-nvim = (import ./sidekick-nvim-overlay.nix) final prev;
 
       # opencode = prev.opencode.overrideAttrs (oldAttrs: rec {
       #   version = "v0.10.2";

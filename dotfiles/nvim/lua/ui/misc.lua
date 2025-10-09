@@ -126,7 +126,7 @@ return {
 
   -- Input dialog
   input = {
-    enabled = true,
+    enabled = false, -- Disabled to avoid conflict with inc_rename
   },
 
   -- Indent guides
