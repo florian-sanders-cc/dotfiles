@@ -14,7 +14,13 @@
       difftool = {
         prompt = false;
         difftastic = {
-          cmd = "difft \"$LOCAL\" \"$REMOTE\"";
+          cmd = "nvim -c DiffviewOpen";
+        };
+      };
+      merge.tool = "nvim";
+      mergetool = {
+        nvim = {
+          cmd = "nvim -c DiffviewOpen";
         };
       };
       transfer.fsckobjects = true;
