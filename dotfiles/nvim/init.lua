@@ -6,6 +6,7 @@ require("core.options")
 require("core.startup-timer")
 require("core.sessions")
 require("core.keymaps")
+require("core.alacritty")
 
 -- Editing features
 require("editing.misc")
@@ -28,3 +29,4 @@ require("lsp.lsp")
 -- AI integration
 require("ai.claude")
 require("ai.codecompanion")
+-- require("ai.sidekick")

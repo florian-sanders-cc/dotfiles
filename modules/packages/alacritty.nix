@@ -6,8 +6,8 @@
         decorations = "none";
         dimensions.columns = 120;
         dimensions.lines = 30;
-        padding.x = 0;
-        padding.y = 0;
+        padding.x = 10;
+        padding.y = 10;
       };
 
       keyboard.bindings = [
