@@ -15,9 +15,28 @@ require("inc_rename").setup({
   input_buffer_type = nil, -- Use inc_rename's default input
 })
 
-vim.lsp.enable({ "nil_ls", "gopls", "lua_ls", "rust_analyzer", "marksman", "eslint", "vtsls", "json-ls", "copilot" })
+vim.lsp.enable({
+  "nil_ls",
+  "gopls",
+  "lua_ls",
+  "rust_analyzer",
+  "marksman",
+  "eslint",
+  "vtsls",
+  "json-ls",
+  "html-ls",
+})
 vim.diagnostic.config({
-  virtual_lines = { current_line = true },
+  float = {
+    format = function(original_diag)
+      return string.format("  %s   \n  ", original_diag.message)
+    end,
+    header = "",
+    prefix = function(diagnostic)
+      return string.format("  \n  %s | %s  \n", diagnostic.source, diagnostic.code), "Comment"
+    end,
+    suffix = "",
+  },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "",

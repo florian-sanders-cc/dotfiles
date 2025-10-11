@@ -443,6 +443,14 @@ vim.keymap.set({ "n", "v" }, "s", "<Nop>")
 -- LSP KEYMAPS
 -- =====================================================
 
+vim.keymap.set({ "n", "v" }, "D", vim.diagnostic.open_float, { desc = "LSP Open diagnostics" })
+vim.keymap.set({ "n", "v" }, "]d", function()
+  vim.diagnostic.goto_next({ float = true })
+end, { desc = "LSP next diagnostic" })
+vim.keymap.set({ "n", "v" }, "[d", function()
+  vim.diagnostic.goto_prev({ float = true })
+end, { desc = "LSP next diagnostic" })
+
 -- LSP Code Actions
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
 vim.keymap.set({ "n", "v" }, "<leader>cA", function()
