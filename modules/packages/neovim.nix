@@ -20,6 +20,7 @@ let
     kdePackages.full
     typescript
     copilot-language-server
+    emmet-language-server
   ];
 
   formatters = with pkgs; [
@@ -82,8 +83,9 @@ let
     # AI Integration
     claudecode-nvim
     codecompanion-nvim
-    copilot-vim
-    blink-copilot
+    copilot-lua
+    # copilot-vim
+    # blink-copilot
   ];
 
 in

@@ -1,19 +1,3 @@
--- Block the normal Copilot suggestions (using LSP integration instead)
-vim.g.copilot_no_maps = true
-vim.api.nvim_create_augroup("github_copilot", { clear = true })
-vim.api.nvim_create_autocmd({ "FileType", "BufUnload" }, {
-  group = "github_copilot",
-  callback = function(args)
-    vim.fn["copilot#On" .. args.event]()
-  end,
-})
-vim.fn["copilot#OnFileType"]()
-
--- Disable Copilot for all filetypes (using blink-copilot LSP instead)
-vim.g.copilot_filetypes = {
-  ["*"] = false,
-}
-
 require("codecompanion").setup({
   strategies = {
     chat = {
