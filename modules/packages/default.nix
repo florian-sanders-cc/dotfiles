@@ -42,7 +42,6 @@ let
 
     # Dev
     bun
-    difftastic
     gcc
     nodejs
     obsidian

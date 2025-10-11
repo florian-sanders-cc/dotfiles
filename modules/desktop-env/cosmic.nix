@@ -18,6 +18,8 @@
     enable = true;
   };
 
+  security.pam.services.greetd.enableGnomeKeyring = true;
+
   # Dark theme preference and tiling mode
   home-manager.users."${currentUser.name}" = {
     home.packages = with pkgs; [

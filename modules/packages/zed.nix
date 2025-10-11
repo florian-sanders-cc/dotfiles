@@ -1,14 +1,15 @@
-{ pkgs
-, config
-, currentUser
-, ...
+{
+  pkgs,
+  config,
+  currentUser,
+  ...
 }:
 
 {
   home.packages = with pkgs; [
-    zed-preview
+    # zed-preview
     # zed-editor-fhs
-    # zed-editor
+    zed-editor
   ];
 
   xdg.configFile."zed/settings.json".source =
