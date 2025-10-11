@@ -11,5 +11,6 @@ in
     (lib.optional (currentDesktop == configSpecs.desktops.hyprland) ./hyprland.nix)
     (lib.optional (currentDesktop == configSpecs.desktops.cosmic) ./cosmic.nix)
     (lib.optional (currentDesktop == configSpecs.desktops.niri) ./niri.nix)
+    (lib.optional (currentDesktop == configSpecs.desktops.cosmic-niri) ./cosmic-niri.nix)
   ];
 }

@@ -37,7 +37,7 @@
 
         perso-workstation = mkNixosConfig {
           user = specs.users.perso-workstation;
-          desktop = specs.desktops.niri;
+          desktop = specs.desktops.cosmic;
         };
       };
     };

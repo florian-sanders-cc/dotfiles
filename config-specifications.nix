@@ -27,5 +27,6 @@
     hyprland = "hyprland";
     cosmic = "cosmic";
     niri = "niri";
+    cosmic-niri = "cosmic-niri";
   };
 }
