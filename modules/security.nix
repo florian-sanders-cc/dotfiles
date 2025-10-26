@@ -21,9 +21,47 @@ in
   security.polkit.enable = true;
   security.rtkit.enable = true;
 
-  # SSH & GPG
-  programs.gnupg.agent = {
-    enable = true;
+  # Install GnuPG system-wide
+  environment.systemPackages = with pkgs; [
+    gnupg
+  ];
+
+  # PAM configuration for GPG auto-unlock
+  security.pam.services.greetd.gnupg.enable = true;
+  security.pam.services.cosmic-greeter.gnupg.enable = true;
+  security.pam.services.login.gnupg.enable = true;
+  security.pam.services.gdm.gnupg.enable = true;
+  security.pam.services.gdm-password.gnupg.enable = true;
+
+  # GPG Agent configuration (via home-manager for user-level control)
+  home-manager.users."${currentUser.name}" = {
+    services.gpg-agent = {
+      enable = true;
+      enableSshSupport = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableNushellIntegration = true;
+      pinentry.package = pkgs.pinentry.gtk2;
+      # Declaratively manage SSH keys (sshcontrol file)
+      sshKeys = lib.optionals (currentUser ? gpgAuthKeygrip && currentUser.gpgAuthKeygrip != null) [
+        currentUser.gpgAuthKeygrip
+      ];
+      # Extra configuration for gpg-agent
+      extraConfig = ''
+        allow-preset-passphrase
+      '';
+    };
+
+    # Configure GPG keys to unlock at login via PAM
+    home.file.".pam-gnupg" = {
+      text = lib.concatStringsSep "\n" (
+        lib.filter (x: x != null) [
+          currentUser.gpgAuthKeygrip
+          currentUser.gpgSignKeygrip
+        ]
+      );
+    };
   };
 
   # environment.shellInit = ''
