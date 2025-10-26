@@ -19,7 +19,7 @@ in
 
   config = lib.mkIf (currentUser.name == specs.users.pro.name) {
     intel.enable = true;
-    boot.kernelPackages = pkgs.linuxPackages_testing;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
