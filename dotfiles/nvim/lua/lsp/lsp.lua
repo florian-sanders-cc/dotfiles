@@ -26,6 +26,7 @@ vim.lsp.enable({
   "json-ls",
   "html-ls",
 })
+
 vim.diagnostic.config({
   float = {
     format = function(original_diag)
@@ -55,3 +56,75 @@ vim.api.nvim_create_autocmd("User", {
     Snacks.rename.on_rename_file(event.data.from, event.data.to)
   end,
 })
+
+vim.keymap.set({ "n", "v" }, "D", vim.diagnostic.open_float, { desc = "LSP: Open Diagnostics" })
+vim.keymap.set({ "n", "v" }, "]d", function()
+  vim.diagnostic.goto_next({ float = true })
+end, { desc = "LSP: Next Diagnostic" })
+vim.keymap.set({ "n", "v" }, "[d", function()
+  vim.diagnostic.goto_prev({ float = true })
+end, { desc = "LSP: Prev Diagnostic" })
+
+vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP: Code Action" })
+
+vim.keymap.set({ "n", "v" }, "<leader>cA", function()
+  vim.lsp.buf.code_action({
+    context = {
+      only = {
+        "source",
+      },
+      diagnostics = {},
+    },
+  })
+end, { desc = "LSP: Source Action" })
+vim.keymap.set({ "n", "v" }, "<leader>cr", ":IncRename ", { desc = "LSP: Rename" })
+
+-- LSP Navigation (Global Keys)
+vim.keymap.set({ "n", "v" }, "gd", function()
+  require("snacks").picker.lsp_definitions()
+end, { desc = "LSP: Goto Definition" })
+
+vim.keymap.set({ "n", "v" }, "gD", function()
+  vim.lsp.buf.definition({
+    on_list = function(options)
+      if #options.items == 0 then
+        vim.notify("No definition found", vim.log.levels.INFO)
+        return
+      end
+
+      -- Always open in vertical split
+      vim.cmd("vsplit")
+
+      -- Jump to the first definition
+      local item = options.items[1]
+      vim.cmd("edit " .. item.filename)
+      vim.api.nvim_win_set_cursor(0, { item.lnum, item.col - 1 })
+    end,
+  })
+end, { desc = "LSP: Goto Definition (Split)" })
+
+vim.keymap.set({ "n", "v" }, "gI", function()
+  require("snacks").picker.lsp_implementations()
+end, { desc = "LSP: Goto Implementation" })
+
+vim.keymap.set({ "n", "v" }, "gy", function()
+  require("snacks").picker.lsp_type_definitions()
+end, { desc = "LSP: Goto Type Definition" })
+
+-- vtsls-specific commands
+vim.keymap.set("n", "gS", function()
+  local clients = vim.lsp.get_clients({ name = "vtsls" })
+  if #clients > 0 then
+    local client = clients[1]
+    clients[1]:exec_cmd({
+      command = "typescript.goToSourceDefinition",
+      title = "Go to Source Definition",
+      arguments = {
+        vim.uri_from_bufnr(0),
+        vim.lsp.util.make_position_params(0, client.offset_encoding).position,
+      },
+    })
+  else
+    vim.lsp.buf.declaration()
+  end
+end, { desc = "LSP: Goto Source Definition" })
