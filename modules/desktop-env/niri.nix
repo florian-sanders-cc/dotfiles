@@ -11,14 +11,16 @@
 
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
+    adw-gtk3
     cliphist
     gtk4
-    kdePackages.breeze-icons
     libadwaita
     nautilus
     pavucontrol
     polkit_gnome
     wl-clipboard
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-gnome
     xwayland-satellite
     gnome-calculator
     gnome-disk-utility
@@ -26,6 +28,7 @@
     noctalia-qs
     swww
     niri-smart-focus
+    kdePackages.qtwayland
   ];
 
   services.displayManager = {
@@ -43,11 +46,16 @@
   };
   services.upower.enable = true;
 
-  home-manager.users."${currentUser.name}" = {
-
-    imports = [
-      ../packages/wlogout.nix
+  # XDG Desktop Portal for GNOME app integration
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
     ];
+  };
+
+  home-manager.users."${currentUser.name}" = {
 
     home.file.".config/niri" = {
       source = ../../dotfiles/niri;
@@ -61,16 +69,16 @@
     gtk = {
       enable = true;
       theme = {
-        name = "Breeze-Dark";
-        package = pkgs.kdePackages.breeze-gtk;
+        name = "adw-gtk3-dark";
+        package = pkgs.adw-gtk3;
       };
       iconTheme = {
-        name = "Breeze-Dark";
-        package = pkgs.kdePackages.breeze-gtk;
+        name = "Adwaita";
+        package = pkgs.adwaita-icon-theme;
       };
       cursorTheme = {
-        name = "Breeze-Dark";
-        package = pkgs.kdePackages.breeze-gtk;
+        name = "Adwaita";
+        package = pkgs.adwaita-icon-theme;
       };
     };
 
@@ -82,16 +90,6 @@
           exec = "alacritty";
           exec-arg = "-e";
         };
-      };
-    };
-
-    services = {
-      gnome-keyring = {
-        enable = true;
-        components = [
-          "secrets"
-          "ssh"
-        ];
       };
     };
 
