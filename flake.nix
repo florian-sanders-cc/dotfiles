@@ -37,7 +37,7 @@
 
         perso-workstation = mkNixosConfig {
           user = specs.users.perso-workstation;
-          desktop = specs.desktops.cosmic;
+          desktop = specs.desktops.niri;
         };
       };
     };
@@ -51,7 +51,7 @@
     };
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell?ref=v2.16.0";
+      url = "github:noctalia-dev/noctalia-shell?ref=v2.19.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -65,10 +65,10 @@
     # home-manager.url = "github:nix-community/home-manager/release-23.11";
 
     # --- Dev Flakes ---
-    # helix-flake = {
-    #   url = "github:helix-editor/helix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    helix-flake = {
+      url = "github:helix-editor/helix?rev=adfcf4849e25609d13ca8dacb81a4ec782d90b28";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # ghostty-flake = {
     #   url = "github:ghostty-org/ghostty";
