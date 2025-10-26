@@ -6,9 +6,13 @@
     (final: prev: {
       neovim-nightly = inputs.neovim-nightly-overlay.packages.${prev.system}.default;
 
-      noctalia-qs = inputs.noctalia.defaultPackage.${prev.system};
+      noctalia-qs = (
+        inputs.noctalia.defaultPackage.${prev.system}.override {
+          quickshell = prev.quickshell;
+        }
+      );
 
-      # helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
+      helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
 
       # opencode = prev.opencode.overrideAttrs (oldAttrs: rec {
       #   version = "v0.10.2";
@@ -42,32 +46,14 @@
 
       clever-tools = prev.clever-tools.overrideAttrs (_: rec {
         pname = "clever-tools";
-        version = "4.1.0";
+        version = "4.3.0";
         src = prev.fetchFromGitHub {
           owner = "CleverCloud";
           repo = "clever-tools";
           rev = version;
-          hash = "sha256-ntKxMlRBE0WoaO2Fmpymhm7y7kCwe197sotNzpK92C4=";
+          hash = "sha256-YC6wfa8bz21LhOH5YIRZ94rLxWl4f1m24jmAAsTvbS0=";
         };
-
-        nodejs = prev.pkgs.nodejs_22;
-
-        buildPhase = ''
-          node scripts/bundle-cjs.js ${version} false
-        '';
-
-        installPhase = ''
-          mkdir -p $out/bin $out/lib/clever-tools
-          cp build/${version}/clever.cjs $out/lib/clever-tools/clever.cjs
-
-          makeWrapper ${nodejs}/bin/node $out/bin/clever \
-            --add-flags "$out/lib/clever-tools/clever.cjs" \
-            --set NO_UPDATE_NOTIFIER true
-
-          runHook postInstall
-        '';
-
-        npmDepsHash = "sha256-GsJlrz41q9GvFpYZcauuGXgMCG6mqSuI5gy+hxlJfUQ=";
+        npmDepsHash = "sha256-KCaLAlJtLsTpjWR8PQtgFYJg0zX5vtu78DKowjE6ygI=";
         npmDeps = final.fetchNpmDeps {
           inherit src;
           name = "${pname}-${version}-npm-deps";
@@ -76,6 +62,19 @@
       });
 
       zed-preview = prev.callPackage ./zed-preview.nix { };
+
+      # Override snacks-nvim to use specific commit
+      vimPlugins = prev.vimPlugins // {
+        snacks-nvim = prev.vimPlugins.snacks-nvim.overrideAttrs (oldAttrs: {
+          version = "unstable-2025-01-28";
+          src = prev.fetchFromGitHub {
+            owner = "folke";
+            repo = "snacks.nvim";
+            rev = "d1eaa30b1b6760d9a33b783d7a20b5ba6167b625";
+            hash = "sha256-FtGnuqaJYlZdIt2pPPSlbLEtUVwJBcI7ogUS2KcIXEM=";
+          };
+        });
+      };
     })
 
   ];
