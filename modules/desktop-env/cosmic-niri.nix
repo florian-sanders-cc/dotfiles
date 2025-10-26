@@ -15,7 +15,7 @@ let
       owner = "Drakulix";
       repo = "cosmic-ext-extra-sessions";
       rev = "66e065728d81eab86171e542dad08fb628c88494";
-      hash = "sha256-uSkxcYztCVWPwdX1q/JDK1/psUmB5/8zLhYQcDp8Dg4=";
+      hash = "sha256-6JiWdBry63NrnmK3mt9gGSDAcyx/f6L5QsIgZSUakQI=";
     };
 
     dontBuild = true;
@@ -55,46 +55,30 @@ in
 
   # Enable Niri compositor
   programs.niri.enable = true;
-  programs.xwayland.enable = true;
 
   # Add Niri and related packages to system
   environment.systemPackages = with pkgs; [
     niri
-    cosmic-ext-niri-session  # Must be in systemPackages for display manager to find the .desktop file
-    adwaita-icon-theme
+    cosmic-ext-niri-session # Must be in systemPackages for display manager to find the .desktop file
     brightnessctl
     cliphist
-    gtk4
-    kdePackages.breeze-icons
-    libadwaita
-    nautilus
     pavucontrol
     polkit_gnome
     wl-clipboard
-    xwayland-satellite
     gnome-calculator
     gnome-disk-utility
-    seahorse
-    swww
     niri-smart-focus
-    wireplumber  # For wpctl audio control
+    wireplumber # For wpctl audio control
   ];
 
-  # Enable required services
-  security.pam.services = {
-    swaylock = { };
-  };
   services.upower.enable = true;
+
+  services.gnome.gnome-keyring.enable = pkgs.lib.mkForce false;
 
   # Home Manager configuration
   home-manager.users."${currentUser.name}" = {
-    imports = [
-      ../packages/wlogout.nix
-    ];
-
     home.packages = with pkgs; [
       wl-clipboard
-      seahorse
     ];
 
     # Niri configuration (COSMIC-integrated version)
@@ -108,35 +92,9 @@ in
       source = ../../dotfiles/cosmic/com.system76.CosmicSettings.Shortcuts/v1/custom;
     };
 
-    home.sessionVariables = {
-      WAYLAND_DISPLAY = "wayland-1";
-    };
-
-    # Services configuration
-    services.gnome-keyring = {
-      enable = true;
-      components = [
-        "secrets"
-        "ssh"
-      ];
-    };
-
-    # GTK theme configuration
-    gtk = {
-      enable = true;
-      theme = {
-        name = "Breeze-Dark";
-        package = pkgs.kdePackages.breeze-gtk;
-      };
-      iconTheme = {
-        name = "Breeze-Dark";
-        package = pkgs.kdePackages.breeze-gtk;
-      };
-      cursorTheme = {
-        name = "Breeze-Dark";
-        package = pkgs.kdePackages.breeze-gtk;
-      };
-    };
+    # home.sessionVariables = {
+    #   WAYLAND_DISPLAY = "wayland-1";
+    # };
 
     # Dconf settings
     dconf = {
@@ -151,36 +109,36 @@ in
     };
 
     # Systemd services for Niri
-    systemd.user.services.niri = {
-      Unit = {
-        Description = "A scrollable-tiling Wayland compositor";
-        BindsTo = "graphical-session.target";
-        Before = "graphical-session.target";
-        Wants = "graphical-session-pre.target";
-        After = "graphical-session-pre.target";
-      };
-      Service = {
-        Slice = "session.slice";
-        Type = "notify";
-        ExecStart = "${pkgs.niri}/bin/niri --session";
-      };
-    };
+    # systemd.user.services.niri = {
+    #   Unit = {
+    #     Description = "A scrollable-tiling Wayland compositor";
+    #     BindsTo = "graphical-session.target";
+    #     Before = "graphical-session.target";
+    #     Wants = "graphical-session-pre.target";
+    #     After = "graphical-session-pre.target";
+    #   };
+    #   Service = {
+    #     Slice = "session.slice";
+    #     Type = "notify";
+    #     ExecStart = "${pkgs.niri}/bin/niri --session";
+    #   };
+    # };
 
-    systemd.user.services.xwayland-satellite = {
-      Unit = {
-        Description = "Xwayland outside your Wayland";
-        BindsTo = "graphical-session.target";
-        PartOf = "graphical-session.target";
-        After = "graphical-session.target";
-        Requisite = "graphical-session.target";
-      };
-      Service = {
-        Type = "notify";
-        NotifyAccess = "all";
-        ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
-        StandardOutput = "journal";
-      };
-      Install.WantedBy = [ "graphical-session.target" ];
-    };
+    # systemd.user.services.xwayland-satellite = {
+    #   Unit = {
+    #     Description = "Xwayland outside your Wayland";
+    #     BindsTo = "graphical-session.target";
+    #     PartOf = "graphical-session.target";
+    #     After = "graphical-session.target";
+    #     Requisite = "graphical-session.target";
+    #   };
+    #   Service = {
+    #     Type = "notify";
+    #     NotifyAccess = "all";
+    #     ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
+    #     StandardOutput = "journal";
+    #   };
+    #   Install.WantedBy = [ "graphical-session.target" ];
+    # };
   };
 }
