@@ -8,7 +8,7 @@
 {
   programs.git = {
     enable = true;
-    extraConfig = {
+    settings = {
       diff.algorithm = "histogram";
       diff.tool = "difftastic";
       difftool = {
