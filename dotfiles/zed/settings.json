@@ -1,18 +1,11 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette
 {
-  "show_edit_predictions": false,
+  "redact_private_values": true,
+  "show_edit_predictions": true,
   "edit_predictions": {
     "mode": "subtle"
   },
   "features": {
-    "edit_prediction_provider": "zed"
+    "edit_prediction_provider": "copilot"
   },
   "agent": {
     "always_allow_tool_actions": true,
@@ -61,11 +54,11 @@
     "default_profile": "write",
     "inline_assistant_model": {
       "provider": "google",
-      "model": "gemini-2.5-pro-exp-03-25"
+      "model": "gemini-2.5-flash"
     },
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4"
+      "provider": "google",
+      "model": "gemini-2.5-flash"
     }
   },
   "tab_bar": {
@@ -74,6 +67,16 @@
   "indent_guides": {
     "enabled": true,
     "coloring": "fixed"
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": true, // Show/hide inline blame
+      "delay_ms": 0, // Show after delay (ms)
+      "min_column": 0, // Minimum column to inline display blame
+      "padding": 7, // Padding between code and inline blame (em)
+      "show_commit_summary": true // Show/hide commit summary
+    },
+    "hunk_style": "staged_hollow" // staged_hollow, unstaged_hollow
   },
   "project_panel": {
     "button": true,
@@ -85,6 +88,7 @@
   },
   "vim_mode": true,
   "ui_font_size": 16,
+  "ui_font_weight": 300,
   "buffer_font_size": 16.0,
   "buffer_line_height": {
     "custom": 2.1
@@ -92,9 +96,11 @@
   "theme": {
     "mode": "system",
     "light": "One Dark",
-    "dark": "One Dark"
+    "dark": "Nordic"
   },
   "terminal": {
+    "font_weight": 399.0,
+    "dock": "bottom",
     "env": {
       "EDITOR": "zed --wait"
     }
@@ -127,7 +133,9 @@
   "tab_size": 2,
   "experimental.theme_overrides": {
     "editor.indent_guide_active": "#5B616C",
-    "editor.indent_guide": "#282c33"
+    "editor.active_line.background": "#242933",
+    "editor.indent_guide": "#242933",
+    "hint": "#465253"
   },
   "lsp": {
     "vtsls": {
@@ -145,6 +153,9 @@
           }
         },
         "javascript": {
+          "suggest": {
+            "completeFunctionCalls": true
+          },
           "tsserver": {
             "maxTsServerMemory": 16184
           },
@@ -174,9 +185,6 @@
   "languages": {
     "Markdown": {
       "show_edit_predictions": false
-    },
-    "Nix": {
-      "language_servers": ["nil"]
     },
     "HTML": {
       "language_servers": ["vscode-html-language-server", "vtsls"]
