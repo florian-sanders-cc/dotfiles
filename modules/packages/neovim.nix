@@ -17,7 +17,6 @@ let
     vscode-langservers-extracted
     vscode-json-languageserver
     wc-ls
-    kdePackages.full
     typescript
     copilot-language-server
     emmet-language-server
@@ -51,23 +50,21 @@ let
     conform-nvim
     flash-nvim
     inc-rename-nvim
-    vim-sleuth
     todo-comments-nvim
-    trouble-nvim
     persistence-nvim
     multicursor-nvim
-    grug-far-nvim
     quicker-nvim
     markdown-nvim
+    guess-indent-nvim # Automatic indent detection
 
     # Git Integration
     neogit
     diffview-nvim
-    octo-nvim
+    litee-nvim
+    gh-nvim
     gitsigns-nvim
 
     # UI & Interface
-    nui-nvim
     lualine-nvim
     which-key-nvim
     snacks-nvim
@@ -75,9 +72,11 @@ let
     markdown-preview-nvim
     (pkgs.callPackage ./neovim-plugins/nordic-nvim.nix { })
     nvim-notify
+    yazi-nvim
+    noice-nvim
 
     # Optional dependencies
-    noice-nvim
+    nui-nvim
     telescope-nvim
 
     # AI Integration
@@ -114,6 +113,7 @@ in
     plugins = plugins;
   };
 
+  # Full nvim config
   xdg.configFile."nvim" = {
     source = ../../dotfiles/nvim;
     recursive = true;

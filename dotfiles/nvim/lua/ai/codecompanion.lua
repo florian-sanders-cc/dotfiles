@@ -36,3 +36,34 @@ require("codecompanion").setup({
     },
   },
 })
+
+vim.keymap.set(
+  { "n", "v" },
+  "<leader>ai",
+  ":CodeCompanion ",
+  { desc = "AI: CodeCompanion Inline", noremap = true, silent = true }
+)
+vim.keymap.set(
+  { "n", "v" },
+  "<leader>ac",
+  "<cmd>CodeCompanionChat<CR>",
+  { desc = "AI: CodeCompanion Chat", noremap = true, silent = true }
+)
+vim.keymap.set(
+  { "n", "v" },
+  "<leader>am",
+  "<cmd>CodeCompanionCmd<CR>",
+  { desc = "AI: CodeCompanion Command", noremap = true, silent = true }
+)
+vim.keymap.set(
+  { "n", "v" },
+  "<leader>aa",
+  "<cmd>CodeCompanionActions<CR>",
+  { desc = "AI: CodeCompanion Actions", noremap = true, silent = true }
+)
+vim.keymap.set(
+  { "n", "v" },
+  "<leader>ag",
+  ":CodeCompanion <CR>",
+  { desc = "AI: CodeCompanion Resume", noremap = true, silent = true }
+)

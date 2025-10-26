@@ -49,7 +49,6 @@ vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
   end,
 })
 
-vim.opt.fillchars:append({ fold = " " })
 vim.opt.foldcolumn = "0"
 vim.opt.foldtext = get_fold_text()
 vim.opt.foldlevel = 99

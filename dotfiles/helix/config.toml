@@ -1,0 +1,42 @@
+theme = "nord-night"
+
+[editor]
+auto-format = true
+line-number = "relative"
+completion-timeout = 50
+mouse = false
+color-modes = true
+true-color = true
+cursorline = true
+bufferline = "never"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+character = "┊"
+skip-levels = 2
+render = true
+
+[editor.statusline]
+left = ["mode", "spinner", "version-control", "file-name"]
+
+[editor.inline-diagnostics]
+cursor-line = "disable"
+other-lines = "disable"
+
+[keys.normal]
+"C-s" = ":w"
+"C-m" = "save_selection"
+A-x = "extend_to_line_bounds"
+X = ["extend_line_up", "extend_to_line_bounds"]
+
+[keys.normal.g]
+D = ["vsplit", "jump_view_up", "goto_definition"]
+
+[keys.insert]
+"C-s" = ":w"
+A-x = "extend_to_line_bounds"
+X = ["extend_line_up", "extend_to_line_bounds"]

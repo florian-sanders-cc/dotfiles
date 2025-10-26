@@ -18,6 +18,7 @@ cache_dir  = ""
 [opener]
 edit = [
   { run = 'nvim "$@"', desc = "Edit with Neovim", block = true, for = "unix" },
+  { run = 'zeditor "$@"', desc = "Edit with Zed", block = true, for = "unix" },
   { run = 'hx "$@"', desc = "Edit with Helix", block = true, for = "unix" },
 ]
 open = [
@@ -36,7 +37,7 @@ play = [
 [open]
 rules = [
   { name = "*/", use = [ "edit", "open", "reveal" ] },
-  
+
   { mime = "text/*", use = [ "edit", "reveal" ] },
   { mime = "image/*", use = [ "open", "reveal" ] },
   { mime = "video/*", use = [ "play", "reveal" ] },
@@ -64,4 +65,3 @@ bizarre_retry    = 5
 image_alloc      = 536870912  # 512MB
 image_bound      = [0, 0]
 suppress_preload = false
-

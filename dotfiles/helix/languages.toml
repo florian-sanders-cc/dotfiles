@@ -1,0 +1,153 @@
+[[language]]
+name = "typescript"
+language-servers = ["vtsls", "eslint"]
+
+[[language]]
+name = "javascript"
+language-servers = [{ name = "vtsls" }, "stylelint", "eslint"]
+auto-format = true
+
+[language.formatter]
+command = "./node_modules/prettier/bin/prettier.cjs"
+args = ["--parser", "typescript"]
+
+[[language]]
+name = "nix"
+scope = "source.nix"
+injection-regex = "nix"
+file-types = ["nix"]
+shebangs = []
+comment-token = "#"
+language-servers = ["nixd"]
+
+[language.formatter]
+command = "nixfmt"
+args = []
+
+[language.indent]
+tab-width = 2
+unit = "  "
+
+[[language]]
+name = "html"
+language-servers = ["wc-language-server", "vscode-html-language-server"]
+
+[language-server.tsgo]
+command = "tsgo"
+args = ["--lsp", "--stdio"]
+
+[language-server.vtsls]
+command = "vtsls"
+args = ["--stdio"]
+required-root-patterns = ["tsconfig.json"]
+
+[language-server.vtsls.config.vtsls]
+enableMoveToFileCodeAction = true
+
+[language-server.vtsls.config.tsserver]
+maxTsServerMemory = 8192
+
+[language-server.vtsls.config.experimental.completion]
+enableServerSideFuzzyMatch = true
+entriesLimit = 50
+
+[language-server.vtsls.config.typescript.preferences]
+importModuleSpecifier = "relative"
+includePackageJsonAutoImports = "off"
+useAliasesForRenames = false
+
+[language-server.vtsls.config.typescript.preferences.format]
+enable = false
+
+[language-server.vtsls.config.typescript.suggest]
+completeFunctionCalls = true
+
+[language-server.vtsls.config.typescript.updateImportsOnFileMove]
+enabled = "always"
+
+[language-server.vtsls.config.javascript.preferences]
+importModuleSpecifier = "relative"
+includePackageJsonAutoImports = "off"
+useAliasesForRenames = false
+
+[language-server.vtsls.config.javascript.preferences.format]
+enable = false
+
+[language-server.vtsls.config.javascript.suggest]
+completeFunctionCalls = true
+
+[language-server.vtsls.config.javascript.updateImportsOnFileMove]
+enabled = "always"
+
+[language-server.eslint]
+command = "vscode-eslint-language-server"
+args = ["--stdio"]
+
+[language-server.eslint.config]
+format = true
+onIgnoredFiles = "off"
+quiet = false
+run = "onType"
+validate = "on"
+root_file = [
+  ".eslintrc",
+  ".eslintrc.js",
+  ".eslintrc.cjs",
+  ".eslintrc.yaml",
+  ".eslintrc.yml",
+  ".eslintrc.json",
+  "eslint.config.js",
+  "eslint.config.mjs",
+  "eslint.config.cjs",
+  "eslint.config.ts",
+  "eslint.config.mts",
+  "eslint.config.cts",
+]
+
+[language-server.eslint.config.codeAction.disableRuleComment]
+enable = true
+location = "separateLine"
+
+[language-server.eslint.config.codeAction.showDocumentation]
+enable = true
+
+[language-server.eslint.config.codeActionOnSave]
+enable = true
+mode = "fixAll"
+
+[language-server.eslint.config.experimental]
+useFlatConfig = true
+
+[language-server.eslint.config.problems]
+shortenToSingleLine = false
+
+[language-server.eslint.config.workingDirectory]
+mode = "location"
+
+[language-server.stylelint]
+command = "stylelint-lsp"
+args = ["--stdio"]
+
+[language-server.stylelint.config]
+root_file = [
+  ".stylelintrc",
+  ".stylelintrc.cjs",
+  ".stylelintrc.js",
+  ".stylelintrc.json",
+  ".stylelintrc.yaml",
+  ".stylelintrc.yml",
+  "stylelint.config.cjs",
+  "stylelint.config.js",
+]
+autoFixOnSave = true
+autoFixOnFormat = true
+cssInJs = true
+customSyntax = "postcss-lit"
+validate = ["css", "less", "postcss"]
+
+[language-server.nixd]
+command = "nixd"
+
+[language-server.wc-language-server]
+command = "wc-language-server"
+args = ["--stdio"]

@@ -26,7 +26,6 @@ let
 
     # CLI
     clever-tools
-    htop
     jq
     s3cmd
     jless
@@ -90,7 +89,9 @@ in
       ./fzf.nix
       ./git.nix
       ./helix.nix
-      ./neovim.nix
+      ./neovim.nix # Full-featured Neovim (command: nvim)
+      # ./neovim-alt.nix
+      # ./nvim-mini.nix # Minimal Neovim (command: nvim-mini)
       ./starship.nix
       ./vscode.nix
       ./zed.nix
@@ -98,7 +99,7 @@ in
       ./zellij.nix
       ./zsh.nix
       ./ghostty.nix
-      ./opencode.nix
+      # ./opencode.nix
       ./waybar.nix
       ./yazi.nix
     ];

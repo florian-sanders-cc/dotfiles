@@ -62,7 +62,15 @@
       "space -": "pane::SplitDown",
 
       // File explorer (matches Neovim <leader>e)
-      "space e": "workspace::ToggleLeftDock",
+      "space e": [
+        "task::Spawn",
+        { "task_name": "Yazi File Manager", "reveal_target": "center" }
+      ],
+
+      "space g D": [
+        "task::Spawn",
+        { "task_name": "Neogit", "reveal_target": "center" }
+      ],
 
       // File finding (matches Neovim)
       "space space": "file_finder::Toggle", // <leader><space>

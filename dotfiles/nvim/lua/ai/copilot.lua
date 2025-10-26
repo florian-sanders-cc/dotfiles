@@ -1,7 +1,7 @@
 require("copilot").setup({
   suggestion = {
     enabled = true,
-    auto_trigger = false, -- Manual trigger only
+    auto_trigger = true, -- Manual trigger only
     hide_during_completion = true,
     debounce = 75,
     keymap = {
@@ -46,10 +46,9 @@ require("copilot").setup({
 -- Manual trigger command
 vim.keymap.set("i", "<C-g>", function()
   require("copilot.suggestion").toggle_auto_trigger()
-end, { desc = "Copilot: Toggle auto trigger" })
+end, { desc = "AI: Copilot Toggle Auto Trigger" })
 
 -- Manual suggestion trigger
 vim.keymap.set("i", "<M-\\>", function()
   require("copilot.suggestion").next()
-end, { desc = "Copilot: Request suggestion" })
-
+end, { desc = "AI: Copilot Request Suggestion" })

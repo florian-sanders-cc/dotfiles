@@ -18,22 +18,15 @@
     enable = true;
   };
 
-  security.pam.services.greetd.enableGnomeKeyring = true;
+  services.gnome.gnome-keyring.enable = pkgs.lib.mkForce false;
 
   # Dark theme preference and tiling mode
   home-manager.users."${currentUser.name}" = {
     home.packages = with pkgs; [
       wl-clipboard
       seahorse
+      polkit_gnome
     ];
-
-    services.gnome-keyring = {
-      enable = true;
-      components = [
-        "secrets"
-        "ssh"
-      ];
-    };
 
     dconf = {
       enable = true;

@@ -81,13 +81,8 @@ require("lualine").setup({
   extensions = {},
 })
 
--- Configure Which-key (Key binding help)
-require("which-key").setup()
-
 require("nvim-web-devicons").setup({})
 require("todo-comments").setup({})
-
--- UI keymaps and which-key configuration are now consolidated in plugin/keymaps.lua
 
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
