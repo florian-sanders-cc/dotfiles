@@ -1,9 +1,6 @@
--- FIXME: delay with snacks explorer
--- copilot
--- ┌─────────────────────────┐
--- │ Core Configuration      │
--- └─────────────────────────┘
--- Load options first as it initializes _G.Config
+-- -- ┌─────────────────────────┐
+-- -- │ Core Configuration      │
+-- -- └─────────────────────────┘
 
 require("core.mini-extra") -- Load before other mini modules that might use it
 require("core.options") -- Includes mini.misc setup, autocmds, and keymaps
