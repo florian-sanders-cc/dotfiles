@@ -76,6 +76,10 @@ opt.smartcase = true -- Override ignorecase if uppercase used
 opt.hlsearch = true -- Highlight search results
 opt.inccommand = "split" -- Live preview of substitutions
 
+-- Line numbers
+opt.number = true -- Show absolute line numbers
+opt.relativenumber = false -- Disable relative line numbers
+
 -- Scrolling and cursor
 opt.scrolloff = 10 -- Keep 10 lines above/below cursor (LazyVim uses 10, native used 8)
 opt.wrap = false -- Disable line wrapping
