@@ -15,6 +15,14 @@ require("inc_rename").setup({
   input_buffer_type = nil, -- Use inc_rename's default input
 })
 
+-- Delete default Neovim 0.10+ LSP keymaps (created in vim/_defaults.lua)
+-- These are global keymaps that conflict with our custom gr mapping
+pcall(vim.keymap.del, 'n', 'grr')
+pcall(vim.keymap.del, 'n', 'gra')
+pcall(vim.keymap.del, 'n', 'grn')
+pcall(vim.keymap.del, 'n', 'gri')
+pcall(vim.keymap.del, 'n', 'grt')
+
 vim.lsp.enable({
   "nil_ls",
   "gopls",
@@ -110,6 +118,10 @@ end, { desc = "LSP: Goto Implementation" })
 vim.keymap.set({ "n", "v" }, "gy", function()
   require("snacks").picker.lsp_type_definitions()
 end, { desc = "LSP: Goto Type Definition" })
+
+vim.keymap.set({ "n", "v" }, "gr", function()
+  require("snacks").picker.lsp_references()
+end, { desc = "LSP: References" })
 
 -- vtsls-specific commands
 vim.keymap.set("n", "gS", function()
