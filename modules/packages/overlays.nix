@@ -34,6 +34,8 @@
 
       wc-ls = prev.callPackage ./wc-ls.nix { };
 
+      gh-actions-ls = prev.callPackage ./gh-actions-ls.nix { };
+
       wallpapers = prev.callPackage ./wallpapers.nix { };
 
       icons = prev.callPackage ./icons.nix { };
