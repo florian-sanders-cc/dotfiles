@@ -33,6 +33,7 @@ vim.lsp.enable({
   "vtsls",
   "json-ls",
   "html-ls",
+  "gh-actions-ls",
 })
 
 vim.diagnostic.config({

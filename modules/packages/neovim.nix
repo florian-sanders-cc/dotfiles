@@ -20,6 +20,7 @@ let
     typescript
     copilot-language-server
     emmet-language-server
+    gh-actions-ls
   ];
 
   formatters = with pkgs; [
