@@ -147,3 +147,4 @@ end
 
 nmap_leader("wr", "<Cmd>lua MiniMisc.resize_window()<CR>", "Resize to default width")
 nmap_leader("wz", "<Cmd>lua MiniMisc.zoom()<CR>", "Zoom toggle")
+vim.keymap.set("n", "<Esc>", "<Cmd>noh<CR>", { desc = "Clear search highlight" })
