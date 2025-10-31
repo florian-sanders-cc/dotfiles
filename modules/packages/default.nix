@@ -16,7 +16,7 @@ let
 
     # Browsers
     ungoogled-chromium
-    firefox-wayland
+    firefox
     google-chrome
     epiphany
 
