@@ -44,22 +44,22 @@
 
       # ghostty-nightly = inputs.ghostty-flake.packages.${prev.system}.default;
 
-      clever-tools = prev.clever-tools.overrideAttrs (_: rec {
-        pname = "clever-tools";
-        version = "4.3.0";
-        src = prev.fetchFromGitHub {
-          owner = "CleverCloud";
-          repo = "clever-tools";
-          rev = version;
-          hash = "sha256-YC6wfa8bz21LhOH5YIRZ94rLxWl4f1m24jmAAsTvbS0=";
-        };
-        npmDepsHash = "sha256-KCaLAlJtLsTpjWR8PQtgFYJg0zX5vtu78DKowjE6ygI=";
-        npmDeps = final.fetchNpmDeps {
-          inherit src;
-          name = "${pname}-${version}-npm-deps";
-          hash = npmDepsHash;
-        };
-      });
+      # clever-tools = prev.clever-tools.overrideAttrs (_: rec {
+      #   pname = "clever-tools";
+      #   version = "4.3.0";
+      #   src = prev.fetchFromGitHub {
+      #     owner = "CleverCloud";
+      #     repo = "clever-tools";
+      #     rev = version;
+      #     hash = "sha256-YC6wfa8bz21LhOH5YIRZ94rLxWl4f1m24jmAAsTvbS0=";
+      #   };
+      #   npmDepsHash = "sha256-KCaLAlJtLsTpjWR8PQtgFYJg0zX5vtu78DKowjE6ygI=";
+      #   npmDeps = final.fetchNpmDeps {
+      #     inherit src;
+      #     name = "${pname}-${version}-npm-deps";
+      #     hash = npmDepsHash;
+      #   };
+      # });
 
       zed-preview = prev.callPackage ./zed-preview.nix { };
 
