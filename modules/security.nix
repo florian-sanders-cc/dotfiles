@@ -42,7 +42,7 @@ in
       enableZshIntegration = true;
       enableBashIntegration = true;
       enableNushellIntegration = true;
-      pinentry.package = pkgs.pinentry.gtk2;
+      pinentry.package = pkgs.pinentry-curses;
       # Declaratively manage SSH keys (sshcontrol file)
       sshKeys = lib.optionals (currentUser ? gpgAuthKeygrip && currentUser.gpgAuthKeygrip != null) [
         currentUser.gpgAuthKeygrip
