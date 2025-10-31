@@ -131,7 +131,7 @@ binds {
     Mod+quotedbl { spawn "smart-focus-chromium"; }
     Mod+Shift+quotedbl { spawn "smart-focus-chromium" "true"; }
     Mod+D { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Super+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "toggle"; }
+    Super+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "volume" "increase"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "volume" "decrease"; }
