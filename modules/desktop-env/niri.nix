@@ -31,6 +31,8 @@
     kdePackages.qtwayland
   ];
 
+  services.orca.enable = true;
+
   services.displayManager = {
     gdm = {
       enable = true;

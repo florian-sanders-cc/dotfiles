@@ -35,7 +35,6 @@ let
     # Utility
     vlc
     inkscape
-    orca
     loupe
     btop
 
