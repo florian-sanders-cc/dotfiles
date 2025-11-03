@@ -72,9 +72,11 @@
           src = prev.fetchFromGitHub {
             owner = "folke";
             repo = "snacks.nvim";
-            rev = "d1eaa30b1b6760d9a33b783d7a20b5ba6167b625";
-            hash = "sha256-FtGnuqaJYlZdIt2pPPSlbLEtUVwJBcI7ogUS2KcIXEM=";
+            rev = "eadb0ca316ee9af078a181ff9517ce54cb048769";
+            hash = "sha256-Kr8NbQ4V0ShJktqQDygd6NN6A6szkcVMlTxhQjjs/AE=";
           };
+          # Disable checks - too many modules with optional dependencies
+          doCheck = false;
         });
       };
     })
