@@ -1,0 +1,5 @@
+return {
+  gh = {
+    enabled = true,
+  },
+}
