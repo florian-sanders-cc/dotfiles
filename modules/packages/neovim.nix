@@ -62,7 +62,7 @@ let
     neogit
     diffview-nvim
     litee-nvim
-    gh-nvim
+    octo-nvim
     gitsigns-nvim
 
     # UI & Interface
