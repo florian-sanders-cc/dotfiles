@@ -4,15 +4,15 @@
 {
   nixpkgs.overlays = [
     (final: prev: {
-      neovim-nightly = inputs.neovim-nightly-overlay.packages.${prev.system}.default;
+      neovim-nightly = inputs.neovim-nightly-overlay.packages.${prev.stdenv.hostPlatform.system}.default;
 
       noctalia-qs = (
-        inputs.noctalia.defaultPackage.${prev.system}.override {
+        inputs.noctalia.defaultPackage.${prev.stdenv.hostPlatform.system}.override {
           quickshell = prev.quickshell;
         }
       );
 
-      helix-nightly = inputs.helix-flake.packages.${prev.system}.default;
+      helix-nightly = inputs.helix-flake.packages.${prev.stdenv.hostPlatform.system}.default;
 
       # opencode = prev.opencode.overrideAttrs (oldAttrs: rec {
       #   version = "v0.10.2";
@@ -44,7 +44,7 @@
 
       niri-smart-focus = prev.callPackage ./niri-smart-focus.nix { };
 
-      # ghostty-nightly = inputs.ghostty-flake.packages.${prev.system}.default;
+      # ghostty-nightly = inputs.ghostty-flake.packages.${prev.stdenv.hostPlatform.system}.default;
 
       # clever-tools = prev.clever-tools.overrideAttrs (_: rec {
       #   pname = "clever-tools";
