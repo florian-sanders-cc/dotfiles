@@ -132,6 +132,7 @@ autocmd("TextYankPost", {
 })
 
 -- Auto-reload files when changed externally
+vim.o.autoread = true
 autocmd({ "FocusGained", "BufEnter" }, {
   command = "if mode() != 'c' | checktime | endif",
   pattern = "*",
