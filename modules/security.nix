@@ -30,8 +30,14 @@ in
   security.pam.services.greetd.gnupg.enable = true;
   security.pam.services.cosmic-greeter.gnupg.enable = true;
   security.pam.services.login.gnupg.enable = true;
-  security.pam.services.gdm.gnupg.enable = true;
-  security.pam.services.gdm-password.gnupg.enable = true;
+  security.pam.services.gdm.gnupg = {
+    enable = true;
+    storeOnly = true;  # Only store the password, don't try to unlock yet
+  };
+  security.pam.services.gdm-password.gnupg = {
+    enable = true;
+    storeOnly = false;  # Actually unlock the keys here
+  };
 
   # GPG Agent configuration (via home-manager for user-level control)
   home-manager.users."${currentUser.name}" = {
@@ -42,7 +48,7 @@ in
       enableZshIntegration = true;
       enableBashIntegration = true;
       enableNushellIntegration = true;
-      pinentry.package = pkgs.pinentry-curses;
+      pinentryPackage = pkgs.pinentry-curses;
       # Declaratively manage SSH keys (sshcontrol file)
       sshKeys = lib.optionals (currentUser ? gpgAuthKeygrip && currentUser.gpgAuthKeygrip != null) [
         currentUser.gpgAuthKeygrip
@@ -50,6 +56,8 @@ in
       # Extra configuration for gpg-agent
       extraConfig = ''
         allow-preset-passphrase
+        max-cache-ttl 86400
+        default-cache-ttl 86400
       '';
     };
 

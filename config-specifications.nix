@@ -12,10 +12,10 @@
     perso = {
       name = "flo-perso";
       email = "sanders.florian@gmail.com";
-      signingKey = "32343690B0FD8FBE";
+      signingKey = "C2A263F2131110D9";
       homeDirectory = "/home/flo-perso";
-      gpgAuthKeygrip = "204ED92B49B381141FB96E8A51BF930F62214CB9";
-      gpgSignKeygrip = "4109515F1927FE595547F3CCEDC8764253C92397";
+      gpgAuthKeygrip = "D502513E4CA32CEAC0330DA6EB7E4167AD59A624";
+      gpgSignKeygrip = "503721A138EF6C5297834C31A1D7F65BE2EC1456";
     };
     perso-workstation = {
       name = "flo-perso-workstation";
