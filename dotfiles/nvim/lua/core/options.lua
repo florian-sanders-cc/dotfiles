@@ -149,3 +149,7 @@ end
 nmap_leader("wr", "<Cmd>lua MiniMisc.resize_window()<CR>", "Resize to default width")
 nmap_leader("wz", "<Cmd>lua MiniMisc.zoom()<CR>", "Zoom toggle")
 vim.keymap.set("n", "<Esc>", "<Cmd>noh<CR>", { desc = "Clear search highlight" })
+
+vim.api.nvim_create_user_command("TermHl", function()
+  vim.api.nvim_open_term(0, {})
+end, { desc = "Highlights ANSI termcodes in the current buffer" })
