@@ -20,10 +20,10 @@
     perso-workstation = {
       name = "flo-perso-workstation";
       email = "sanders.florian@gmail.com";
-      signingKey = "F26A9005C2DC3FB7";
+      signingKey = "3E4FEFB93BE2B45F";
       homeDirectory = "/home/flo-perso-workstation";
-      gpgAuthKeygrip = "6EDF2C2580763C5447F637AFBE930E626149530A";
-      gpgSignKeygrip = "122D9EE3BCD9EBA2ABC322B5C93D5DC4D463493D";
+      gpgAuthKeygrip = "EB56941A73AA1135AC44A832859F49740E224071";
+      gpgSignKeygrip = "C97E78A16EB977D4CB6BF29FF681ACBAECF330E4";
     };
   };
 
