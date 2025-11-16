@@ -12,7 +12,7 @@
         }
       );
 
-      helix-nightly = inputs.helix-flake.packages.${prev.stdenv.hostPlatform.system}.default;
+      # helix-nightly = inputs.helix-flake.packages.${prev.stdenv.hostPlatform.system}.default;
 
       # opencode = prev.opencode.overrideAttrs (oldAttrs: rec {
       #   version = "v0.10.2";
