@@ -13,6 +13,7 @@ let
 in
 {
   imports = [
+    ./gpu.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
