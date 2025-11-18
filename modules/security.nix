@@ -32,11 +32,11 @@ in
   security.pam.services.login.gnupg.enable = true;
   security.pam.services.gdm.gnupg = {
     enable = true;
-    storeOnly = true;  # Only store the password, don't try to unlock yet
+    storeOnly = true; # Only store the password, don't try to unlock yet
   };
   security.pam.services.gdm-password.gnupg = {
     enable = true;
-    storeOnly = false;  # Actually unlock the keys here
+    storeOnly = false; # Actually unlock the keys here
   };
 
   # GPG Agent configuration (via home-manager for user-level control)
@@ -48,7 +48,7 @@ in
       enableZshIntegration = true;
       enableBashIntegration = true;
       enableNushellIntegration = true;
-      pinentryPackage = pkgs.pinentry-curses;
+      pinentry.package = pkgs.pinentry-curses;
       # Declaratively manage SSH keys (sshcontrol file)
       sshKeys = lib.optionals (currentUser ? gpgAuthKeygrip && currentUser.gpgAuthKeygrip != null) [
         currentUser.gpgAuthKeygrip
