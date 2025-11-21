@@ -16,6 +16,7 @@
     gtk4
     libadwaita
     nautilus
+    orca
     pavucontrol
     polkit_gnome
     wl-clipboard
@@ -31,7 +32,7 @@
     kdePackages.qtwayland
   ];
 
-  services.orca.enable = true;
+  services.gnome.at-spi2-core.enable = true;
 
   services.displayManager = {
     gdm = {
