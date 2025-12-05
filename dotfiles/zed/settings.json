@@ -8,58 +8,8 @@
     "edit_prediction_provider": "copilot"
   },
   "agent": {
-    "always_allow_tool_actions": true,
-    "profiles": {
-      "ask": {
-        "name": "Ask",
-        "tools": {
-          "contents": true,
-          "diagnostics": true,
-          "fetch": true,
-          "list_directory": true,
-          "project_notifications": false,
-          "now": true,
-          "find_path": true,
-          "read_file": true,
-          "open": true,
-          "grep": true,
-          "thinking": true,
-          "web_search": true
-        },
-        "enable_all_context_servers": false,
-        "context_servers": {
-          "claude-code": {
-            "tools": {
-              "Write": true,
-              "WebSearch": true,
-              "WebFetch": true,
-              "TodoWrite": true,
-              "Task": true,
-              "Read": true,
-              "NotebookEdit": true,
-              "MultiEdit": true,
-              "LS": true,
-              "KillBash": true,
-              "Grep": true,
-              "Glob": true,
-              "ExitPlanMode": true,
-              "Edit": true,
-              "BashOutput": true,
-              "Bash": true
-            }
-          }
-        }
-      }
-    },
-    "default_profile": "write",
-    "inline_assistant_model": {
-      "provider": "google",
-      "model": "gemini-2.5-flash"
-    },
-    "default_model": {
-      "provider": "google",
-      "model": "gemini-2.5-flash"
-    }
+    "default_profile": "ask",
+    "model_parameters": []
   },
   "tab_bar": {
     "show": false
@@ -116,7 +66,7 @@
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "buffer_font_weight": 300,
   // use relative line numbers
-  "relative_line_numbers": false,
+  "relative_line_numbers": "disabled",
   // hide the scroll bar
   "scrollbar": {
     "show": "never"
