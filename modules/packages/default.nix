@@ -51,7 +51,7 @@ let
     usage
     neovide
     claude-code
-    gemini-cli
+    opencode
     stu
     stylelint-ls
     lsof
