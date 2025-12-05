@@ -88,6 +88,13 @@ in
     };
   };
 
+  services.osquery = lib.mkIf (currentUser.name == specs.users.pro.name) {
+    enable = true;
+    flags = {
+      flagfile = "/etc/osquery/osquery.flags";
+    };
+  };
+
   # ClamAV
   services.clamav.daemon.enable = true;
   services.clamav.daemon.settings = {
