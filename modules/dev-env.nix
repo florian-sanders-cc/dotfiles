@@ -1,14 +1,12 @@
-{ pkgs, config, currentUser, ... }:
+{
+  pkgs,
+  ...
+}:
 
 {
   services.httpd.enable = false;
   services.httpd.adminAddr = "webmaster@example.org";
   services.httpd.enablePHP = false;
-
-  # TODO: remove
-  # services.httpd.virtualHosts."yahoo.com" = {
-  #   documentRoot = "${currentUser.homeDirectory}/test";
-  # };
 
   # move to db?
   services.mysql.enable = false;
@@ -16,6 +14,6 @@
 
   services.ollama = {
     enable = false;
-    acceleration = "cuda";
+    package = pkgs.ollama-cuda;
   };
 }
