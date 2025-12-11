@@ -88,7 +88,10 @@
     dconf = {
       enable = true;
       settings = {
-        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+        "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
+          enable-animations = true;
+        };
         "org/gnome/desktop/default-applications/terminal" = {
           exec = "alacritty";
           exec-arg = "-e";
