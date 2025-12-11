@@ -51,7 +51,7 @@
     };
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell?ref=v3.5.0";
+      url = "github:noctalia-dev/noctalia-shell?ref=v3.6.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
