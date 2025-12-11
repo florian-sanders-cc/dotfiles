@@ -1,4 +1,37 @@
+-- Filetypes where Copilot should never attach (security/privacy)
+local disabled_filetypes = {
+  "dotenv",
+  "yaml",
+  "markdown",
+  "help",
+  "gitcommit",
+  "gitrebase",
+  "hgcommit",
+  "svn",
+  "cvs",
+}
+
 require("copilot").setup({
+  -- Prevent LSP from attaching to sensitive files
+  -- Signature: should_attach(bufnr, bufname)
+  should_attach = function(bufnr, bufname)
+    local filename = vim.fs.basename(bufname or "")
+
+    -- Block .env* files by filename pattern
+    if filename and string.match(filename, "^%.env") then
+      return false
+    end
+
+    -- Block by filetype
+    local ft = vim.bo[bufnr].filetype
+    for _, disabled_ft in ipairs(disabled_filetypes) do
+      if ft == disabled_ft then
+        return false
+      end
+    end
+
+    return true
+  end,
   suggestion = {
     enabled = true,
     auto_trigger = true, -- Manual trigger only
@@ -37,6 +70,7 @@ require("copilot").setup({
     hgcommit = false,
     svn = false,
     cvs = false,
+    dotenv = false,
     ["."] = false,
   },
   copilot_node_command = "node", -- Node.js version must be > 18.x
