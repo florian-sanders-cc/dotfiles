@@ -45,9 +45,9 @@ opt.shellxquote = ""
 opt.autoindent = true -- Enable auto indentation
 opt.breakindent = true -- Enable break indent
 opt.expandtab = true -- Use spaces instead of tabs
-opt.tabstop = 4 -- Number of spaces for a tab
-opt.softtabstop = 4 -- Number of spaces for a tab when editing
-opt.shiftwidth = 4 -- Number of spaces for autoindent
+opt.tabstop = 2 -- Number of spaces for a tab
+opt.softtabstop = 2 -- Number of spaces for a tab when editing
+opt.shiftwidth = 2 -- Number of spaces for autoindent
 opt.shiftround = true -- Round indent to multiple of shiftwidth
 
 -- ┌─────────────────────────┐
