@@ -18,6 +18,7 @@ let
     vscode-json-languageserver
     wc-ls
     typescript
+    typescript-go
     copilot-language-server
     emmet-language-server
     gh-actions-ls
