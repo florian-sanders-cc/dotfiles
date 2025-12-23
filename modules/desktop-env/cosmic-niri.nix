@@ -102,7 +102,7 @@ in
       settings = {
         "org/gnome/desktop/interface".color-scheme = "prefer-dark";
         "org/gnome/desktop/default-applications/terminal" = {
-          exec = "alacritty";
+          exec = "kitty";
           exec-arg = "-e";
         };
       };

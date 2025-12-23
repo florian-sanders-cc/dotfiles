@@ -1,7 +1,7 @@
 [
   {
     "label": "Neogit",
-    "command": "alacritty -e nvim -c Neogit",
+    "command": "kitty -e nvim -c Neogit",
     "args": [],
     "env": {},
     "use_new_terminal": true,
@@ -16,7 +16,7 @@
   },
   {
     "label": "Yazi File Manager",
-    "command": "alacritty -e yazi",
+    "command": "kitty -e yazi",
     "args": [],
     "env": { "EDITOR": "zed --wait" },
     "use_new_terminal": false,

@@ -106,9 +106,9 @@ in
         "audio/mpeg" = [ "vlc.desktop" ];
         "audio/x-wav" = [ "vlc.desktop" ];
         "audio/ogg" = [ "vlc.desktop" ];
-        "inode/directory" = [ "yazi-alacritty.desktop" ];
-        "x-directory/normal" = [ "yazi-alacritty.desktop" ];
-        "x-scheme-handler/terminal" = [ "alacritty.desktop" ];
+        "inode/directory" = [ "yazi-kitty.desktop" ];
+        "x-directory/normal" = [ "yazi-kitty.desktop" ];
+        "x-scheme-handler/terminal" = [ "kitty.desktop" ];
       };
     };
 
@@ -129,7 +129,7 @@ in
       NPM_PREFIX = "${home.homeDirectory}/.npm-packages";
       PATH = "${home.homeDirectory}/.npm-packages/bin:$PATH";
       NIXOS_OZONE_WL = "1";
-      TERMINAL = "alacritty";
+      TERMINAL = "kitty";
     };
   };
 

@@ -100,6 +100,6 @@
     "tooltip-format-ethernet": "{ifname} ",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50,
-    "on-click": "alacritty --class floating -e nmtui"
+    "on-click": "kitty --class floating -e nmtui"
   }
 }

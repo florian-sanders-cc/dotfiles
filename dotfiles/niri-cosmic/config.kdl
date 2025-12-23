@@ -116,13 +116,13 @@ binds {
     Mod+Shift+Colon { show-hotkey-overlay; }
 
     // COSMIC-integrated terminal and launcher
-    Mod+ampersand { spawn "alacritty"; }
+    Mod+ampersand { spawn "kitty"; }
     Mod+D { spawn "cosmic-launcher"; }
     Mod+Shift+D { spawn "cosmic-app-library"; }
     Mod+Alt+L { spawn "cosmic-greeter"; }
 
     // Keep your smart-focus bindings
-    Mod+Shift+ampersand { spawn "smart-focus-terminal" "alacritty"; }
+    Mod+Shift+ampersand { spawn "smart-focus-terminal" "kitty"; }
     Mod+eacute { spawn "smart-focus-firefox"; }
     Mod+Shift+eacute { spawn "smart-focus-firefox" "true"; }
     Mod+quotedbl { spawn "smart-focus-chromium"; }

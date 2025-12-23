@@ -131,7 +131,7 @@ binds {
     Mod+Shift+Colon { show-hotkey-overlay; }
 
     Mod+ampersand { spawn "smart-focus-terminal"; }
-    Mod+Shift+ampersand { spawn "smart-focus-terminal" "alacritty"; }
+    Mod+Shift+ampersand { spawn "smart-focus-terminal" "kitty"; }
     Mod+eacute { spawn "smart-focus-firefox"; }
     Mod+Shift+eacute { spawn "smart-focus-firefox" "true"; }
     Mod+quotedbl { spawn "smart-focus-chromium"; }

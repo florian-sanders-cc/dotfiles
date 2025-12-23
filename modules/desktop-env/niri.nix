@@ -93,7 +93,7 @@
           enable-animations = true;
         };
         "org/gnome/desktop/default-applications/terminal" = {
-          exec = "alacritty";
+          exec = "kitty";
           exec-arg = "-e";
         };
       };

@@ -23,7 +23,7 @@ set -euo pipefail
 # Default list of known terminal app_ids
 DEFAULT_TERMINAL_APP_IDS="com.mitchellh.ghostty Alacritty kitty foot org.gnome.Terminal org.kde.konsole rio"
 TERMINAL_APP_IDS="${TERMINAL_APP_IDS:-$DEFAULT_TERMINAL_APP_IDS}"
-TERMINAL_CMD="${TERMINAL_CMD:-alacritty}"
+TERMINAL_CMD="${TERMINAL_CMD:-kitty}"
 
 # Function to get all window information from niri
 get_windows() {

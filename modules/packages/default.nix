@@ -95,6 +95,7 @@ in
       ./vscode.nix
       ./zed.nix
       ./zoxide.nix
+      ./kitty.nix
       ./zellij.nix
       ./zsh.nix
       ./ghostty.nix
