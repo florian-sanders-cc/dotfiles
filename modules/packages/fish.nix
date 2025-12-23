@@ -198,6 +198,20 @@
           end
 
           auto_start_zellij
+
+          # Alt-H: Run current command with --help, then restore command
+          function __fish_help_command
+              set -l cmd (commandline)
+              if test -n "$cmd"
+                  commandline -r ""
+                  echo
+                  eval $cmd --help
+                  commandline -r $cmd
+                  commandline -f repaint
+              end
+          end
+          bind -M insert \eh __fish_help_command
+          bind -M default \eh __fish_help_command
       '';
   };
   xdg.configFile."fish/completions/clever.fish".source = ../../dotfiles/fish/completions/clever.fish;
