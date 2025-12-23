@@ -2,13 +2,12 @@
 
 pkgs.vimUtils.buildVimPlugin {
   pname = "nordic.nvim";
-  version = "2025-05-15";
+  version = "2025-12-22";
   src = pkgs.fetchFromGitHub {
     owner = "AlexvZyl";
     repo = "nordic.nvim";
-    rev = "6afe957722fb1b0ec7ca5fbea5a651bcca55f3e1";
-    sha256 = "sha256-NY4kjeq01sMTg1PZeVVa2Vle4KpLwWEv4y34cDQ6JMU=";
+    rev = "082b61f583317cb529530c85466541d5442a2aae";
+    sha256 = "sha256-1eOPlBmV9OK/YyV+wO5nel6n2GXMuLddV+66q3mY4Qg=";
   };
   meta.homepage = "https://github.com/AlexvZyl/nordic.nvim";
-  meta.hydraPlatforms = [ ];
 }
