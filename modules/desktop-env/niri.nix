@@ -60,6 +60,9 @@
 
   home-manager.users."${currentUser.name}" = {
 
+    # Polkit authentication agent for run0 and other privilege escalation
+    services.polkit-gnome.enable = true;
+
     home.file.".config/niri" = {
       source = ../../dotfiles/niri;
       recursive = true;

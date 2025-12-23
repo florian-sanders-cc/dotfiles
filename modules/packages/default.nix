@@ -31,6 +31,7 @@ let
     jless
     git-absorb
     gh
+    sops
 
     # Utility
     vlc

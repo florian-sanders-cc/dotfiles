@@ -9,5 +9,6 @@
     ./packages
     ./dev-env.nix
     ./security.nix
+    ./secrets.nix
   ];
 }

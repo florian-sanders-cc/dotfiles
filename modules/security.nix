@@ -48,7 +48,7 @@ in
       enableZshIntegration = true;
       enableBashIntegration = true;
       enableNushellIntegration = true;
-      pinentry.package = pkgs.pinentry-curses;
+      pinentry.package = pkgs.pinentry-gnome3;
       # Declaratively manage SSH keys (sshcontrol file)
       sshKeys = lib.optionals (currentUser ? gpgAuthKeygrip && currentUser.gpgAuthKeygrip != null) [
         currentUser.gpgAuthKeygrip
@@ -56,8 +56,8 @@ in
       # Extra configuration for gpg-agent
       extraConfig = ''
         allow-preset-passphrase
-        max-cache-ttl 86400
-        default-cache-ttl 86400
+        max-cache-ttl 900
+        default-cache-ttl 300
       '';
     };
 
