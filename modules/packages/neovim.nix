@@ -56,7 +56,7 @@ let
     multicursor-nvim
     quicker-nvim
     markdown-nvim
-    guess-indent-nvim # Automatic indent detection
+    vim-sleuth # Automatic indent detection
 
     # Git Integration
     neogit
