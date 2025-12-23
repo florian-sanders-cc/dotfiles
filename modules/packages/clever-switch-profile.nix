@@ -1,19 +1,27 @@
 {
-  stdenv,
-  pkgs,
+  buildNpmPackage,
+  fetchFromGitHub,
+  nodejs_22,
   ...
 }:
 
-stdenv.mkDerivation {
-  name = "clever-switch-profile";
-  version = "0.1.0";
-  src = ../../dotfiles/clever-tools;
-  nativeBuildInputs = [ pkgs.makeWrapper ];
+buildNpmPackage rec {
+  pname = "clever-switch-profile";
+  version = "4.4.1";
+
+  src = fetchFromGitHub {
+    owner = "CleverCloud";
+    repo = "clever-tools";
+    rev = version;
+    hash = "sha256-ssbm2XevvB1zzVVeOUTxUUKcD8smlsOjy9efnFLw03M=";
+  };
 
   installPhase = ''
-    mkdir -p $out/bin $out/src
-    cp clever-switch-profile.js $out/src
-    makeWrapper ${pkgs.nodejs_22}/bin/node $out/bin/clever-switch-profile \
-      --add-flags "$out/src/clever-switch-profile.js"
+    cp -r . $out
+    makeWrapper ${nodejs_22}/bin/node $out/bin/clever-switch-profile \
+      --add-flags "$out/scripts/switch-profile.js"
   '';
+
+  npmDepsHash = "sha256-VxFxMvbkEnjooSq1Ats4tC8Dcqr3EVffccxOXNha4MY=";
+  dontNpmBuild = true;
 }
