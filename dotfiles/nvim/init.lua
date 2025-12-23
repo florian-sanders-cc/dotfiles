@@ -41,6 +41,7 @@ require("navigation.mini-visits")
 -- -- │ UI Plugins              │
 -- -- └─────────────────────────┘
 
+require("ui.render-markdown")
 require("ui.which-key") -- Load first so plugins can register keymaps
 require("ui.statusline")
 require("ui.mini-starter")
@@ -54,7 +55,6 @@ require("ui.noice")
 -- -- └─────────────────────────┘
 
 require("editing.mini-basics")
-require("editing.guess-indent")
 require("editing.mini-ai")
 require("editing.mini-align")
 require("editing.mini-bracketed")

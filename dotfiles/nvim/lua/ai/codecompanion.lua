@@ -1,5 +1,5 @@
 require("codecompanion").setup({
-  strategies = {
+  interactions = {
     chat = {
       adapter = "copilot",
     },
@@ -19,7 +19,7 @@ require("codecompanion").setup({
           role = "system",
           content = function()
             return string.format(
-              [[You are an expert at following the Conventional Commit specification. Given the git diff listed below, please generate a commit message for me:
+              [[You are an expert at following the Conventional Commit specification. Given the git diff listed below, please generate a commit message for me. Make sure to use 80 characters per line maximum:
 
 ```diff
 %s

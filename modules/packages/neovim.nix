@@ -72,6 +72,7 @@ let
     snacks-nvim
     mini-nvim
     markdown-preview-nvim
+    render-markdown-nvim
     (pkgs.callPackage ./neovim-plugins/nordic-nvim.nix { })
     nvim-notify
     yazi-nvim
