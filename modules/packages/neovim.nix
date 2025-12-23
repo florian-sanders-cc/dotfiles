@@ -85,8 +85,6 @@ let
     claudecode-nvim
     codecompanion-nvim
     copilot-lua
-    # copilot-vim
-    # blink-copilot
   ];
 
 in
@@ -97,7 +95,7 @@ in
     vimAlias = true;
     withNodeJs = true;
     defaultEditor = true;
-    # package = pkgs.neovim-nightly;
+    package = pkgs.neovim-nightly;
 
     extraPackages =
       with pkgs;
