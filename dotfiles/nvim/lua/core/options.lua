@@ -31,8 +31,8 @@ opt.secure = true -- Temporarily disable for testing
 -- Mouse
 opt.mouse = "" -- Disable mouse
 
--- Clipboard
-opt.clipboard = "unnamedplus" -- Sync with system clipboard
+-- Clipboard (Helix-style: operations don't touch system clipboard by default)
+opt.clipboard = ""
 
 -- Shell
 opt.shell = vim.env.SHELL or "/usr/bin/sh"
@@ -150,6 +150,18 @@ nmap_leader("wr", "<Cmd>lua MiniMisc.resize_window()<CR>", "Resize to default wi
 nmap_leader("wz", "<Cmd>lua MiniMisc.zoom()<CR>", "Zoom toggle")
 vim.keymap.set("n", "<Esc>", "<Cmd>noh<CR>", { desc = "Clear search highlight" })
 
+-- Clipboard (Helix-style): explicit system clipboard access
+vim.keymap.set({ "n", "v" }, "<Leader>y", '"+y', { desc = "Yank to system clipboard" })
+vim.keymap.set("n", "<Leader>Y", '"+y$', { desc = "Yank line to system clipboard" })
+vim.keymap.set({ "n", "v" }, "<Leader>p", '"+p', { desc = "Paste from system clipboard" })
+vim.keymap.set({ "n", "v" }, "<Leader>P", '"+P', { desc = "Paste before from system clipboard" })
+
 vim.api.nvim_create_user_command("TermHl", function()
-  vim.api.nvim_open_term(0, {})
+  -- Capture buffer content before converting to terminal
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+  local content = table.concat(lines, "\r\n")
+  -- Convert to terminal buffer (returns channel ID)
+  local chan = vim.api.nvim_open_term(0, {})
+  -- Send original content to terminal for ANSI interpretation
+  vim.api.nvim_chan_send(chan, content)
 end, { desc = "Highlights ANSI termcodes in the current buffer" })
