@@ -35,7 +35,6 @@ let
     plenary-nvim
     nvim-web-devicons
     nvim-treesitter
-    nvim-treesitter-context
     nvim-treesitter-textobjects
 
     # LSP & Language Support
