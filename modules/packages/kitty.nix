@@ -15,7 +15,7 @@
       confirm_os_window_close = 0;
       modify_font = "cell_height 140%";
       shell_integration = true;
-      scrollback_pager = "nvim --cmd 'set eventignore=FileType' -c 'tnoremap <buffer> <Esc><Esc> <C-\\><C-n> | nnoremap <buffer> q :q!<CR> | call nvim_open_term(0, {}) | set nomodified nolist | normal G' -";
+      scrollback_pager = "nvim -c TermHl -";
       # Colors matched from Alacritty config
       background = "#242933";
       foreground = "#BBBDAF";
