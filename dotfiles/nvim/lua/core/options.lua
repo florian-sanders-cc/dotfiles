@@ -150,6 +150,12 @@ nmap_leader("wr", "<Cmd>lua MiniMisc.resize_window()<CR>", "Resize to default wi
 nmap_leader("wz", "<Cmd>lua MiniMisc.zoom()<CR>", "Zoom toggle")
 vim.keymap.set("n", "<Esc>", "<Cmd>noh<CR>", { desc = "Clear search highlight" })
 
+-- Window navigation
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to down window" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to up window" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+
 -- Clipboard (Helix-style): explicit system clipboard access
 vim.keymap.set({ "n", "v" }, "<Leader>y", '"+y', { desc = "Yank to system clipboard" })
 vim.keymap.set("n", "<Leader>Y", '"+y$', { desc = "Yank line to system clipboard" })

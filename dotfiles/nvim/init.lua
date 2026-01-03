@@ -54,7 +54,6 @@ require("ui.noice")
 -- -- │ Editing Plugins         │
 -- -- └─────────────────────────┘
 
-require("editing.mini-basics")
 require("editing.mini-ai")
 require("editing.mini-align")
 require("editing.mini-bracketed")
