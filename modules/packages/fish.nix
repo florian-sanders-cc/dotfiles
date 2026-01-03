@@ -44,9 +44,9 @@
         #compdef _git gca!=git-commit
             alias gcmsg='git commit -m'
         #compdef _git gcmsg=git-commit
-            alias gco='git checkout'
+            alias gsw='git switch'
         #compdef _git gco=git-checkout
-            alias gcm='git checkout master'
+            alias gswm='git switch master'
             alias gr='git remote'
         #compdef _git gr=git-remote
             alias grv='git remote -v'
