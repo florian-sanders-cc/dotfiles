@@ -2,26 +2,27 @@
 
 let
   lspServers = with pkgs; [
-    lua-language-server
-    nil
-    nodePackages.bash-language-server
-    nodePackages.yaml-language-server
-    rust-analyzer
-    gopls
-    pyright
     clang-tools
-    taplo
-    marksman
-    vtsls
-    stylelint-ls
-    vscode-langservers-extracted
-    vscode-json-languageserver
-    wc-ls
-    typescript
-    typescript-go
     copilot-language-server
     emmet-language-server
     gh-actions-ls
+    gopls
+    lua-language-server
+    marksman
+    nil
+    nodePackages.bash-language-server
+    nodePackages.yaml-language-server
+    oxlint
+    pyright
+    rust-analyzer
+    stylelint-ls
+    taplo
+    typescript
+    typescript-go
+    vscode-json-languageserver
+    vscode-langservers-extracted
+    vtsls
+    wc-ls
   ];
 
   formatters = with pkgs; [
@@ -57,6 +58,7 @@ let
     quicker-nvim
     markdown-nvim
     vim-sleuth # Automatic indent detection
+    kitty-scrollback-nvim
 
     # Git Integration
     neogit
@@ -95,7 +97,7 @@ in
     vimAlias = true;
     withNodeJs = true;
     defaultEditor = true;
-    package = pkgs.neovim-nightly;
+    # package = pkgs.neovim-nightly;
 
     extraPackages =
       with pkgs;
