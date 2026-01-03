@@ -1,40 +1,38 @@
-{ lib
-, stdenv
-, fetchurl
-, unzip
-, nodejs
-,
+{
+  lib,
+  stdenv,
+  fetchurl,
+  unzip,
+  makeWrapper,
+  nodejs,
 }:
 
 stdenv.mkDerivation rec {
   pname = "stylelint-ls";
-  version = "1.5.3";
+  version = "1.6.0";
 
   src = fetchurl {
     url = "https://open-vsx.org/api/stylelint/vscode-stylelint/${version}/file/stylelint.vscode-stylelint-${version}.vsix";
-    sha256 = "1bsia43dpxbx6nky1lybnf64lvn0qgsdwknvarqnkyihvqixnk5w";
+    sha256 = "sha256-q66+xEzrU58+THQcwJ542Vd2V//kN8NrFQX2ml4V/38=";
   };
 
-  nativeBuildInputs = [ unzip ];
+  nativeBuildInputs = [
+    unzip
+    makeWrapper
+    nodejs
+  ];
 
   unpackPhase = ''
     unzip -q $src
   '';
 
   installPhase = ''
-        mkdir -p $out/bin
-        mkdir -p $out/lib/stylelint-ls
-        
-        # Copy the extension files
-        cp -r extension/* $out/lib/stylelint-ls/
-        
-        # Create wrapper script
-        cat > $out/bin/stylelint-ls << EOF
-    #!/usr/bin/env sh
-    exec env node $out/lib/stylelint-ls/dist/start-server.js --stdio "\$@"
-    EOF
-        
-        chmod +x $out/bin/stylelint-ls
+    mkdir -p $out/bin
+    mkdir -p $out/lib/stylelint-ls
+
+    cp -r extension/* $out/lib/stylelint-ls/
+
+    makeWrapper ${nodejs}/bin/node $out/bin/stylelint-ls --add-flags $out/lib/stylelint-ls/dist/start-server.js
   '';
 
   meta = with lib; {

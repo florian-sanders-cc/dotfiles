@@ -1,49 +1,58 @@
 {
   stdenv,
-  fetchurl,
+  fetchFromGitHub,
   lib,
   nodejs,
   unzip,
+  pnpm,
+  pnpmConfigHook,
+  makeWrapper,
+  fetchPnpmDeps,
 }:
 
 stdenv.mkDerivation (finalAttrs: rec {
   pname = "wc-language-server";
-  version = "0.0.20";
+  version = "@wc-toolkit/language-server@0.0.6";
 
-  src = fetchurl {
-    url = "https://open-vsx.org/api/wc-toolkit/web-components-language-server/${version}/file/wc-toolkit.web-components-language-server-${version}.vsix";
-    hash = "sha256-RGpTtxJze9IdU9s4I5kbd7J2yIMWm41C5+PtkHcgvkU=";
+  src = fetchFromGitHub {
+    owner = "wc-toolkit";
+    repo = "wc-language-server";
+    rev = "${version}";
+    sha256 = "sha256-9HjEUokJB5Z/hg0HR/azIIM5Dfxa27jyN0vO7POYbNg=";
   };
 
   nativeBuildInputs = [
     nodejs
     unzip
+    pnpm
+    pnpmConfigHook
+    makeWrapper
   ];
 
-  unpackPhase = ''
-    runHook preUnpack
-    unzip $src
-    runHook postUnpack
+  pnpmDeps = fetchPnpmDeps {
+    inherit (finalAttrs)
+      pname
+      version
+      src
+      ;
+    fetcherVersion = 3;
+    hash = "sha256-19UfrA1lTQ3dwG50eHlcTORAplha/0rt+RwT3fPv9XE=";
+  };
+
+  pnpmWorkspaces = [ "@wc-toolkit/language-server" ];
+
+  buildPhase = ''
+    runHook preBuild
+
+    pnpm --filter=@wc-toolkit/language-server run bundle:single
+
+    runHook postBuild
   '';
 
   installPhase = ''
-        runHook preInstall
-
-        mkdir -p $out/bin
-        mkdir -p $out/lib/wc-language-server
-
-        # Extract and copy the extension contents
-        cp -r extension/. $out/lib/wc-language-server/
-
-        # Create wrapper script that runs server.js from dist directory
-        cat > $out/bin/wc-language-server << EOF
-    #!/bin/sh
-    exec ${nodejs}/bin/node $out/lib/wc-language-server/dist/server.js "\$@"
-    EOF
-
-        chmod +x $out/bin/wc-language-server
-
-        runHook postInstall
+    mkdir -p $out/bin
+    cp packages/language-server/dist/wc-language-server.bundle.cjs $out/wc-language-server.cjs
+    makeWrapper ${nodejs}/bin/node $out/bin/wc-language-server --add-flags $out/wc-language-server.cjs
   '';
 
   meta = with lib; {
@@ -51,6 +60,5 @@ stdenv.mkDerivation (finalAttrs: rec {
     homepage = "https://github.com/wc-toolkit/wc-language-server";
     license = licenses.mit;
     platforms = platforms.all;
-    maintainers = [ ];
   };
 })
