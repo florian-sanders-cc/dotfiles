@@ -45,7 +45,7 @@ let
     nodejs
     obsidian
     rustup
-    dogdns
+    doggo
     yazi
     volta
     bat
