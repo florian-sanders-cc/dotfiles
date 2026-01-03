@@ -141,7 +141,6 @@ in
               css
               json
               json5
-              jsonc
               jsdoc
               bash
               regex
