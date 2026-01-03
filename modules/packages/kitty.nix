@@ -15,7 +15,8 @@
       confirm_os_window_close = 0;
       modify_font = "cell_height 140%";
       shell_integration = true;
-      scrollback_pager = "nvim -c TermHl -";
+      allow_remote_control = true;
+      listen_on = "unix:/tmp/kitty";
       # Colors matched from Alacritty config
       background = "#242933";
       foreground = "#BBBDAF";
@@ -44,6 +45,13 @@
       color13 = "#C7A9D9";
       color14 = "#BBDA97";
       color15 = "#BDC5BD";
+    };
+    actionAliases = {
+      kitty_scrollback_nvim = "kitten ${pkgs.vimPlugins.kitty-scrollback-nvim}/python/kitty_scrollback_nvim.py";
+    };
+    keybindings = {
+      "ctrl+shift+h" = "kitty_scrollback_nvim";
+      "ctrl+shift+e" = "kitty_scrollback_nvim";
     };
   };
 }
