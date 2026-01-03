@@ -4,4 +4,6 @@
     ./hardware-perso.nix
     ./hardware-perso-workstation.nix
   ];
+
+  powerManagement.cpuFreqGovernor = "performance";
 }
