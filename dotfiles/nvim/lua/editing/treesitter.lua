@@ -5,7 +5,7 @@ local function get_fold_text()
   return vim.v.folddashes .. sub
 end
 
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter").setup({
   -- Use only Nix-provided parsers, disable installation
   ensure_installed = {},
   auto_install = false,
@@ -40,12 +40,8 @@ require("nvim-treesitter.configs").setup({
 vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
   pattern = "*",
   callback = function()
-    local ft = vim.bo.filetype
-    local has_parser = require("nvim-treesitter.parsers").has_parser(ft)
-    if has_parser then
-      vim.wo.foldmethod = "expr"
-      vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-    end
+    vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.wo[0][0].foldmethod = 'expr'
   end,
 })
 

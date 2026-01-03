@@ -36,7 +36,6 @@ let
     plenary-nvim
     nvim-web-devicons
     nvim-treesitter
-    nvim-treesitter-textobjects
 
     # LSP & Language Support
     nvim-lspconfig
@@ -97,7 +96,7 @@ in
     vimAlias = true;
     withNodeJs = true;
     defaultEditor = true;
-    # package = pkgs.neovim-nightly;
+    package = pkgs.neovim-nightly;
 
     extraPackages =
       with pkgs;
