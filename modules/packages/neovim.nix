@@ -31,11 +31,25 @@ let
     nixfmt-rfc-style
   ];
 
+  # Provide ecma/jsx/html_tags queries that nvim-treesitter-grammars is missing
+  # (needed because JS/TS/HTML queries use `; inherits: ecma,jsx` / `; inherits: html_tags`)
+  treesitterQueries = pkgs.vimUtils.buildVimPlugin {
+    pname = "nvim-treesitter-queries";
+    version = "0.0.1";
+    src = pkgs.runCommand "treesitter-queries" { } ''
+      mkdir -p $out/queries
+      cp -r ${pkgs.vimPlugins.nvim-treesitter}/runtime/queries/ecma $out/queries/
+      cp -r ${pkgs.vimPlugins.nvim-treesitter}/runtime/queries/jsx $out/queries/
+      cp -r ${pkgs.vimPlugins.nvim-treesitter}/runtime/queries/html_tags $out/queries/
+    '';
+  };
+
   plugins = with pkgs.vimPlugins; [
     # Core dependencies
     plenary-nvim
     nvim-web-devicons
-    nvim-treesitter
+    nvim-treesitter.withAllGrammars
+    treesitterQueries
 
     # LSP & Language Support
     nvim-lspconfig
@@ -119,47 +133,6 @@ in
     source = ../../dotfiles/nvim;
     recursive = true;
   };
-
-  xdg.configFile."nvim/parser".source =
-    let
-      parsers = pkgs.symlinkJoin {
-        name = "treesitter-parsers";
-        paths =
-          (pkgs.vimPlugins.nvim-treesitter.withPlugins (
-            plugins: with plugins; [
-              diff
-              hyprlang
-              lua
-              nix
-              javascript
-              styled
-              typescript
-              markdown
-              markdown_inline
-              html
-              css
-              json
-              json5
-              jsdoc
-              bash
-              regex
-              c
-              vimdoc
-              rust
-              yaml
-              vim
-              vimdoc
-              python
-              go
-              scheme
-              fish
-              qmljs
-              ron
-            ]
-          )).dependencies;
-      };
-    in
-    "${parsers}/parser";
 
   xdg.configFile."neovide" = {
     source = ../../dotfiles/neovide;
