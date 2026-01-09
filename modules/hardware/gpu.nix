@@ -34,6 +34,9 @@
     # ];
 
     boot.kernelParams = lib.mkIf (config.intel.enable) [
+      "i915.enable_dc=0" # Disable display C-states
+      "i915.disable_power_well=0" # Keep power wells always on
+      "i915.enable_psr=0" # Disable Panel Self Refresh
       "i915.force_probe=!9a49"
       "xe.force_probe=*"
       "xe.enable_guc=0"
@@ -41,13 +44,24 @@
 
     services.xserver.videoDrivers = lib.mkIf (config.nvidia.enable) [ "nvidia" ];
 
-    # Disable VA-API hardware acceleration drivers
-    environment.sessionVariables = {
-      LIBVA_DRIVER_NAME = lib.mkDefault "iHD";
-    }
-    // lib.mkIf (config.nvidia.enable) {
-      LIBVA_DRIVER_NAME = "nvidia";
-    };
+    # Always blacklist nouveau - we either use Intel or NVIDIA proprietary drivers
+    # (nouveau wakes up sleeping GPUs, causing 1-2s startup delay for GPU apps)
+    boot.blacklistedKernelModules = [ "nouveau" ];
+
+    # GPU driver environment variables
+    environment.sessionVariables = lib.mkMerge [
+      # Intel systems (laptops): force apps to use Intel GPU
+      # This prevents 1-2s startup delay from probing sleeping NVIDIA eGPU/dGPU
+      (lib.mkIf (config.intel.enable) {
+        LIBVA_DRIVER_NAME = "iHD";
+        # 8086 = Intel's PCI vendor ID - works across all Intel systems
+        DRI_PRIME = "vendor_id:8086";
+      })
+      # NVIDIA-only systems (desktop): use NVIDIA
+      (lib.mkIf (config.nvidia.enable && !config.intel.enable) {
+        LIBVA_DRIVER_NAME = "nvidia";
+      })
+    ];
 
     environment.etc = lib.mkIf (config.nvidia.enable) {
       "egl/egl_external_platform.d".source = "/run/opengl-driver/share/egl/egl_external_platform.d/";
@@ -67,7 +81,7 @@
 
       # Fine-grained power management. Turns off GPU when not in use.
       # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-      powerManagement.finegrained = lib.mkIf (config.nvidia.prime.enable) true;
+      powerManagement.finegrained = lib.mkIf (config.nvidia.prime.enable) false;
 
       # Use the NVidia open source kernel module (not to be confused with the
       # independent third-party "nouveau" open source driver).
