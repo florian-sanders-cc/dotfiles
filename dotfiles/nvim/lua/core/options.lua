@@ -162,4 +162,6 @@ vim.keymap.set("n", "<Leader>Y", '"+y$', { desc = "Yank line to system clipboard
 vim.keymap.set({ "n", "v" }, "<Leader>p", '"+p', { desc = "Paste from system clipboard" })
 vim.keymap.set({ "n", "v" }, "<Leader>P", '"+P', { desc = "Paste before from system clipboard" })
 
+vim.keymap.set({ "n", "v", "i" }, "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
+
 require("kitty-scrollback").setup({})
