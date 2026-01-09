@@ -50,6 +50,7 @@
       kitty_scrollback_nvim = "kitten ${pkgs.vimPlugins.kitty-scrollback-nvim}/python/kitty_scrollback_nvim.py";
     };
     keybindings = {
+      "ctrl+shift+t" = "new_tab_with_cwd";
       "ctrl+shift+h" = "kitty_scrollback_nvim";
       "ctrl+shift+e" = "kitty_scrollback_nvim";
     };
