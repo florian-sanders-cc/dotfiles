@@ -8,7 +8,11 @@
     "edit_prediction_provider": "copilot"
   },
   "agent": {
-    "default_profile": "ask",
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5"
+    },
+    "default_profile": "write",
     "model_parameters": []
   },
   "tab_bar": {
