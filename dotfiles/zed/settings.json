@@ -2,25 +2,25 @@
   "redact_private_values": true,
   "show_edit_predictions": true,
   "edit_predictions": {
-    "mode": "subtle"
+    "mode": "subtle",
   },
   "features": {
-    "edit_prediction_provider": "copilot"
+    "edit_prediction_provider": "copilot",
   },
   "agent": {
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-5"
+      "model": "gpt-5",
     },
     "default_profile": "write",
-    "model_parameters": []
+    "model_parameters": [],
   },
   "tab_bar": {
-    "show": false
+    "show": false,
   },
   "indent_guides": {
     "enabled": true,
-    "coloring": "fixed"
+    "coloring": "fixed",
   },
   "git": {
     "inline_blame": {
@@ -28,41 +28,45 @@
       "delay_ms": 0, // Show after delay (ms)
       "min_column": 0, // Minimum column to inline display blame
       "padding": 7, // Padding between code and inline blame (em)
-      "show_commit_summary": true // Show/hide commit summary
+      "show_commit_summary": true, // Show/hide commit summary
     },
-    "hunk_style": "staged_hollow" // staged_hollow, unstaged_hollow
+    "hunk_style": "staged_hollow", // staged_hollow, unstaged_hollow
   },
   "project_panel": {
     "button": true,
     "dock": "left",
-    "git_status": true
+    "git_status": true,
   },
   "tabs": {
-    "file_icons": true
+    "file_icons": true,
   },
   "vim_mode": true,
   "ui_font_size": 16,
   "ui_font_weight": 300,
   "buffer_font_size": 16.0,
   "buffer_line_height": {
-    "custom": 2.1
+    "custom": 2.1,
   },
   "theme": {
     "mode": "system",
     "light": "One Dark",
-    "dark": "Nordic"
+    "dark": "Nordic",
   },
   "terminal": {
     "font_weight": 399.0,
     "dock": "bottom",
     "env": {
-      "EDITOR": "zed --wait"
-    }
+      "EDITOR": "zed --wait",
+    },
+  },
+  "which_key": {
+    "enabled": true,
+    "delay_ms": 0,
   },
   "vim": {
     "use_system_clipboard": "on_yank",
     // Let `f` and `t` motions match case insensitively if the target is lowercase
-    "use_smartcase_find": true
+    "use_smartcase_find": true,
     // Use relative line numbers in normal mode, absolute in insert mode
     // c.f. https://github.com/jeffkreeftmeijer/vim-numbertoggle
     // "toggle_relative_line_numbers": true
@@ -73,7 +77,7 @@
   "relative_line_numbers": "disabled",
   // hide the scroll bar
   "scrollbar": {
-    "show": "never"
+    "show": "never",
   },
   // prevent the buffer from scrolling beyond the last line
   "scroll_beyond_last_line": "off",
@@ -82,66 +86,66 @@
   "command_aliases": {
     "W": "w",
     "Wq": "wq",
-    "Q": "q"
+    "Q": "q",
   },
   "tab_size": 2,
   "experimental.theme_overrides": {
     "editor.indent_guide_active": "#5B616C",
     "editor.active_line.background": "#242933",
     "editor.indent_guide": "#242933",
-    "hint": "#465253"
+    "hint": "#465253",
   },
   "lsp": {
     "vtsls": {
       "settings": {
         "typescript": {
           "tsserver": {
-            "maxTsServerMemory": 16184
+            "maxTsServerMemory": 16184,
           },
           "preferences": {
             "useAliasesForRenames": false,
             "format": {
-              "enable": false
+              "enable": false,
             },
-            "importModuleSpecifier": "relative"
-          }
+            "importModuleSpecifier": "relative",
+          },
         },
         "javascript": {
           "suggest": {
-            "completeFunctionCalls": true
+            "completeFunctionCalls": true,
           },
           "tsserver": {
-            "maxTsServerMemory": 16184
+            "maxTsServerMemory": 16184,
           },
           "experimental": {
             "completion": {
               "enableServerSideFuzzyMatch": true,
-              "entriesLimit": 50
-            }
+              "entriesLimit": 50,
+            },
           },
           "preferences": {
             "useAliasesForRenames": false,
             "format": {
-              "enable": false
+              "enable": false,
             },
             "experimental": {
               "completion": {
                 "enableServerSideFuzzyMatch": true,
-                "entriesLimit": 50
-              }
+                "entriesLimit": 50,
+              },
             },
-            "importModuleSpecifier": "relative"
-          }
-        }
-      }
-    }
+            "importModuleSpecifier": "relative",
+          },
+        },
+      },
+    },
   },
   "languages": {
     "Markdown": {
-      "show_edit_predictions": false
+      "show_edit_predictions": false,
     },
     "HTML": {
-      "language_servers": ["vscode-html-language-server", "vtsls"]
-    }
-  }
+      "language_servers": ["vscode-html-language-server", "vtsls"],
+    },
+  },
 }

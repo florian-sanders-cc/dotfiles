@@ -1,20 +1,20 @@
-{ lib
-, stdenv
-, fetchurl
-, makeWrapper
-, autoPatchelfHook
-, libGL
-, libxkbcommon
-, xorg
-, openssl
-, alsa-lib
-, vulkan-loader
-, wayland
-,
+{
+  lib,
+  stdenv,
+  fetchurl,
+  makeWrapper,
+  autoPatchelfHook,
+  libGL,
+  libxkbcommon,
+  xorg,
+  openssl,
+  alsa-lib,
+  vulkan-loader,
+  wayland,
 }:
 
 let
-  version = "0.206.3-pre";
+  version = "0.219.0-pre";
 in
 stdenv.mkDerivation rec {
   pname = "zed-preview";
@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
   # Fetch the Linux binary tarball
   src = fetchurl {
     url = "https://github.com/zed-industries/zed/releases/download/v${version}/zed-linux-x86_64.tar.gz";
-    sha256 = "sha256-8dzQbHGD5y+L3OwDIsLiNMroFTYyBR9wo/ksbpNzk3w=";
+    sha256 = "sha256-7Hfy003/Bb20UXhwOMyivp/fQgJLOENVT7T47fEwwrk=";
   };
 
   nativeBuildInputs = [
