@@ -26,6 +26,5 @@
 
       zed-preview = prev.callPackage ./zed-preview.nix { };
     })
-
   ];
 }
