@@ -25,6 +25,8 @@
       niri-smart-focus = prev.callPackage ./niri-smart-focus.nix { };
 
       zed-preview = prev.callPackage ./zed-preview.nix { };
+
+      warp-terminal-wayland = prev.callPackage ./warp-terminal.nix { };
     })
   ];
 }

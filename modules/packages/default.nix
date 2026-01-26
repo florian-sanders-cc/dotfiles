@@ -11,7 +11,7 @@ let
     # Nix related
     nix-prefetch-git
     nixd
-    nixfmt-rfc-style
+    nixfmt
     prefetch-npm-deps
 
     # Browsers
@@ -57,6 +57,7 @@ let
     stylelint-ls
     lsof
     github-copilot-cli
+    warp-terminal-wayland
   ];
   proPackages = with pkgs; [
     random-labels
