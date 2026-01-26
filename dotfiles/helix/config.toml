@@ -18,7 +18,7 @@ select = "underline"
 [editor.indent-guides]
 character = "┊"
 skip-levels = 2
-render = true
+render = false
 
 [editor.statusline]
 left = ["mode", "spinner", "version-control", "file-name"]

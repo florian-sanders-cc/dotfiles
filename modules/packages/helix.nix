@@ -17,7 +17,7 @@
       wc-ls
     ];
   };
-  xdg.configFile."helix/runtime".source = ../../dotfiles/helix/runtime;
+  # xdg.configFile."helix/runtime".source = ../../dotfiles/helix/runtime;
   xdg.configFile."helix/config.toml".source = ../../dotfiles/helix/config.toml;
   xdg.configFile."helix/languages.toml".source = ../../dotfiles/helix/languages.toml;
 }
