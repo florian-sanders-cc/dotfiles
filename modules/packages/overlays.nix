@@ -26,7 +26,18 @@
 
       zed-preview = prev.callPackage ./zed-preview.nix { };
 
-      warp-terminal-wayland = prev.callPackage ./warp-terminal.nix { };
+      warp-terminal-wayland =
+        let
+          version = "0.2026.01.21.08.14.stable_00";
+        in
+        (prev.warp-terminal.override { waylandSupport = true; }).overrideAttrs (old: {
+          inherit version;
+          src = prev.fetchurl {
+            url = "https://releases.warp.dev/stable/v${version}/warp-terminal-v${version}-1-x86_64.pkg.tar.zst";
+            hash = "sha256-WFoiW6Yxf3U4Teq8IWOAM6oCdIasZShoI8xN3CaogTg=";
+          };
+          buildInputs = old.buildInputs ++ [ prev.xz ];
+        });
     })
   ];
 }
