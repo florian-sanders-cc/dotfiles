@@ -66,6 +66,7 @@ stdenv.mkDerivation rec {
     makeWrapper $out/bin/.handy-unwrapped $out/bin/handy \
       --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath buildInputs}" \
       --set WEBKIT_DISABLE_DMABUF_RENDERER 1 \
+      --set GDK_BACKEND wayland \
       --set VK_ICD_FILENAMES /run/opengl-driver/share/vulkan/icd.d/intel_icd.x86_64.json
 
     runHook postInstall
