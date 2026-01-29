@@ -60,6 +60,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    handy = {
+      url = "github:y0usaf/Handy?ref=feat/nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # --- Stable channels ---
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     # home-manager.url = "github:nix-community/home-manager/release-23.11";

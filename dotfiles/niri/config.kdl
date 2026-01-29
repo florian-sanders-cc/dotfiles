@@ -263,7 +263,7 @@ binds {
     Mod+Shift+Q { quit; }
 
     Mod+Ctrl+Shift+P { power-off-monitors; }
-    Mod+Space { spawn "pkill" "-SIGUSR1" "waybar"; }
+    Mod+Space { spawn "pkill" "-USR2" "-n" "handy"; }
     Mod+N { spawn "swaync-client" "-t" "-sw"; }
 
     Mod+P { spawn "noctalia-shell" "ipc" "call" "sidePanel" "toggle"; }

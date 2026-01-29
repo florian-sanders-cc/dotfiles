@@ -58,6 +58,8 @@ let
     lsof
     github-copilot-cli
     warp-terminal-wayland
+    handy
+    wtype
   ];
   proPackages = with pkgs; [
     random-labels
