@@ -8,7 +8,7 @@
 
       noctalia-qs = inputs.noctalia.packages.${prev.stdenv.hostPlatform.system}.default;
 
-      handy = inputs.handy.packages.${prev.stdenv.hostPlatform.system}.default;
+      handy = prev.callPackage ./handy.nix { };
 
       random-labels = prev.callPackage ./random-labels.nix { };
 

@@ -21,27 +21,6 @@
         "type": "github"
       }
     },
-    "handy": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1768413677,
-        "narHash": "sha256-aLu+iIlOcg8PJZeUX1qVObD5MxRfFlF0AZyF9ub6xio=",
-        "owner": "y0usaf",
-        "repo": "Handy",
-        "rev": "c074f71dfb795f357ee1daa6cfcf76c7f26c8559",
-        "type": "github"
-      },
-      "original": {
-        "owner": "y0usaf",
-        "ref": "feat/nix-flake",
-        "repo": "Handy",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -139,7 +118,6 @@
     },
     "root": {
       "inputs": {
-        "handy": "handy",
         "home-manager": "home-manager",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs",
