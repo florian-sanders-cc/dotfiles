@@ -12,7 +12,7 @@
       nixd
       stylelint-lsp
       vscode-langservers-extracted
-      nixfmt-rfc-style
+      nixfmt
       typescript-go
       wc-ls
     ];

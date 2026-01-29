@@ -28,7 +28,7 @@ let
   formatters = with pkgs; [
     stylua
     prettierd
-    nixfmt-rfc-style
+    nixfmt
   ];
 
   # Provide ecma/jsx/html_tags queries that nvim-treesitter-grammars is missing
