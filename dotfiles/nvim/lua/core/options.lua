@@ -156,6 +156,12 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to down window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to up window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
+-- Window resize
+vim.keymap.set("n", "<C-Left>", "<C-w><", { desc = "Decrease window width" })
+vim.keymap.set("n", "<C-Right>", "<C-w>>", { desc = "Increase window width" })
+vim.keymap.set("n", "<C-Up>", "<C-w>+", { desc = "Increase window height" })
+vim.keymap.set("n", "<C-Down>", "<C-w>-", { desc = "Decrease window height" })
+
 -- Clipboard (Helix-style): explicit system clipboard access
 vim.keymap.set({ "n", "v" }, "<Leader>y", '"+y', { desc = "Yank to system clipboard" })
 vim.keymap.set("n", "<Leader>Y", '"+y$', { desc = "Yank line to system clipboard" })
