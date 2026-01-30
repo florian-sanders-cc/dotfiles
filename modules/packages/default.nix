@@ -103,9 +103,10 @@ in
       ./zellij.nix
       ./zsh.nix
       ./ghostty.nix
-      # ./opencode.nix
+      ./opencode.nix
       ./waybar.nix
       ./yazi.nix
+      ./warp.nix
     ];
 
     # Standard packages
