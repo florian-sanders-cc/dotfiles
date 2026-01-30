@@ -17,6 +17,8 @@
       shell_integration = true;
       allow_remote_control = true;
       listen_on = "unix:/tmp/kitty";
+      # Enable splits layout for vsplit/hsplit support
+      enabled_layouts = "splits,stack";
       # Colors matched from Alacritty config
       background = "#242933";
       foreground = "#BBBDAF";
@@ -52,7 +54,13 @@
     keybindings = {
       "ctrl+shift+t" = "new_tab_with_cwd";
       "ctrl+shift+h" = "kitty_scrollback_nvim";
-      "ctrl+shift+e" = "kitty_scrollback_nvim";
+      "ctrl+shift+e" = "launch --type=tab --cwd=current nvim .";
+      "ctrl+shift+d" = "launch --type=tab --cwd=current nvim -c DiffviewOpen";
+      # AI split panes (Warp-like feature)
+      "ctrl+shift+a" = "launch --type=window --location=vsplit --cwd=current opencode";
+      # Fork: continue most recent session in a new split
+      "ctrl+shift+f" =
+        "launch --type=window --location=vsplit --cwd=current fish -c 'set -l sid (opencode session list --format=json 2>/dev/null | jq -r \".[0].id\" 2>/dev/null); if test -n \"$sid\" -a \"$sid\" != \"null\"; opencode --session \"$sid\"; else; opencode; end'";
     };
   };
 }
