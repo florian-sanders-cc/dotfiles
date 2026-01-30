@@ -1,13 +1,13 @@
 require("codecompanion").setup({
   interactions = {
     chat = {
-      adapter = "copilot",
+      adapter = "opencode",
     },
     inline = {
-      adapter = "copilot",
+      adapter = "opencode",
     },
     cmd = {
-      adapter = "copilot",
+      adapter = "opencode",
     },
   },
   prompt_library = {
@@ -26,6 +26,30 @@ require("codecompanion").setup({
 ```
 ]],
               vim.fn.system("git diff --no-ext-diff --staged")
+            )
+          end,
+          opts = {
+            contains_code = true,
+          },
+        },
+      },
+    },
+    -- Explain terminal output (Warp-like feature for scrollback analysis)
+    ["Explain terminal output"] = {
+      strategy = "chat",
+      description = "Explain selected terminal output and identify errors",
+      prompts = {
+        {
+          role = "user",
+          content = function()
+            local selection = require("codecompanion.helpers.selection").get_visual()
+            return string.format(
+              [[Analyze this terminal output. Identify any errors, warnings, or issues and explain what they mean:
+
+```
+%s
+```]],
+              selection
             )
           end,
           opts = {

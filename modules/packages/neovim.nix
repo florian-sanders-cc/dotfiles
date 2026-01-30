@@ -100,6 +100,7 @@ let
     claudecode-nvim
     codecompanion-nvim
     copilot-lua
+    opencode-nvim
   ];
 
 in

@@ -16,6 +16,7 @@ require("snacks").setup(
     "force",
     require("navigation.snacks-picker"),
     require("navigation.snacks-explorer"),
+    require("terminal.snacks-terminal"),
     require("ui.snacks-bufdelete"),
     require("ui.snacks-toggle"),
     require("ui.snacks-zen"),
@@ -104,6 +105,7 @@ require("terminal.config")
 require("ai.claude")
 require("ai.codecompanion")
 require("ai.copilot")
+require("ai.opencode")
 
 -- -- ┌─────────────────────────┐
 -- -- │ Final Overrides         │
