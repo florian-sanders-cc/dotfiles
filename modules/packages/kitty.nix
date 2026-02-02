@@ -61,6 +61,8 @@
       # Fork: continue most recent session in a new split
       "ctrl+shift+f" =
         "launch --type=window --location=vsplit --cwd=current fish -c 'set -l sid (opencode session list --format=json 2>/dev/null | jq -r \".[0].id\" 2>/dev/null); if test -n \"$sid\" -a \"$sid\" != \"null\"; opencode --session \"$sid\"; else; opencode; end'";
+      "ctrl+alt+left" = "previous_window";
+      "ctrl+alt+right" = "next_window";
     };
   };
 }
