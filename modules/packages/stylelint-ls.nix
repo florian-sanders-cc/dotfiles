@@ -9,11 +9,11 @@
 
 stdenv.mkDerivation rec {
   pname = "stylelint-ls";
-  version = "1.6.0";
+  version = "2.0.0";
 
   src = fetchurl {
     url = "https://open-vsx.org/api/stylelint/vscode-stylelint/${version}/file/stylelint.vscode-stylelint-${version}.vsix";
-    sha256 = "sha256-q66+xEzrU58+THQcwJ542Vd2V//kN8NrFQX2ml4V/38=";
+    sha256 = "sha256-wtWqpoQe9HJ9P8wE1WlhklfPQybQMEp59ohejNMa12I=";
   };
 
   nativeBuildInputs = [
