@@ -28,6 +28,14 @@
 
       zed-preview = prev.callPackage ./zed-preview.nix { };
 
+      # Fix cosmic-osd polkit authentication (https://github.com/pop-os/cosmic-osd/issues/170)
+      # polkit 127+ uses socket activation instead of SUID, so we need to set the helper path at build time
+      cosmic-osd = prev.cosmic-osd.overrideAttrs (old: {
+        env = (old.env or { }) // {
+          POLKIT_AGENT_HELPER_1 = "${final.polkit.out}/lib/polkit-1/polkit-agent-helper-1";
+        };
+      });
+
       warp-terminal-wayland =
         let
           version = "0.2026.01.28.08.14.stable_01";
