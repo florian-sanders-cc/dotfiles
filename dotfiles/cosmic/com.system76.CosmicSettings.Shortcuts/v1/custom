@@ -104,4 +104,7 @@
     (modifiers: [Super], key: "End"): Focus(Out),
     (modifiers: [Super, Ctrl], key: "Home"): Focus(Out),
     (modifiers: [Super, Ctrl], key: "End"): Focus(Out),
+    
+    // Custom commands
+    (modifiers: [Super], key: "space"): Spawn("pkill -USR2 -n handy"),
 }
