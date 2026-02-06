@@ -126,6 +126,7 @@ in
     programs.home-manager.enable = true;
 
     home.sessionVariables = {
+      HOME = home.homeDirectory;
       NPM_PREFIX = "${home.homeDirectory}/.npm-packages";
       PATH = "${home.homeDirectory}/.npm-packages/bin:$PATH";
       NIXOS_OZONE_WL = "1";
