@@ -9,6 +9,11 @@ require("codediff").setup({
     position = "left",
     width = 35,
   },
+  keymaps = {
+    view = {
+      toggle_stage = "s",
+    },
+  },
 })
 
 -- Keymaps (same bindings as previous diffview setup)
