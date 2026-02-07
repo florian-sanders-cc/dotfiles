@@ -21,6 +21,14 @@ in
   security.polkit.enable = true;
   security.rtkit.enable = true;
 
+  # SUID wrapper for polkit-agent-helper-1 (needed for password verification via PAM)
+  security.wrappers.polkit-agent-helper-1 = {
+    owner = "root";
+    group = "root";
+    setuid = true;
+    source = "${pkgs.polkit.out}/lib/polkit-1/polkit-agent-helper-1";
+  };
+
   # Install GnuPG system-wide
   environment.systemPackages = with pkgs; [
     gnupg
