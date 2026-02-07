@@ -75,7 +75,7 @@ let
 
     # Git Integration
     neogit
-    diffview-nvim
+    codediff-nvim
     litee-nvim
     octo-nvim
     gitsigns-nvim

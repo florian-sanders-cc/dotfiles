@@ -17,7 +17,7 @@ require("neogit").setup({
   },
   integrations = {
     telescope = false, -- Using snacks picker instead
-    diffview = true, -- Enable diffview integration
+    diffview = false,
   },
 })
 

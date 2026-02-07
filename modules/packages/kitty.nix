@@ -55,7 +55,7 @@
       "ctrl+shift+t" = "new_tab_with_cwd";
       "ctrl+shift+h" = "kitty_scrollback_nvim";
       "ctrl+shift+e" = "launch --type=tab --cwd=current nvim .";
-      "ctrl+shift+d" = "launch --type=tab --cwd=current nvim -c DiffviewOpen";
+      "ctrl+shift+d" = "launch --type=tab --cwd=current nvim -c CodeDiff";
       # AI split panes (Warp-like feature)
       "ctrl+shift+a" = "launch --type=window --location=vsplit --cwd=current opencode";
       # Fork: continue most recent session in a new split

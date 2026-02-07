@@ -82,7 +82,7 @@ require("editing.markdown")
 require("git.mini-diff")
 require("git.gitsigns")
 require("git.neogit")
-require("git.diffview")
+require("git.codediff")
 require("git.octo")
 require("git.snacks-gh")
 

@@ -10,17 +10,17 @@
     enable = true;
     settings = {
       diff.algorithm = "histogram";
-      diff.tool = "difftastic";
+      diff.tool = "codediff";
       difftool = {
         prompt = false;
-        difftastic = {
-          cmd = "nvim -c DiffviewOpen";
+        codediff = {
+          cmd = ''nvim "$LOCAL" "$REMOTE" +"CodeDiff file $LOCAL $REMOTE"'';
         };
       };
-      merge.tool = "nvim";
+      merge.tool = "codediff";
       mergetool = {
-        nvim = {
-          cmd = "nvim -c DiffviewOpen";
+        codediff = {
+          cmd = ''nvim "$MERGED" -c "CodeDiff merge \"$MERGED\""'';
         };
       };
       transfer.fsckobjects = true;
