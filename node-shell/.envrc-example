@@ -1,6 +1,0 @@
-PACKAGE_NODE_VERSION=$(cat package.json | jq -r '.volta.node')
-PACKAGE_NPM_VERSION=$(cat package.json | jq -r '.volta.npm')
-CURRENT_NPM_VERSION=$(npm -v)
-CURRENT_NODE_VERSION=$(node -v)
-
-use nix ~/.config/nixos-config/node-shell/shell.nix --argstr nodeVersion "$PACKAGE_NODE_VERSION" --argstr npmVersion "$PACKAGE_NPM_VERSION"
