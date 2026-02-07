@@ -26,3 +26,16 @@ vim.opt.foldtext = get_fold_text()
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
+
+-- ┌─────────────────────────────────────────┐
+-- │ Incremental Node Selection (Alt-i/Alt-o)│
+-- └─────────────────────────────────────────┘
+
+vim.keymap.set({ "n", "x", "o" }, "<A-o>", function()
+  require("flash").treesitter({
+    actions = {
+      ["<A-o>"] = "next",
+      ["<A-i>"] = "prev",
+    },
+  })
+end, { desc = "Treesitter incremental selection" })
