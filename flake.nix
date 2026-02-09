@@ -27,7 +27,7 @@
       nixosConfigurations = {
         pro = mkNixosConfig {
           user = specs.users.pro;
-          desktop = specs.desktops.cosmic;
+          desktop = specs.desktops.niri;
         };
 
         perso = mkNixosConfig {
