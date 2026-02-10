@@ -28,6 +28,26 @@
 
       zed-preview = prev.callPackage ./zed-preview.nix { };
 
+      # Enable VA-API hardware video encoding for WebRTC + Vulkan rendering
+      # See: https://wiki.archlinux.org/title/Chromium#Hardware_video_acceleration
+      google-chrome = prev.google-chrome.override {
+        commandLineArgs = [
+          "--enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,VaapiIgnoreDriverChecks,WebRTCPipeWireCapturer,Vulkan,VulkanFromANGLE"
+          "--disable-features=UseChromeOSDirectVideoDecoder"
+          "--ignore-gpu-blocklist"
+          "--use-angle=vulkan"
+        ];
+      };
+
+      ungoogled-chromium = prev.ungoogled-chromium.override {
+        commandLineArgs = [
+          "--enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,VaapiIgnoreDriverChecks,WebRTCPipeWireCapturer,Vulkan,VulkanFromANGLE"
+          "--disable-features=UseChromeOSDirectVideoDecoder"
+          "--ignore-gpu-blocklist"
+          "--use-angle=vulkan"
+        ];
+      };
+
       # Fix cosmic-osd polkit authentication (https://github.com/pop-os/cosmic-osd/issues/170)
       # Point to the SUID-wrapped helper in /run/wrappers/bin/ (set up by security.wrappers)
       cosmic-osd = prev.cosmic-osd.overrideAttrs (old: {

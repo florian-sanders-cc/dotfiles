@@ -26,20 +26,12 @@
       ];
     };
 
-    # Reduce Intel GPU power management delays
-    # boot.kernelParams = lib.mkIf (config.intel.enable) [
-    #   "i915.enable_dc=0" # Disable display C-states
-    #   "i915.disable_power_well=0" # Keep power wells always on
-    #   "i915.enable_psr=0" # Disable Panel Self Refresh
-    # ];
-
     boot.kernelParams = lib.mkIf (config.intel.enable) [
-      "i915.enable_dc=0" # Disable display C-states
-      "i915.disable_power_well=0" # Keep power wells always on
-      "i915.enable_psr=0" # Disable Panel Self Refresh
+      # Force XE driver instead of i915 for Tiger Lake GPU (device 9a49)
+      # XE provides better performance for app startup times
       "i915.force_probe=!9a49"
       "xe.force_probe=*"
-      "xe.enable_guc=0"
+      "xe.enable_guc=0" # Disable GuC submission (can cause issues on some hardware)
     ];
 
     services.xserver.videoDrivers = lib.mkIf (config.nvidia.enable) [ "nvidia" ];
