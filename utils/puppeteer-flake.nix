@@ -21,7 +21,7 @@
             cups # libcups.so.2
             libdrm # libdrm.so.2
             dbus # libdbus-1.so.3
-            xorg.libX11 # libX11.so.6
+            libX11 # libX11.so.6
             xorg.libXcomposite # libXcomposite.so.1
             xorg.libXdamage # libXdamage.so.1
             xorg.libXext # libXext.so.6

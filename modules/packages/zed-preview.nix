@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
     stdenv.cc.cc.lib
     libGL
     libxkbcommon
-    xorg.libX11
+    libx11
     xorg.libXcursor
     xorg.libXi
     xorg.libXrandr

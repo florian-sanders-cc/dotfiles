@@ -47,7 +47,7 @@ let
     rustup
     doggo
     yazi
-    volta
+    mise
     bat
     usage
     neovide
