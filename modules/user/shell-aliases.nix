@@ -34,5 +34,7 @@ in
     # OpenCode commit helpers
     gcm = "opencode run --agent commit-msg 'Analyze the current git diff and generate a commit message'";
     gcs = "opencode --agent smart-commit --prompt 'Analyze my current changes and help me create atomic commits'";
+    # Power management
+    pstatus = "tlp-stat -s";
   };
 }
