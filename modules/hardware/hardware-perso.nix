@@ -26,12 +26,8 @@ in
       };
     };
 
-    # Intel P-state driver + limit idle states to prevent deep frequency drops
-    boot.kernelParams = [
-      "intel_pstate=active"
-      "intel_idle.max_cstate=0"
-      "processor.max_cstate=1"
-    ];
+    # Passive mode disables HWP so the OS governor has real frequency control
+    boot.kernelParams = [ "intel_pstate=passive" ];
 
     # i7-13700H: 2.4 GHz base (P-cores), 5.0 GHz boost
     # TLP for automatic power management (AC vs battery)
@@ -40,21 +36,15 @@ in
       settings = {
         # -- AC Power (aggressive performance) --
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-        CPU_MIN_PERF_ON_AC = 80;
-        CPU_MAX_PERF_ON_AC = 100;
-        CPU_BOOST_ON_AC = 1;
-        CPU_HWP_DYN_BOOST_ON_AC = 1;
         CPU_SCALING_MIN_FREQ_ON_AC = 2400000; # Base clock floor (P-cores)
+        CPU_SCALING_MAX_FREQ_ON_AC = 5000000;
+        CPU_BOOST_ON_AC = 1;
 
         # -- Battery Power (conservative) --
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-        CPU_MIN_PERF_ON_BAT = 0;
-        CPU_MAX_PERF_ON_BAT = 60;
-        CPU_BOOST_ON_BAT = 0;
-        CPU_HWP_DYN_BOOST_ON_BAT = 0;
         CPU_SCALING_MIN_FREQ_ON_BAT = 400000;
+        CPU_SCALING_MAX_FREQ_ON_BAT = 2400000;
+        CPU_BOOST_ON_BAT = 0;
       };
     };
 

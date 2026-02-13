@@ -21,12 +21,8 @@ in
     intel.enable = true;
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    # Intel P-state driver + limit idle states to prevent deep frequency drops
-    boot.kernelParams = [
-      "intel_pstate=active"
-      "intel_idle.max_cstate=0"
-      "processor.max_cstate=1"
-    ];
+    # Passive mode disables HWP so the OS governor has real frequency control
+    boot.kernelParams = [ "intel_pstate=passive" ];
 
     # i7-11370H: 3.3 GHz base, 4.8 GHz boost
     # TLP for automatic power management (AC vs battery)
@@ -35,21 +31,15 @@ in
       settings = {
         # -- AC Power (aggressive performance) --
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-        CPU_MIN_PERF_ON_AC = 80;
-        CPU_MAX_PERF_ON_AC = 100;
-        CPU_BOOST_ON_AC = 1;
-        CPU_HWP_DYN_BOOST_ON_AC = 1;
         CPU_SCALING_MIN_FREQ_ON_AC = 3300000; # Base clock floor
+        CPU_SCALING_MAX_FREQ_ON_AC = 4800000;
+        CPU_BOOST_ON_AC = 1;
 
         # -- Battery Power (conservative) --
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-        CPU_MIN_PERF_ON_BAT = 0;
-        CPU_MAX_PERF_ON_BAT = 80;
-        CPU_BOOST_ON_BAT = 0;
-        CPU_HWP_DYN_BOOST_ON_BAT = 0;
         CPU_SCALING_MIN_FREQ_ON_BAT = 400000;
+        CPU_SCALING_MAX_FREQ_ON_BAT = 3300000;
+        CPU_BOOST_ON_BAT = 0;
       };
     };
 
