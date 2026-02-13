@@ -18,12 +18,36 @@ in
   ];
 
   config = lib.mkIf (currentUser.name == specs.users.perso.name) {
-
     intel.enable = true;
     nvidia = {
       enable = true;
       prime = {
         enable = true;
+      };
+    };
+
+    # Intel P-state driver for frequency scaling
+    boot.kernelParams = [ "intel_pstate=active" ];
+
+    # TLP for automatic power management (AC vs battery)
+    services.tlp = {
+      enable = true;
+      settings = {
+        # -- AC Power (performance) --
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+        CPU_MIN_PERF_ON_AC = 80;
+        CPU_MAX_PERF_ON_AC = 100;
+        CPU_BOOST_ON_AC = 1;
+        CPU_HWP_DYN_BOOST_ON_AC = 1;
+
+        # -- Battery Power (conservative) --
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+        CPU_MIN_PERF_ON_BAT = 0;
+        CPU_MAX_PERF_ON_BAT = 60;
+        CPU_BOOST_ON_BAT = 0;
+        CPU_HWP_DYN_BOOST_ON_BAT = 0;
       };
     };
 

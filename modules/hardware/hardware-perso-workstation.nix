@@ -19,6 +19,9 @@ in
 
   config = lib.mkIf (currentUser.name == specs.users.perso-workstation.name) {
     nvidia.enable = true;
+
+    powerManagement.cpuFreqGovernor = "performance";
+
     boot.initrd.availableKernelModules = [
       "nvme"
       "xhci_pci"
