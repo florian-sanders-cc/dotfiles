@@ -22,7 +22,12 @@ in
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Passive mode disables HWP so the OS governor has real frequency control
-    boot.kernelParams = [ "intel_pstate=passive" ];
+    # Limit C-states to prevent deep idle frequency drops
+    boot.kernelParams = [
+      "intel_pstate=passive"
+      "intel_idle.max_cstate=0"
+      "processor.max_cstate=1"
+    ];
 
     # i7-11370H: 3.3 GHz base, 4.8 GHz boost
     # TLP for automatic power management (AC vs battery)
