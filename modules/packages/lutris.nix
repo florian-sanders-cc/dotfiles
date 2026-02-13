@@ -10,7 +10,7 @@
     # Standard packages
     home.packages = [
       pkgs.lutris
-      pkgs.wineWowPackages.waylandFull
+      pkgs.wineWow64Packages.waylandFull
       pkgs.winetricks
     ];
   };
