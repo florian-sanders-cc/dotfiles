@@ -14,7 +14,7 @@
   glib,
   cairo,
   gdk-pixbuf,
-  xorg,
+  libx11,
   libayatana-appindicator,
 }:
 
@@ -43,7 +43,7 @@ stdenv.mkDerivation rec {
     glib
     cairo
     gdk-pixbuf
-    xorg.libX11
+    libx11
     libayatana-appindicator
     stdenv.cc.cc.lib # libstdc++
   ];
