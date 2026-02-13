@@ -58,13 +58,13 @@
 
       warp-terminal-wayland =
         let
-          version = "0.2026.02.10.11.37.stable_01";
+          version = "0.2026.02.11.08.23.stable_01";
         in
         (prev.warp-terminal.override { waylandSupport = true; }).overrideAttrs (old: {
           inherit version;
           src = prev.fetchurl {
             url = "https://releases.warp.dev/stable/v${version}/warp-terminal-v${version}-1-x86_64.pkg.tar.zst";
-            hash = "sha256-EdGpswzJBC54OczLewxviqLm7RpvW4e9toebTLNXbtI=";
+            hash = "sha256-LzkByYibCwJbX9KaihoLOqW7oqtrjyojJojjmrQ9Y1o=";
           };
           buildInputs = old.buildInputs ++ [ prev.xz ];
         });
