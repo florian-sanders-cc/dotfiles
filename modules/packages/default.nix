@@ -38,7 +38,6 @@ let
     inkscape
     loupe
     btop
-    nvtopPackages.full
 
     # Dev
     bun
