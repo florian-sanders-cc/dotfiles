@@ -5,6 +5,7 @@
     enable = true;
     enableFishIntegration = true;
     enableZshIntegration = true;
+    shellWrapperName = "y";
   };
 
   # Copy custom config files
