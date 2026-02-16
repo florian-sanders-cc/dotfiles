@@ -6,7 +6,10 @@
   autoPatchelfHook,
   libGL,
   libxkbcommon,
-  xorg,
+  libX11,
+  libXcursor,
+  libXi,
+  libXrandr,
   openssl,
   alsa-lib,
   vulkan-loader,
@@ -36,10 +39,10 @@ stdenv.mkDerivation rec {
     stdenv.cc.cc.lib
     libGL
     libxkbcommon
-    libx11
-    xorg.libXcursor
-    xorg.libXi
-    xorg.libXrandr
+    libX11
+    libXcursor
+    libXi
+    libXrandr
     openssl
     alsa-lib
     vulkan-loader
