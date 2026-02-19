@@ -34,17 +34,20 @@ in
     services.tlp = {
       enable = true;
       settings = {
-        # -- AC Power (aggressive performance) --
+        # -- AC Power (maximum performance) --
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
         CPU_SCALING_MIN_FREQ_ON_AC = 3300000; # Base clock floor
         CPU_SCALING_MAX_FREQ_ON_AC = 4800000;
         CPU_BOOST_ON_AC = 1;
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+        PLATFORM_PROFILE_ON_AC = "performance";
 
         # -- Battery Power (conservative) --
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
         CPU_SCALING_MIN_FREQ_ON_BAT = 400000;
         CPU_SCALING_MAX_FREQ_ON_BAT = 3300000;
         CPU_BOOST_ON_BAT = 0;
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
       };
     };
 
