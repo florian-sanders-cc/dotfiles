@@ -26,22 +26,30 @@ in
       };
     };
 
-    # Passive mode disables HWP so the OS governor has real frequency control
-    boot.kernelParams = [ "intel_pstate=passive" ];
+    boot.kernelParams = [
+      "intel_idle.max_cstate=1" # C1 allowed, C6/C7 deep sleep blocked
+      # intel_pstate=passive removed — HWP active mode distributes RAPL budget per-core
+    ];
 
     # i7-13700H: 2.4 GHz base (P-cores), 5.0 GHz boost
     # TLP for automatic power management (AC vs battery)
     services.tlp = {
       enable = true;
       settings = {
-        # -- AC Power (aggressive performance) --
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_MIN_FREQ_ON_AC = 2400000; # Base clock floor (P-cores)
+        # -- AC Power --
+        # powersave governor + performance EPP: lets HWP make per-core decisions
+        # while hinting to prioritize speed when RAPL headroom is available
+        CPU_SCALING_GOVERNOR_ON_AC = "powersave";     # HWP ignores governor; powersave = let HWP decide
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance"; # EPP: hint to HWP to prioritize speed
+        CPU_HWP_DYN_BOOST_ON_AC = 1;                 # Intel Dynamic Boost with HWP
         CPU_SCALING_MAX_FREQ_ON_AC = 5000000;
         CPU_BOOST_ON_AC = 1;
+        PLATFORM_PROFILE_ON_AC = "performance";
+        # CPU_SCALING_MIN_FREQ_ON_AC removed — was exhausting RAPL budget on idle cores
 
         # -- Battery Power (conservative) --
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
         CPU_SCALING_MIN_FREQ_ON_BAT = 400000;
         CPU_SCALING_MAX_FREQ_ON_BAT = 2400000;
         CPU_BOOST_ON_BAT = 0;
