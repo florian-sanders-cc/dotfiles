@@ -3,6 +3,7 @@
 let
   lspServers = with pkgs; [
     clang-tools
+    cem
     copilot-language-server
     emmet-language-server
     gh-actions-ls
