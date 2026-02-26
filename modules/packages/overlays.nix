@@ -37,7 +37,7 @@
           "--enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,VaapiIgnoreDriverChecks,WebRTCPipeWireCapturer,Vulkan,VulkanFromANGLE"
           "--disable-features=UseChromeOSDirectVideoDecoder"
           "--ignore-gpu-blocklist"
-          "--use-angle=vulkan"
+          "--use-angle=gl-egl"
         ];
       };
 
@@ -46,7 +46,7 @@
           "--enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,VaapiIgnoreDriverChecks,WebRTCPipeWireCapturer,Vulkan,VulkanFromANGLE"
           "--disable-features=UseChromeOSDirectVideoDecoder"
           "--ignore-gpu-blocklist"
-          "--use-angle=vulkan"
+          "--use-angle=gl-egl"
         ];
       };
 
