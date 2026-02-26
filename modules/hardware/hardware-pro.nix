@@ -21,12 +21,11 @@ in
     intel.enable = true;
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    # Passive mode disables HWP so the OS governor has real frequency control
-    # Limit C-states to prevent deep idle frequency drops
+    # HWP active mode: hardware distributes RAPL budget per-core in µs
+    # C1 allowed; C6/C7 deep sleep blocked to prevent freq-recovery lag on wakeup
     boot.kernelParams = [
-      "intel_pstate=passive"
-      "intel_idle.max_cstate=0"
-      "processor.max_cstate=1"
+      "intel_idle.max_cstate=1" # C1 allowed, C6/C7 deep sleep blocked
+      # intel_pstate=passive removed — HWP active mode distributes RAPL budget per-core
     ];
 
     # i7-11370H: 3.3 GHz base, 4.8 GHz boost
@@ -34,13 +33,16 @@ in
     services.tlp = {
       enable = true;
       settings = {
-        # -- AC Power (maximum performance) --
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_MIN_FREQ_ON_AC = 3300000; # Base clock floor
+        # -- AC Power --
+        # powersave governor + performance EPP: lets HWP make per-core decisions
+        # while hinting to prioritize speed when RAPL headroom is available
+        CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # HWP ignores governor; powersave = let HWP decide
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance"; # EPP: hint to HWP to prioritize speed
+        CPU_HWP_DYN_BOOST_ON_AC = 1; # Intel Dynamic Boost with HWP
         CPU_SCALING_MAX_FREQ_ON_AC = 4800000;
         CPU_BOOST_ON_AC = 1;
-        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
         PLATFORM_PROFILE_ON_AC = "performance";
+        # CPU_SCALING_MIN_FREQ_ON_AC removed — was exhausting RAPL budget on idle cores
 
         # -- Battery Power (conservative) --
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
