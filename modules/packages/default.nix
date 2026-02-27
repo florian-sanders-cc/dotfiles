@@ -60,6 +60,7 @@ let
     warp-terminal-wayland
     handy
     wtype
+    playwright-cli
   ];
   proPackages = with pkgs; [
     random-labels

@@ -28,6 +28,8 @@
 
       niri-smart-focus = prev.callPackage ./niri-smart-focus.nix { };
 
+      playwright-cli = prev.callPackage ./playwright-cli.nix { };
+
       zed-preview = prev.callPackage ./zed-preview.nix { };
 
       # Enable VA-API hardware video encoding for WebRTC + Vulkan rendering
