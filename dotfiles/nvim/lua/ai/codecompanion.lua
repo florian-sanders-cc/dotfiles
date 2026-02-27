@@ -1,13 +1,13 @@
 require("codecompanion").setup({
   interactions = {
     chat = {
-      adapter = "opencode",
+      adapter = "copilot",
     },
     inline = {
-      adapter = "opencode",
+      adapter = "copilot",
     },
     cmd = {
-      adapter = "opencode",
+      adapter = "copilot",
     },
   },
   prompt_library = {
