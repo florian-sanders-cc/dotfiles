@@ -105,6 +105,7 @@ in
       ./zellij.nix
       ./zsh.nix
       ./ghostty.nix
+      ./claude-code.nix
       ./opencode.nix
       ./waybar.nix
       ./yazi.nix
