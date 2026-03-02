@@ -31,6 +31,11 @@ in
       # intel_pstate=passive removed — HWP active mode distributes RAPL budget per-core
     ];
 
+    # TUXEDO EC driver: required for proper power limit negotiation with the EC.
+    # Without it, the EC falls back to a conservative PL1 cap, throttling
+    # all cores regardless of load or AC state.
+    hardware.tuxedo-drivers.enable = true;
+
     # i7-13700H: 2.4 GHz base (P-cores), 5.0 GHz boost
     # TLP for automatic power management (AC vs battery)
     services.tlp = {
@@ -39,12 +44,13 @@ in
         # -- AC Power --
         # powersave governor + performance EPP: lets HWP make per-core decisions
         # while hinting to prioritize speed when RAPL headroom is available
-        CPU_SCALING_GOVERNOR_ON_AC = "powersave";     # HWP ignores governor; powersave = let HWP decide
+        CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # HWP ignores governor; powersave = let HWP decide
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance"; # EPP: hint to HWP to prioritize speed
-        CPU_HWP_DYN_BOOST_ON_AC = 1;                 # Intel Dynamic Boost with HWP
+        CPU_HWP_DYN_BOOST_ON_AC = 1; # Intel Dynamic Boost with HWP
         CPU_SCALING_MAX_FREQ_ON_AC = 5000000;
         CPU_BOOST_ON_AC = 1;
-        PLATFORM_PROFILE_ON_AC = "performance";
+        # PLATFORM_PROFILE_ON_AC removed — /sys/firmware/acpi/platform_profile is
+        # not available on this machine, so the setting was silently ignored
         # CPU_SCALING_MIN_FREQ_ON_AC removed — was exhausting RAPL budget on idle cores
 
         # -- Battery Power (conservative) --
