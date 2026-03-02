@@ -55,6 +55,7 @@ wk.add({
   { "<leader>e", group = "Explorer" },
   { "<leader>f", group = "Find Files" },
   { "<leader>g", group = "Git" },
+  { "<leader>j", group = "Jujutsu (jj)" },
   { "<leader>Gh", group = "Github" },
   { "<leader>Ghc", group = "Github: Commit" },
   { "<leader>Ghi", group = "Github: Issue" },

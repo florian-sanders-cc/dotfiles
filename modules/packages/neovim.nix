@@ -59,11 +59,13 @@ let
     markdown-nvim
     vim-sleuth # Automatic indent detection
     kitty-scrollback-nvim
+    jj-nvim
 
     # Git Integration
     neogit
     codediff-nvim
     gitsigns-nvim
+    hunk-nvim
 
     # UI & Interface
     lualine-nvim

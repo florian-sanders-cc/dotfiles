@@ -83,6 +83,8 @@ require("git.mini-diff")
 require("git.gitsigns")
 require("git.neogit")
 require("git.codediff")
+require("git.hunk")
+require("git.jj")
 
 -- -- ┌─────────────────────────┐
 -- -- │ LSP Configuration       │
