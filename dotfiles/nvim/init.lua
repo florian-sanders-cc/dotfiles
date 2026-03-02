@@ -102,7 +102,6 @@ require("terminal.config")
 -- -- │ AI                      │
 -- -- └─────────────────────────┘
 
-require("ai.claude")
 require("ai.codecompanion")
 require("ai.copilot")
 

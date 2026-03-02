@@ -84,7 +84,6 @@ let
     telescope-nvim
 
     # AI Integration
-    claudecode-nvim
     codecompanion-nvim
     copilot-lua
   ];
