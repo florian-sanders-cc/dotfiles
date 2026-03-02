@@ -5,6 +5,10 @@
   ...
 }:
 
+let
+  specs = import ../../config-specifications.nix;
+in
+
 {
   programs.git = {
     enable = true;
@@ -54,16 +58,65 @@
 
   programs.jujutsu = {
     enable = true;
-    settings = {
-      name = "Florian Sanders";
-      email = currentUser.email;
-      signing = {
-        behavior = "own";
-        backend = "gpg";
-      }
+    settings =
+      let
+        jjSettings = {
+          user = {
+            name = "Florian Sanders";
+            email = currentUser.email;
+          };
+          signing = {
+            behavior = "own";
+            backend = "gpg";
+          };
+        };
+      in
+      jjSettings
       // lib.optionalAttrs (builtins.hasAttr "signingKey" currentUser) {
-        key = currentUser.signingKey;
+        signing.key = currentUser.signingKey;
+      }
+      // lib.optionalAttrs (currentUser.name == specs.users.pro.name) {
+        # ui = {
+        #   diff-editor = [
+        #     "nvim"
+        #     "-c"
+        #     "DiffEditor ''$left $right $output"
+        #   ];
+        # };
+      }
+      // {
+        ui = {
+          diff-formatter = ":git";
+          # hunk.nvim handles diff editing (jj split -i, jj diffedit, jj squash -i)
+          diff-editor = [
+            "nvim"
+            "-c"
+            "DiffEditor $left $right $output"
+          ];
+          # vscodium 3-way merge editor handles conflict resolution (jj resolve)
+          merge-editor = "vscodium";
+        };
+        "merge-tools".nvimdiff = {
+          program = "nvim";
+          # 4-pane layout: left/base/right across top, output on bottom
+          # $output is pre-populated with conflict markers; edit it to resolve
+          merge-args = [
+            "-f"
+            "-d"
+            "$output"
+            "-M"
+            "$left"
+            "$base"
+            "$right"
+            "-c"
+            "wincmd J"
+            "-c"
+            "set modifiable"
+            "-c"
+            "set write"
+          ];
+          merge-tool-edits-conflict-markers = true;
+        };
       };
-    };
   };
 }
