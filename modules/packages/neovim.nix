@@ -63,8 +63,6 @@ let
     # Git Integration
     neogit
     codediff-nvim
-    litee-nvim
-    octo-nvim
     gitsigns-nvim
 
     # UI & Interface

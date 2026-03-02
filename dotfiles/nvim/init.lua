@@ -83,8 +83,6 @@ require("git.mini-diff")
 require("git.gitsigns")
 require("git.neogit")
 require("git.codediff")
-require("git.octo")
-require("git.snacks-gh")
 
 -- -- ┌─────────────────────────┐
 -- -- │ LSP Configuration       │
