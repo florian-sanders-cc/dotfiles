@@ -95,8 +95,6 @@ in
       ./git.nix
       ./helix.nix
       ./neovim.nix # Full-featured Neovim (command: nvim)
-      # ./neovim-alt.nix
-      # ./nvim-mini.nix # Minimal Neovim (command: nvim-mini)
       ./starship.nix
       ./vscode.nix
       ./zed.nix
