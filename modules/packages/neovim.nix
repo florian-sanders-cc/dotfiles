@@ -87,7 +87,6 @@ let
     claudecode-nvim
     codecompanion-nvim
     copilot-lua
-    (pkgs.callPackage ./neovim-plugins/agentic-nvim.nix { })
   ];
 
 in

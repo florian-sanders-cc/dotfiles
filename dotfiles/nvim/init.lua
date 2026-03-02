@@ -105,7 +105,6 @@ require("terminal.config")
 require("ai.claude")
 require("ai.codecompanion")
 require("ai.copilot")
-require("ai.agentic")
 
 -- -- ┌─────────────────────────┐
 -- -- │ Final Overrides         │
