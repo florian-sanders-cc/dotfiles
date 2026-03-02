@@ -28,6 +28,11 @@ in
       # intel_pstate=passive removed — HWP active mode distributes RAPL budget per-core
     ];
 
+    # TUXEDO EC driver: required for proper power limit negotiation with the EC.
+    # Without it, the EC falls back to a conservative 35W PL1 cap, throttling
+    # all cores to ~1.2 GHz regardless of load or AC state.
+    hardware.tuxedo-drivers.enable = true;
+
     # i7-11370H: 3.3 GHz base, 4.8 GHz boost
     # TLP for automatic power management (AC vs battery)
     services.tlp = {
@@ -41,7 +46,8 @@ in
         CPU_HWP_DYN_BOOST_ON_AC = 1; # Intel Dynamic Boost with HWP
         CPU_SCALING_MAX_FREQ_ON_AC = 4800000;
         CPU_BOOST_ON_AC = 1;
-        PLATFORM_PROFILE_ON_AC = "performance";
+        # PLATFORM_PROFILE_ON_AC removed — /sys/firmware/acpi/platform_profile is
+        # not available on this machine, so the setting was silently ignored
         # CPU_SCALING_MIN_FREQ_ON_AC removed — was exhausting RAPL budget on idle cores
 
         # -- Battery Power (conservative) --
