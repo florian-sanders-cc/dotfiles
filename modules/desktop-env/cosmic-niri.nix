@@ -45,7 +45,7 @@ in
 
   # Configure keyboard layout for COSMIC greeter
   services.xserver.displayManager.sessionCommands = ''
-    ${pkgs.xorg.setxkbmap}/bin/setxkbmap fr
+    ${pkgs.setxkbmap}/bin/setxkbmap fr
   '';
 
   # Enable the COSMIC desktop environment
