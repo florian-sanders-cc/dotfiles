@@ -32,6 +32,7 @@ let
     git-absorb
     gh
     sops
+    jjui
 
     # Utility
     vlc
