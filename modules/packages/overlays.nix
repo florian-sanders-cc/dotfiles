@@ -24,8 +24,6 @@
 
       icons = prev.callPackage ./icons.nix { };
 
-      clever-switch-profile = prev.callPackage ./clever-switch-profile.nix { };
-
       niri-smart-focus = prev.callPackage ./niri-smart-focus.nix { };
 
       playwright-cli = prev.callPackage ./playwright-cli.nix { };
