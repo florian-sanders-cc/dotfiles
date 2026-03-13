@@ -170,4 +170,3 @@ vim.keymap.set({ "n", "v" }, "<Leader>P", '"+P', { desc = "Paste before from sys
 
 vim.keymap.set({ "n", "v", "i" }, "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
 
-require("kitty-scrollback").setup({})

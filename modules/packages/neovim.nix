@@ -58,7 +58,6 @@ let
     quicker-nvim
     markdown-nvim
     vim-sleuth # Automatic indent detection
-    kitty-scrollback-nvim
     jj-nvim
 
     # Git Integration

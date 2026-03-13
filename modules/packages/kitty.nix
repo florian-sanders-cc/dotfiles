@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   programs.kitty = {
@@ -47,13 +47,11 @@
       color13 = "#C7A9D9";
       color14 = "#BBDA97";
       color15 = "#BDC5BD";
-    };
-    actionAliases = {
-      kitty_scrollback_nvim = "kitten ${pkgs.vimPlugins.kitty-scrollback-nvim}/python/kitty_scrollback_nvim.py";
+      scrollback_pager = "nvim --cmd 'set eventignore=FileType' +'nnoremap q ZQ' +'call nvim_open_term(0, {})' +'set nomodified nolist' +'$' -";
     };
     keybindings = {
       "ctrl+shift+t" = "new_tab_with_cwd";
-      "ctrl+shift+h" = "kitty_scrollback_nvim";
+      "ctrl+shift+h" = "show_scrollback";
       "ctrl+shift+e" = "launch --type=tab --cwd=current nvim .";
       "ctrl+shift+d" = "launch --type=tab --cwd=current nvim -c CodeDiff";
       # AI split panes (Warp-like feature)
