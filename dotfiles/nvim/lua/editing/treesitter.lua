@@ -7,17 +7,23 @@ end
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "*",
-  callback = function()
+  callback = function(args)
     -- Only enable treesitter if a parser exists for this filetype
-    local ok = pcall(vim.treesitter.get_parser, 0)
-    if not ok then
+    local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+    if not lang then
       return
     end
+
+    if not vim.treesitter.language.add(lang) then
+      return
+    end
+
     -- Enable treesitter highlighting (replaces old highlight module)
     vim.treesitter.start()
     -- Enable treesitter folding
     vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
     vim.wo[0][0].foldmethod = "expr"
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
 
