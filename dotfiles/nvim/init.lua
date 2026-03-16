@@ -34,9 +34,7 @@ require("snacks").setup(
 
 require("navigation.mini-jump")
 require("navigation.flash")
-require("navigation.mini-files")
 require("navigation.yazi")
-require("navigation.mini-visits")
 
 -- -- ┌─────────────────────────┐
 -- -- │ UI Plugins              │
