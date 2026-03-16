@@ -4,15 +4,10 @@
 --
 -- File explorer using Snacks
 
--- Keymaps
-local nmap_leader = function(suffix, rhs, desc)
-  vim.keymap.set({ "n", "v" }, "<Leader>" .. suffix, rhs, { desc = desc })
-end
-
 -- File Explorer
-nmap_leader("e", function()
+vim.keymap.set({ "n", "v" }, "<Leader>e", function()
   require("snacks").explorer()
-end, "File Explorer")
+end, { desc = "File Explorer" })
 
 -- Config export
 return {
