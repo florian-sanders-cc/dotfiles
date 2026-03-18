@@ -12,13 +12,13 @@
 
 stdenv.mkDerivation (finalAttrs: rec {
   pname = "wc-language-server";
-  version = "@wc-toolkit/language-server@0.0.6";
+  version = "@wc-toolkit/language-server@0.0.7";
 
   src = fetchFromGitHub {
     owner = "wc-toolkit";
     repo = "wc-language-server";
     rev = "${version}";
-    sha256 = "sha256-9HjEUokJB5Z/hg0HR/azIIM5Dfxa27jyN0vO7POYbNg=";
+    sha256 = "sha256-uECdpYMoWPDh74Kixyq9cubkFbbfo05RSji22Twt2/g=";
   };
 
   nativeBuildInputs = [
