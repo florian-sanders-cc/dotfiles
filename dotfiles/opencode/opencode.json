@@ -3,10 +3,10 @@
   "model": "github-copilot/claude-sonnet-4.6",
   "default_agent": "plan",
   "mcp": {
-    "figma": {
-      "type": "remote",
-      "url": "https://mcp.figma.com/mcp",
-      "oauth": {}
-    }
+    // "figma": {
+    //   "type": "remote",
+    //   "url": "https://mcp.figma.com/mcp",
+    //   "oauth": {}
+    // }
   },
 }
