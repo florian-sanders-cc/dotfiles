@@ -12,6 +12,7 @@ in
 {
   programs.git = {
     enable = true;
+    signing.format = "openpgp";
     settings = {
       diff.algorithm = "histogram";
       diff.tool = "codediff";
