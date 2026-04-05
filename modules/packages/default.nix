@@ -52,7 +52,7 @@ let
     bat
     usage
     neovide
-    claude-code
+    claude-code-bin
     opencode
     stu
     stylelint-ls

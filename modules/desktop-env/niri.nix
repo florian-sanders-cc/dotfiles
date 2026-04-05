@@ -27,7 +27,6 @@
     gnome-disk-utility
     seahorse
     noctalia-qs
-    swww
     niri-smart-focus
     kdePackages.qtwayland
   ];
@@ -62,6 +61,7 @@
 
     # Polkit authentication agent for run0 and other privilege escalation
     services.polkit-gnome.enable = true;
+    services.awww.enable = true;
 
     home.file.".config/niri" = {
       source = ../../dotfiles/niri;
