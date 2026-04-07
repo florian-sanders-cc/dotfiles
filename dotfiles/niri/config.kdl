@@ -1,5 +1,3 @@
-// spawn-at-startup "swayosd-server"
-// spawn-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 spawn-at-startup "noctalia-shell"
 
 prefer-no-csd
