@@ -94,6 +94,8 @@ in
     viAlias = true;
     vimAlias = true;
     withNodeJs = true;
+    withRuby = true;
+    withPython3 = true;
     defaultEditor = true;
     package = pkgs.neovim-nightly;
 
