@@ -17,7 +17,7 @@ input {
 
 output "DP-1" {
     mode "2560x1440@59.9"
-    position x=0 y=0
+    position x=2560 y=0
     scale 1
 }
 
@@ -28,8 +28,8 @@ output "HDMI-A-2" {
 }
 
 output "HDMI-A-1" {
-    mode "1920x1080@60.0"
-    position x=2560 y=0
+    mode "2560x1440@59.9"
+    position x=0 y=0
     scale 1
 }
 
@@ -50,6 +50,8 @@ output "DP-2" {
     position x=2560 y=0
     scale 1
 }
+
+include "outputs.kdl"
 
 cursor {
     xcursor-theme "Adwaita"

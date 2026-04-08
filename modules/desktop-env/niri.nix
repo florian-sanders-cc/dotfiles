@@ -1,6 +1,8 @@
 {
   pkgs,
   currentUser,
+  lib,
+  specs,
   ...
 }:
 
@@ -67,6 +69,16 @@
       source = ../../dotfiles/niri;
       recursive = true;
     };
+
+    home.file.".config/niri/outputs.kdl" =
+      if currentUser.name == specs.users.pro.name then
+        { source = ../../dotfiles/niri/outputs-pro.kdl; }
+      else if currentUser.name == specs.users.perso.name then
+        { source = ../../dotfiles/niri/outputs-perso.kdl; }
+      else if currentUser.name == specs.users.perso-workstation.name then
+        { source = ../../dotfiles/niri/outputs-perso-workstation.kdl; }
+      else
+        builtins.throw "niri: no outputs.kdl defined for user ${currentUser.name}";
 
     home.sessionVariables = {
       WAYLAND_DISPLAY = "wayland-1";
