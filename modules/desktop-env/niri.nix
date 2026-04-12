@@ -62,6 +62,7 @@
 
     # Polkit authentication agent for run0 and other privilege escalation
     services.polkit-gnome.enable = true;
+    services.awww.enable = false;
 
     home.file.".config/niri" = {
       source = ../../dotfiles/niri;
