@@ -62,6 +62,7 @@ let
     handy
     wtype
     playwright-cli
+    pi-coding-agent
   ];
   proPackages = with pkgs; [
     random-labels
