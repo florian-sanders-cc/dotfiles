@@ -54,6 +54,7 @@ let
     neovide
     claude-code-bin
     opencode
+    opencode-desktop
     stu
     stylelint-ls
     lsof
@@ -63,6 +64,7 @@ let
     wtype
     playwright-cli
     pi-coding-agent
+    rtk
   ];
   proPackages = with pkgs; [
     random-labels
