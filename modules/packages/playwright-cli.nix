@@ -79,16 +79,16 @@ let
 in
 buildNpmPackage rec {
   pname = "playwright-cli";
-  version = "0.1.1";
+  version = "0.1.8";
 
   src = fetchFromGitHub {
     owner = "microsoft";
     repo = "playwright-cli";
-    rev = "fa6f6bcca9c3eeb4ac71051f83ebd623ac51d765";
-    hash = "sha256-XjYib26oVoTEmjD5wHMlauEdtXkaC60OBitb1mj/Xnk=";
+    rev = "0406adaed4c6ba95bbfa6952229e76188bc59993";
+    hash = "sha256-8f/wFO4hSytpy3kEPyScoMWXWyeTl/SKoc3vD7xYaKo=";
   };
 
-  npmDepsHash = "sha256-4x3ozVrST6LtLoHl9KtmaOKrkYwCK84fwEREaoNaESc=";
+  npmDepsHash = "sha256-DK+nTRdVKznerAMK7McCCgr2OK4GXymbmgyR9qU/aH4=";
 
   nativeBuildInputs = [ makeWrapper ];
 
