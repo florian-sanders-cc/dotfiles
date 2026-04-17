@@ -1,5 +1,5 @@
 {
-  description = "Node.js + Playwright dev environment via nix-ld";
+  description = "Node.js + Playwright dev environment using nixpkgs-patched browsers";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
@@ -8,59 +8,32 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      playwrightVersion = pkgs.playwright-driver.version;
     in
     {
       devShells.${system}.default = pkgs.mkShell {
         MISE_NODE_COMPILE = "0";
 
-        NIX_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (
-          with pkgs;
-          [
-            stdenv.cc.cc.lib # libstdc++
-
-            # Playwright browser dependencies
-            glib
-            nss
-            nspr
-            at-spi2-core
-            at-spi2-atk
-            atk
-            cups
-            libdrm
-            dbus
-            libx11
-            libxcomposite
-            libxdamage
-            libxext
-            libxfixes
-            libxrandr
-            libxcursor
-            libxi
-            libxrender
-            mesa
-            libgbm
-            expat
-            libxcb
-            libxkbcommon
-            pango
-            cairo
-            alsa-lib
-            wayland
-            systemd
-            gtk3
-            gdk-pixbuf
-            freetype
-            fontconfig
-            gnutls
-          ]
-        );
+        # Point Playwright at the nixpkgs-patched browser bundle. These
+        # browsers have proper RPATHs so they work without FHS/nix-ld. The
+        # browser revisions are pinned to the Playwright release that
+        # nixpkgs currently tracks (see playwrightVersion below).
+        PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+        PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
+        PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "true";
 
         packages = [
           pkgs.mise
         ];
 
         shellHook = ''
-          echo "🔧 nix-ld environment active — Node.js and Playwright libraries available"
+          echo "Node.js dev environment active."
+          echo "Playwright browsers: nixpkgs playwright-driver ${playwrightVersion}"
+          echo ""
+          echo "If your project's npm 'playwright' package diverges from this"
+          echo "version by more than a patch, browser tests may break due to"
+          echo "protocol mismatches. Align the npm version, or 'nix flake update'"
+          echo "this flake to bring nixpkgs forward."
         '';
       };
     };
