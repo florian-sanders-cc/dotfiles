@@ -39,4 +39,3 @@ D = ["vsplit", "jump_view_up", "goto_definition"]
 [keys.insert]
 "C-s" = ":w"
 A-x = "extend_to_line_bounds"
-X = ["extend_line_up", "extend_to_line_bounds"]
