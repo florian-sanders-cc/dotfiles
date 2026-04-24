@@ -41,6 +41,19 @@
         ];
       };
 
+      opencode = prev.opencode.overrideAttrs (finalAttrs: oldAttrs: rec {
+        version = "1.14.28";
+        src = prev.fetchFromGitHub {
+          owner = "anomalyco";
+          repo = "opencode";
+          tag = "v${version}";
+          hash = "sha256-lsyjM6rhSv1HzEd2d/+aGHqrYMARj+TrFrLMGY2X59U=";
+        };
+        node_modules = oldAttrs.node_modules.overrideAttrs {
+          outputHash = "sha256-shMfcEeS4T/gUKILrXmFTnXISg4CcL682YniuaNlb2I=";
+        };
+      });
+
       ungoogled-chromium = prev.ungoogled-chromium.override {
         commandLineArgs = [
           "--enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,VaapiIgnoreDriverChecks,WebRTCPipeWireCapturer,Vulkan,VulkanFromANGLE"
