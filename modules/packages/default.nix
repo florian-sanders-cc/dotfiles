@@ -81,6 +81,7 @@ in
   ]
   ++ lib.optional isGamingEnabled ./steam.nix
   ++ lib.optional isGamingEnabled ./lutris.nix;
+  services.flatpak.enable = true;
 
   fonts.packages = with pkgs; [
     font-awesome
