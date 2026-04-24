@@ -1,4 +1,14 @@
 {
+  "cli_default_open_behavior": "new_window",
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "redact_private_values": true,
   "show_edit_predictions": true,
   "edit_predictions": {
@@ -8,6 +18,7 @@
     "edit_prediction_provider": "copilot",
   },
   "agent": {
+    "dock": "right",
     "default_model": {
       "provider": "copilot_chat",
       "model": "gpt-5",
@@ -54,7 +65,7 @@
   },
   "terminal": {
     "font_weight": 399.0,
-    "dock": "bottom",
+    "dock": "right",
     "env": {
       "EDITOR": "zed --wait",
     },

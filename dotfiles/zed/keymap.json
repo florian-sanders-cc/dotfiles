@@ -151,6 +151,7 @@
       // AI/Assistant (matches Neovim Claude keybinds)
       "space a c": "agent::ToggleFocus", // <leader>ac
       "space a f": "agent::ToggleFocus", // <leader>af
+      "space a o": ["task::Spawn", { "task_name": "OpenCode" }], // <leader>ao
 
       // Rename with inc-rename style
       "ctrl-r": "editor::Rename",

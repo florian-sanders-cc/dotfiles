@@ -15,6 +15,19 @@
     "show_command": false
   },
   {
+    "label": "OpenCode",
+    "command": "opencode",
+    "args": [],
+    "env": {},
+    "use_new_terminal": false,
+    "allow_concurrent_runs": true,
+    "cwd": "${ZED_WORKTREE_ROOT}",
+    "hide": "never",
+    "reveal": "always",
+    "show_summary": false,
+    "show_command": false
+  },
+  {
     "label": "Yazi File Manager",
     "command": "kitty -e yazi",
     "args": [],
