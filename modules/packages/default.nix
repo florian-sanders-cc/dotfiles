@@ -52,7 +52,7 @@ let
     bat
     usage
     neovide
-    claude-code-bin
+    claude-code
     opencode
     opencode-desktop
     stu
