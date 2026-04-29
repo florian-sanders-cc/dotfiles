@@ -77,47 +77,47 @@ in
         signing.key = currentUser.signingKey;
       }
       // lib.optionalAttrs (currentUser.name == specs.users.pro.name) {
-        # ui = {
-        #   diff-editor = [
-        #     "nvim"
-        #     "-c"
-        #     "DiffEditor ''$left $right $output"
-        #   ];
-        # };
+        ui = {
+          diff-editor = [
+            "nvim"
+            "-c"
+            "DiffEditor ''$left $right $output"
+          ];
+        };
       }
       // {
         ui = {
           diff-formatter = ":git";
           # hunk.nvim handles diff editing (jj split -i, jj diffedit, jj squash -i)
-          # diff-editor = [
-          #   "nvim"
-          #   "-c"
-          #   "DiffEditor $left $right $output"
-          # ];
+          diff-editor = [
+            "nvim"
+            "-c"
+            "DiffEditor $left $right $output"
+          ];
           # vscodium 3-way merge editor handles conflict resolution (jj resolve)
           merge-editor = "vscodium";
         };
-        # "merge-tools".nvimdiff = {
-        #   program = "nvim";
-        #   # 4-pane layout: left/base/right across top, output on bottom
-        #   # $output is pre-populated with conflict markers; edit it to resolve
-        #   merge-args = [
-        #     "-f"
-        #     "-d"
-        #     "$output"
-        #     "-M"
-        #     "$left"
-        #     "$base"
-        #     "$right"
-        #     "-c"
-        #     "wincmd J"
-        #     "-c"
-        #     "set modifiable"
-        #     "-c"
-        #     "set write"
-        #   ];
-        #   merge-tool-edits-conflict-markers = true;
-        # };
+        "merge-tools".nvimdiff = {
+          program = "nvim";
+          # 4-pane layout: left/base/right across top, output on bottom
+          # $output is pre-populated with conflict markers; edit it to resolve
+          merge-args = [
+            "-f"
+            "-d"
+            "$output"
+            "-M"
+            "$left"
+            "$base"
+            "$right"
+            "-c"
+            "wincmd J"
+            "-c"
+            "set modifiable"
+            "-c"
+            "set write"
+          ];
+          merge-tool-edits-conflict-markers = true;
+        };
       };
   };
 }
