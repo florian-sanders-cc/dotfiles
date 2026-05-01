@@ -6,6 +6,8 @@
     (final: prev: {
       neovim-nightly = inputs.neovim-nightly-overlay.packages.${prev.stdenv.hostPlatform.system}.default;
 
+      helix-nightly = inputs.helix-flake.packages.${prev.stdenv.hostPlatform.system}.default;
+
       noctalia-qs = inputs.noctalia.packages.${prev.stdenv.hostPlatform.system}.default;
 
       handy = prev.callPackage ./handy.nix { };
