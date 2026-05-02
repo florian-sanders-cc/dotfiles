@@ -67,6 +67,9 @@
     # --- Dev Flakes ---
     helix-flake = {
       url = "github:helix-editor/helix";
+
+    handy-flake = {
+      url = "github:cjpais/Handy?ref=v0.8.3";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
