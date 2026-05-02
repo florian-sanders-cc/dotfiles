@@ -59,7 +59,6 @@ let
     stylelint-ls
     lsof
     github-copilot-cli
-    warp-terminal-wayland
     handy
     wtype
     playwright-cli
@@ -111,7 +110,6 @@ in
       ./opencode.nix
       ./waybar.nix
       ./yazi.nix
-      ./warp.nix
     ];
 
     # Standard packages
