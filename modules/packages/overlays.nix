@@ -11,6 +11,8 @@
       noctalia-qs = inputs.noctalia.packages.${prev.stdenv.hostPlatform.system}.default;
 
       handy = prev.callPackage ./handy.nix { };
+      tuxedo-control-center = prev.callPackage ./tuxedo-control-center.nix { };
+
 
       random-labels = prev.callPackage ./random-labels.nix { };
 
