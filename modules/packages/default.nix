@@ -11,6 +11,7 @@ let
     # Nix related
     nix-prefetch-git
     nixd
+    nil
     nixfmt
     prefetch-npm-deps
 
