@@ -1,38 +1,44 @@
 {
-  lib,
-  stdenv,
-  fetchurl,
-  unzip,
+  buildNpmPackage,
+  fetchFromGitHub,
+  nodejs_22,
   makeWrapper,
-  nodejs,
+  lib,
+  libsecret,
+  pkg-config,
 }:
 
-stdenv.mkDerivation rec {
+buildNpmPackage rec {
   pname = "stylelint-ls";
-  version = "2.0.0";
+  version = "1.1.1";
 
-  src = fetchurl {
-    url = "https://open-vsx.org/api/stylelint/vscode-stylelint/${version}/file/stylelint.vscode-stylelint-${version}.vsix";
-    sha256 = "sha256-wtWqpoQe9HJ9P8wE1WlhklfPQybQMEp59ohejNMa12I=";
+  src = fetchFromGitHub {
+    owner = "stylelint";
+    repo = "vscode-stylelint";
+    rev = "@stylelint/language-server@${version}";
+    hash = "sha256-QRFc//mG7e0G7A7ZmwQzakU7RvegTPaJ6pGzvan2mwQ=";
   };
 
+  npmDepsHash = "sha256-LDegvLvKbw9c+iOmfx0q0Himf46MDh2TmraNqhFPE/Q=";
+
   nativeBuildInputs = [
-    unzip
+    nodejs_22
     makeWrapper
-    nodejs
+    pkg-config
   ];
 
-  unpackPhase = ''
-    unzip -q $src
+  buildInputs = [
+    libsecret
+  ];
+
+  buildPhase = ''
+    npm run build-bundle
   '';
 
   installPhase = ''
-    mkdir -p $out/bin
-    mkdir -p $out/lib/stylelint-ls
-
-    cp -r extension/* $out/lib/stylelint-ls/
-
-    makeWrapper ${nodejs}/bin/node $out/bin/stylelint-ls --add-flags $out/lib/stylelint-ls/dist/start-server.js
+    mkdir -p $out/bin && cp -r dist/. $out/bin
+    makeWrapper ${nodejs_22}/bin/node $out/bin/stylelint-ls \
+      --add-flags "$out/bin/start-server.js"
   '';
 
   meta = with lib; {

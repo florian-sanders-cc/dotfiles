@@ -10,7 +10,9 @@
 
       noctalia-qs = inputs.noctalia.packages.${prev.stdenv.hostPlatform.system}.default;
 
-      handy = prev.callPackage ./handy.nix { };
+      tuxedo-control-center = prev.callPackage ./tuxedo-control-center.nix { };
+
+      handy = inputs.handy-flake.packages.${prev.stdenv.hostPlatform.system}.default;
 
       random-labels = prev.callPackage ./random-labels.nix { };
 
@@ -43,19 +45,6 @@
         ];
       };
 
-      opencode = prev.opencode.overrideAttrs (finalAttrs: oldAttrs: rec {
-        version = "1.14.28";
-        src = prev.fetchFromGitHub {
-          owner = "anomalyco";
-          repo = "opencode";
-          tag = "v${version}";
-          hash = "sha256-lsyjM6rhSv1HzEd2d/+aGHqrYMARj+TrFrLMGY2X59U=";
-        };
-        node_modules = oldAttrs.node_modules.overrideAttrs {
-          outputHash = "sha256-shMfcEeS4T/gUKILrXmFTnXISg4CcL682YniuaNlb2I=";
-        };
-      });
-
       ungoogled-chromium = prev.ungoogled-chromium.override {
         commandLineArgs = [
           "--enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,VaapiIgnoreDriverChecks,WebRTCPipeWireCapturer,Vulkan,VulkanFromANGLE"
@@ -72,20 +61,6 @@
           POLKIT_AGENT_HELPER_1 = "/run/wrappers/bin/polkit-agent-helper-1";
         };
       });
-
-      warp-terminal-wayland =
-        let
-          version = "0.2026.04.27.15.32.stable_02";
-
-        in
-        (prev.warp-terminal.override { waylandSupport = true; }).overrideAttrs (old: {
-          inherit version;
-          src = prev.fetchurl {
-            url = "https://releases.warp.dev/stable/v${version}/warp-terminal-v${version}-1-x86_64.pkg.tar.zst";
-            hash = "sha256-mi253KoPMo4kFksox26T1PpyxXafeEGFBBvSKOCX1NQ=";
-          };
-          buildInputs = old.buildInputs ++ [ prev.xz ];
-        });
     })
   ];
 }

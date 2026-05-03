@@ -11,6 +11,7 @@ let
     # Nix related
     nix-prefetch-git
     nixd
+    nil
     nixfmt
     prefetch-npm-deps
 
@@ -59,7 +60,6 @@ let
     stylelint-ls
     lsof
     github-copilot-cli
-    warp-terminal-wayland
     handy
     wtype
     playwright-cli
@@ -111,7 +111,6 @@ in
       ./opencode.nix
       ./waybar.nix
       ./yazi.nix
-      ./warp.nix
     ];
 
     # Standard packages
