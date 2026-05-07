@@ -10,13 +10,6 @@ function isRecording()
   return "q@" .. reg
 end
 
-require("mini.files").setup({
-  options = {
-    -- Whether to use for editing directories
-    use_as_default_explorer = false,
-  },
-})
-
 -- Configure Lualine (Status line)
 require("lualine").setup({
   options = {
@@ -79,8 +72,7 @@ require("lualine").setup({
   extensions = {},
 })
 
-require("nvim-web-devicons").setup({})
-require("todo-comments").setup({})
+vim.o.cmdheight = 0
 
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup

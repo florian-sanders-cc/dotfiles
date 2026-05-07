@@ -11,20 +11,125 @@ vim.api.nvim_create_user_command("SelectTSVersion", function()
   })
 end, {})
 
-require("inc_rename").setup({
-  input_buffer_type = nil, -- Use inc_rename's default input
+local function lsp_client_complete(arg_lead)
+  return vim.tbl_filter(
+    function(name)
+      return arg_lead == "" or name:find(arg_lead, 1, true) ~= nil
+    end,
+    vim.tbl_map(function(client)
+      return client.name
+    end, vim.lsp.get_clients())
+  )
+end
+
+local function lsp_start_complete(arg_lead)
+  local names = {}
+  local seen = {}
+  for _, c in ipairs(vim.lsp.get_clients()) do
+    if not seen[c.name] and (arg_lead == "" or c.name:find(arg_lead, 1, true) ~= nil) then
+      names[#names + 1] = c.name
+      seen[c.name] = true
+    end
+  end
+  for _, cfg in ipairs(vim.lsp.get_configs({ enabled = true })) do
+    if not seen[cfg.name] and (arg_lead == "" or cfg.name:find(arg_lead, 1, true) ~= nil) then
+      names[#names + 1] = cfg.name
+      seen[cfg.name] = true
+    end
+  end
+  return names
+end
+
+-- Stop all or a specific LSP server
+vim.api.nvim_create_user_command("LspStop", function(opts)
+  local clients = opts.args == "" and vim.lsp.get_clients() or vim.lsp.get_clients({ name = opts.args })
+  if #clients == 0 then
+    vim.notify(
+      opts.args == "" and "No active LSP clients to stop" or "No LSP client found: " .. opts.args,
+      vim.log.levels.WARN
+    )
+    return
+  end
+  for _, client in ipairs(clients) do
+    client:stop()
+  end
+  vim.notify("Stopped " .. #clients .. " LSP client(s)", vim.log.levels.INFO)
+end, {
+  nargs = "?",
+  complete = lsp_client_complete,
+  desc = "Stop all or specified LSP server",
 })
 
--- Delete default Neovim 0.10+ LSP keymaps (created in vim/_defaults.lua)
--- These are global keymaps that conflict with our custom gr mapping
-pcall(vim.keymap.del, "n", "grr")
-pcall(vim.keymap.del, "n", "gra")
-pcall(vim.keymap.del, "n", "grn")
-pcall(vim.keymap.del, "n", "gri")
-pcall(vim.keymap.del, "n", "grt")
+-- Restart all or a specific LSP server
+vim.api.nvim_create_user_command("LspRestart", function(opts)
+  local clients = opts.args == "" and vim.lsp.get_clients() or vim.lsp.get_clients({ name = opts.args })
+  if #clients == 0 then
+    vim.notify(
+      opts.args == "" and "No active LSP clients to restart" or "No LSP client found: " .. opts.args,
+      vim.log.levels.WARN
+    )
+    return
+  end
+  for _, client in ipairs(clients) do
+    local config = vim.deepcopy(client.config)
+    if not config or not config.cmd then
+      vim.notify("Cannot restart " .. client.name .. ": no config", vim.log.levels.ERROR)
+    else
+      client:stop()
+      vim.defer_fn(function()
+        local ok, err = pcall(vim.lsp.start, config)
+        if not ok then
+          vim.notify("Failed to restart " .. client.name .. ": " .. tostring(err), vim.log.levels.ERROR)
+        end
+      end, 100)
+    end
+  end
+  vim.notify("Restarting " .. #clients .. " LSP client(s)", vim.log.levels.INFO)
+end, {
+  nargs = "?",
+  complete = lsp_client_complete,
+  desc = "Restart all or specified LSP server",
+})
+
+-- Start an LSP server by name or for the current buffer
+vim.api.nvim_create_user_command("LspStart", function(opts)
+  if opts.args == "" then
+    local bufnr = vim.api.nvim_get_current_buf()
+    local ft = vim.bo[bufnr].filetype
+    local configs = vim.lsp.get_configs({ enabled = true, filetype = ft })
+    local started = 0
+    for _, config in ipairs(configs) do
+      if #vim.lsp.get_clients({ name = config.name, bufnr = bufnr }) == 0 then
+        vim.lsp.start(vim.deepcopy(config), { bufnr = bufnr })
+        started = started + 1
+      end
+    end
+    if started == 0 then
+      vim.notify("All LSP servers already running for filetype: " .. ft, vim.log.levels.INFO)
+    end
+  else
+    local clients = vim.lsp.get_clients({ name = opts.args })
+    if #clients > 0 then
+      vim.notify(opts.args .. " is already running", vim.log.levels.INFO)
+      return
+    end
+    local config = vim.lsp.config[opts.args]
+    if not config then
+      vim.notify("No LSP config found for: " .. opts.args, vim.log.levels.ERROR)
+      return
+    end
+    vim.lsp.start(vim.deepcopy(config))
+    vim.notify("Started " .. opts.args, vim.log.levels.INFO)
+  end
+end, {
+  nargs = "?",
+  complete = lsp_start_complete,
+  desc = "Start specified LSP server or for current buffer",
+})
 
 vim.lsp.enable({
-  "nil_ls",
+  -- "nil_ls",
+  "nixd",
   "gopls",
   "lua_ls",
   "rust_analyzer",
@@ -36,17 +141,34 @@ vim.lsp.enable({
   "gh-actions-ls",
 })
 
+-- Delete default Neovim LSP keymaps that conflict with custom `gr` mapping
+-- These are set buffer-local on LspAttach, so delete after they're created
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspKeymaps", { clear = true }),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client then
+      client.server_capabilities.semanticTokensProvider = nil
+    end
+    pcall(vim.keymap.del, "n", "grr", { buffer = args.buf })
+    pcall(vim.keymap.del, "n", "gra", { buffer = args.buf })
+    pcall(vim.keymap.del, "n", "grn", { buffer = args.buf })
+    pcall(vim.keymap.del, "n", "gri", { buffer = args.buf })
+    pcall(vim.keymap.del, "n", "grt", { buffer = args.buf })
+  end,
+})
+
 vim.diagnostic.config({
-  float = {
-    format = function(original_diag)
-      return string.format("  %s   \n  ", original_diag.message)
-    end,
-    header = "",
-    prefix = function(diagnostic)
-      return string.format("  \n  %s | %s  \n", diagnostic.source, diagnostic.code), "Comment"
-    end,
-    suffix = "",
-  },
+  -- float = {
+  --   format = function(original_diag)
+  --     return string.format("  %s   \n  ", original_diag.message)
+  --   end,
+  --   header = "",
+  --   prefix = function(diagnostic)
+  --     return string.format("  \n  %s | %s  \n", diagnostic.source, diagnostic.code), "Comment"
+  --   end,
+  --   suffix = "",
+  -- },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "",
@@ -68,10 +190,10 @@ vim.api.nvim_create_autocmd("User", {
 
 vim.keymap.set({ "n", "v" }, "D", vim.diagnostic.open_float, { desc = "LSP: Open Diagnostics" })
 vim.keymap.set({ "n", "v" }, "]d", function()
-  vim.diagnostic.goto_next({ float = true })
+  vim.diagnostic.jump({ count = 1, on_jump = vim.diagnostic.open_float })
 end, { desc = "LSP: Next Diagnostic" })
 vim.keymap.set({ "n", "v" }, "[d", function()
-  vim.diagnostic.goto_prev({ float = true })
+  vim.diagnostic.jump({ count = -1, on_jump = vim.diagnostic.open_float })
 end, { desc = "LSP: Prev Diagnostic" })
 
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP: Code Action" })
@@ -86,7 +208,8 @@ vim.keymap.set({ "n", "v" }, "<leader>cA", function()
     },
   })
 end, { desc = "LSP: Source Action" })
-vim.keymap.set({ "n", "v" }, "<leader>cr", ":IncRename ", { desc = "LSP: Rename" })
+
+vim.keymap.set({ "n", "v" }, "<leader>cr", vim.lsp.buf.rename, { desc = "LSP: Rename" })
 
 -- LSP Navigation (Global Keys)
 vim.keymap.set({ "n", "v" }, "gd", function()
@@ -122,7 +245,7 @@ end, { desc = "LSP: Goto Type Definition" })
 
 vim.keymap.set({ "n", "v" }, "gr", function()
   require("snacks").picker.lsp_references()
-end, { desc = "LSP: References" })
+end, { desc = "LSP: References", nowait = true })
 
 -- vtsls-specific commands
 vim.keymap.set("n", "gS", function()

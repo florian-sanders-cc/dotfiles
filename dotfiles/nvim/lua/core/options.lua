@@ -39,7 +39,7 @@ opt.shell = vim.env.SHELL or "/usr/bin/sh"
 opt.shellcmdflag = "-c"
 opt.shellquote = '"'
 opt.shellxquote = ""
--- opt.winborder = "shadow"
+opt.winborder = "solid"
 
 -- Indentation
 opt.autoindent = true -- Enable auto indentation

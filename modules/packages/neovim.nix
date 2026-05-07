@@ -4,13 +4,13 @@ let
   lspServers = with pkgs; [
     clang-tools
     cem
-    copilot-language-server
     emmet-language-server
     gh-actions-ls
     gopls
     lua-language-server
     marksman
     nil
+    nixd
     bash-language-server
     yaml-language-server
     oxlint
@@ -40,7 +40,6 @@ let
 
     # LSP & Language Support
     nvim-lspconfig
-    lazydev-nvim
     SchemaStore-nvim
 
     # Completion & Snippets
@@ -48,20 +47,16 @@ let
     friendly-snippets
 
     # Editor Features
-    nvim-ts-autotag
     conform-nvim
     flash-nvim
-    inc-rename-nvim
     todo-comments-nvim
     persistence-nvim
     multicursor-nvim
     quicker-nvim
     markdown-nvim
-    vim-sleuth # Automatic indent detection
     jj-nvim
 
     # Git Integration
-    neogit
     codediff-nvim
     hunk-nvim
 
@@ -73,17 +68,7 @@ let
     markdown-preview-nvim
     render-markdown-nvim
     (pkgs.callPackage ./neovim-plugins/nordic-nvim.nix { })
-    nvim-notify
     yazi-nvim
-    noice-nvim
-
-    # Optional dependencies
-    nui-nvim
-    telescope-nvim
-
-    # AI Integration
-    codecompanion-nvim
-    copilot-lua
   ];
 
 in
