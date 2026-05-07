@@ -1,4 +1,10 @@
 {
+  "base_keymap": "VSCode",
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)",
+  },
   "agent_servers": {
     "github-copilot-cli": {
       "type": "registry",
@@ -20,10 +26,8 @@
   "redact_private_values": true,
   "show_edit_predictions": true,
   "edit_predictions": {
+    "provider": "copilot",
     "mode": "subtle",
-  },
-  "features": {
-    "edit_prediction_provider": "copilot",
   },
   "agent": {
     "dock": "right",
@@ -67,7 +71,7 @@
     "custom": 2.1,
   },
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "One Dark",
     "dark": "Nordic",
   },
@@ -102,11 +106,6 @@
   "scroll_beyond_last_line": "off",
   // allow cursor to reach edges of screen
   "vertical_scroll_margin": 0,
-  "command_aliases": {
-    "W": "w",
-    "Wq": "wq",
-    "Q": "q",
-  },
   "tab_size": 2,
   "experimental.theme_overrides": {
     "editor.indent_guide_active": "#5B616C",
@@ -166,5 +165,12 @@
     "HTML": {
       "language_servers": ["vscode-html-language-server", "vtsls"],
     },
+    "JavaScript": {
+      "language_servers": ["!tsgo", "vtsls", "eslint"],
+    },
+    "TypeScript": {
+      "language_servers": ["!tsgo", "vtsls", "eslint"],
+    },
+  },
   },
 }

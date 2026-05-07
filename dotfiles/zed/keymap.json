@@ -7,47 +7,225 @@
 // from the command palette.
 [
   // =====================================================
-  // GLOBAL BINDINGS
+  // GLOBAL APP-LEVEL (no context)
+  // Works in editor, terminal, dock, panels — everywhere.
+  // These are Ctrl-combos, safe to bind globally since
+  // they are never typed as literal text.
   // =====================================================
   {
     "bindings": {
-      "ctrl-shift-w": "workspace::CloseAllDocks",
-      "ctrl-+": ["zed::IncreaseBufferFontSize", { "persist": true }],
-      "ctrl--": ["zed::DecreaseBufferFontSize", { "persist": true }]
+      "ctrl-+":       ["zed::IncreaseBufferFontSize", { "persist": true }],
+      "ctrl--":       ["zed::DecreaseBufferFontSize", { "persist": true }],
+      "ctrl-s":       "workspace::Save",
+      "ctrl-shift-p": "command_palette::Toggle",
+      "ctrl-,":       "zed::OpenSettings",
+      "ctrl-k ctrl-s": "zed::OpenKeymap",
+      "ctrl-p":       "file_finder::Toggle",
+      "ctrl-y":       "workspace::CopyPath",
+      "ctrl-shift-y": "workspace::CopyRelativePath"
     }
   },
 
   // =====================================================
-  // TERMINAL MODE ESCAPE (matches Neovim)
+  // GLOBAL MODAL / PICKER ESSENTIALS (no context)
+  // Restores escape/enter/arrow navigation stripped by
+  // base_keymap: "None". Applies to command palette,
+  // file finder, any picker or modal overlay.
   // =====================================================
   {
-    "context": "Terminal",
     "bindings": {
-      // "escape escape": "terminal::SendText",
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-j": "workspace::ToggleBottomDock",
-      "ctrl-w": "pane::CloseActiveItem",
-      "ctrl-shift-w": "pane::CloseAllItems",
-      "ctrl-b": "workspace::ToggleLeftDock"
+      "escape": "menu::Cancel",
+      "enter":  "menu::Confirm",
+      "up":     "menu::SelectPrevious",
+      "down":   "menu::SelectNext",
+      "shift-tab": "menu::SelectPrevious"
     }
   },
 
   // =====================================================
-  // WINDOW NAVIGATION (matches Neovim <C-h/j/k/l>)
+  // EDITOR INPUT FIELDS (broad Editor context)
+  // Covers single-line inputs in pickers, search bars,
+  // etc. which are Editor components but NOT in vim_mode.
+  // In vim mode buffers, the vim layer takes precedence
+  // for escape (exit insert → normal), so no conflict.
   // =====================================================
   {
-    "context": "Dock || vim_mode == normal || vim_mode == visual",
+    "context": "Editor",
     "bindings": {
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-j": "workspace::ActivatePaneDown",
-      "ctrl-w": "pane::CloseActiveItem",
-      "ctrl-shift-w": "pane::CloseAllItems",
-      "ctrl-b": "workspace::ToggleLeftDock",
-      "ctrl-shift-b": "workspace::ToggleRightDock"
+      "backspace": "editor::Backspace",
+      "escape":    "editor::Cancel"
+    }
+  },
+
+  // =====================================================
+  // BUFFER SEARCH BAR
+  // =====================================================
+  {
+    "context": "BufferSearchBar",
+    "bindings": {
+      "escape":      "buffer_search::Dismiss",
+      "enter":       "search::SelectNextMatch",
+      "shift-enter": "search::SelectPreviousMatch"
+    }
+  },
+
+  // =====================================================
+  // GLOBAL CTRL-W WINDOW PREFIX (no context)
+  // Vim-style windowing available everywhere — editor,
+  // terminal, dock, panels. No standalone ctrl-w binding
+  // so ctrl-w is a pure prefix with no 1s timeout race.
+  //
+  // NOTE: ctrl-w c is intentionally remapped to
+  // CloseAllItems (diverges from vim's "close window").
+  // Use ctrl-w q for single close (vim parity for :q).
+  // =====================================================
+  {
+    "bindings": {
+      // Navigation (mirrors <C-w>h/j/k/l)
+      "ctrl-w h":      "workspace::ActivatePaneLeft",
+      "ctrl-w j":      "workspace::ActivatePaneDown",
+      "ctrl-w k":      "workspace::ActivatePaneUp",
+      "ctrl-w l":      "workspace::ActivatePaneRight",
+      "ctrl-w w":      "workspace::ActivateNextPane",
+      "ctrl-w ctrl-w": "workspace::ActivateNextPane",
+
+      // Resize with arrow keys (no timeout race — not a prefix)
+      "ctrl-w left":  "vim::ResizePaneLeft",
+      "ctrl-w right": "vim::ResizePaneRight",
+      "ctrl-w up":    "vim::ResizePaneUp",
+      "ctrl-w down":  "vim::ResizePaneDown",
+
+      // Resize with symbolic keys (vim parity)
+      "ctrl-w >": "vim::ResizePaneRight",
+      "ctrl-w <": "vim::ResizePaneLeft",
+      "ctrl-w +": "vim::ResizePaneUp",
+      "ctrl-w -": "vim::ResizePaneDown",
+
+      // Equalize / zoom
+      "ctrl-w =":      "vim::ResetPaneSizes",
+      "ctrl-w ctrl-=": "vim::ResetPaneSizes",
+      "ctrl-w z":      "workspace::ToggleZoom",
+      "ctrl-w ctrl-z": "workspace::ToggleZoom",
+
+      // Splits (mirrors <C-w>s / <C-w>v)
+      "ctrl-w s":      "pane::SplitDown",
+      "ctrl-w ctrl-s": "pane::SplitDown",
+      "ctrl-w v":      "pane::SplitRight",
+      "ctrl-w ctrl-v": "pane::SplitRight",
+
+      // Close active item (mirrors <C-w>q / :q)
+      "ctrl-w q":      "pane::CloseActiveItem",
+      "ctrl-w ctrl-q": "pane::CloseActiveItem",
+
+      // Close ALL items (repurposed; diverges from vim's <C-w>c)
+      "ctrl-w c":      "pane::CloseAllItems",
+      "ctrl-w ctrl-c": "pane::CloseAllItems",
+
+      // Close others (mirrors <C-w>o)
+      "ctrl-w o":      "pane::CloseOtherItems",
+      "ctrl-w ctrl-o": "pane::CloseOtherItems",
+
+      // Swap with adjacent pane (mirrors <C-w>x)
+      "ctrl-w x": "workspace::SwapPaneAdjacent",
+
+      // Move pane (mirrors <C-w>H/J/K/L)
+      "ctrl-w H": "workspace::SwapPaneLeft",
+      "ctrl-w J": "workspace::SwapPaneDown",
+      "ctrl-w K": "workspace::SwapPaneUp",
+      "ctrl-w L": "workspace::SwapPaneRight"
+    }
+  },
+
+  // =====================================================
+  // INSERT-MODE COMPLETION & PREDICTION
+  // Explicitly restores tab/enter/shift-tab behavior
+  // removed by base_keymap: "None".
+  // Precedence (higher context specificity wins):
+  //   edit_prediction && !showing_completions → tab accepts prediction
+  //   showing_completions → tab composes, enter confirms
+  //   otherwise → tab indents (editor::Tab)
+  // =====================================================
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "tab":       "editor::Tab",      // literal indent (fallback)
+      "shift-tab": "editor::Backtab",
+      "ctrl-e":    "editor::Cancel"    // cancel completion / prediction
+    }
+  },
+  {
+    // Accepts edit prediction when one is visible (any prediction mode,
+    // including "subtle"). Overrides the generic tab → editor::Tab above.
+    "context": "Editor && vim_mode == insert && edit_prediction && !showing_completions",
+    "bindings": {
+      "tab": "editor::AcceptEditPrediction"
+    }
+  },
+  {
+    // When completion menu is open: compose completion on tab, confirm on enter.
+    "context": "Editor && vim_mode == insert && showing_completions",
+    "bindings": {
+      "tab":   "editor::ComposeCompletion",
+      "enter": "editor::ConfirmCompletion"
+    }
+  },
+  {
+    // Snippet tabstop navigation (stripped by base_keymap: None — restore).
+    "context": "Editor && in_snippet && has_next_tabstop && !showing_completions",
+    "bindings": {
+      "tab": "editor::NextSnippetTabstop"
+    }
+  },
+  {
+    "context": "Editor && in_snippet && has_previous_tabstop && !showing_completions",
+    "bindings": {
+      "shift-tab": "editor::PreviousSnippetTabstop"
+    }
+  },
+
+  // =====================================================
+  // UNBIND VSCode BASE ctrl-w CONFLICTS
+  // VSCode base binds standalone ctrl-w to close pane/dock in
+  // these contexts. We nullify them so ctrl-w functions as a
+  // pure prefix (no 1s timeout race) for the window bindings
+  // in the global ctrl-w section above.
+  // =====================================================
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-w": "pane::CloseActiveItem"
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-w": "workspace::CloseActiveDock"
+    }
+  },
+  {
+    "context": "SettingsWindow",
+    "unbind": {
+      "ctrl-w": "workspace::CloseWindow"
+    }
+  },
+  {
+    "context": "RulesLibrary",
+    "unbind": {
+      "ctrl-w": "workspace::CloseWindow"
+    }
+  },
+
+  // =====================================================
+  // OVERRIDE VSCode ctrl-y IN EDITOR
+  // VSCode base binds ctrl-y → editor::Redo (Editor ctx),
+  // which takes precedence over our global CopyPath binding.
+  // In vim buffers, vim.json handles ctrl-y as LineUp.
+  // This ensures CopyPath works in non-vim Editor contexts.
+  // =====================================================
+  {
+    "context": "Editor && !VimControl",
+    "bindings": {
+      "ctrl-y": "workspace::CopyPath"
     }
   },
 
@@ -57,11 +235,28 @@
   {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
-      // Window splits (matches Neovim <leader>_ and <leader>-)
+      // Window splits — space-w prefix (mirrors Neovim <leader>w)
+      "space w s": "pane::SplitDown",       // horizontal split (like <C-w>s)
+      "space w v": "pane::SplitRight",      // vertical split (like <C-w>v)
+      "space w _": "pane::SplitRight",      // alias kept for muscle memory
+      "space w -": "pane::SplitDown",       // alias kept for muscle memory
+      "space w q": "pane::CloseActiveItem", // close window (like <C-w>q)
+      "space w d": "pane::CloseActiveItem", // alias
+      "space w o": "pane::CloseOtherItems", // close others (like <C-w>o)
+      "space w x": "workspace::SwapPaneAdjacent", // swap (like <C-w>x)
+      "space w =": "vim::ResetPaneSizes",   // equalize (like <C-w>=)
+      "space w r": "vim::ResetPaneSizes",   // mirrors Neovim MiniMisc.resize_window
+      "space w z": "workspace::ToggleZoom", // zoom toggle (mirrors Neovim <leader>wz)
+      "space w h": "workspace::ActivatePaneLeft",
+      "space w j": "workspace::ActivatePaneDown",
+      "space w k": "workspace::ActivatePaneUp",
+      "space w l": "workspace::ActivatePaneRight",
+
+      // Old split aliases at top-level (keep for existing muscle memory)
       "space _": "pane::SplitRight",
       "space -": "pane::SplitDown",
 
-      // File explorer (matches Neovim <leader>e)
+      // File explorer (matches Neovim <leader>e → Yazi)
       "space e": [
         "task::Spawn",
         { "task_name": "Yazi File Manager", "reveal_target": "center" }
@@ -73,23 +268,23 @@
       ],
 
       // File finding (matches Neovim)
-      "space space": "file_finder::Toggle", // <leader><space>
-      "space f f": "file_finder::Toggle", // <leader>ff
-      "space f r": "projects::OpenRecent", // <leader>fr
-      "space f g": "file_finder::Toggle", // <leader>fg (approximate)
-      "space ,": "buffer_search::Deploy", // <leader>, for buffers
+      "space space": "file_finder::Toggle",           // <leader><space>
+      "space f f": "file_finder::Toggle",             // <leader>ff
+      "space f r": "projects::OpenRecent",            // <leader>fr
+      "space f g": "file_finder::Toggle",             // <leader>fg (approximate)
+      "space ,": "buffer_search::Deploy",             // <leader>, for buffers
 
-      // Search operations (matches Neovim)
-      "space /": "buffer_search::Deploy", // <leader>/
+      // Search operations
+      "space /": "buffer_search::Deploy",             // <leader>/
       "space s g": "project_panel::NewSearchInDirectory", // <leader>sg
 
-      // Git operations (matches Neovim)
-      "space g g": "git_panel::ToggleFocus", // <leader>gg
-      "space g c": "git_panel::ToggleFocus", // <leader>gc (approximate)
+      // Git operations
+      "space g g": "git_panel::ToggleFocus",          // <leader>gg
+      "space g c": "git_panel::ToggleFocus",          // <leader>gc (approximate)
 
-      // Buffer management (matches Neovim)
-      "space b d": "pane::CloseActiveItem", // <leader>bd
-      "space b o": "pane::CloseOtherItems", // <leader>bo
+      // Buffer management
+      "space b d": "pane::CloseActiveItem",           // <leader>bd
+      "space b o": "pane::CloseOtherItems",           // <leader>bo
 
       // Center screen on scroll (matches Neovim <C-d>zz and <C-u>zz)
       "ctrl-d": ["vim::ScrollDown", { "center_cursor": true }],
@@ -99,17 +294,16 @@
       "j": "vim::Down",
       "k": "vim::Up",
 
-      // Save file (matches Neovim <C-s>)
-      "ctrl-s": "workspace::Save",
-
-      // Toggle inlay hints
-      "ctrl i": "editor::ToggleInlayHints",
+      // UI toggles — space u prefix (mirrors Neovim <leader>u)
+      "space u h": "editor::ToggleInlayHints",
+      "space u l": "editor::ToggleRelativeLineNumbers",
+      "space u e": "workspace::ToggleLeftDock",
+      "space u E": "workspace::ToggleRightDock",
+      "space u z": "workspace::ToggleZoom",
+      "space u D": "workspace::CloseAllDocks",
 
       // Go to file with gf
-      "g f": "editor::OpenExcerpts",
-
-      // Toggle relative line numbers
-      "ctrl l": "editor::ToggleRelativeLineNumbers"
+      "g f": "editor::OpenExcerpts"
     }
   },
 
@@ -121,15 +315,15 @@
     "bindings": {
       // LSP Navigation (matches Neovim)
       "g d": "editor::GoToDefinition",
-      "g D": "editor::GoToDefinitionSplit", // matches Neovim gD
-      "g r": "editor::FindAllReferences", // matches Neovim gr
-      "g I": "editor::GoToImplementation", // matches Neovim gI
-      "g y": "editor::GoToTypeDefinition", // matches Neovim gy
-      "g S": "editor::GoToDefinition", // matches Neovim gS (approximate)
+      "g D": "editor::GoToDefinitionSplit",   // matches Neovim gD
+      "g r": "editor::FindAllReferences",     // matches Neovim gr
+      "g I": "editor::GoToImplementation",    // matches Neovim gI
+      "g y": "editor::GoToTypeDefinition",    // matches Neovim gy
+      "g S": "editor::GoToDefinition",        // matches Neovim gS (approximate)
 
-      // Code actions (matches Neovim <leader>ca)
+      // Code actions (matches Neovim <leader>ca / <leader>cr)
       "space c a": "editor::ToggleCodeActions",
-      "space c r": "editor::Rename", // matches Neovim <leader>cr
+      "space c r": "editor::Rename",          // <leader>cr; ctrl-r restored to redo
 
       // Diagnostics navigation
       "] d": "editor::GoToDiagnostic",
@@ -142,22 +336,20 @@
       "[ h": "editor::GoToPreviousHunk",
 
       // Symbol search
-      "space s s": "outline::Toggle", // matches Neovim <leader>ss
+      "space s s": "outline::Toggle",         // matches Neovim <leader>ss
       "space s S": "project_symbols::Toggle", // matches Neovim <leader>sS
 
       // Diagnostics
-      "space x d": "diagnostics::Deploy", // matches Neovim diagnostics
+      "space x d": "diagnostics::Deploy",     // matches Neovim diagnostics
 
       // AI/Assistant (matches Neovim Claude keybinds)
-      "space a c": "agent::ToggleFocus", // <leader>ac
-      "space a f": "agent::ToggleFocus", // <leader>af
+      "space a c": "agent::ToggleFocus",      // <leader>ac
+      "space a f": "agent::ToggleFocus",      // <leader>af
       "space a o": ["task::Spawn", { "task_name": "OpenCode" }], // <leader>ao
-
-      // Rename with inc-rename style
-      "ctrl-r": "editor::Rename",
 
       // Git panel
       "ctrl-shift-g": "git_panel::ToggleFocus"
+      // Note: ctrl-r intentionally NOT rebound here — restored to vim redo
     }
   },
 
@@ -192,6 +384,9 @@
 
   // =====================================================
   // PROJECT PANEL (File Explorer)
+  // Single-letter file ops must be context-scoped.
+  // Ctrl-combos (ctrl-y, ctrl-shift-y, ctrl-p) are
+  // now global — no longer duplicated here.
   // =====================================================
   {
     "context": "ProjectPanel && not_editing",
@@ -208,26 +403,13 @@
       "l": "project_panel::ExpandSelectedEntry",
       "h": "project_panel::CollapseSelectedEntry",
       "shift-h": "project_panel::CollapseAllEntries",
-      "ctrl-y": "workspace::CopyPath",
-      "ctrl-shift-y": "workspace::CopyRelativePath",
-      "ctrl-f": "project_panel::NewSearchInDirectory",
-      "escape": "menu::Cancel",
-      "ctrl-p": "file_finder::Toggle"
+      "escape": "menu::Cancel"
     }
   },
 
   // =====================================================
-  // EMPTY PANE BINDINGS
+  // VIM MULTI-CURSOR (select next/prev match)
   // =====================================================
-  {
-    "context": "EmptyPane || SharedScreen",
-    "bindings": {
-      "space f r": "projects::OpenRecent",
-      "space f f": "file_finder::Toggle",
-      "space space": "file_finder::Toggle"
-    }
-  },
-
   {
     "context": "VimControl && !menu",
     "bindings": {
@@ -247,7 +429,7 @@
   {
     "context": "vim_mode == normal || vim_mode == visual",
     "bindings": {
-      // Text object selection
+      // Syntax node selection
       "alt-o": "editor::SelectLargerSyntaxNode",
       "alt-i": "editor::SelectSmallerSyntaxNode",
 
@@ -271,7 +453,7 @@
   },
 
   // =====================================================
-  // EDITOR FULL MODE
+  // EDITOR FULL MODE (multibuffer excerpts)
   // =====================================================
   {
     "context": "Editor && mode == full",
@@ -279,6 +461,10 @@
       "shift-enter": ["editor::ExpandExcerpts", { "lines": 5 }]
     }
   },
+
+  // =====================================================
+  // HELIX-STYLE JUMP (ss)
+  // =====================================================
   {
     "context": "(vim_mode == visual || vim_mode == normal) && !menu",
     "bindings": {
@@ -289,6 +475,12 @@
     "context": "(vim_mode == helix_normal || vim_mode == helix_select) && !menu",
     "unbind": {
       "g w": "vim::HelixJumpToWord"
+    }
+  },
+  {
+    "context": "v",
+    "bindings": {
+      "v i t": "vim::Tag"
     }
   }
 ]
