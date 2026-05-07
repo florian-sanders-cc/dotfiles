@@ -34,6 +34,17 @@
 
       zed-preview = prev.callPackage ./zed-preview.nix { };
 
+      pi-coding-agent = prev.symlinkJoin {
+        name = "pi-coding-agent-${prev.pi-coding-agent.version}";
+        paths = [ prev.pi-coding-agent ];
+        nativeBuildInputs = [ prev.makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/pi \
+            --unset DISPLAY \
+            --set PI_SKIP_VERSION_CHECK 1
+        '';
+      };
+
       # Enable VA-API hardware video encoding for WebRTC + Vulkan rendering
       # See: https://wiki.archlinux.org/title/Chromium#Hardware_video_acceleration
       google-chrome = prev.google-chrome.override {

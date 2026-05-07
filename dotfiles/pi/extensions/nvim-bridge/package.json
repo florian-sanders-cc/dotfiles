@@ -1,0 +1,12 @@
+{
+  "name": "pi-nvim-bridge",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "pi": {
+    "extensions": ["./index.ts"]
+  },
+  "dependencies": {
+    "neovim": "^5.3.0"
+  }
+}
