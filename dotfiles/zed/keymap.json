@@ -278,5 +278,17 @@
     "bindings": {
       "shift-enter": ["editor::ExpandExcerpts", { "lines": 5 }]
     }
+  },
+  {
+    "context": "(vim_mode == visual || vim_mode == normal) && !menu",
+    "bindings": {
+      "s s": "vim::HelixJumpToWord"
+    }
+  },
+  {
+    "context": "(vim_mode == helix_normal || vim_mode == helix_select) && !menu",
+    "unbind": {
+      "g w": "vim::HelixJumpToWord"
+    }
   }
 ]
