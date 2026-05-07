@@ -2,7 +2,7 @@ theme = "nord-night"
 
 [editor]
 auto-format = true
-line-number = "relative"
+line-number = "absolute"
 completion-timeout = 50
 mouse = false
 color-modes = true
