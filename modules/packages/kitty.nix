@@ -55,10 +55,9 @@
       "ctrl+shift+e" = "launch --type=tab --cwd=current nvim .";
       "ctrl+shift+d" = "launch --type=tab --cwd=current nvim -c CodeDiff";
       # AI split panes (Warp-like feature)
-      "ctrl+shift+a" = "launch --type=window --location=vsplit --cwd=current opencode";
+      "ctrl+shift+a" = "launch --type=window --location=vsplit --cwd=current pi";
       # Fork: continue most recent session in a new split
-      "ctrl+shift+f" =
-        "launch --type=window --location=vsplit --cwd=current fish -c 'set -l sid (opencode session list --format=json 2>/dev/null | jq -r \".[0].id\" 2>/dev/null); if test -n \"$sid\" -a \"$sid\" != \"null\"; opencode --session \"$sid\"; else; opencode; end'";
+      "ctrl+shift+f" = "launch --type=window --location=vsplit --cwd=current pi --continue";
       "ctrl+alt+left" = "previous_window";
       "ctrl+alt+right" = "next_window";
     };
