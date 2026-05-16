@@ -6,27 +6,27 @@
 -- Provides summary info used in 'mini.statusline'.
 
 vim.schedule(function()
-  require('mini.diff').setup({
+  require("mini.diff").setup({
     view = {
       -- Visualization style. Possible values are 'sign' and 'number'.
       -- Default: 'number' if line numbers are enabled, 'sign' otherwise.
-      style = 'sign',
+      style = "sign",
 
       -- Signs used for hunks with 'sign' view
-      signs = { add = '▒', change = '▒', delete = '▒' },
+      signs = { add = "▒", change = "▒", delete = "▒" },
 
       -- Priority of used visualization extmarks
       priority = 199,
-    }
+    },
   })
 end)
 
 -- Keymaps
 local nmap_leader = function(suffix, rhs, desc)
-  vim.keymap.set('n', '<Leader>' .. suffix, rhs, { desc = desc })
+  vim.keymap.set("n", "<Leader>" .. suffix, rhs, { desc = desc })
 end
 
-nmap_leader('go', '<Cmd>lua MiniDiff.toggle_overlay()<CR>', 'Git: Toggle Overlay')
+nmap_leader("go", "<Cmd>lua MiniDiff.toggle_overlay()<CR>", "Git: Toggle Overlay")
 
 -- Hunk operators (work with motions/textobjects):
 -- - `ghip` - apply hunks inside paragraph

@@ -2,7 +2,6 @@
 -- -- │ Core Configuration      │
 -- -- └─────────────────────────┘
 
-require("core.mini-extra") -- Load before other mini modules that might use it
 require("core.options") -- Includes mini.misc setup, autocmds, and keymaps
 require("core.colorscheme")
 require("core.persistence")
@@ -16,14 +15,10 @@ require("snacks").setup(
     "force",
     require("navigation.snacks-picker"),
     require("navigation.snacks-explorer"),
-    require("terminal.snacks-terminal"),
     require("ui.snacks-bufdelete"),
     require("ui.snacks-toggle"),
-    require("ui.snacks-zen"),
     require("ui.snacks-notifier"),
     require("ui.snacks-bigfile"),
-    require("ui.snacks-quickfile"),
-    require("ui.snacks-words"),
     require("ui.snacks-input")
   )
 )
@@ -32,7 +27,6 @@ require("snacks").setup(
 -- -- │ Navigation Plugins      │
 -- -- └─────────────────────────┘
 
-require("navigation.mini-jump")
 require("navigation.flash")
 require("navigation.yazi")
 
@@ -43,29 +37,24 @@ require("navigation.yazi")
 require("ui.render-markdown")
 require("ui.which-key") -- Load first so plugins can register keymaps
 require("ui.statusline")
-require("ui.mini-starter")
-require("ui.mini-hipatterns")
-require("ui.mini-icons")
 require("ui.mini-indentscope")
-require("ui.noice")
+require("ui.ui2")
+require("ui.icons")
+require("ui.todo-comments")
 
 -- -- ┌─────────────────────────┐
 -- -- │ Editing Plugins         │
 -- -- └─────────────────────────┘
 
 require("editing.mini-align")
-require("editing.mini-bracketed")
 require("editing.mini-pairs")
 require("editing.mini-surround")
-require("editing.mini-splitjoin")
-require("editing.mini-comment")
 require("editing.treesitter")
 require("editing.multicursor")
 require("editing.quicker")
 
 -- -- Completion and snippets (load after treesitter for better integration)
 require("editing.blink")
-require("editing.mini-snippets")
 
 -- -- Formatting (load after LSP setup for lsp_fallback)
 require("editing.conform")
@@ -77,12 +66,10 @@ require("editing.markdown")
 -- -- │ Git Integration         │
 -- -- └─────────────────────────┘
 
-require("git.mini-diff")
-require("git.gitsigns")
-require("git.neogit")
 require("git.codediff")
 require("git.hunk")
 require("git.jj")
+require("git.mini-diff")
 
 -- -- ┌─────────────────────────┐
 -- -- │ LSP Configuration       │
@@ -100,8 +87,7 @@ require("terminal.config")
 -- -- │ AI                      │
 -- -- └─────────────────────────┘
 
-require("ai.codecompanion")
-require("ai.copilot")
+require("ai.init")
 
 -- -- ┌─────────────────────────┐
 -- -- │ Final Overrides         │

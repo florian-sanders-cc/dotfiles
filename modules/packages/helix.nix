@@ -15,6 +15,7 @@
       nixfmt
       typescript-go
       wc-ls
+      rust-analyzer
     ];
   };
   xdg.configFile."helix/runtime".source = ../../dotfiles/helix/runtime;

@@ -8,6 +8,7 @@ require("codediff").setup({
   explorer = {
     position = "left",
     width = 35,
+    view_mode = "tree",
   },
   keymaps = {
     view = {

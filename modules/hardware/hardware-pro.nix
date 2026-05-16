@@ -15,49 +15,12 @@ in
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ./gpu.nix
+    ./tuxedo.nix
   ];
 
   config = lib.mkIf (currentUser.name == specs.users.pro.name) {
     intel.enable = true;
     boot.kernelPackages = pkgs.linuxPackages_latest;
-
-    # HWP active mode: hardware distributes RAPL budget per-core in µs
-    # C1 allowed; C6/C7 deep sleep blocked to prevent freq-recovery lag on wakeup
-    boot.kernelParams = [
-      "intel_idle.max_cstate=1" # C1 allowed, C6/C7 deep sleep blocked
-      # intel_pstate=passive removed — HWP active mode distributes RAPL budget per-core
-    ];
-
-    # TUXEDO EC driver: required for proper power limit negotiation with the EC.
-    # Without it, the EC falls back to a conservative 35W PL1 cap, throttling
-    # all cores to ~1.2 GHz regardless of load or AC state.
-    hardware.tuxedo-drivers.enable = true;
-
-    # i7-11370H: 3.3 GHz base, 4.8 GHz boost
-    # TLP for automatic power management (AC vs battery)
-    services.tlp = {
-      enable = true;
-      settings = {
-        # -- AC Power --
-        # powersave governor + performance EPP: lets HWP make per-core decisions
-        # while hinting to prioritize speed when RAPL headroom is available
-        CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # HWP ignores governor; powersave = let HWP decide
-        CPU_ENERGY_PERF_POLICY_ON_AC = "performance"; # EPP: hint to HWP to prioritize speed
-        CPU_HWP_DYN_BOOST_ON_AC = 1; # Intel Dynamic Boost with HWP
-        CPU_SCALING_MAX_FREQ_ON_AC = 4800000;
-        CPU_BOOST_ON_AC = 1;
-        # PLATFORM_PROFILE_ON_AC removed — /sys/firmware/acpi/platform_profile is
-        # not available on this machine, so the setting was silently ignored
-        # CPU_SCALING_MIN_FREQ_ON_AC removed — was exhausting RAPL budget on idle cores
-
-        # -- Battery Power (conservative) --
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        CPU_SCALING_MIN_FREQ_ON_BAT = 400000;
-        CPU_SCALING_MAX_FREQ_ON_BAT = 3300000;
-        CPU_BOOST_ON_BAT = 0;
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
-      };
-    };
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 

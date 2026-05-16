@@ -37,11 +37,19 @@ vim.opt.foldenable = true
 -- │ Incremental Node Selection (Alt-i/Alt-o)│
 -- └─────────────────────────────────────────┘
 
-vim.keymap.set({ "n", "x", "o" }, "<A-o>", function()
+vim.keymap.set({ "n", "x", "o" }, "<A-s>", function()
   require("flash").treesitter({
     actions = {
       ["<A-o>"] = "next",
       ["<A-i>"] = "prev",
     },
   })
+end, { desc = "Treesitter incremental selection" })
+
+vim.keymap.set({ "n", "x", "o" }, "<A-i>", function()
+  vim.treesitter.select("extend_prev")
+end, { desc = "Treesitter incremental selection" })
+
+vim.keymap.set({ "n", "x", "o" }, "<A-o>", function()
+  vim.treesitter.select("extend_next")
 end, { desc = "Treesitter incremental selection" })
