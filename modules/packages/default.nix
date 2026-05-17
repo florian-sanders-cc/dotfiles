@@ -63,7 +63,6 @@ let
     handy
     wtype
     playwright-cli
-    pi-coding-agent
     rtk
   ];
   proPackages = with pkgs; [
@@ -109,6 +108,7 @@ in
       ./ghostty.nix
       ./claude-code.nix
       ./opencode.nix
+      ./pi.nix
       ./waybar.nix
       ./yazi.nix
     ];
