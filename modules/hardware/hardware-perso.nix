@@ -21,9 +21,9 @@ in
   config = lib.mkIf (currentUser.name == specs.users.perso.name) {
     intel.enable = true;
     nvidia = {
-      enable = true;
+      enable = false;
       prime = {
-        enable = true;
+        enable = false;
       };
     };
 
