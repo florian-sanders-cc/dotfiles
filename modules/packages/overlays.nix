@@ -34,9 +34,10 @@
 
       zed-preview = prev.callPackage ./zed-preview.nix { };
 
-      pi-coding-agent = prev.symlinkJoin {
-        name = "pi-coding-agent-${prev.pi-coding-agent.version}";
-        paths = [ prev.pi-coding-agent ];
+      # TODO: remove callPackage override once nixos-unstable ships 0.75.3
+      pi-coding-agent = let base = prev.callPackage ./pi-coding-agent.nix { }; in prev.symlinkJoin {
+        name = "pi-coding-agent-${base.version}";
+        paths = [ base ];
         nativeBuildInputs = [ prev.makeWrapper ];
         postBuild = ''
           wrapProgram $out/bin/pi \
