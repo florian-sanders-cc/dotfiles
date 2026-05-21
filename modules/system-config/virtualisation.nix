@@ -6,7 +6,7 @@
 
 {
   virtualisation = {
-    containers.enable = true;
+    containers.enable = false;
     docker = {
       enable = true;
       # Would be safer but does not work with Distrobox?
@@ -47,6 +47,6 @@
     distrobox
 
     dive # look into docker image layers
-    docker-compose # start group of containers for dev
+    # docker-compose # start group of containers for dev
   ];
 }
