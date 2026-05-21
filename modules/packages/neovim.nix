@@ -23,7 +23,7 @@ let
     vscode-json-languageserver
     vscode-langservers-extracted
     vtsls
-    wc-ls
+    # wc-ls
   ];
 
   formatters = with pkgs; [

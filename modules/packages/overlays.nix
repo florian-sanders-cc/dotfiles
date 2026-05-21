@@ -18,7 +18,7 @@
 
       stylelint-ls = prev.callPackage ./stylelint-ls.nix { };
 
-      wc-ls = prev.callPackage ./wc-ls.nix { };
+      # wc-ls = prev.callPackage ./wc-ls.nix { };
 
       gh-actions-ls = prev.callPackage ./gh-actions-ls.nix { };
 

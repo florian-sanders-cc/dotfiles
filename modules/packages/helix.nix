@@ -14,7 +14,7 @@
       vscode-langservers-extracted
       nixfmt
       typescript-go
-      wc-ls
+      # wc-ls
       rust-analyzer
     ];
   };
