@@ -4,7 +4,7 @@
 {
   nixpkgs.overlays = [
     (final: prev: {
-      neovim-nightly = inputs.neovim-nightly-overlay.packages.${prev.stdenv.hostPlatform.system}.default;
+      # neovim-nightly = inputs.neovim-nightly-overlay.packages.${prev.stdenv.hostPlatform.system}.default;
 
       # helix-nightly = inputs.helix-flake.packages.${prev.stdenv.hostPlatform.system}.default;
 
