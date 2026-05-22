@@ -60,27 +60,43 @@ in
   environment.systemPackages = with pkgs; [
     niri
     cosmic-ext-niri-session # Must be in systemPackages for display manager to find the .desktop file
-    brightnessctl
+    adwaita-icon-theme
+    adw-gtk3
     cliphist
+    gtk4
+    libadwaita
+    nautilus
+    orca
     pavucontrol
     polkit_gnome
+    seahorse
+    noctalia-qs
+    niri-smart-focus
     wl-clipboard
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-gnome
+    xwayland-satellite
     gnome-calculator
     gnome-disk-utility
-    niri-smart-focus
     wireplumber # For wpctl audio control
+    kdePackages.qtwayland
   ];
 
   services.upower.enable = true;
 
   services.gnome.gnome-keyring.enable = pkgs.lib.mkForce false;
 
+  # XDG Desktop Portal for GNOME app integration
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = [
+  #     pkgs.xdg-desktop-portal-gtk
+  #     pkgs.xdg-desktop-portal-gnome
+  #   ];
+  # };
+
   # Home Manager configuration
   home-manager.users."${currentUser.name}" = {
-    home.packages = with pkgs; [
-      wl-clipboard
-    ];
-
     # Niri configuration (COSMIC-integrated version)
     home.file.".config/niri" = {
       source = ../../dotfiles/niri-cosmic;
@@ -92,15 +108,30 @@ in
       source = ../../dotfiles/cosmic/com.system76.CosmicSettings.Shortcuts/v1/custom;
     };
 
-    # home.sessionVariables = {
-    #   WAYLAND_DISPLAY = "wayland-1";
-    # };
+    gtk = {
+      enable = true;
+      gtk4.theme = null;
+      theme = {
+        name = "adw-gtk3-dark";
+        package = pkgs.adw-gtk3;
+      };
+      iconTheme = {
+        name = "Adwaita";
+        package = pkgs.adwaita-icon-theme;
+      };
+      cursorTheme = {
+        name = "Adwaita";
+        package = pkgs.adwaita-icon-theme;
+      };
+    };
 
-    # Dconf settings
     dconf = {
       enable = true;
       settings = {
-        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+        "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
+          enable-animations = true;
+        };
         "org/gnome/desktop/default-applications/terminal" = {
           exec = "kitty";
           exec-arg = "-e";
@@ -108,37 +139,35 @@ in
       };
     };
 
-    # Systemd services for Niri
-    # systemd.user.services.niri = {
-    #   Unit = {
-    #     Description = "A scrollable-tiling Wayland compositor";
-    #     BindsTo = "graphical-session.target";
-    #     Before = "graphical-session.target";
-    #     Wants = "graphical-session-pre.target";
-    #     After = "graphical-session-pre.target";
-    #   };
-    #   Service = {
-    #     Slice = "session.slice";
-    #     Type = "notify";
-    #     ExecStart = "${pkgs.niri}/bin/niri --session";
-    #   };
-    # };
+    # Xwayland started via systemd (triggered by graphical-session.target from COSMIC session)
+    systemd.user.services.xwayland-satellite = {
+      Unit = {
+        Description = "Xwayland outside your Wayland";
+        PartOf = "graphical-session.target";
+        After = "graphical-session.target";
+      };
+      Service = {
+        ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
+        Restart = "on-failure";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
 
-    # systemd.user.services.xwayland-satellite = {
-    #   Unit = {
-    #     Description = "Xwayland outside your Wayland";
-    #     BindsTo = "graphical-session.target";
-    #     PartOf = "graphical-session.target";
-    #     After = "graphical-session.target";
-    #     Requisite = "graphical-session.target";
-    #   };
-    #   Service = {
-    #     Type = "notify";
-    #     NotifyAccess = "all";
-    #     ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
-    #     StandardOutput = "journal";
-    #   };
-    #   Install.WantedBy = [ "graphical-session.target" ];
-    # };
+    # Polkit authentication agent
+    systemd.user.services.polkit-gnome = {
+      Unit = {
+        Description = "Polkit GNOME Authentication Agent";
+        PartOf = [ "graphical-session.target" ];
+        After = [
+          "graphical-session.target"
+          "dbus.socket"
+        ];
+      };
+      Service = {
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
   };
 }
