@@ -32,22 +32,18 @@
     kdePackages.qtwayland
   ];
 
-  services.gnome.at-spi2-core.enable = true;
-
-  services.displayManager = {
-    gdm = {
-      enable = true;
-      wayland = true;
-    };
-    defaultSession = "niri";
-    sessionPackages = [ pkgs.niri ];
-  };
-
-  programs.xwayland.enable = true;
-  security.pam.services = {
-    swaylock = { };
-  };
   services.upower.enable = true;
+
+  # Greetd with agreety for niri session login (prompts for password)
+  services.greetd = {
+    enable = true;
+    useTextGreeter = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd}/bin/agreety --cmd '${pkgs.niri}/bin/niri-session'";
+      };
+    };
+  };
 
   # XDG Desktop Portal for GNOME app integration
   xdg.portal = {
@@ -59,10 +55,6 @@
   };
 
   home-manager.users."${currentUser.name}" = {
-
-    # Polkit authentication agent for run0 and other privilege escalation
-    services.polkit-gnome.enable = true;
-    services.awww.enable = false;
 
     home.file.".config/niri" = {
       source = ../../dotfiles/niri;
@@ -78,10 +70,6 @@
         { source = ../../dotfiles/niri/outputs-perso-workstation.kdl; }
       else
         builtins.throw "niri: no outputs.kdl defined for user ${currentUser.name}";
-
-    home.sessionVariables = {
-      WAYLAND_DISPLAY = "wayland-1";
-    };
 
     gtk = {
       enable = true;
@@ -114,36 +102,37 @@
       };
     };
 
-    systemd.user.services.niri = {
-      Unit = {
-        Description = "A scrollable-tiling Wayland compositor";
-        BindsTo = "graphical-session.target";
-        Before = "graphical-session.target";
-        Wants = "graphical-session-pre.target";
-        After = "graphical-session-pre.target";
-      };
-      Service = {
-        Slice = "session.slice";
-        Type = "notify";
-        ExecStart = "${pkgs.niri}/bin/niri --session";
-      };
-    };
-
+    # Xwayland started via systemd (triggered by graphical-session.target from niri-session)
     systemd.user.services.xwayland-satellite = {
       Unit = {
         Description = "Xwayland outside your Wayland";
-        BindsTo = "graphical-session.target";
         PartOf = "graphical-session.target";
         After = "graphical-session.target";
-        Requisite = "graphical-session.target";
       };
       Service = {
-        Type = "notify";
-        NotifyAccess = "all";
         ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
-        StandardOutput = "journal";
+        Restart = "on-failure";
       };
       Install.WantedBy = [ "graphical-session.target" ];
     };
+
+    services.polkit-gnome.enable = true;
+
+    # Polkit authentication agent - starts when niri --session activates graphical-session.target
+    # systemd.user.services.polkit-gnome = {
+    #   Unit = {
+    #     Description = "Polkit GNOME Authentication Agent";
+    #     PartOf = [ "graphical-session.target" ];
+    #     After = [
+    #       "graphical-session.target"
+    #       "dbus.socket"
+    #     ];
+    #   };
+    #   Service = {
+    #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    #     Restart = "on-failure";
+    #   };
+    #   Install.WantedBy = [ "graphical-session.target" ];
+    # };
   };
 }

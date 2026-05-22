@@ -35,17 +35,7 @@ in
   ];
 
   # PAM configuration for GPG auto-unlock
-  security.pam.services.greetd.gnupg.enable = true;
-  security.pam.services.cosmic-greeter.gnupg.enable = true;
   security.pam.services.login.gnupg.enable = true;
-  security.pam.services.gdm.gnupg = {
-    enable = true;
-    storeOnly = true; # Only store the password, don't try to unlock yet
-  };
-  security.pam.services.gdm-password.gnupg = {
-    enable = true;
-    storeOnly = false; # Actually unlock the keys here
-  };
 
   # GPG Agent configuration (via home-manager for user-level control)
   home-manager.users."${currentUser.name}" = {
