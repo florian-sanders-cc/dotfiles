@@ -1,4 +1,11 @@
 {
+  "context_servers": {
+    "mcp-server-context7": {
+      "enabled": false,
+      "remote": false,
+      "settings": {}
+    }
+  },
   "base_keymap": "VSCode",
   "icon_theme": {
     "mode": "dark",
@@ -6,9 +13,6 @@
     "dark": "Zed (Default)",
   },
   "agent_servers": {
-    "github-copilot-cli": {
-      "type": "registry",
-    },
     "opencode": {
       "type": "registry",
     },
