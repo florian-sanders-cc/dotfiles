@@ -64,6 +64,7 @@ let
     wtype
     playwright-cli
     rtk
+    # warp-terminal-wayland
   ];
   proPackages = with pkgs; [
     random-labels
@@ -111,6 +112,7 @@ in
       ./pi.nix
       ./waybar.nix
       ./yazi.nix
+      ./warp.nix
     ];
 
     # Standard packages

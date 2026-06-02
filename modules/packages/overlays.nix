@@ -34,7 +34,6 @@
 
       zed-preview = prev.callPackage ./zed-preview.nix { };
 
-      # TODO: remove callPackage override once nixos-unstable ships 0.75.3
       pi-coding-agent =
         let
           base = prev.callPackage ./pi-coding-agent.nix { };
@@ -72,11 +71,24 @@
 
       # Fix cosmic-osd polkit authentication (https://github.com/pop-os/cosmic-osd/issues/170)
       # Point to the SUID-wrapped helper in /run/wrappers/bin/ (set up by security.wrappers)
-      cosmic-osd = prev.cosmic-osd.overrideAttrs (old: {
-        env = (old.env or { }) // {
-          POLKIT_AGENT_HELPER_1 = "/run/wrappers/bin/polkit-agent-helper-1";
-        };
-      });
+      # cosmic-osd = prev.cosmic-osd.overrideAttrs (old: {
+      #   env = (old.env or { }) // {
+      #     POLKIT_AGENT_HELPER_1 = "/run/wrappers/bin/polkit-agent-helper-1";
+      #   };
+      # });
+
+      # warp-terminal-wayland =
+      #   let
+      #     version = "0.2026.05.27.15.44.stable_01";
+      #   in
+      #   (prev.warp-terminal.override { waylandSupport = true; }).overrideAttrs (old: {
+      #     inherit version;
+      #     src = prev.fetchurl {
+      #       url = "https://releases.warp.dev/stable/v${version}/warp-terminal-v${version}-1-x86_64.pkg.tar.zst";
+      #       hash = "sha256-dvD9s1zVGlvWrc2TmARp5njCHKH0FvocRxg642R2tQc=";
+      #     };
+      #     buildInputs = old.buildInputs ++ [ prev.xz ];
+      #   });
     })
   ];
 }
