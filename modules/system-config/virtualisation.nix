@@ -23,6 +23,9 @@
 
   programs.virt-manager.enable = true;
 
+  # Enable systemd-nspawn container support + machines target
+  systemd.targets.machines.enable = false;
+
   users.users."${currentUser.name}".extraGroups = [
     "docker"
     "libvirt"
