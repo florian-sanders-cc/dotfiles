@@ -3,7 +3,7 @@
 {
   programs.helix = {
     enable = true;
-    # package = pkgs.helix-nightly;
+    package = pkgs.helix-nightly;
 
     extraPackages = with pkgs; [
       typescript
@@ -14,7 +14,6 @@
       vscode-langservers-extracted
       nixfmt
       typescript-go
-      # wc-ls
       rust-analyzer
     ];
   };

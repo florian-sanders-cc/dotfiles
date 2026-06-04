@@ -65,10 +65,10 @@
     # home-manager.url = "github:nix-community/home-manager/release-23.11";
 
     # --- Dev Flakes ---
-    # helix-flake = {
-    #   url = "github:florian-sanders/helix/fix-vtsls";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    helix-flake = {
+      url = "github:florian-sanders/helix/fix-vtsls";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     handy-flake = {
       url = "github:cjpais/Handy?ref=v0.8.3";
