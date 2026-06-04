@@ -5,3 +5,4 @@ window-padding-x = 8
 window-padding-y = 0
 adjust-cell-height = 40%
 font-family = JetBrainsMono NFM Light
+theme = Nordfox
