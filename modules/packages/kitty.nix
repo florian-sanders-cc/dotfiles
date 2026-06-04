@@ -47,6 +47,7 @@
       color13 = "#C7A9D9";
       color14 = "#BBDA97";
       color15 = "#BDC5BD";
+      auto_reload_config = -1;
       scrollback_pager = "nvim --cmd 'set eventignore=FileType' +'nnoremap q ZQ' +'call nvim_open_term(0, {})' +'set nomodified nolist' +'$' -";
     };
     keybindings = {
