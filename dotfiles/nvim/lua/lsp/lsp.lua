@@ -128,7 +128,7 @@ end, {
 })
 
 vim.lsp.enable({
-  -- "nil_ls",
+  "nil_ls",
   "nixd",
   "gopls",
   "lua_ls",
