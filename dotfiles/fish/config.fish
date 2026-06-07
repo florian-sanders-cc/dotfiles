@@ -188,7 +188,6 @@ alias nn='cd /home/flo/Notes'
 alias SN='s3cmd -c /home/flo/s3cfgs/flo-clever.s3cfg sync --delete-removed /home/flo/Notes/ s3://flo-clever-notes'
 alias SP='s3cmd -c /home/flo/s3cfgs/flo-clever.s3cfg sync --delete-removed --exclude-from /home/flo/Projects/.s3ignore /home/flo/Projects s3://flo-projects-backup'
 alias rt='random-labels Hubert Mathieu Florian Bob Pierre Hélène --clipboard'
-alias ncfg='cd /home/flo/.config/nvim/ && nvim .'
 alias cfg='cd ~/.config/'
 
 direnv hook fish | source
