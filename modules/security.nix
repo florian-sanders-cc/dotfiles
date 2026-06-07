@@ -59,6 +59,13 @@ in
       '';
     };
 
+    # Workaround for cyclic dependency between gpg-agent-ssh.socket and
+    # set-SSH_AUTH_SOCK.service (upstream home-manager issue).
+    # The Before ordering on the socket unit creates:
+    #   sockets.target → basic.target → set-SSH_AUTH_SOCK.service → gpg-agent-ssh.socket → sockets.target
+    # Removing it is safe since WantedBy already pulls in the service.
+    systemd.user.services.set-SSH_AUTH_SOCK.Unit.Before = lib.mkForce [ ];
+
     # Configure GPG keys to unlock at login via PAM
     home.file.".pam-gnupg" = {
       text = lib.concatStringsSep "\n" (
