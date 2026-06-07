@@ -9,6 +9,7 @@ color-modes = true
 true-color = true
 cursorline = true
 bufferline = "never"
+end-of-line-diagnostics = "disable"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -21,7 +22,18 @@ skip-levels = 2
 render = false
 
 [editor.statusline]
-left = ["mode", "spinner", "version-control", "file-name"]
+left = ["mode", "spinner"]
+center = ["file-name"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+diagnostics = ["warning", "error"]
+workspace-diagnostics = ["warning", "error"]
+
+[editor.lsp]
+display-progress-messages = true
 
 [editor.inline-diagnostics]
 cursor-line = "disable"

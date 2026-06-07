@@ -41,8 +41,12 @@ command = "vtsls"
 args = ["--stdio"]
 required-root-patterns = ["tsconfig.json"]
 
+[language-server.vtsls.config]
+enableMoveToFileCodeAction = true
+
 [language-server.vtsls.config.vtsls]
 enableMoveToFileCodeAction = true
+autoUseWorkspaceTsdk = true
 
 [language-server.vtsls.config.tsserver]
 maxTsServerMemory = 8192
@@ -53,7 +57,6 @@ entriesLimit = 50
 
 [language-server.vtsls.config.typescript.preferences]
 importModuleSpecifier = "relative"
-includePackageJsonAutoImports = "off"
 useAliasesForRenames = false
 
 [language-server.vtsls.config.typescript.preferences.format]
@@ -62,12 +65,9 @@ enable = false
 [language-server.vtsls.config.typescript.suggest]
 completeFunctionCalls = true
 
-[language-server.vtsls.config.typescript.updateImportsOnFileMove]
-enabled = "always"
 
 [language-server.vtsls.config.javascript.preferences]
 importModuleSpecifier = "relative"
-includePackageJsonAutoImports = "off"
 useAliasesForRenames = false
 
 [language-server.vtsls.config.javascript.preferences.format]
@@ -76,8 +76,6 @@ enable = false
 [language-server.vtsls.config.javascript.suggest]
 completeFunctionCalls = true
 
-[language-server.vtsls.config.javascript.updateImportsOnFileMove]
-enabled = "always"
 
 [language-server.eslint]
 command = "vscode-eslint-language-server"
@@ -112,38 +110,39 @@ location = "separateLine"
 enable = true
 
 [language-server.eslint.config.codeActionOnSave]
-enable = true
-mode = "fixAll"
+enable = false
+mode = "all"
 
 [language-server.eslint.config.experimental]
-useFlatConfig = true
+useFlatConfig = false
 
 [language-server.eslint.config.problems]
 shortenToSingleLine = false
 
 [language-server.eslint.config.workingDirectory]
-mode = "location"
+mode = "auto"
 
 [language-server.stylelint]
-command = "stylelint-lsp"
+command = "stylelint-ls"
 args = ["--stdio"]
 
 [language-server.stylelint.config]
 root_file = [
   ".stylelintrc",
-  ".stylelintrc.cjs",
-  ".stylelintrc.js",
   ".stylelintrc.json",
   ".stylelintrc.yaml",
   ".stylelintrc.yml",
-  "stylelint.config.cjs",
+  ".stylelintrc.js",
+  ".stylelintrc.mjs",
   "stylelint.config.js",
+  "stylelint.config.mjs",
+  "package.json",
 ]
-autoFixOnSave = true
-autoFixOnFormat = true
-cssInJs = true
-customSyntax = "postcss-lit"
-validate = ["css", "less", "postcss"]
+
+[language-server.stylelint.config.stylelint]
+ignoreDisables = false
+packageManager = "npm"
+snippet = ["css", "postcss"]
 
 [language-server.nixd]
 command = "nixd"

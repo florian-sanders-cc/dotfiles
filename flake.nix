@@ -66,7 +66,7 @@
 
     # --- Dev Flakes ---
     helix-flake = {
-      url = "github:florian-sanders/helix/fix-vtsls";
+      url = "github:helix-editor/helix/?ref=7eb1a2874af919caab8e69cf8bb6222d32fa6445";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
