@@ -1,20 +1,5 @@
 [
-  {
-    "label": "Neogit",
-    "command": "kitty -e nvim -c Neogit",
-    "args": [],
-    "env": {},
-    "use_new_terminal": true,
-    "allow_concurrent_runs": false,
-    "cwd": "${ZED_WORKTREE_ROOT}",
-    "hide": "always",
-    "reveal": "never",
-    // Whether to show the task line in the output of the spawned task, defaults to `true`.
-    "show_summary": false,
-    // Whether to show the command line in the output of the spawned task, defaults to `true`.
-    "show_command": false
-  },
-  {
+{
     "label": "OpenCode",
     "command": "opencode",
     "args": [],
