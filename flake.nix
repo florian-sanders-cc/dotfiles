@@ -69,19 +69,5 @@
       url = "github:helix-editor/helix/?ref=7eb1a2874af919caab8e69cf8bb6222d32fa6445";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    handy-flake = {
-      url = "github:cjpais/Handy?ref=v0.8.3";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # ghostty-flake = {
-    #   url = "github:ghostty-org/ghostty";
-    # };
-
-    # niri = {
-    #   url = "github:YaLTeR/niri";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
 }
