@@ -34,7 +34,7 @@ let
 
   plugins = with pkgs.vimPlugins; [
     # Core dependencies
-    plenary-nvim
+    plenary-nvim # Maybe not needed
     nvim-web-devicons
     nvim-treesitter.withAllGrammars
 
@@ -43,8 +43,8 @@ let
     SchemaStore-nvim
 
     # Completion & Snippets
-    blink-cmp
-    friendly-snippets
+    blink-cmp # Maybe not needed
+    friendly-snippets # Maybe not needed
 
     # Editor Features
     conform-nvim
@@ -53,8 +53,8 @@ let
     persistence-nvim
     multicursor-nvim
     quicker-nvim
-    markdown-nvim
-    jj-nvim
+    markdown-nvim # Maybe not needed
+    jj-nvim # not needed
 
     # Git Integration
     codediff-nvim
@@ -65,10 +65,10 @@ let
     which-key-nvim
     snacks-nvim
     mini-nvim
-    markdown-preview-nvim
-    render-markdown-nvim
+    markdown-preview-nvim # Maybe not needed
+    render-markdown-nvim # Maybe not needed
     (pkgs.callPackage ./neovim-plugins/nordic-nvim.nix { })
-    yazi-nvim
+    yazi-nvim # Maybe not needed
   ];
 
 in
