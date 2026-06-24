@@ -9,3 +9,4 @@
 .claude/
 .opencode/
 .playwright-cli/
+playwright-docker/
