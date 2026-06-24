@@ -1,10 +1,12 @@
 [[language]]
 name = "typescript"
-language-servers = ["vtsls", "eslint"]
+language-servers = ["tsgo", "eslint"]
+code-actions-on-save = ["source.fixAll.eslint"]
 
 [[language]]
 name = "javascript"
-language-servers = [{ name = "vtsls" }, "stylelint", "eslint"]
+language-servers = [{ name = "tsgo" }, "eslint"]
+code-actions-on-save = ["source.fixAll.eslint"]
 auto-format = true
 
 [language.formatter]
@@ -78,7 +80,7 @@ completeFunctionCalls = true
 
 
 [language-server.eslint]
-command = "vscode-eslint-language-server"
+command = "vscode-eslint"
 args = ["--stdio"]
 
 [language-server.eslint.config]
@@ -87,6 +89,11 @@ onIgnoredFiles = "off"
 quiet = false
 run = "onType"
 validate = "on"
+# Must be set (even to ""). The vscode-eslint server feeds `nodePath` into Node's `path`
+# API while resolving settings; if the key is absent it's `undefined` and the server throws
+# `The "path" argument must be of type string` on textDocument/diagnostic & codeAction.
+# Helix (unlike Neovim's eslint.lua) does not default this, so we set it explicitly.
+nodePath = ""
 root_file = [
   ".eslintrc",
   ".eslintrc.js",
@@ -101,6 +108,7 @@ root_file = [
   "eslint.config.mts",
   "eslint.config.cts",
 ]
+workingDirectories = [ "/home/flo-pro/Projects/clever-components" ]
 
 [language-server.eslint.config.codeAction.disableRuleComment]
 enable = true
@@ -109,9 +117,9 @@ location = "separateLine"
 [language-server.eslint.config.codeAction.showDocumentation]
 enable = true
 
-[language-server.eslint.config.codeActionOnSave]
-enable = false
-mode = "all"
+# [language-server.eslint.config.codeActionOnSave]
+# enable = false
+# mode = "all"
 
 [language-server.eslint.config.experimental]
 useFlatConfig = false
@@ -119,8 +127,7 @@ useFlatConfig = false
 [language-server.eslint.config.problems]
 shortenToSingleLine = false
 
-[language-server.eslint.config.workingDirectory]
-mode = "auto"
+
 
 [language-server.stylelint]
 command = "stylelint-ls"

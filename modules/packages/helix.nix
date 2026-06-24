@@ -10,8 +10,9 @@
       vtsls
       lua-language-server
       nixd
-      stylelint-lsp
+      stylelint-ls
       vscode-langservers-extracted
+      vscode-eslint
       nixfmt
       typescript-go
       rust-analyzer
