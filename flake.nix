@@ -66,7 +66,7 @@
 
     # --- Dev Flakes ---
     helix-flake = {
-      url = "github:helix-editor/helix/?ref=43bf7c2dc219606c64003aef21151f49f48d0939";
+      url = "github:helix-editor/helix/?ref=6b7c7c6e0784d7c34295c24064deb36418c0b4b5";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
