@@ -77,18 +77,18 @@
       #   };
       # });
 
-      # warp-terminal-wayland =
-      #   let
-      #     version = "0.2026.05.27.15.44.stable_01";
-      #   in
-      #   (prev.warp-terminal.override { waylandSupport = true; }).overrideAttrs (old: {
-      #     inherit version;
-      #     src = prev.fetchurl {
-      #       url = "https://releases.warp.dev/stable/v${version}/warp-terminal-v${version}-1-x86_64.pkg.tar.zst";
-      #       hash = "sha256-dvD9s1zVGlvWrc2TmARp5njCHKH0FvocRxg642R2tQc=";
-      #     };
-      #     buildInputs = old.buildInputs ++ [ prev.xz ];
-      #   });
+      warp-terminal-wayland =
+        let
+          version = "0.2026.06.17.09.49.stable_02";
+        in
+        (prev.warp-terminal.override { waylandSupport = true; }).overrideAttrs (old: {
+          inherit version;
+          src = prev.fetchurl {
+            url = "https://releases.warp.dev/stable/v${version}/warp-terminal-v${version}-1-x86_64.pkg.tar.zst";
+            hash = "sha256-U8dX4kC5HHZpJNer3uleKV/JsC8rCQ+06aaSj3xG1dI=";
+          };
+          buildInputs = old.buildInputs ++ [ prev.xz ];
+        });
     })
   ];
 }
