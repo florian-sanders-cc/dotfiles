@@ -22,6 +22,7 @@ let
     typescript-go
     vscode-json-languageserver
     vscode-langservers-extracted
+    vscode-eslint
     vtsls
     # wc-ls
   ];

@@ -58,7 +58,7 @@ local eslint_config_files = {
 
 ---@type vim.lsp.Config
 return {
-  cmd = { "vscode-eslint-language-server", "--stdio" },
+  cmd = { "vscode-eslint", "--stdio" },
   filetypes = {
     "javascript",
     "javascriptreact",
