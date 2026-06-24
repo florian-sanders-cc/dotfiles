@@ -8,12 +8,11 @@
   virtualisation = {
     containers.enable = false;
     docker = {
-      enable = true;
-      # Would be safer but does not work with Distrobox?
-      # rootless = {
-      #   enable = true;
-      #   setSocketVariable = true;
-      # };
+      enable = false; # stop running the rootful (host-root) daemon
+      rootless = {
+        enable = true;
+        setSocketVariable = true; # exports DOCKER_HOST to the user's rootless socket
+      };
     };
 
     libvirtd = {
@@ -27,7 +26,6 @@
   systemd.targets.machines.enable = false;
 
   users.users."${currentUser.name}".extraGroups = [
-    "docker"
     "libvirt"
     "kvm"
   ];
@@ -47,7 +45,6 @@
     spice
     spice-gtk
     spice-vdagent
-    distrobox
 
     dive # look into docker image layers
     # docker-compose # start group of containers for dev
