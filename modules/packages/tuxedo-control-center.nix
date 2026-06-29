@@ -219,7 +219,7 @@ EOF
     # build time (Nix sandbox sets HOME=/build).
     {
       printf '#!/bin/sh\n'
-      printf 'export PATH="%s''${PATH:+:$PATH}"\n' "${lib.makeBinPath [ python3 ]}"
+      printf 'export PATH="/run/wrappers/bin:%s''${PATH:+:$PATH}"\n' "${lib.makeBinPath [ python3 ]}"
       printf 'export NODE_PATH="%s''${NODE_PATH:+:$NODE_PATH}"\n' "$out/node_modules"
       printf 'exec "%s" \\\n' "${electron_41}/bin/electron"
       printf '  "%s" \\\n' "$out/e-app/e-app/main.js"

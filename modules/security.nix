@@ -21,6 +21,9 @@ in
   security.polkit.enable = true;
   security.rtkit.enable = true;
 
+  # Enable the setuid pkexec wrapper (needed for privileged actions via polkit, e.g. tuxedo-control-center)
+  security.polkit.enablePkexecWrapper = true;
+
   # SUID wrapper for polkit-agent-helper-1 (needed for password verification via PAM)
   security.wrappers.polkit-agent-helper-1 = {
     owner = "root";
