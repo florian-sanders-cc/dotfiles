@@ -1,7 +1,7 @@
 ---
 name: qa-analyze
 description: Analyze smart component code for QA patterns and discuss findings with user
-user-invocable: true
+disable-model-invocation: true
 ---
 
 # QA Component Analyzer (Critical Analysis)

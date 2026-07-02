@@ -107,6 +107,7 @@ in
       ./zellij.nix
       ./zsh.nix
       ./ghostty.nix
+      ./agents.nix
       ./claude-code.nix
       ./opencode.nix
       ./pi.nix

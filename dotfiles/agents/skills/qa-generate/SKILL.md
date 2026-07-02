@@ -1,7 +1,7 @@
 ---
 name: qa-generate
 description: Generate QA test document from findings file
-user-invocable: true
+disable-model-invocation: true
 ---
 
 # QA Test Document Generator

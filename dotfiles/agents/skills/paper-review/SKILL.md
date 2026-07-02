@@ -1,5 +1,6 @@
 ---
 name: paper-review
+disable-model-invocation: true
 description: Conversational code review written to a markdown file the reviewer annotates, then acted on. Use when the user asks to review the current branch or diff, runs /paper-review (optionally with "working tree", "staging", "rescan", or a ref/range), says "review my changes", or asks to act on their annotations in an existing review file.
 allowed-tools: Bash(git:*), Bash(gh:*), Read, Write, Edit, Grep, Glob, Task
 ---

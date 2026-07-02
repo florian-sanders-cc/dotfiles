@@ -1,5 +1,6 @@
 ---
 name: playwright-docker-setup
+disable-model-invocation: true
 description: Scaffold or update the per-project files that run browser/Playwright tests inside the official Playwright Docker image on a NixOS host. Use this when tests need to run but the project has no `playwright-docker/` directory yet (first-time setup), or to bump it when the project's Playwright version changes. To actually run tests once set up, use the playwright-docker skill.
 allowed-tools: Bash(docker compose:*) Bash(docker:*) Bash(grep:*) Bash(ls:*) Bash(cat:*)
 ---
