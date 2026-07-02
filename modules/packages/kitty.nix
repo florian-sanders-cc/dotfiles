@@ -59,6 +59,8 @@
       "ctrl+shift+a" = "launch --type=window --location=vsplit --cwd=current pi";
       # Fork: continue most recent session in a new split
       "ctrl+shift+f" = "launch --type=window --location=vsplit --cwd=current pi --continue";
+      # Handoff: copy last assistant message, exit pi, launch pi-write
+      "ctrl+shift+y" = "launch --type=background --allow-remote-control pi-handoff @active-kitty-window-id";
       "ctrl+alt+left" = "previous_window";
       "ctrl+alt+right" = "next_window";
     };

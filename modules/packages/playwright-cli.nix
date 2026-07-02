@@ -50,8 +50,17 @@ buildNpmPackage rec {
     wrapProgram $out/bin/playwright-cli \
       --set PLAYWRIGHT_BROWSERS_PATH "$COMPAT_DIR" \
       --set PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD "1" \
-      --set PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS "true"
+      --set PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS "true" \
+      --set-default PLAYWRIGHT_MCP_CONFIG "$out/share/playwright-cli/default-config.json"
 
+    # Default config: browserName=chromium. Without this, playwright-cli's
+    # validateBrowserConfig (coreBundle.js:65678) defaults launchOptions.channel
+    # to "chrome" (Google Chrome at /opt/google/chrome/chrome), which is not
+    # installed here -> "Chromium distribution 'chrome' is not found". Setting
+    # browserName=chromium makes it use the bundled chrome-for-testing/chromium.
+    # Used via --set-default above so an explicitly-set PLAYWRIGHT_MCP_CONFIG
+    # (e.g. the pi/nono sandbox config with --no-sandbox) still takes precedence.
+    # No --no-sandbox here: unsandboxed use keeps chromium's own sandbox intact.
     mkdir -p $out/share/playwright-cli
     cat > $out/share/playwright-cli/default-config.json <<'CONFEOF'
     {"browser":{"browserName":"chromium"}}

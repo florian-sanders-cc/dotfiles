@@ -1,0 +1,38 @@
+{
+  "$schema": "./nono-profile.schema.json",
+  "extends": "default",
+  "meta": {
+    "name": "pi-write",
+    "description": "pi write mode: read-write project, network limited to LLM providers only"
+  },
+  "groups": {
+    "include": ["nix_runtime"]
+  },
+  "filesystem": {
+    // Out-of-store symlinks under ~/.pi/agent and ~/.agents/skills resolve to
+    // $HOME/.config/nixos-config/dotfiles/... . Without grants on those
+    // realpaths they're denied whenever pi is launched from outside the
+    // nixos-config repo, so pi silently finds no skills / extensions / prompts /
+    // keybindings. R+W so we can edit skills, extensions, prompts, and
+    // keybindings in place; the grant is scoped to these dotfiles subtrees only
+    // — the rest of the nixos-config repo (modules/, flake.nix, secrets, ...) is
+    // NOT touched by this profile and stays gated by the per-invocation
+    // --allow "$PWD".
+    "allow": [
+      "$HOME/.pi/agent",
+      "$HOME/.local/state/playwright-cli",
+      "$HOME/.agents/skills",
+      "$HOME/.pi/agent/extensions",
+      "$HOME/.pi/agent/prompts"
+    ],
+    "allow_file": ["$HOME/.pi/agent/keybindings.json"]
+  },
+  "network": {
+    "block": false,
+    "allow_domain": [
+      "api.anthropic.com",
+      "openrouter.ai",
+      "opencode.ai"
+    ]
+  }
+}

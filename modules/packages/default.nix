@@ -65,6 +65,7 @@ let
     playwright-cli
     rtk
     # warp-terminal-wayland
+    nono
   ];
   proPackages = with pkgs; [
     random-labels
@@ -111,6 +112,7 @@ in
       ./claude-code.nix
       ./opencode.nix
       ./pi.nix
+      ./nono.nix
       ./waybar.nix
       ./yazi.nix
       ./warp.nix

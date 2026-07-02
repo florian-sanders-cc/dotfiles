@@ -34,6 +34,8 @@
 
       zed-preview = prev.callPackage ./zed-preview.nix { };
 
+      pi-handoff = prev.callPackage ./pi-handoff.nix { };
+
       pi-coding-agent =
         let
           base = prev.callPackage ./pi-coding-agent.nix { };

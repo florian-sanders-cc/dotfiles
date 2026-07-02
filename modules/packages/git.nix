@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   currentUser,
   ...
 }:
@@ -38,6 +39,18 @@ in
       core = {
         editor = "nvim";
         excludesFile = "~/.gitignore";
+        # Disable git hooks globally by pointing hooksPath at an immutable empty
+        # store dir. Rationale: under the pi-write agent sandbox, $PWD (incl.
+        # .git/hooks and .git/config) is a read-write mount, so an injected agent
+        # can plant an executable .git/hooks/pre-commit that runs on the host —
+        # unsandboxed — the next time *you* run git. nono/Landlock can't deny a
+        # sub-path inside an allowed parent (deny-overlap is unenforceable; a
+        # narrower --read is unioned away), so this is closed host-side instead.
+        # We don't use hooks, so an empty hooksPath loses nothing.
+        # CAVEAT: repo-local .git/config overrides this global setting and is also
+        # writable by the agent — so `repo-audit` (fish) flags a local core.hooksPath
+        # / core.fsmonitor. This handles the common case; repo-audit covers the rest.
+        hooksPath = "${pkgs.emptyDirectory}";
       };
       user = {
         name = "Florian Sanders";
