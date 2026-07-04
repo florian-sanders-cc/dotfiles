@@ -18,6 +18,7 @@ in
     ".pi/agent/extensions".source = config.lib.file.mkOutOfStoreSymlink "${piDotfiles}/extensions";
     ".pi/agent/agents".source = config.lib.file.mkOutOfStoreSymlink "${piDotfiles}/agents";
     ".pi/agent/prompts".source = config.lib.file.mkOutOfStoreSymlink "${piDotfiles}/prompts";
+    ".pi/agent/skills".source = config.lib.file.mkOutOfStoreSymlink "${piDotfiles}/skills";
     ".pi/agent/keybindings.json".source =
       config.lib.file.mkOutOfStoreSymlink "${piDotfiles}/keybindings.json";
   };

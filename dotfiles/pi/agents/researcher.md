@@ -13,10 +13,10 @@ Two command-line tools are available to you (run them with `bash`):
 
 ```bash
 # search the web -> ranked JSON results
-node ~/.agents/skills/web-search/bin/websearch.mts "<query>"
+node ~/.pi/agent/skills/web-search/bin/websearch.mts "<query>"
 
 # read a page -> cleaned, readable text as JSON
-node ~/.agents/skills/web-search/bin/webfetch.mts <url>
+node ~/.pi/agent/skills/web-search/bin/webfetch.mts <url>
 ```
 
 Each prints JSON to stdout. Pipe to `jq` if you want a single field. Typical
