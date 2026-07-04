@@ -235,8 +235,8 @@
                                       end
                                   end
 
-                                  # Explain error with OpenCode in Kitty split
-                                  function ai_explain_error --description "Explain last failed command with OpenCode"
+                                  # Explain error with pi in Kitty split
+                                  function ai_explain_error --description "Explain last failed command with pi"
                                       if not set -q __last_failed_cmd
                                           echo "No failed command to explain"
                                           return 1
@@ -257,9 +257,11 @@
                                           end
                                       end
                                       
-                                      # Build prompt for OpenCode and write to temp file
-                                      # This avoids issues with special characters in shell arguments
-                                      set -l prompt_file (mktemp /tmp/opencode-prompt.XXXXXX)
+                                      # Build prompt and write to .pi/.error-prompt.md (readable
+                                      # under pi-plan's --read "$PWD" + --allow "$PWD/.pi").
+                                      # @file syntax includes the file contents in pi's initial message.
+                                      mkdir -p .pi
+                                      set -l prompt_file "$PWD/.pi/.error-prompt.md"
                                       echo "This command failed with exit code $__last_failed_status:
 
         Command:
@@ -275,45 +277,19 @@
         Please explain what went wrong and suggest a fix." > $prompt_file
 
                               if set -q KITTY_PID
-                                  # Launch OpenCode TUI in vertical split (interactive session)
-                                  # Create a bash wrapper script to handle multi-line prompt properly
-                                  set -l wrapper_script (mktemp /tmp/opencode-wrapper.XXXXXX.sh)
-                                  printf '#!/usr/bin/env bash\nopencode --prompt="$(cat %s)"\nrm -f %s %s\n' "$prompt_file" "$prompt_file" "$wrapper_script" > $wrapper_script
-                                  chmod +x $wrapper_script
-                                  kitty @ launch --type=window --location=vsplit --cwd=current --hold -- $wrapper_script
+                                  # Launch pi-plan (sandboxed with nono) in vertical split;
+                                  # @file includes the prompt file contents in the initial message.
+                                  kitty @ launch --type=window --location=vsplit --cwd=current \
+                                      fish -c 'pi-plan @.pi/.error-prompt.md'
                               else
-                                  # Fallback: run inline (use string collect to prevent splitting)
-                                  opencode --model anthropic/claude-opus-4-5 --prompt="(cat $prompt_file | string collect)"
-                                  rm -f $prompt_file
+                                  # Fallback: run inline
+                                  pi-plan @.pi/.error-prompt.md
                               end
-                                  end
-
-                                  # Fork OpenCode session into a new Kitty split
-                                  function ai_fork_session --description "Fork current OpenCode session into a new Kitty split"
-                                      if not set -q KITTY_PID
-                                          echo "This feature requires Kitty terminal"
-                                          return 1
-                                      end
-                                      
-                                      # Get the most recent session ID for this project
-                                      set -l session_id (opencode session list --format=json 2>/dev/null | string collect | jq -r '.[0].id' 2>/dev/null)
-                                      
-                                      if test -n "$session_id" -a "$session_id" != "null"
-                                          # Fork: open new split continuing the same session
-                                          kitty @ launch --type=window --location=vsplit --cwd=current -- opencode --session "$session_id"
-                                      else
-                                          # No session found, just open a new OpenCode instance
-                                          kitty @ launch --type=window --location=vsplit --cwd=current -- opencode
-                                      end
                                   end
 
                                   # Bind Ctrl+Space to explain error
                                   bind ctrl-space ai_explain_error
                                   bind -M insert ctrl-space ai_explain_error
-                                  
-                                  # Bind Ctrl+Alt+F to fork session (Ctrl+Shift+F is handled by Kitty)
-                                  bind ctrl-alt-f ai_fork_session
-                                  bind -M insert ctrl-alt-f ai_fork_session
       '';
   };
   xdg.configFile."fish/completions/clever.fish".source = ../../dotfiles/fish/completions/clever.fish;

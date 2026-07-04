@@ -56,9 +56,9 @@
       "ctrl+shift+e" = "launch --type=tab --cwd=current nvim .";
       "ctrl+shift+d" = "launch --type=tab --cwd=current nvim -c CodeDiff";
       # AI split panes (Warp-like feature)
-      "ctrl+shift+a" = "launch --type=window --location=vsplit --cwd=current pi";
-      # Fork: continue most recent session in a new split
-      "ctrl+shift+f" = "launch --type=window --location=vsplit --cwd=current pi --continue";
+      "ctrl+shift+a" = "launch --type=window --location=vsplit --cwd=current fish -c 'pi-plan'";
+      # Fork: continue the latest session in a new split
+      "ctrl+shift+f" = "launch --type=window --location=vsplit --cwd=current fish -c 'pi-plan --continue'";
       # Handoff: copy last assistant message, exit pi, launch pi-write
       "ctrl+shift+y" = "launch --type=background --allow-remote-control pi-handoff @active-kitty-window-id";
       "ctrl+alt+left" = "previous_window";
