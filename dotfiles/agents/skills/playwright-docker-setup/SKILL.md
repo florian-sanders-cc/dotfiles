@@ -1,7 +1,7 @@
 ---
 name: playwright-docker-setup
 disable-model-invocation: true
-description: Scaffold or update the per-project files that run browser/Playwright tests inside the official Playwright Docker image on a NixOS host. Use this when tests need to run but the project has no `playwright-docker/` directory yet (first-time setup), or to bump it when the project's Playwright version changes. To actually run tests once set up, use the playwright-docker skill.
+description: Scaffold or update the per-project files that run browser/Playwright tests inside the official Playwright Docker image on a NixOS host. Use this when tests need to run but the project has no `playwright-docker/` directory yet (first-time setup), or to bump it when the project's Playwright version changes. To actually run tests once set up, use the `pw_test` tool (auto-registered in projects that have `playwright-docker/`).
 allowed-tools: Bash(docker compose:*) Bash(docker:*) Bash(grep:*) Bash(ls:*) Bash(cat:*)
 ---
 
@@ -12,7 +12,7 @@ prebuilt browsers need. The fix is to run tests inside the official
 `mcr.microsoft.com/playwright` image, which ships the FHS environment, system deps, and the
 browser revision for a given Playwright version. This skill writes three files into a
 `playwright-docker/` directory at the project root and builds the image. (To *run* tests
-afterward, use the **playwright-docker** skill.)
+afterward, use the `pw_test` tool, which auto-registers once this directory exists.)
 
 All three files live under `playwright-docker/` (not the project root). That directory is
 covered by the global gitignore, so the setup stays untracked by the host project.
@@ -83,12 +83,21 @@ All paths are relative to the project root.
    docker compose -f playwright-docker/compose.playwright.yaml run --rm playwright pnpm -v    # baked pnpm
    ```
 
+6. **Trust the setup** so sandboxed agents can run tests through the broker (`pw-test`).
+   This pins sha256 of every `playwright-docker/` file; the `pw-broker` daemon refuses
+   unpinned or modified setups. Must be run by the human, on the host, at the project root:
+   ```bash
+   pw-broker trust
+   ```
+
 ## Bumping the version
 
 When the project's Playwright dependency changes, update `PLAYWRIGHT_VERSION` in BOTH
 `playwright-docker/playwright.Dockerfile` (ARG default) and
 `playwright-docker/compose.playwright.yaml` (`build.args`), then
-`docker compose -f playwright-docker/compose.playwright.yaml build`.
+`docker compose -f playwright-docker/compose.playwright.yaml build`, then have the human
+re-run `pw-broker trust` at the project root — any edit to `playwright-docker/` files
+invalidates the broker's pins and `pw-test` will exit 126 until re-trusted.
 
 ## If the exact image tag is unavailable
 

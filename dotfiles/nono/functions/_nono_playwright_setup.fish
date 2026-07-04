@@ -24,4 +24,9 @@
 function _nono_playwright_setup --description "Provision ~/.local/state/playwright-cli for chromium-under-Landlock"
     mkdir -p "$HOME/.local/state/playwright-cli/tmp"
     echo '{"browser":{"browserName":"chromium","launchOptions":{"args":["--no-sandbox","--disable-crash-reporter"]}}}' > "$HOME/.local/state/playwright-cli/config.json"
+    # pw-broker file queue (pw-test client in-sandbox <-> pw-broker daemon on
+    # the host). Pre-created here for the same reason as above: nono skips
+    # grants for nonexistent paths, and the queue must be grantable even if the
+    # daemon has never run yet.
+    mkdir -p "$HOME/.local/state/pw-broker/queue/requests" "$HOME/.local/state/pw-broker/queue/runs"
 end

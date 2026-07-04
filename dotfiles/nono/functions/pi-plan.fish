@@ -6,7 +6,12 @@
 function pi-plan --description "pi planning: read-only project + writable .pi, full internet"
     _nono_playwright_setup
     mkdir -p .pi
+    # pw-broker queue grants: see the comment in pi-write.fish (write=requests/
+    # only; runs/ read-only; trusted.json outside any grant).
     env (_nono_sandbox_env) nono run --profile pi-plan \
         --read "$PWD" --read-file "$HOME/.config/AGENTS.md" \
-        --allow "$PWD/.pi" -- pi --plan $argv
+        --allow "$PWD/.pi" \
+        --allow "$HOME/.local/state/pw-broker/queue/requests" \
+        --read "$HOME/.local/state/pw-broker/queue" \
+        -- pi --plan $argv
 end

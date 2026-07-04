@@ -51,8 +51,15 @@ function pi-write --description "pi writing: read-write project, LLM providers o
         end
     end
     _nono_playwright_setup
+    # pw-broker queue: write=requests/ ONLY, rest of queue/ read-only. runs/
+    # must stay read-only — if it were writable the agent could symlink-swap a
+    # run dir and make the unsandboxed daemon write container output through it
+    # to an arbitrary host path. trusted.json (the pin store) lives one level
+    # up in ~/.local/state/pw-broker/ and must stay outside any grant.
     env (_nono_sandbox_env) nono run --profile pi-write \
         --allow "$PWD" --read-file "$HOME/.config/AGENTS.md" \
+        --allow "$HOME/.local/state/pw-broker/queue/requests" \
+        --read "$HOME/.local/state/pw-broker/queue" \
         $open_ports \
         -- pi $argv
     # Auto-audit on the HOST after the sandbox exits. pi-write gave the

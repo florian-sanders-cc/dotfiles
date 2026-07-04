@@ -113,6 +113,7 @@ in
       ./opencode.nix
       ./pi.nix
       ./nono.nix
+      ./pw-broker.nix
       ./waybar.nix
       ./yazi.nix
       ./warp.nix
