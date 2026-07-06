@@ -8,6 +8,7 @@
   versionCheckHook,
   writableTmpDirAsHomeHook,
   ripgrep,
+  mermaid-cli,
   makeBinaryWrapper,
   stdenvNoCC,
 }:
@@ -65,7 +66,8 @@ buildNpmPackage (finalAttrs: {
       "$nm/@anthropic-ai/sandbox-runtime/vendor/seccomp"
   '';
 
-  postFixup = "wrapProgram $out/bin/pi --prefix PATH : ${lib.makeBinPath [ ripgrep ]}";
+  # mmdc (mermaid-cli) reuses the nix-managed chromium; see pkgs/by-name/me/mermaid-cli.
+  postFixup = "wrapProgram $out/bin/pi --prefix PATH : ${lib.makeBinPath [ ripgrep mermaid-cli ]}";
 
   doInstallCheck = true;
   nativeInstallCheckInputs = [
