@@ -9,18 +9,21 @@
 
 buildNpmPackage rec {
   pname = "playwright-cli";
-  version = "0.1.13";
+  version = "0.1.15";
 
   src = fetchFromGitHub {
     owner = "microsoft";
     repo = "playwright-cli";
-    rev = "3a1bafc8b4e973c72d0364eb5b427d1ce0aa8317";
-    hash = "sha256-hHK/GR5Drlt+e0L9kyNmn+ht1PCrVH6WrVbxGB1Wsxg=";
+    rev = "74d9bf144a96770b6295ceedecb07a2fd7e86775";
+    hash = "sha256-M0NZ7h1kSIsxktMWe5n75LDc+MHZvSq6b+iRx6opakU=";
   };
 
-  npmDepsHash = "sha256-Ulp6IttsZcOOA7LaYDpVKkBYbe2j4RFG8lJARWifOSk=";
+  npmDepsHash = "sha256-ZrO8yIqMYMQUlsQraejVgKRZ7klC5/8UsV3/H1EqYtA=";
 
-  nativeBuildInputs = [ makeWrapper jq ];
+  nativeBuildInputs = [
+    makeWrapper
+    jq
+  ];
 
   dontNpmBuild = true;
 
@@ -74,6 +77,6 @@ buildNpmPackage rec {
     maintainers = [ ];
     mainProgram = "playwright-cli";
     platforms = platforms.linux ++ platforms.darwin;
-  }
-;
+  };
 }
+
