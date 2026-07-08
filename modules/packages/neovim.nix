@@ -57,6 +57,9 @@ let
     markdown-nvim # Maybe not needed
     jj-nvim # not needed
 
+    # AI
+    claudecode-nvim # IDE bridge to the `claude` CLI; terminal via snacks-nvim
+
     # Git Integration
     codediff-nvim
     hunk-nvim

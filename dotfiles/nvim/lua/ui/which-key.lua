@@ -64,6 +64,7 @@ wk.add({
   { "<leader>Ghr", group = "Github: Review" },
   { "<leader>Ght", group = "Github: Thread" },
   { "<leader>q", group = "Session/Quit" },
+  { "<leader>r", group = "Review" },
   { "<leader>s", group = "Search" },
   { "<leader>t", group = "Terminal" },
   { "<leader>u", group = "UI/Toggles" },

@@ -89,6 +89,7 @@ require("terminal.config")
 -- -- └─────────────────────────┘
 
 require("ai.init")
+require("ai.claudecode")
 
 -- -- ┌─────────────────────────┐
 -- -- │ Final Overrides         │
