@@ -69,7 +69,7 @@
       else if currentUser.name == specs.users.perso-workstation.name then
         { source = ../../dotfiles/niri/outputs-perso-workstation.kdl; }
       else
-        builtins.throw "niri: no outputs.kdl defined for user ${currentUser.name}";
+        throw "niri: no outputs.kdl defined for user ${currentUser.name}";
 
     gtk = {
       enable = true;
@@ -117,22 +117,5 @@
     };
 
     services.polkit-gnome.enable = true;
-
-    # Polkit authentication agent - starts when niri --session activates graphical-session.target
-    # systemd.user.services.polkit-gnome = {
-    #   Unit = {
-    #     Description = "Polkit GNOME Authentication Agent";
-    #     PartOf = [ "graphical-session.target" ];
-    #     After = [
-    #       "graphical-session.target"
-    #       "dbus.socket"
-    #     ];
-    #   };
-    #   Service = {
-    #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-    #     Restart = "on-failure";
-    #   };
-    #   Install.WantedBy = [ "graphical-session.target" ];
-    # };
   };
 }
