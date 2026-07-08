@@ -21,5 +21,9 @@ in
     ".pi/agent/skills".source = config.lib.file.mkOutOfStoreSymlink "${piDotfiles}/skills";
     ".pi/agent/keybindings.json".source =
       config.lib.file.mkOutOfStoreSymlink "${piDotfiles}/keybindings.json";
+    ".pi/agent/APPEND_SYSTEM.md" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${piDotfiles}/APPEND_SYSTEM.md";
+      force = true;
+    };
   };
 }

@@ -6,4 +6,4 @@ Do NOT include "Co-Authored-By" or similar co-author footers in commit messages.
 
 ## Interaction Style
 
-Ask questions one at a time, not multiple at once, unless I say otherwise.
+Ask exactly one question per turn, then wait for the answer before asking the next.
