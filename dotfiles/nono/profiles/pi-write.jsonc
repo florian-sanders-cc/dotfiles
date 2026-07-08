@@ -12,9 +12,11 @@
     // Out-of-store symlinks under ~/.pi/agent and ~/.agents/skills resolve to
     // $HOME/.config/nixos-config/dotfiles/... . Without grants on those
     // realpaths they're denied whenever pi is launched from outside the
-    // nixos-config repo, so pi silently finds no skills / extensions / prompts /
-    // keybindings. R+W so we can edit skills, extensions, prompts, and
-    // keybindings in place; the grant is scoped to these dotfiles subtrees only
+    // nixos-config repo, so pi silently finds no agents (subagents) / skills /
+    // extensions / prompts / keybindings / APPEND_SYSTEM.md. R+W so we can edit
+    // subagents, skills, extensions, prompts, keybindings, and the system
+    // prompt in place; the grant is
+    // scoped to these dotfiles subtrees only
     // — the rest of the nixos-config repo (modules/, flake.nix, secrets, ...) is
     // NOT touched by this profile and stays gated by the per-invocation
     // --allow "$PWD".
@@ -22,17 +24,32 @@
       "$HOME/.pi/agent",
       "$HOME/.local/state/playwright-cli",
       "$HOME/.agents/skills",
+      "$HOME/.pi/agent/agents",
       "$HOME/.pi/agent/extensions",
-      "$HOME/.pi/agent/prompts"
+      "$HOME/.pi/agent/prompts",
+      "$HOME/.pi/agent/skills"
     ],
-    "allow_file": ["$HOME/.pi/agent/keybindings.json"]
+    "allow_file": [
+      "$HOME/.pi/agent/keybindings.json",
+      "$HOME/.pi/agent/APPEND_SYSTEM.md",
+      "$HOME/.pi/agent/settings.json"
+    ],
+    // mise JS toolchain installs = nix-store-equivalent runtime (read → exec,
+    // verified via /nix/store). pi-write has no general net, so the agent can't
+    // `mise install` to grow this; other JS installs (pnpm/bun/deno) added when
+    // a project needs them.
+    "read": [
+      "~/.local/share/mise/installs/node",
+      "~/.local/share/mise/installs/npm"
+    ]
   },
   "network": {
     "block": false,
     "allow_domain": [
       "api.anthropic.com",
       "openrouter.ai",
-      "opencode.ai"
+      "opencode.ai",
+      "api.scaleway.ai"
     ]
   }
 }

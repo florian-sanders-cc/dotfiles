@@ -13,8 +13,8 @@
 # walks up the tree from $PWD to find global agent instructions, which live
 # outside $PWD and are otherwise denied.
 #
-# PLAYWRIGHT_DAEMON_SESSION_DIR: playwright-cli stores its IPC/socket and
-# browser --user-data-dir base here. coreBundle.js:63748.
+# PWTEST_DAEMON_SESSION_DIR: playwright-cli stores its IPC/socket and
+# browser --user-data-dir base here. coreBundle.js:69414 + registry.js:120.
 #
 # PWTEST_CLI_GLOBAL_CONFIG: repoints the *global* config lookup
 # (coreBundle.js:65317 — path.join(PWTEST_CLI_GLOBAL_CONFIG ?? homedir(),
@@ -29,10 +29,15 @@
 # subdir does not exist -> existsSync false (clean ENOENT) -> loadConfig(void 0)
 # -> {} -> no read, no crash.
 #
-# PLAYWRIGHT_SERVER_REGISTRY: repoints the b/browser@<hash> registry
-# (coreBundle.js:46243 — process.env.PLAYWRIGHT_SERVER_REGISTRY ||
+# PWTEST_SERVER_REGISTRY: repoints the b/browser@<hash> registry
+# (coreBundle.js:51661 + serverRegistry.js:7213 — process.env.PWTEST_SERVER_REGISTRY ||
 # ~/.cache/ms-playwright/b). Without this, the daemon child EACCES on
 # ~/.cache/ms-playwright/b/browser@..., whose ~/.cache ancestor is denied.
+#
+# PLAYWRIGHT_MCP_OUTPUT_DIR: repoints outputDir() (coreBundle.js:63812 —
+# options.config.outputDir, sourced from PLAYWRIGHT_MCP_OUTPUT_DIR at
+# coreBundle.js:71226) else cwd/.playwright-cli. Without this, in pi-plan
+# (read-only cwd) the fallback .playwright-cli mkdir EACCES.
 #
 # TMPDIR: THE KEY FIX for chromium actually running. nono grants /tmp
 # write-ONLY (dir read + file O_RDWR are denied — verified: `touch /tmp/x`
@@ -53,8 +58,9 @@
 function _nono_sandbox_env --description "Emit the playwright→Landlock env pairs for pi-plan / pi-write"
     echo "JITI_FS_CACHE=false"
     echo "TMPDIR=$HOME/.local/state/playwright-cli/tmp"
-    echo "PLAYWRIGHT_DAEMON_SESSION_DIR=$HOME/.local/state/playwright-cli"
+    echo "PWTEST_DAEMON_SESSION_DIR=$HOME/.local/state/playwright-cli"
     echo "PWTEST_CLI_GLOBAL_CONFIG=$HOME/.local/state/playwright-cli"
-    echo "PLAYWRIGHT_SERVER_REGISTRY=$HOME/.local/state/playwright-cli"
+    echo "PWTEST_SERVER_REGISTRY=$HOME/.local/state/playwright-cli"
     echo "PLAYWRIGHT_MCP_CONFIG=$HOME/.local/state/playwright-cli/config.json"
+    echo "PLAYWRIGHT_MCP_OUTPUT_DIR=$HOME/.local/state/playwright-cli"
 end

@@ -1,33 +1,122 @@
 {
-  "$schema": "./nono-profile.schema.json",
-  "extends": "default",
+  "extends": [
+    "default"
+  ],
   "meta": {
     "name": "pi-plan",
-    "description": "pi plan mode: read-only project, full internet, writable pi state"
+    "version": "",
+    "description": "pi plan mode: read-only project, full internet, writable pi state",
+    "author": null
+  },
+  "security": {
+    "signal_mode": null,
+    "process_info_mode": null,
+    "ipc_mode": null,
+    "capability_elevation": null,
+    "wsl2_proxy_policy": null
   },
   "groups": {
-    "include": ["nix_runtime"]
+    "include": [
+      "nix_runtime",
+      "git_config",
+      "linux_temp_read"
+    ],
+    "exclude": []
+  },
+  "commands": {
+    "allow": [],
+    "deny": []
   },
   "filesystem": {
-    // Out-of-store symlinks under ~/.pi/agent and ~/.agents/skills resolve to
-    // $HOME/.config/nixos-config/dotfiles/... . Without grants on those
-    // realpaths they're denied whenever pi is launched from outside the
-    // nixos-config repo, so pi silently finds no skills / extensions / prompts /
-    // keybindings. R+W so we can edit skills, extensions, prompts, and
-    // keybindings in place; the grant is scoped to these dotfiles subtrees only
-    // — the rest of the nixos-config repo (modules/, flake.nix, secrets, ...) is
-    // NOT touched by this profile and stays gated by the per-invocation
-    // --read/--allow "$PWD" (read-only here in pi-plan).
     "allow": [
       "$HOME/.pi/agent",
       "$HOME/.local/state/playwright-cli",
       "$HOME/.agents/skills",
+      "$HOME/.pi/agent/agents",
+      "$HOME/.pi/agent/skills",
       "$HOME/.pi/agent/extensions",
-      "$HOME/.pi/agent/prompts"
+      "$HOME/.pi/agent/prompts",
+      "/dev/shm",
+      "~/Projects/console/packages/aiguillage/.pi",
+      "~/.cache/nix",
+      "/npm",
+      "~/.cache/ms-playwright",
+      "/run/user/1000/",
+      "~/.local/state/nvim/shada"
     ],
-    "allow_file": ["$HOME/.pi/agent/keybindings.json"]
+    "read": [
+      "~/.cache/nix",
+      "~/.pi",
+      "~/Projects/console",
+      "/nix/store/vrg0akqhg8q7rss3z8ckz4vk3waq8hqc-home-manager-files/.pi/agent/agents/",
+      "~/.config/nono",
+      "~/.local/share/mise",
+      "~/.local/share/mise/installs/node",
+      "~/.local/share/mise/installs/npm"
+    ],
+    "write": [
+      "/nix/store",
+      "~/.cache",
+      "~/.config/nixos-config"
+    ],
+    "allow_file": [
+      "$HOME/.pi/agent/keybindings.json",
+      "$HOME/.pi/agent/APPEND_SYSTEM.md",
+      "/run/wrappers/bin/mount",
+      "/tmp/pi-ai-meta.json",
+      "~/Projects/console/package.json",
+      "~/.pi/agent/settings.json"
+    ],
+    "read_file": [],
+    "write_file": [],
+    "unix_socket": [],
+    "unix_socket_bind": [],
+    "unix_socket_dir": [],
+    "unix_socket_dir_bind": [],
+    "unix_socket_subtree": [],
+    "unix_socket_subtree_bind": [],
+    "deny": [],
+    "bypass_protection": [],
+    "suppress_save_prompt": []
   },
   "network": {
-    "block": false
-  }
+    "block": false,
+    "allow_http2": false,
+    "allow_domain": [],
+    "deny_domain": [],
+    "open_port": [],
+    "open_port_range": [],
+    "listen_port": [],
+    "listen_port_range": [],
+    "connect_port": [],
+    "custom_credentials": {},
+    "tls_intercept": null,
+    "upstream_proxy": null,
+    "upstream_bypass": []
+  },
+  "diagnostics": {
+    "suppress_system_services": []
+  },
+  "linux": {
+    "af_unix_mediation": null,
+    "sandbox_policy": null
+  },
+  "env_credentials": {},
+  "credential_capture": {},
+  "credential_providers": {},
+  "credential_routes": [],
+  "workdir": {
+    "access": "none"
+  },
+  "hooks": {},
+  "session_hooks": {},
+  "rollback": {
+    "exclude_patterns": [],
+    "exclude_globs": []
+  },
+  "interactive": false,
+  "skipdirs": [],
+  "packs": [],
+  "command_args": [],
+  "unsafe_macos_seatbelt_rules": []
 }
