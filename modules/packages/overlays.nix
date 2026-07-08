@@ -39,14 +39,23 @@
       pi-coding-agent =
       pi-rtk-bash = prev.callPackage ./pi-rtk-bash.nix { };
         let
+
           base = prev.callPackage ./pi-coding-agent.nix { };
+      # rtk 0.43.0's derivation isn't in the binary cache (Hydra never built
         in
+      # this hash), so it compiles from source — and its *test* crate fails
         prev.symlinkJoin {
+      # under `-D warnings`: FILTERS_TOML and TomlFilterRegistry::load are
           name = "pi-coding-agent-${base.version}";
+      # dead code in the test profile (the real binary uses them). Skip the
           paths = [ base ];
+      # check phase until upstream fixes the lint; the binary builds fine.
           nativeBuildInputs = [ prev.makeWrapper ];
+      rtk = prev.rtk.overrideAttrs (_old: {
           postBuild = ''
+        doCheck = false;
             wrapProgram $out/bin/pi \
+      });
               --unset DISPLAY \
               --set PI_SKIP_VERSION_CHECK 1
           '';
