@@ -31,7 +31,10 @@
       # XE provides better performance for app startup times
       "i915.force_probe=!9a49"
       "xe.force_probe=*"
-      "xe.enable_guc=0" # Disable GuC submission (can cause issues on some hardware)
+      # NOTE: no `xe.enable_guc=0` here — it was a no-op. Unlike i915, the xe
+      # driver has no execlist path and *requires* GuC submission, so it loads
+      # the firmware regardless ("Using GuC firmware from i915/tgl_guc_70.bin"
+      # in dmesg) and schedules through it.
     ];
 
     services.xserver.videoDrivers = lib.mkIf (config.nvidia.enable) [ "nvidia" ];
