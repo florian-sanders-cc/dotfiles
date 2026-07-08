@@ -67,6 +67,7 @@ require("editing.markdown")
 -- -- └─────────────────────────┘
 
 require("git.codediff")
+require("git.codediff-annotate").setup()
 require("git.hunk")
 require("git.jj")
 require("git.mini-diff")

@@ -114,6 +114,7 @@ in
       ./pi.nix
       ./nono.nix
       ./pw-broker.nix
+      ./codediff-ann.nix
       ./waybar.nix
       ./yazi.nix
       ./warp.nix
