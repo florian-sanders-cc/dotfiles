@@ -496,11 +496,38 @@ export default function (pi: ExtensionAPI) {
 
 			if (modeCount !== 1) {
 				const available = agents.map((a) => `${a.name} (${a.source})`).join(", ") || "none";
+				// Give the model an actionable, situation-specific hint. The most common
+				// near-miss is "single mode" with only half the { agent, task } pair
+				// supplied — the generic "provide exactly one mode" wording makes the
+				// model drop the other half instead of adding it.
+				const halfSingle = !hasChain && !hasTasks && Boolean(params.agent) !== Boolean(params.task);
+				let hint: string;
+				if (halfSingle && params.agent) {
+					hint = `You set "agent" but not "task". Single mode needs BOTH in the same call: { agent: "${params.agent}", task: "<what to do>" }.`;
+				} else if (halfSingle && params.task) {
+					hint = `You set "task" but not "agent". Single mode needs BOTH in the same call: { agent: "<name>", task: "<what to do>" }.`;
+				} else if (modeCount === 0) {
+					hint = [
+						"Provide exactly one mode (each is a distinct shape, not a single field):",
+						'  • single:   { agent: "researcher", task: "..." }',
+						"  • parallel: { tasks: [{ agent, task }, ...] }",
+						"  • chain:    { chain: [{ agent, task }, ...] }",
+					].join("\n");
+				} else {
+					const provided = [
+						hasSingle && "single (agent+task)",
+						hasTasks && "tasks[]",
+						hasChain && "chain[]",
+					]
+						.filter(Boolean)
+						.join(" + ");
+					hint = `You combined multiple modes (${provided}). Use only ONE of single / tasks / chain per call.`;
+				}
 				return {
 					content: [
 						{
 							type: "text",
-							text: `Invalid parameters. Provide exactly one mode.\nAvailable agents: ${available}`,
+							text: `${hint}\nAvailable agents: ${available}`,
 						},
 					],
 					details: makeDetails("single")([]),
