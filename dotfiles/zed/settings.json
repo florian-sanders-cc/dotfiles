@@ -1,4 +1,5 @@
 {
+  "diff_view_style": "unified",
   "context_servers": {
     "mcp-server-context7": {
       "enabled": false,
@@ -34,10 +35,57 @@
     "mode": "subtle",
   },
   "agent": {
+    "show_turn_stats": true,
+    "thinking_display": "always_expanded",
+    "tool_permissions": {
+      "tools": {
+        "terminal": {
+          "default": "allow"
+        }
+      }
+    },
+    "profiles": {
+      "test": {
+        "default_model": {
+          "provider": "opencode",
+          "model": "free/big-pickle",
+          "enable_thinking": false
+        },
+        "name": "test",
+        "tools": {
+          "copy_path": true,
+          "create_directory": true,
+          "create_thread": true,
+          "delete_path": true,
+          "diagnostics": true,
+          "apply_code_action": true,
+          "edit_file": true,
+          "write_file": true,
+          "fetch": true,
+          "find_path": true,
+          "find_references": true,
+          "get_code_actions": true,
+          "go_to_definition": true,
+          "list_agents_and_models": true,
+          "list_directory": true,
+          "move_path": true,
+          "rename_symbol": true,
+          "read_file": true,
+          "grep": true,
+          "skill": true,
+          "spawn_agent": true,
+          "terminal": true,
+          "search_web": true
+        },
+        "enable_all_context_servers": true,
+        "context_servers": {}
+      }
+    },
     "dock": "right",
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-5",
+      "enable_thinking": false,
+      "provider": "opencode",
+      "model": "free/big-pickle",
     },
     "default_profile": "write",
     "model_parameters": [],
@@ -68,7 +116,7 @@
     "file_icons": true,
   },
   "vim_mode": true,
-  "ui_font_size": 16,
+  "ui_font_size": 18,
   "ui_font_weight": 300,
   "buffer_font_size": 16.0,
   "buffer_line_height": {
@@ -175,6 +223,5 @@
     "TypeScript": {
       "language_servers": ["!tsgo", "vtsls", "eslint"],
     },
-  },
   },
 }
