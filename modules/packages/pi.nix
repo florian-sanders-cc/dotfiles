@@ -26,5 +26,9 @@ in
       force = true;
     };
     ".pi/agent/nix-extensions/pi-rtk-bash".source = "${pkgs.pi-rtk-bash}/lib/node_modules/pi-rtk-bash";
+    ".pi/agent/settings.json" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${piDotfiles}/settings.json";
+      force = true;
+    };
   };
 }
