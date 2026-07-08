@@ -37,6 +37,7 @@
       pi-handoff = prev.callPackage ./pi-handoff.nix { };
 
       pi-coding-agent =
+      pi-rtk-bash = prev.callPackage ./pi-rtk-bash.nix { };
         let
           base = prev.callPackage ./pi-coding-agent.nix { };
         in

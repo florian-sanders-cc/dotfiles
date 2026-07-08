@@ -1,0 +1,21 @@
+{
+  "lastChangelogVersion": "999.0.0",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "glm-5.2",
+  "defaultThinkingLevel": "high",
+  "hideThinkingBlock": false,
+  "editorPaddingX": 3,
+  "steeringMode": "all",
+  "transport": "sse",
+  "collapseChangelog": true,
+  "quietStartup": true,
+  "treeFilterMode": "all",
+  "theme": "dark",
+  "packages": [
+    "git:github.com/earendil-works/pi-review",
+    "./nix-extensions/pi-rtk-bash"
+  ],
+  "terminal": {
+    "showTerminalProgress": false
+  }
+}

@@ -25,5 +25,6 @@ in
       source = config.lib.file.mkOutOfStoreSymlink "${piDotfiles}/APPEND_SYSTEM.md";
       force = true;
     };
+    ".pi/agent/nix-extensions/pi-rtk-bash".source = "${pkgs.pi-rtk-bash}/lib/node_modules/pi-rtk-bash";
   };
 }
