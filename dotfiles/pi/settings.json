@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "999.0.0",
   "defaultProvider": "opencode-go",
-  "defaultModel": "glm-5.2",
+  "defaultModel": "glm-5.3",
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "editorPaddingX": 3,
@@ -17,5 +17,6 @@
   ],
   "terminal": {
     "showTerminalProgress": false
-  }
+  },
+  "tuiMode": "fullscreen"
 }
