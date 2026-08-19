@@ -1,5 +1,8 @@
 # TODO: should we split into separate files & move random-labels.nix to overlay?
-{ inputs, ... }:
+{
+  inputs,
+  ...
+}:
 
 {
   nixpkgs.overlays = [
