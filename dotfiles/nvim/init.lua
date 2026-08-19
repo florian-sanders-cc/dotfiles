@@ -50,7 +50,7 @@ require("editing.mini-align")
 require("editing.mini-pairs")
 require("editing.mini-surround")
 require("editing.treesitter")
-require("editing.multicursor")
+require("editing.native-multicursor") -- old plugin: require("editing.multicursor")
 require("editing.quicker")
 
 -- -- Completion and snippets (load after treesitter for better integration)

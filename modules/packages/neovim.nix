@@ -85,7 +85,7 @@ in
     withRuby = true;
     withPython3 = true;
     defaultEditor = true;
-    # package = pkgs.neovim-nightly;
+    package = pkgs.neovim-nightly;
 
     extraPackages =
       with pkgs;
