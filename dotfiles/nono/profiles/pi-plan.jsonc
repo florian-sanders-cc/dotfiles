@@ -13,6 +13,8 @@
     "process_info_mode": null,
     "ipc_mode": null,
     "capability_elevation": null,
+    "approval_backends": {},
+    "approval_defaults": null,
     "wsl2_proxy_policy": null
   },
   "groups": {
@@ -28,45 +30,62 @@
     "deny": []
   },
   "filesystem": {
+    // allow = writable pi/browser state only. Everything else in the audit
+    // was either redundant (subpaths of a parent grant), dead (/npm), a
+    // symlink into the read-only nix store (writes fail regardless), or
+    // needs read only — see `read` below.
     "allow": [
+      // Core writable pi state: sessions/, git/, bin/, nix-extensions/,
+      // auth.json, models-store.json. Covers agents/skills/extensions/prompts
+      // subdirs and the keybindings/APPEND_SYSTEM symlinks — no separate
+      // grants needed.
       "$HOME/.pi/agent",
+      // chromium-under-Landlock: --user-data-dir, daemon session dir, and
+      // tmp/ (Playwright TMPDIR repoint; --disable-dev-shm-usage sends
+      // profile+shm here). Everything the browser chain needs.
       "$HOME/.local/state/playwright-cli",
-      "$HOME/.agents/skills",
-      "$HOME/.pi/agent/agents",
-      "$HOME/.pi/agent/skills",
-      "$HOME/.pi/agent/extensions",
-      "$HOME/.pi/agent/prompts",
-      "/dev/shm",
-      "~/Projects/console/packages/aiguillage/.pi",
-      "~/.cache/nix",
-      "/npm",
-      "~/.cache/ms-playwright",
-      "/run/user/1000/",
+      // Removed after audit (re-add if a rebuild+test cycle breaks something):
+      //   "/dev/shm" — chromium avoids it via --disable-dev-shm-usage; all
+      //   browser shm+profile land in playwright-cli/tmp (TMPDIR repoint).
+      //   "/run/user/1000/" — docker.sock (= host root), keyring, gnupg,
+      //   session bus; nothing in the chain needs it (pw-broker comm is a
+      //   file queue, chromium uses the TMPDIR repoint). If ever re-added:
+      //   scope to the exact socket file, not the dir.
+      // nvim inside sandboxed agents. Tiny, harmless.
       "~/.local/state/nvim/shada"
     ],
     "read": [
+      // Skills repo-path dep. Content is markdown (read → exec is enough).
+      // Deliberately NOT in `allow` for plan mode: a writable skills dir is a
+      // persistent prompt-injection vector (agent rewriting its own
+      // instructions). In-place editing lives in pi-write instead.
+      "~/.agents/skills",
+      // nix eval-cache + config inspection in plan mode (write would be
+      // perf-only; not granted).
       "~/.cache/nix",
+      // ~/.pi/bin exec → subagent spawning.
       "~/.pi",
-      "~/Projects/console",
-      "/nix/store/vrg0akqhg8q7rss3z8ckz4vk3waq8hqc-home-manager-files/.pi/agent/agents/",
+      // Profiles → store symlink; agents may run `nono profile show`.
       "~/.config/nono",
+      // mise = node runtime for pi extensions (jiti), playwright-cli, rtk;
+      // includes shims/. Parent grant covers installs/node and installs/npm
+      // — no subpath entries needed.
       "~/.local/share/mise",
-      "~/.local/share/mise/installs/node",
-      "~/.local/share/mise/installs/npm"
+      // ms-playwright chromium binaries (chromium-1071, -1187). read → exec
+      // suffices; installs happen outside the sandbox.
+      "~/.cache/ms-playwright",
+      // Generic cache read (top-level stays unreadable without this).
+      "~/.cache"
     ],
+    // Pragmatic low-risk write area. Top-level cache is still unreadable as
+    // a side effect (verified: `ls ~/.cache` → EACCES in-session).
     "write": [
-      "/nix/store",
-      "~/.cache",
-      "~/.config/nixos-config"
+      "~/.cache"
     ],
-    "allow_file": [
-      "$HOME/.pi/agent/keybindings.json",
-      "$HOME/.pi/agent/APPEND_SYSTEM.md",
-      "/run/wrappers/bin/mount",
-      "/tmp/pi-ai-meta.json",
-      "~/Projects/console/package.json",
-      "~/.pi/agent/settings.json"
-    ],
+    // Empty: keybindings.json and APPEND_SYSTEM.md are symlinks into the
+    // read-only nix store — writes fail regardless of any grant. Editing
+    // flow = this repo + rebuild.
+    "allow_file": [],
     "read_file": [],
     "write_file": [],
     "unix_socket": [],
@@ -89,6 +108,7 @@
     "listen_port": [],
     "listen_port_range": [],
     "connect_port": [],
+    "no_proxy": [],
     "custom_credentials": {},
     "tls_intercept": null,
     "upstream_proxy": null,
