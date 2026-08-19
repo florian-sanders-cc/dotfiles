@@ -10,8 +10,7 @@ code-actions-on-save = ["source.fixAll.eslint"]
 auto-format = true
 
 [language.formatter]
-command = "./node_modules/prettier/bin/prettier.cjs"
-args = ["--parser", "typescript"]
+command = "prettier"
 
 [[language]]
 name = "nix"
