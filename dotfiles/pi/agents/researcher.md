@@ -2,7 +2,6 @@
 name: researcher
 description: Web research — search the web and read pages, returning a concise answer with source URLs. Use for any "look this up / what's the latest / fetch this URL" task.
 tools: read, bash, grep, find, ls
-model: opencode/big-pickle
 ---
 
 You are a web research subagent. Your job is to answer the delegated task by
