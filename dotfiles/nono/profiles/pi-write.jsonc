@@ -12,22 +12,37 @@
     // Out-of-store symlinks under ~/.pi/agent and ~/.agents/skills resolve to
     // $HOME/.config/nixos-config/dotfiles/... . R+W so we can edit subagents,
     // skills, extensions, prompts, keybindings, and the system prompt in
-    // place; the parent-grant form below covers all symlinked subdirs
-    // (agents/ skills/ extensions/ prompts/) and files (keybindings.json,
-    // APPEND_SYSTEM.md, settings.json) without enumerating them — the grant
-    // is scoped to these dotfiles subtrees only; the rest of the nixos-config
-    // repo (modules/, flake.nix, secrets, ...) is NOT touched by this profile
+    // place. IMPORTANT: Landlock grants bind to real inodes and a parent
+    // grant does NOT follow symlinks — "$HOME/.pi/agent" below only covers
+    // the real files/dirs under it, so each symlinked subdir/file needs its
+    // own entry. nono resolves grant paths at sandbox build, so the entries
+    // below are effectively grants on the dotfiles realpaths — scoped to
+    // those subtrees only; the rest of the nixos-config repo (modules/,
+    // flake.nix, secrets, nono profiles, ...) is NOT touched by this profile
     // and stays gated by the per-invocation --allow "$PWD".
     "allow": [
-      // Core writable pi state incl. symlinked agents/skills/extensions/
-      // prompts — parent grant suffices, subpath entries are redundant.
+      // Core writable pi state: REAL files/dirs only (sessions/, git/,
+      // bin/, nix-extensions/, auth.json, models-store.json).
       "$HOME/.pi/agent",
+      // Symlinked subdirs → dotfiles/pi/{agents,skills,extensions,prompts}.
+      "$HOME/.pi/agent/agents",
+      "$HOME/.pi/agent/skills",
+      "$HOME/.pi/agent/extensions",
+      "$HOME/.pi/agent/prompts",
       // chromium-under-Landlock: --user-data-dir, daemon session dir, tmp/
       // (TMPDIR repoint; --disable-dev-shm-usage sends profile+shm here).
       "$HOME/.local/state/playwright-cli",
       // In-place skill editing lives here (plan mode grants read only —
       // writable skills = persistent prompt-injection vector).
       "$HOME/.agents/skills"
+    ],
+    // Symlinked FILES → dotfiles/pi/{APPEND_SYSTEM.md,settings.json,
+    // keybindings.json}. nono rejects non-dirs in `allow`, so these must be
+    // allow_file. R+W for in-place editing (same intent as the dirs above).
+    "allow_file": [
+      "$HOME/.pi/agent/APPEND_SYSTEM.md",
+      "$HOME/.pi/agent/settings.json",
+      "$HOME/.pi/agent/keybindings.json"
     ],
     // mise JS toolchain installs = nix-store-equivalent runtime (read → exec,
     // verified via /nix/store). pi-write has no general net, so the agent can't

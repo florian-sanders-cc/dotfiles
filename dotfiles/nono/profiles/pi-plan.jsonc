@@ -36,9 +36,12 @@
     // needs read only — see `read` below.
     "allow": [
       // Core writable pi state: sessions/, git/, bin/, nix-extensions/,
-      // auth.json, models-store.json. Covers agents/skills/extensions/prompts
-      // subdirs and the keybindings/APPEND_SYSTEM symlinks — no separate
-      // grants needed.
+      // auth.json, models-store.json. REAL files/dirs only — the symlinked
+      // agents/skills/extensions/prompts dirs and keybindings/APPEND_SYSTEM/
+      // settings files resolve OUT of this tree (nix store → this repo's
+      // dotfiles/pi), and Landlock grants bind to real inodes: a parent
+      // grant does NOT follow symlinks. Those get their own entries in
+      // `read`/`read_file` below.
       "$HOME/.pi/agent",
       // chromium-under-Landlock: --user-data-dir, daemon session dir, and
       // tmp/ (Playwright TMPDIR repoint; --disable-dev-shm-usage sends
@@ -60,13 +63,27 @@
       // persistent prompt-injection vector (agent rewriting its own
       // instructions). In-place editing lives in pi-write instead.
       "~/.agents/skills",
+      // Symlinked pi state: each entry below is a symlink under ~/.pi/agent
+      // → /nix/store/...-home-manager-files (itself → this repo's
+      // dotfiles/pi). nono resolves grant paths at sandbox build, so these
+      // are effectively grants on the realpaths. READ-only by design: a
+      // writable skills/prompts dir is a persistent prompt-injection vector
+      // (agent rewriting its own instructions) — in-place editing lives in
+      // pi-write. Files must use read_file (nono rejects non-dirs in `read`).
+      "~/.pi/agent/agents",
+      "~/.pi/agent/skills",
+      "~/.pi/agent/extensions",
+      "~/.pi/agent/prompts",
       // nix eval-cache + config inspection in plan mode (write would be
       // perf-only; not granted).
       "~/.cache/nix",
       // ~/.pi/bin exec → subagent spawning.
       "~/.pi",
-      // Profiles → store symlink; agents may run `nono profile show`.
+      // Profiles → store symlink; agents may run `nono profile show`. The
+      // profiles/ symlink resolves to this repo's dotfiles/nono/profiles,
+      // so the parent ~/.config/nono grant alone doesn't cover it.
       "~/.config/nono",
+      "~/.config/nono/profiles",
       // mise = node runtime for pi extensions (jiti), playwright-cli, rtk;
       // includes shims/. Parent grant covers installs/node and installs/npm
       // — no subpath entries needed.
@@ -82,11 +99,19 @@
     "write": [
       "~/.cache"
     ],
-    // Empty: keybindings.json and APPEND_SYSTEM.md are symlinks into the
-    // read-only nix store — writes fail regardless of any grant. Editing
-    // flow = this repo + rebuild.
+    // allow_file empty: the symlinked files below are granted read-only —
+    // writes target repo realpaths via this repo + rebuild (or pi-write for
+    // in-place edits). Without the read_file grants pi startup degrades:
+    // settings.json unreadable → settings lost; APPEND_SYSTEM.md unreadable
+    // → system-prompt append dropped (warning at startup); keybindings.json
+    // unreadable → custom bindings lost. Same symlink mechanism as the
+    // `read` entries above — realpaths outside $HOME/.pi/agent.
     "allow_file": [],
-    "read_file": [],
+    "read_file": [
+      "~/.pi/agent/APPEND_SYSTEM.md",
+      "~/.pi/agent/settings.json",
+      "~/.pi/agent/keybindings.json"
+    ],
     "write_file": [],
     "unix_socket": [],
     "unix_socket_bind": [],
