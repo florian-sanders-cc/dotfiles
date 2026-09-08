@@ -19,7 +19,6 @@ let
     stylelint-ls
     taplo
     typescript
-    typescript-go
     vscode-json-languageserver
     vscode-langservers-extracted
     vscode-eslint

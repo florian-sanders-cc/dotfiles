@@ -14,7 +14,6 @@
       vscode-langservers-extracted
       vscode-eslint
       nixfmt
-      typescript-go
       rust-analyzer
     ];
   };
