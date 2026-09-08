@@ -61,9 +61,54 @@
     "block": false,
     "allow_domain": [
       "api.anthropic.com",
+      // OpenRouter: completions, /models and key checks all live under this
+      // single origin (openrouter.ai/api/v1/...) — no second host to grant.
       "openrouter.ai",
       "opencode.ai",
-      "api.scaleway.ai"
+      "api.scaleway.ai",
+      // GitHub Copilot 1/2 — the inference plane (/models, /chat/completions,
+      // /models/<id>/policy). pi derives the API host PER CREDENTIAL from the
+      // `proxy-ep=` claim inside the Copilot token, rewriting proxy.* → api.*
+      // (pi-ai/src/auth/oauth/github-copilot.ts:getBaseUrlFromToken), so the
+      // subdomain follows the account tier and can change on renewal — all
+      // four are listed rather than guessing one.
+      //
+      // NOT a github.com grant: githubcopilot.com is a separate, Copilot-only
+      // domain, and its apex stays denied.
+      //
+      // GOTCHA — do NOT collapse these into "*.githubcopilot.com". nono
+      // documents wildcards for `deny_domain` only; in `allow_domain` the
+      // runtime proxy ignores them, and `nono why` disagrees with the proxy
+      // here: `why` reports a wildcard match as "allowed" while an in-sandbox
+      // request to the same host fails to connect (curl exit 7). Verified on
+      // nono 0.74.0. Always confirm a network grant with a real request
+      // inside `nono run`, not with `nono why` alone.
+      "api.githubcopilot.com",
+      "api.individual.githubcopilot.com",
+      "api.business.githubcopilot.com",
+      "api.enterprise.githubcopilot.com",
+      // GitHub Copilot 2/2 — the token exchange. The long-lived GitHub OAuth
+      // token in auth.json is swapped for a ~30-min Copilot token at
+      // GET https://api.github.com/copilot_internal/v2/token, on every session
+      // start and again mid-session when it expires. api.github.com is the
+      // ENTIRE GitHub REST API, so this entry is an OBJECT, not a plain
+      // hostname: object form makes nono TLS-intercept the host and enforce
+      // method+path (default-deny for anything unmatched) instead of opening a
+      // blind CONNECT tunnel. GET + /copilot_internal/** keeps /user,
+      // /repos/**, /gists — the exfil and write surface — denied.
+      // Interception needs the sandbox to trust nono's per-session CA; nono
+      // sets NODE_EXTRA_CA_CERTS itself, which is what pi's undici fetch reads.
+      // Verified in-sandbox: /copilot_internal/v2/token → 401 from GitHub
+      // (request forwarded), /user → 403 from the nono proxy (L7 blocked).
+      {
+        "domain": "api.github.com",
+        "endpoints": [{ "method": "GET", "path": "/copilot_internal/**" }]
+      }
+      // Deliberately NOT granted: github.com/login/device/code and
+      // /login/oauth/access_token (the `pi auth login` device flow). That is a
+      // one-time HOST action — run `pi auth login` outside the sandbox. The
+      // credential lands in ~/.pi/agent/auth.json, which pi-write already
+      // grants R+W, so in-sandbox token refreshes persist normally.
     ]
   }
 }
