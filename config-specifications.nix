@@ -3,11 +3,11 @@
     pro = {
       id = "pro";
       name = "flo-pro";
-      email = "florian.sanders@clever-cloud.com";
-      signingKey = "684168075E28E749";
+      email = "florian.sanders@clever.cloud";
+      signingKey = "537702FBD6C4D960";
       homeDirectory = "/home/flo-pro";
-      gpgAuthKeygrip = "DA297557775E21E76FCBCE6C24295BE213D3BD1C";
-      gpgSignKeygrip = "E6223B67A87A3156E73B88A604F079489275E3D3";
+      gpgAuthKeygrip = "77F89DEDEA259704B3A8D3E7AB31F81951E1A0E9";
+      gpgSignKeygrip = "6C37CC2D18C0AC28DD2AA599B1D05E9A45F2BA34";
     };
     perso = {
       name = "flo-perso";
