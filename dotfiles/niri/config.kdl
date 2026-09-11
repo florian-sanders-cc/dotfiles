@@ -1,4 +1,4 @@
-spawn-at-startup "noctalia-shell"
+spawn-at-startup "noctalia"
 
 prefer-no-csd
 
@@ -100,17 +100,19 @@ binds {
     Mod+Shift+eacute { spawn "smart-focus-firefox" "true"; }
     Mod+quotedbl { spawn "smart-focus-chromium"; }
     Mod+Shift+quotedbl { spawn "smart-focus-chromium" "true"; }
-    Mod+D { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Super+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+    Mod+D { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
+    Mod+Comma { spawn-sh "noctalia msg settings-toggle"; }
+    Mod+Shift+P { spawn-sh "noctalia msg panel-toggle session"; }
+    Mod+Alt+L { spawn-sh "noctalia msg session lock"; }
+    Alt+Tab { spawn-sh "noctalia msg window-switcher"; }
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "volume" "increase"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "volume" "decrease"; }
-    XF86AudioMute allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
-    XF86AudioMicMute allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "volume" "muteInput"; }
-
-    XF86MonBrightnessUp allow-when-locked=true { spawn "swayosd-client" "--brightness" "raise"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "swayosd-client" "--brightness" "lower"; }
-    Caps_Lock allow-when-locked=true { spawn "swayosd-client" "--caps-lock"; }
+    // Audio & Brightness
+    XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioMute { spawn-sh "noctalia msg volume-mute"; }
+    XF86MonBrightnessUp { spawn-sh "noctalia msg brightness-up"; }
+    XF86MonBrightnessDown { spawn-sh "noctalia msg brightness-down"; }
 
     Mod+Q { close-window; }
 
@@ -229,12 +231,4 @@ binds {
     Mod+Ctrl+Shift+P { power-off-monitors; }
     Mod+Space { spawn "pkill" "-USR2" "-n" "handy"; }
     Mod+N { spawn "swaync-client" "-t" "-sw"; }
-
-    Mod+P { spawn "noctalia-shell" "ipc" "call" "sidePanel" "toggle"; }
-    Mod+V { spawn "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
-    Mod+Shift+X { spawn "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
-    Mod+Shift+P { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
-    // Mod+Shift+I { spawn "noctalia-shell" "ipc" "call" "idleInhibitor" "toggle"; }
-    Mod+Comma { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
-    Mod+Shift+N { spawn "noctalia-shell" "ipc" "call" "notifications" "toggleHistory"; }
 }
