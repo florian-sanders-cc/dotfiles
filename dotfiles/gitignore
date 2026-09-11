@@ -10,3 +10,4 @@
 .opencode/
 .playwright-cli/
 playwright-docker/
+.nvim/
