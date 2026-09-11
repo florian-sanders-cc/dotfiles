@@ -27,7 +27,7 @@
     gnome-calculator
     gnome-disk-utility
     seahorse
-    noctalia-qs
+    noctalia
     niri-smart-focus
     kdePackages.qtwayland
   ];

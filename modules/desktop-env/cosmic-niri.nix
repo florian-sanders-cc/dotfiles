@@ -70,7 +70,6 @@ in
     pavucontrol
     polkit_gnome
     seahorse
-    noctalia-qs
     niri-smart-focus
     wl-clipboard
     xdg-desktop-portal-gtk
