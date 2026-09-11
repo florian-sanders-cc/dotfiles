@@ -6,7 +6,7 @@
   python3,
   node-gyp,
   nodejs_24,
-  electron_41,
+  electron_42,
   udev,
   gnugrep,
   gawk,
@@ -17,18 +17,18 @@
 
 buildNpmPackage rec {
   pname = "tuxedo-control-center";
-  version = "3.0.3";
+  version = "3.0.9";
 
   src = fetchFromGitHub {
     owner = "tuxedocomputers";
     repo = "tuxedo-control-center";
     rev = "v${version}";
-    hash = "sha256-ucsgzuTHZ1SL23l84EEBnzjDnXJ5RFHj/Zx4rx1YbxA=";
+    hash = "sha256-jK4ZiurcKrZt2KqCjrccVuPtzvqFEaMjxl7BLsdE76w=";
   };
 
   nodejs = nodejs_24;
 
-  npmDepsHash = "sha256-j8fBwDdo2zHTbIo28My4PZijgqgTcalNHHR9s1VuBqA=";
+  npmDepsHash = "sha256-de+UDVubEWxK0Ft9NCgtAisOg40+K2R1OEywX/sKlOo=";
 
   # git+https:// deps in package.json (dbus-next, node-ble, usocket)
   forceGitDeps = true;
@@ -150,49 +150,49 @@ buildNpmPackage rec {
   '';
 
   installPhase = ''
-    runHook preInstall
+        runHook preInstall
 
-    mkdir -p $out
-    cp -r ./dist/tuxedo-control-center/. $out/
+        mkdir -p $out
+        cp -r ./dist/tuxedo-control-center/. $out/
 
-    # node_modules needed at runtime by the esbuild bundle and electron app
-    cp -r ./node_modules $out/node_modules
+        # node_modules needed at runtime by the esbuild bundle and electron app
+        cp -r ./node_modules $out/node_modules
 
-    # systemd units
-    install -Dm644 src/dist-data/tccd.service \
-      $out/lib/systemd/system/tccd.service
-    install -Dm644 src/dist-data/tccd-sleep.service \
-      $out/lib/systemd/system/tccd-sleep.service
+        # systemd units
+        install -Dm644 src/dist-data/tccd.service \
+          $out/lib/systemd/system/tccd.service
+        install -Dm644 src/dist-data/tccd-sleep.service \
+          $out/lib/systemd/system/tccd-sleep.service
 
-    # D-Bus policy
-    install -Dm644 src/dist-data/com.tuxedocomputers.tccd.conf \
-      $out/share/dbus-1/system.d/com.tuxedocomputers.tccd.conf
+        # D-Bus policy
+        install -Dm644 src/dist-data/com.tuxedocomputers.tccd.conf \
+          $out/share/dbus-1/system.d/com.tuxedocomputers.tccd.conf
 
-    # Polkit policy
-    install -Dm644 src/dist-data/com.tuxedocomputers.tccd.policy \
-      $out/share/polkit-1/actions/com.tuxedocomputers.tccd.policy
+        # Polkit policy
+        install -Dm644 src/dist-data/com.tuxedocomputers.tccd.policy \
+          $out/share/polkit-1/actions/com.tuxedocomputers.tccd.policy
 
-    # Desktop files
-    install -Dm644 src/dist-data/tuxedo-control-center.desktop \
-      $out/share/applications/tuxedo-control-center.desktop
-    install -Dm644 src/dist-data/tuxedo-control-center-tray.desktop \
-      $out/share/applications/tuxedo-control-center-tray.desktop
+        # Desktop files
+        install -Dm644 src/dist-data/tuxedo-control-center.desktop \
+          $out/share/applications/tuxedo-control-center.desktop
+        install -Dm644 src/dist-data/tuxedo-control-center-tray.desktop \
+          $out/share/applications/tuxedo-control-center-tray.desktop
 
-    # Icons
-    install -Dm644 src/dist-data/tuxedo-control-center_256.svg \
-      $out/share/icons/hicolor/scalable/apps/tuxedo-control-center.svg
-    install -Dm644 src/dist-data/tuxedo-control-center_256.png \
-      $out/share/icons/hicolor/256x256/apps/tuxedo-control-center.png
+        # Icons
+        install -Dm644 src/dist-data/tuxedo-control-center_256.svg \
+          $out/share/icons/hicolor/scalable/apps/tuxedo-control-center.svg
+        install -Dm644 src/dist-data/tuxedo-control-center_256.png \
+          $out/share/icons/hicolor/256x256/apps/tuxedo-control-center.png
 
-    # udev rule: generate with real $out path so udevadm verify passes.
-    # $devnode and $env{...} are udev variables — escaped so they survive
-    # into the installed rule as literals.
-    install -Dm644 /dev/null $out/lib/udev/rules.d/99-webcam.rules
-    cat > $out/lib/udev/rules.d/99-webcam.rules <<EOF
-SUBSYSTEM=="video4linux", ACTION=="add", KERNEL=="video[0-9]*", RUN+="${python3}/bin/python3 $out/data/camera/cameractrls.py -s \$devnode,\$env{ID_VENDOR_ID},\$env{ID_MODEL_ID},/var/lib/tcc/webcam,$out/data/camera/v4l2_kernel_names.json"
-EOF
+        # udev rule: generate with real $out path so udevadm verify passes.
+        # $devnode and $env{...} are udev variables — escaped so they survive
+        # into the installed rule as literals.
+        install -Dm644 /dev/null $out/lib/udev/rules.d/99-webcam.rules
+        cat > $out/lib/udev/rules.d/99-webcam.rules <<EOF
+    SUBSYSTEM=="video4linux", ACTION=="add", KERNEL=="video[0-9]*", RUN+="${python3}/bin/python3 $out/data/camera/cameractrls.py -s \$devnode,\$env{ID_VENDOR_ID},\$env{ID_MODEL_ID},/var/lib/tcc/webcam,$out/data/camera/v4l2_kernel_names.json"
+    EOF
 
-    runHook postInstall
+        runHook postInstall
   '';
 
   postFixup = ''
@@ -211,7 +211,15 @@ EOF
     # tccd daemon: run the esbuild bundle with Node instead of pkg binary
     makeWrapper ${nodejs_24}/bin/node $out/bin/tccd \
       --add-flags "$out/service-app/service-app/esbuild.js" \
-      --prefix PATH : "${lib.makeBinPath [ gnugrep gawk xrandr procps which ]}" \
+      --prefix PATH : "${
+        lib.makeBinPath [
+          gnugrep
+          gawk
+          xrandr
+          procps
+          which
+        ]
+      }" \
       --prefix NODE_PATH : "$out/node_modules"
 
     # GUI wrapper: written as a shell script rather than via makeWrapper so
@@ -221,7 +229,7 @@ EOF
       printf '#!/bin/sh\n'
       printf 'export PATH="/run/wrappers/bin:%s''${PATH:+:$PATH}"\n' "${lib.makeBinPath [ python3 ]}"
       printf 'export NODE_PATH="%s''${NODE_PATH:+:$NODE_PATH}"\n' "$out/node_modules"
-      printf 'exec "%s" \\\n' "${electron_41}/bin/electron"
+      printf 'exec "%s" \\\n' "${electron_42}/bin/electron"
       printf '  "%s" \\\n' "$out/e-app/e-app/main.js"
       printf '  --no-tccd-version-check \\\n'
       printf '  --user-data-dir="$HOME/.config/tuxedo-control-center" \\\n'
