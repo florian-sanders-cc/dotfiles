@@ -34,7 +34,6 @@ name = "html"
 language-servers = ["wc-language-server", "vscode-html-language-server"]
 
 [language-server.tsgo]
-command = "tsgo"
 command = "tsc"
 args = ["--lsp", "--stdio"]
 
