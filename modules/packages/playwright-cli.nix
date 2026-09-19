@@ -9,7 +9,7 @@
 
 buildNpmPackage rec {
   pname = "playwright-cli";
-  version = "0.1.15";
+  version = "0.1.20";
 
   src = fetchFromGitHub {
     owner = "microsoft";
@@ -34,7 +34,9 @@ buildNpmPackage rec {
     # Create compat browsers directory with nixpkgs browsers and revision symlinks
     COMPAT_DIR="$out/share/playwright-cli/browsers"
     mkdir -p "$COMPAT_DIR"
-    ln -sfn ${playwright-driver.browsers}/* "$COMPAT_DIR/"
+    # withWebkit = false: nixpkgs' playwright-webkit fails auto-patchelf
+    # (missing libmanette-0.2.so.0 for minibrowser-wpe), and we only use chromium.
+    ln -sfn ${playwright-driver.browsers.override { withWebkit = false; }}/* "$COMPAT_DIR/"
 
     # Create compat symlinks for any mismatched revisions between
     # the bundled playwright-core and nixpkgs' playwright-driver
@@ -79,4 +81,3 @@ buildNpmPackage rec {
     platforms = platforms.linux ++ platforms.darwin;
   };
 }
-
