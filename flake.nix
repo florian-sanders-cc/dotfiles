@@ -60,9 +60,10 @@
     # home-manager.url = "github:nix-community/home-manager/release-23.11";
 
     # --- Dev Flakes ---
-    helix-flake = {
-      url = "github:helix-editor/helix/?ref=079a789e8cb08ead67f19e1971a1b7438b37354b";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
+    # helix-flake = {
+    #   url = "github:helix-editor/helix/?ref=079a789e8cb08ead67f19e1971a1b7438b37354b";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 }

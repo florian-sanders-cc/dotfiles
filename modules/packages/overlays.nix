@@ -9,7 +9,7 @@
     (final: prev: {
       neovim-nightly = inputs.neovim-nightly-overlay.packages.${prev.stdenv.hostPlatform.system}.default;
 
-      helix-nightly = inputs.helix-flake.packages.${prev.stdenv.hostPlatform.system}.default;
+      # helix-nightly = inputs.helix-flake.packages.${prev.stdenv.hostPlatform.system}.default;
 
       tuxedo-control-center = prev.callPackage ./tuxedo-control-center.nix { };
 
