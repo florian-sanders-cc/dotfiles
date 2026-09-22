@@ -12,8 +12,6 @@
       ''
                                   function fish_greeting; end
 
-                                  # mise - polyglot tool version manager
-                                  mise activate fish | source
                                 # Aliases
                                     alias g='git'
                                 #compdef g=git

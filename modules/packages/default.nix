@@ -49,7 +49,6 @@ let
     rustup
     doggo
     yazi
-    mise
     bat
     usage
     neovide
@@ -64,13 +63,12 @@ let
     wtype
     playwright-cli
     rtk
-    # warp-terminal-wayland
     nono
   ];
   proPackages = with pkgs; [
-    random-labels
-    glab
     # jetbrains.webstorm
+    glab
+    random-labels
   ];
   isGamingEnabled = currentUser.name == specs.users.perso-workstation.name;
 
@@ -93,31 +91,32 @@ in
   home-manager.users."${currentUser.name}" = {
     # Packages with specific config
     imports = [
+      ./agents.nix
       ./alacritty.nix
+      ./claude-code.nix
+      ./codediff-ann.nix
       ./direnv.nix
       ./fish.nix
       ./fzf.nix
+      ./ghostty.nix
       ./git.nix
       ./helix.nix
-      ./neovim.nix # Full-featured Neovim (command: nvim)
-      ./starship.nix
-      ./vscode.nix
-      ./zed.nix
-      ./zoxide.nix
       ./kitty.nix
-      ./zellij.nix
-      ./zsh.nix
-      ./ghostty.nix
-      ./agents.nix
-      ./claude-code.nix
+      ./mise.nix
+      ./neovim.nix # Full-featured Neovim (command: nvim)
+      ./nono.nix
       ./opencode.nix
       ./pi.nix
-      ./nono.nix
       ./pw-broker.nix
-      ./codediff-ann.nix
+      ./starship.nix
+      ./vscode.nix
+      ./warp.nix
       ./waybar.nix
       ./yazi.nix
-      ./warp.nix
+      ./zed.nix
+      ./zellij.nix
+      ./zoxide.nix
+      ./zsh.nix
     ];
 
     # Standard packages
