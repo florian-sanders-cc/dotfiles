@@ -290,6 +290,14 @@ map("n", "<right>", when_active(function()
   mc.jump(true, vim.v.count1)
 end, "<right>"), "next cursor")
 
-map("n", "<esc>", when_active(function()
-  vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
-end, "<esc>"), "clear cursors")
+-- `<esc>` can't go through `when_active`: its fallback replays a noremap'd
+-- `<esc>`, which skips mappings on purpose (else it would recurse into this
+-- one) and so never reaches the `:noh` map from core/options.lua. Do the
+-- highlight clearing here instead, so `<esc>` keeps both jobs.
+map("n", "<esc>", function()
+  if mc.active() then
+    vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+  else
+    vim.cmd("nohlsearch")
+  end
+end, "clear cursors / search highlight")

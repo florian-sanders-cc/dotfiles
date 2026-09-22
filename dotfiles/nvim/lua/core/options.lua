@@ -148,7 +148,9 @@ end
 
 nmap_leader("wr", "<Cmd>lua MiniMisc.resize_window()<CR>", "Resize to default width")
 nmap_leader("wz", "<Cmd>lua MiniMisc.zoom()<CR>", "Zoom toggle")
-vim.keymap.set("n", "<Esc>", "<Cmd>noh<CR>", { desc = "Clear search highlight" })
+-- NOTE: `<Esc>` clears the search highlight, but the mapping lives in
+-- editing/native-multicursor.lua -- that file loads later and owns `<Esc>` so
+-- it can clear extra cursors first. Setting it here too would just be shadowed.
 
 -- Window navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
