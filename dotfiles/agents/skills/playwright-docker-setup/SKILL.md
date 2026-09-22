@@ -150,6 +150,17 @@ CMD ["pnpm", "test"]
 #!/usr/bin/env sh
 set -e
 
+# The node_modules exclude below also shields every node_modules in /work from --delete. When a
+# package is removed from /src, its leftover node_modules keeps the directory alive and rsync
+# fails with "cannot delete non-empty directory". Drop the node_modules whose package no longer
+# exists in /src; those of live packages are kept, so the volume stays warm.
+find /work -name node_modules -type d -prune | while read -r nm; do
+  rel="${nm#/work}"
+  if [ ! -d "/src${rel%/node_modules}" ]; then
+    rm -rf "$nm"
+  fi
+done
+
 # Copy the read-only source into the writable work tree. node_modules and .git are excluded:
 # the host's node_modules is built for NixOS and must not enter Ubuntu, and .git is large and
 # unneeded. --delete keeps /work in sync with deletions in /src on later runs.
