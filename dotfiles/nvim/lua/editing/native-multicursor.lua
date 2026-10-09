@@ -2,22 +2,42 @@
 --
 -- Builtin commands do most of the work; see `:h mcursor`:
 --   Q / {Visual}Q / <C-LeftMouse>  toggle cursors      q=  follow-mode
+--   zq{motion}  cursor at each {motion}  (zq* / zqgn: every match)
 --   gQ  restore    ]C / [C  jump   CTRL-L  clear       g CTRL-A  counter
 --
 -- This file adds what the builtin lacks: incremental match selection
 -- (VSCode's Ctrl-D), per-line stepping, diagnostic cursors and alignment.
+--
+-- Only the public API is used (`:h mcursor-api`): cursors are extmarks in the
+-- "nvim.multicursor" namespace -- setting one adds a cursor, deleting one
+-- removes it. `vim._core.mcursor` is internal and has changed under us before.
 
-local ok, mc = pcall(require, "vim._core.mcursor")
-if not ok then
-  vim.notify("native-multicursor: vim._core.mcursor unavailable (needs nvim 0.13+)", vim.log.levels.WARN)
+if vim.fn.exists("##CmdAtom") == 0 then
+  vim.notify("native-multicursor: builtin multicursor unavailable (needs nvim 0.13+)", vim.log.levels.WARN)
   return
 end
 
--- Cursors are extmarks in this namespace; deleting a mark deletes the cursor.
 local ns = vim.api.nvim_create_namespace("nvim.multicursor")
 
 local function map(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { desc = "Multicursor: " .. desc })
+end
+
+--- True if extra cursors exist in the current buffer.
+local function active()
+  return #vim.api.nvim_buf_get_extmarks(0, ns, 0, -1, { limit = 1 }) > 0
+end
+
+--- Add a cursor at (1-indexed `row`, 0-indexed byte `col`). No-op if one is
+--- already there.
+local function add(row, col)
+  vim.api.nvim_buf_set_extmark(0, ns, row - 1, col, {})
+end
+
+--- Add a cursor at the primary cursor's position.
+local function add_here()
+  local pos = vim.api.nvim_win_get_cursor(0)
+  add(pos[1], pos[2])
 end
 
 --- Extra cursors, as { row = 1-indexed, col = 0-indexed byte }, in buffer order.
@@ -30,7 +50,7 @@ local function cursors()
 end
 
 --- Byte column on `lnum` nearest to virtual column `vcol`, clamped to EOL.
---- Mirrors the builtin's handling of tabs/multibyte in `vim._core.mcursor`.
+--- Handles tabs/multibyte the way the builtin `v_Q` does.
 local function bytecol(lnum, vcol)
   if vim.fn.virtcol({ lnum, "$" }) <= vcol then
     return math.max(vim.fn.col({ lnum, "$" }) - 1, 0)
@@ -47,7 +67,7 @@ end
 
 --- Search pattern for match-based cursors: the Visual selection if we are in
 --- Visual mode (leaving it), else the word under the cursor. Sets @/ so that
---- `n`, `N` and the builtin `[count]Q` all agree with us.
+--- `n`, `N` and the builtin `zqgn` all agree with us.
 local function seed_pattern()
   local mode = vim.fn.mode()
   local pat
@@ -76,7 +96,7 @@ end
 --- Pattern for the current session: reuse @/ once cursors exist, so repeated
 --- presses keep matching the original word rather than whatever we landed on.
 local function session_pattern()
-  if mc.active() then
+  if active() then
     local reg = vim.fn.getreg("/")
     if reg ~= "" then
       return reg
@@ -91,7 +111,7 @@ end
 --- @param dir integer 1 forward, -1 backward
 --- @param skip boolean true to move the primary cursor without leaving one behind
 local function match_cursor(dir, skip)
-  local fresh = not mc.active()
+  local fresh = not active()
   local pat = session_pattern()
   if not pat then
     return
@@ -102,8 +122,7 @@ local function match_cursor(dir, skip)
     vim.fn.search(pat, "bcW")
   end
   if not skip then
-    local pos = vim.api.nvim_win_get_cursor(0)
-    vim.api.nvim_mcursor(0, { pos[1], pos[2] })
+    add_here()
   end
   if vim.fn.search(pat, dir > 0 and "w" or "bw") == 0 then
     vim.notify("No more matches", vim.log.levels.INFO)
@@ -111,11 +130,19 @@ local function match_cursor(dir, skip)
 end
 
 --- Place a cursor at every match of the cursor word / Visual selection.
+--- The primary cursor moves to the start of its match and stands in for it.
 local function match_all()
-  if not seed_pattern() then
+  local pat = seed_pattern()
+  if not pat then
     return
   end
-  mc.matches()
+  vim.fn.search(pat, "bcW")
+  local pos = vim.api.nvim_win_get_cursor(0)
+  for _, m in ipairs(vim.fn.matchbufline("%", pat, 1, "$")) do
+    if m.lnum ~= pos[1] or m.byteidx ~= pos[2] then
+      add(m.lnum, m.byteidx)
+    end
+  end
 end
 
 map({ "n", "x" }, "<M-n>", function()
@@ -144,7 +171,7 @@ local function line_cursor(dir, skip)
   end
   local vcol = vim.fn.virtcol(".")
   if not skip then
-    vim.api.nvim_mcursor(0, { pos[1], pos[2] })
+    add(pos[1], pos[2])
   end
   vim.api.nvim_win_set_cursor(0, { target, bytecol(target, vcol) })
 end
@@ -167,8 +194,7 @@ end, "skip cursor to line above")
 --- Jump to the next/previous diagnostic, optionally leaving a cursor behind.
 local function diagnostic_cursor(dir, skip)
   if not skip then
-    local pos = vim.api.nvim_win_get_cursor(0)
-    vim.api.nvim_mcursor(0, { pos[1], pos[2] })
+    add_here()
   end
   vim.diagnostic.jump({ count = dir, float = false })
 end
@@ -181,7 +207,7 @@ local function diagnostic_all(severity)
     return
   end
   for _, d in ipairs(diags) do
-    vim.api.nvim_mcursor(0, { d.lnum + 1, d.col })
+    add(d.lnum + 1, d.col)
   end
 end
 
@@ -209,7 +235,7 @@ end, "add cursors at all errors")
 --- line aligns with the other 1st cursors, the 2nd with the 2nd, and so on.
 --- Extmarks shift themselves as we insert, so positions are re-read each round.
 local function align()
-  if not mc.active() then
+  if not active() then
     return
   end
   for nth = 1, 64 do
@@ -261,21 +287,38 @@ local function delete_nearest()
 end
 
 map("n", "<leader>x", delete_nearest, "delete nearest cursor")
-map("n", "<M-u>", mc.restore, "restore cleared cursors")
+map("n", "<M-u>", "gQ", "restore cleared cursors")
 
--- Counters. `g CTRL-A` is the builtin; these add a decrementing variant and
--- honour a [count] as the starting number.
-map("n", "<M-c>", function()
-  mc.number(vim.v.count1, 1)
-end, "number cursors ascending")
+--- Insert a number at each cursor (primary included), in buffer order:
+--- start, start+step, … Inserted bottom-up so earlier positions don't shift.
+local function number(start, step)
+  local pos = vim.api.nvim_win_get_cursor(0)
+  local pts = { { row = pos[1], col = pos[2] } }
+  for _, c in ipairs(cursors()) do
+    if c.row ~= pos[1] or c.col ~= pos[2] then
+      pts[#pts + 1] = c
+    end
+  end
+  table.sort(pts, function(a, b)
+    return a.row < b.row or (a.row == b.row and a.col < b.col)
+  end)
+  for i = #pts, 1, -1 do
+    local p = pts[i]
+    vim.api.nvim_buf_set_text(0, p.row - 1, p.col, p.row - 1, p.col, { tostring(start + (i - 1) * step) })
+  end
+end
+
+-- Counters. `g CTRL-A` is the builtin ascending one; this adds a decrementing
+-- variant. Both honour a [count] as the starting number.
+map("n", "<M-c>", "g<C-a>", "number cursors ascending")
 map("n", "<M-C>", function()
-  mc.number(vim.v.count1, -1)
+  number(vim.v.count1, -1)
 end, "number cursors descending")
 
 --- Run `builtin` only while cursors exist, else fall through to the default key.
 local function when_active(builtin, fallback)
   return function()
-    if mc.active() then
+    if active() then
       builtin()
     else
       vim.api.nvim_feedkeys(vim.keycode(fallback), "n", false)
@@ -284,10 +327,10 @@ local function when_active(builtin, fallback)
 end
 
 map("n", "<left>", when_active(function()
-  mc.jump(false, vim.v.count1)
+  vim.cmd("normal! " .. vim.v.count1 .. "[C")
 end, "<left>"), "previous cursor")
 map("n", "<right>", when_active(function()
-  mc.jump(true, vim.v.count1)
+  vim.cmd("normal! " .. vim.v.count1 .. "]C")
 end, "<right>"), "next cursor")
 
 -- `<esc>` can't go through `when_active`: its fallback replays a noremap'd
@@ -295,7 +338,7 @@ end, "<right>"), "next cursor")
 -- one) and so never reaches the `:noh` map from core/options.lua. Do the
 -- highlight clearing here instead, so `<esc>` keeps both jobs.
 map("n", "<esc>", function()
-  if mc.active() then
+  if active() then
     vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
   else
     vim.cmd("nohlsearch")
