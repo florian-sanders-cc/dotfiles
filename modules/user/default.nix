@@ -128,7 +128,7 @@ in
     home.sessionVariables = {
       HOME = home.homeDirectory;
       NPM_PREFIX = "${home.homeDirectory}/.npm-packages";
-      PATH = "${home.homeDirectory}/.npm-packages/bin:$PATH";
+      PATH = "${home.homeDirectory}/.npm-packages/bin:${home.homeDirectory}/.cargo/bin:$PATH";
       NIXOS_OZONE_WL = "1";
       TERMINAL = "kitty";
     };
