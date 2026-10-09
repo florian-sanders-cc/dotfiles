@@ -9,6 +9,7 @@ require("codediff").setup({
     position = "left",
     width = 35,
     view_mode = "tree",
+    auto_refresh = false,
   },
   keymaps = {
     view = {
