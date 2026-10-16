@@ -15,7 +15,7 @@
       plugins = [ "git" ];
       theme = "robbyrussell";
     };
-    initExtra = ''
+    initContent = ''
       eval "$(direnv hook zsh)"
       if [[ $(ps --no-header -p $PPID -o comm) =~ '^alacritty$' ]]; then
               for wid in $(xdotool search --pid $PPID); do
