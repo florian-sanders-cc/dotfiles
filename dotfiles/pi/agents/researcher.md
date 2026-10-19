@@ -1,6 +1,7 @@
 ---
 name: researcher
 description: Web research — search the web and read pages, returning a concise answer with source URLs. Use for any "look this up / what's the latest / fetch this URL" task.
+model: openai/gpt-5.6-terra
 tools: read, bash, grep, find, ls
 ---
 

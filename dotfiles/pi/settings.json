@@ -1,7 +1,13 @@
 {
   "lastChangelogVersion": "999.0.0",
-  "defaultProvider": "opencode-go",
-  "defaultModel": "glm-5.3",
+  "defaultProvider": "openai",
+  "defaultModel": "gpt-6.1-sol",
+  "enabledModels": [
+    "openai/gpt-6.1-sol",
+    "openai/gpt-6-luna",
+    "openai/gpt-5.6-terra",
+    "openai/gpt-6-astra"
+  ],
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "editorPaddingX": 3,
