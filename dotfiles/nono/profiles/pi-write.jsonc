@@ -66,8 +66,12 @@
       "openrouter.ai",
       "opencode.ai",
       "api.scaleway.ai",
+      // ChatGPT subscription OAuth (login and token refresh), plus both pi
+      // inference routes: openai-codex via chatgpt.com/backend-api/codex
+      // and openai via api.openai.com/v1.
       "auth.openai.com",
-      "chatgtp.com",
+      "chatgpt.com",
+      "api.openai.com",
       // GitHub Copilot 1/2 — the inference plane (/models, /chat/completions,
       // /models/<id>/policy). pi derives the API host PER CREDENTIAL from the
       // `proxy-ep=` claim inside the Copilot token, rewriting proxy.* → api.*
