@@ -18,7 +18,7 @@
   "tui.editor.deleteWordForward": ["alt+d", "alt+delete", "ctrl+delete"],
   "tui.editor.deleteToLineStart": ["ctrl+u"],
   "tui.editor.deleteToLineEnd": ["ctrl+k"],
-  "tui.editor.yankPop": ["none"],
+  "tui.editor.yankPop": [],
 
   "tui.input.newLine": ["shift+enter", "ctrl+return", "alt+return", "ctrl+j"],
   "tui.input.submit": ["enter"],
