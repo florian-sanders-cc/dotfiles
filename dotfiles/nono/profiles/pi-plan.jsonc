@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/nolabs-ai/nono/refs/heads/main/crates/nono-cli/data/nono-profile.schema.json",
   "extends": [
     "default"
   ],
@@ -24,10 +25,6 @@
       "linux_temp_read"
     ],
     "exclude": []
-  },
-  "commands": {
-    "allow": [],
-    "deny": []
   },
   "filesystem": {
     // allow = writable pi/browser state only. Everything else in the audit
@@ -55,7 +52,22 @@
       //   file queue, chromium uses the TMPDIR repoint). If ever re-added:
       //   scope to the exact socket file, not the dir.
       // nvim inside sandboxed agents. Tiny, harmless.
-      "~/.local/state/nvim/shada"
+      "~/.local/state/nvim/shada",
+      // Cache: only the subdirs agent-run tools actually use. A blanket
+      // ~/.cache grant exposed browser profiles, email (evolution), gh/copilot
+      // and other agents' logs (claude-cli-nodejs, opencode) to a profile with
+      // unrestricted network. pi + playwright need none of this (pi-write runs
+      // with no cache grant at all) — these are for commands the agent runs.
+      //
+      // nix: eval-cache, fetcher-cache-v*.sqlite, gitv3, tarball-cache. Must
+      // be R+W — nix opens its SQLite caches read-write even to read, so a
+      // read-only grant breaks `nix eval`/`nix flake` rather than just
+      // slowing them. Accepted risk: cache entries could be tampered with,
+      // but locked flake inputs are still checked against narHash.
+      "~/.cache/nix",
+      // mise: version/metadata caches touched on every shim invocation.
+      // Low-sensitivity (registry metadata, lockfile resolutions).
+      "~/.cache/mise"
     ],
     "read": [
       // Skills repo-path dep. Content is markdown (read → exec is enough).
@@ -74,9 +86,6 @@
       "~/.pi/agent/skills",
       "~/.pi/agent/extensions",
       "~/.pi/agent/prompts",
-      // nix eval-cache + config inspection in plan mode (write would be
-      // perf-only; not granted).
-      "~/.cache/nix",
       // ~/.pi/bin exec → subagent spawning.
       "~/.pi",
       // Profiles → store symlink; agents may run `nono profile show`. The
@@ -90,15 +99,9 @@
       "~/.local/share/mise",
       // ms-playwright chromium binaries (chromium-1071, -1187). read → exec
       // suffices; installs happen outside the sandbox.
-      "~/.cache/ms-playwright",
-      // Generic cache read (top-level stays unreadable without this).
-      "~/.cache"
+      "~/.cache/ms-playwright"
     ],
-    // Pragmatic low-risk write area. Top-level cache is still unreadable as
-    // a side effect (verified: `ls ~/.cache` → EACCES in-session).
-    "write": [
-      "~/.cache"
-    ],
+    "write": [],
     // allow_file empty: the symlinked files below are granted read-only —
     // writes target repo realpaths via this repo + rebuild (or pi-write for
     // in-place edits). Without the read_file grants pi startup degrades:
@@ -159,7 +162,6 @@
     "exclude_patterns": [],
     "exclude_globs": []
   },
-  "interactive": false,
   "skipdirs": [],
   "packs": [],
   "command_args": [],

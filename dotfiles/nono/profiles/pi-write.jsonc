@@ -1,5 +1,5 @@
 {
-  "$schema": "./nono-profile.schema.json",
+  "$schema": "https://raw.githubusercontent.com/nolabs-ai/nono/refs/heads/main/crates/nono-cli/data/nono-profile.schema.json",
   "extends": "default",
   "meta": {
     "name": "pi-write",
