@@ -6,6 +6,28 @@
 
 {
   nixpkgs.overlays = [
+    (_final: prev:
+      let
+        patchTuxedoDrivers = kernelPackages: kernelPackages.extend (
+          _kernelFinal: kernelPrev: {
+            tuxedo-drivers = kernelPrev.tuxedo-drivers.overrideAttrs (old: {
+              # NixOS runs depmod after combining all kernel module packages.
+              makeFlags = (old.makeFlags or [ ]) ++ [ "DEPMOD=true" ];
+              postPatch = (old.postPatch or "") + ''
+                # Let recursive make inherit flags without shell expansion.
+                substituteInPlace Makefile \
+                  --replace-fail '$(MAKEFLAGS)' "" \
+                  --replace-fail 'make -C' '$(MAKE) -C'
+              '';
+            });
+          }
+        );
+      in
+      {
+        linuxPackages_latest = patchTuxedoDrivers prev.linuxPackages_latest;
+        linuxPackages_zen = patchTuxedoDrivers prev.linuxPackages_zen;
+      }
+    )
     (final: prev: {
       neovim-nightly = inputs.neovim-nightly-overlay.packages.${prev.stdenv.hostPlatform.system}.default;
 
