@@ -24,6 +24,7 @@
         );
       in
       {
+        linuxPackages_7_2 = patchTuxedoDrivers prev.linuxPackages_7_2;
         linuxPackages_latest = patchTuxedoDrivers prev.linuxPackages_latest;
         linuxPackages_zen = patchTuxedoDrivers prev.linuxPackages_zen;
       }
