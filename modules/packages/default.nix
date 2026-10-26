@@ -64,6 +64,7 @@ let
     playwright-cli
     rtk
     nono
+    zed-delta
   ];
   proPackages = with pkgs; [
     # jetbrains.webstorm

@@ -55,6 +55,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    delta = {
+      url = "github:zed-industries/delta-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # --- Stable channels ---
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     # home-manager.url = "github:nix-community/home-manager/release-23.11";
