@@ -18,8 +18,7 @@
   "treeFilterMode": "all",
   "theme": "dark",
   "packages": [
-    "git:github.com/earendil-works/pi-review",
-    "./nix-extensions/pi-rtk-bash"
+    "git:github.com/earendil-works/pi-review"
   ],
   "terminal": {
     "showTerminalProgress": false

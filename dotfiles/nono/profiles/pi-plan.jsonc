@@ -93,7 +93,7 @@
       // so the parent ~/.config/nono grant alone doesn't cover it.
       "~/.config/nono",
       "~/.config/nono/profiles",
-      // mise = node runtime for pi extensions (jiti), playwright-cli, rtk;
+      // mise = node runtime for pi extensions (jiti), playwright-cli;
       // includes shims/. Parent grant covers installs/node and installs/npm
       // — no subpath entries needed.
       "~/.local/share/mise",

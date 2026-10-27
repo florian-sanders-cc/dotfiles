@@ -62,7 +62,6 @@ let
     handy
     wtype
     playwright-cli
-    rtk
     nono
     zed-delta
   ];
