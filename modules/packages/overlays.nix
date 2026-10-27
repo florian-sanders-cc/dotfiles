@@ -63,12 +63,6 @@
 
       pi-handoff = prev.callPackage ./pi-handoff.nix { };
 
-      pi-rtk-bash = prev.callPackage ./pi-rtk-bash.nix { };
-
-      rtk = prev.rtk.overrideAttrs (_old: {
-        doCheck = false;
-      });
-
       # Enable VA-API hardware video encoding for WebRTC + Vulkan rendering
       # See: https://wiki.archlinux.org/title/Chromium#Hardware_video_acceleration
       google-chrome = prev.google-chrome.override {
@@ -96,19 +90,6 @@
       #     POLKIT_AGENT_HELPER_1 = "/run/wrappers/bin/polkit-agent-helper-1";
       #   };
       # });
-
-      warp-terminal-wayland =
-        let
-          version = "0.2026.06.17.09.49.stable_02";
-        in
-        (prev.warp-terminal.override { waylandSupport = true; }).overrideAttrs (old: {
-          inherit version;
-          src = prev.fetchurl {
-            url = "https://releases.warp.dev/stable/v${version}/warp-terminal-v${version}-1-x86_64.pkg.tar.zst";
-            hash = "sha256-U8dX4kC5HHZpJNer3uleKV/JsC8rCQ+06aaSj3xG1dI=";
-          };
-          buildInputs = old.buildInputs ++ [ prev.xz ];
-        });
 
       zed-delta = inputs.delta.packages.${prev.stdenv.hostPlatform.system}.delta;
     })

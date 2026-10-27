@@ -64,6 +64,7 @@ let
     playwright-cli
     nono
     zed-delta
+    warp-terminal
   ];
   proPackages = with pkgs; [
     # jetbrains.webstorm
