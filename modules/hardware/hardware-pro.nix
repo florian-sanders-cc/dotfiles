@@ -15,7 +15,7 @@ in
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ./gpu.nix
-    ./tuxedo.nix
+    # ./tuxedo.nix
   ];
 
   config = lib.mkIf (currentUser.name == specs.users.pro.name) {

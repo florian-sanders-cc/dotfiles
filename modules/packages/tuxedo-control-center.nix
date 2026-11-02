@@ -17,18 +17,18 @@
 
 buildNpmPackage rec {
   pname = "tuxedo-control-center";
-  version = "3.0.10";
+  version = "3.1.1";
 
   src = fetchFromGitHub {
     owner = "tuxedocomputers";
     repo = "tuxedo-control-center";
     rev = "v${version}";
-    hash = "sha256-9jGru71QtKmGp3uQu/9W/IgzVjKruscxdGNBoXTYN4k=";
+    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
   };
 
   nodejs = nodejs_24;
 
-  npmDepsHash = "sha256-ZunuBAsIBtbXmrH3ctcX5tygMF5h015XYomtjqRNLhM=";
+  npmDepsHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
 
   # git+https:// deps in package.json (dbus-next, node-ble, usocket)
   forceGitDeps = true;
