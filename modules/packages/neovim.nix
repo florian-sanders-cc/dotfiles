@@ -27,6 +27,7 @@ let
   ];
 
   formatters = with pkgs; [
+    oxfmt
     stylua
     prettierd
     nixfmt

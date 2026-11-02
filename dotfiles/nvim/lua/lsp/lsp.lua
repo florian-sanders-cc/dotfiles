@@ -135,6 +135,7 @@ vim.lsp.enable({
   "rust_analyzer",
   "marksman",
   "eslint",
+  "oxlint",
   "tsgo-ls",
   "json-ls",
   "html-ls",

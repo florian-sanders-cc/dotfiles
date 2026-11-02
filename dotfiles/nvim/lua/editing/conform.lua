@@ -16,12 +16,19 @@ require("conform").setup({
   formatters_by_ft = {
     lua = { "stylua" },
     nix = { "nixfmt" },
-    javascript = { "prettier", stop_after_first = true },
-    typescript = { "prettier", stop_after_first = true },
-    json = { "prettier", stop_after_first = true },
-    jsonc = { "prettier", stop_after_first = true },
+    javascript = { "oxfmt", "prettier", stop_after_first = true },
+    javascriptreact = { "oxfmt", "prettier", stop_after_first = true },
+    typescript = { "oxfmt", "prettier", stop_after_first = true },
+    typescriptreact = { "oxfmt", "prettier", stop_after_first = true },
+    json = { "oxfmt", "prettier", stop_after_first = true },
+    jsonc = { "oxfmt", "prettier", stop_after_first = true },
   },
   formatters = {
+    oxfmt = {
+      -- Only opt in with an Oxfmt config; other projects keep Prettier.
+      cwd = require("conform.util").root_file({ ".oxfmtrc.json", ".oxfmtrc.jsonc", "oxfmt.config.ts" }),
+      require_cwd = true,
+    },
     stylua = {
       args = { "--indent-type", "Spaces", "--indent-width", "2", "--stdin-filepath", "$FILENAME", "-" },
     },
