@@ -50,6 +50,11 @@ function pi-write --description "pi writing: read-write project, LLM providers o
             end
         end
     end
+    # Keep dependency guidance specific to pi-write, not pi or pi-plan.
+    set -l sandbox_prompt 'You are running in the pi-write sandbox. LLM-provider traffic is allowed, but general internet access, including package downloads, is blocked.
+Use installed tools and locally available dependencies. Do not attempt downloads or bypass sandbox restrictions.
+When dependencies are missing, list their names, required versions (or state when unknown), and why they are needed. Ask the user to install them outside the sandbox.
+State which work or tests remain blocked by missing dependencies.'
     _nono_playwright_setup
     # pw-broker queue: write=requests/ ONLY, rest of queue/ read-only. runs/
     # must stay read-only — if it were writable the agent could symlink-swap a
@@ -61,7 +66,7 @@ function pi-write --description "pi writing: read-write project, LLM providers o
         --allow "$HOME/.local/state/pw-broker/queue/requests" \
         --read "$HOME/.local/state/pw-broker/queue" \
         $open_ports \
-        -- pi $argv
+        -- pi --append-system-prompt "$sandbox_prompt" $argv
     # Auto-audit on the HOST after the sandbox exits. pi-write gave the
     # agent RW over $PWD (incl. .git/.jj); Landlock can't stop it planting
     # a control file (jj repo config, git hook, local core.hooksPath) that
