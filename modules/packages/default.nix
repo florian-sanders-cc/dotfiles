@@ -53,8 +53,6 @@ let
     usage
     neovide
     claude-code
-    opencode
-    opencode-desktop
     stu
     stylelint-ls
     lsof
