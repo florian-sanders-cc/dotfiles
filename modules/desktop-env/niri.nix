@@ -28,8 +28,8 @@
     gnome-disk-utility
     seahorse
     noctalia
-    niri-smart-focus
     kdePackages.qtwayland
+    niri-focus-or-run
   ];
 
   services.upower.enable = true;

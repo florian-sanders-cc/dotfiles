@@ -94,12 +94,12 @@ hotkey-overlay {
 binds {
     Mod+Shift+Colon { show-hotkey-overlay; }
 
-    Mod+ampersand { spawn "smart-focus-terminal"; }
-    Mod+Shift+ampersand { spawn "smart-focus-terminal" "kitty"; }
-    Mod+eacute { spawn "smart-focus-firefox"; }
-    Mod+Shift+eacute { spawn "smart-focus-firefox" "true"; }
-    Mod+quotedbl { spawn "smart-focus-chromium"; }
-    Mod+Shift+quotedbl { spawn "smart-focus-chromium" "true"; }
+    Mod+ampersand { spawn "niri-focus-or-run" "kitty"; }
+    Mod+Shift+ampersand { spawn "kitty"; }
+    Mod+eacute { spawn "niri-focus-or-run" "firefox"; }
+    Mod+Shift+eacute { spawn "firefox"; }
+    Mod+quotedbl { spawn "niri-focus-or-run" "chromium"; }
+    Mod+Shift+quotedbl { spawn "chromium"; }
     Mod+D { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
     Mod+Comma { spawn-sh "noctalia msg settings-toggle"; }
