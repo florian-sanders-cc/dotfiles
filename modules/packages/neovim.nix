@@ -23,7 +23,6 @@ let
     vscode-langservers-extracted
     vscode-eslint
     vtsls
-    # wc-ls
   ];
 
   formatters = with pkgs; [

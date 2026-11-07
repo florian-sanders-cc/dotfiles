@@ -45,8 +45,6 @@
 
       vscode-eslint = prev.callPackage ./vscode-eslint.nix { };
 
-      # wc-ls = prev.callPackage ./wc-ls.nix { };
-
       gh-actions-ls = prev.callPackage ./gh-actions-ls.nix { };
 
       cem = prev.callPackage ./cem.nix { };
