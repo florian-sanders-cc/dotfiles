@@ -12,8 +12,8 @@ rustPlatform.buildRustPackage {
   src = fetchFromGitHub {
     owner = "florian-sanders";
     repo = "niri-focus-or-run";
-    rev = "73a46afcf582cdb9bd749e573757423b6ecd5b0a";
-    hash = "sha256-VRc340RWAXd7HzACeEly33yV2ymaYaftZssBiB1+VcE=";
+    rev = "ed6cb76fed1c8bbe57bb33ff5af7b786b439e450";
+    hash = "sha256-xbO3Sjg+T+hAxgSTchgOCBPJiNN2ZUOLbAUhr522JcA=";
   };
 
   cargoHash = "sha256-KEecvN58gpvwQCrOWl/nPoN0E7cREeTE2fXqRhmj8zs=";
