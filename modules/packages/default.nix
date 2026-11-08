@@ -98,7 +98,6 @@ in
       ./fzf.nix
       ./ghostty.nix
       ./git.nix
-      ./helix.nix
       ./kitty.nix
       ./mise.nix
       ./mitos.nix
