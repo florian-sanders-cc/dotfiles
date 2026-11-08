@@ -54,7 +54,6 @@ let
     neovide
     claude-code
     stu
-    stylelint-ls
     lsof
     github-copilot-cli
     handy
@@ -102,6 +101,7 @@ in
       ./helix.nix
       ./kitty.nix
       ./mise.nix
+      ./mitos.nix
       ./neovim.nix # Full-featured Neovim (command: nvim)
       ./nono.nix
       ./opencode.nix

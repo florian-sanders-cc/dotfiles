@@ -1,0 +1,76 @@
+theme = "nord"
+
+[editor]
+line-number = "absolute"
+
+[editor.cursor.shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.completion]
+trigger-delay = 50
+
+[editor.format]
+on-save = true
+
+[editor.indent-guides]
+character = "┊"
+skip-levels = 2
+render = false
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+mode.color = true
+diagnostics = ["warning", "error"]
+workspace-diagnostics = ["warning", "error"]
+
+[editor.lsp]
+
+[editor.lsp.progress]
+enable = true
+
+[editor.mouse]
+enable = false
+
+[editor.cursor]
+highlight-line = true
+
+[editor.diagnostics.inline]
+cursor-line = "disable"
+other-lines = "disable"
+
+[editor.diagnostics.end-of-line]
+severity = "disable"
+
+[editor.bufferline]
+show = "never"
+
+[keys.normal]
+"C-s" = ":w"
+"C-m" = "save_selection"
+A-x = "extend_to_line_bounds"
+X = ["extend_line_up", "extend_to_line_bounds"]
+space.e = [
+	':sh rm -f /tmp/unique-ca1ea106',
+	':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/unique-ca1ea106',
+	':sh printf "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+	':open %sh{cat /tmp/unique-ca1ea106}',
+	':redraw',
+	':set mouse false',
+  ':set mouse true',
+]
+[keys.normal.g]
+D = ["split_vertical", "jump_view_up", "goto_definition"]
+
+[keys.insert]
+"C-s" = ":w"
+A-x = "extend_to_line_bounds"
+
+[terminal]
+true-color = true
