@@ -3,14 +3,11 @@ theme "nord"
 
 show_startup_tips false
 
-// Default layout to use on startup
-default_layout "neovim-layout"
-
 // Disable pane frames
 pane_frames false
 
 // Set scrollback editor
-scrollback_editor "nvim"
+scrollback_editor "ms"
 
 session_serialization false
 
@@ -37,6 +34,15 @@ keybinds clear-defaults=true {
 
         // Essential keybinds for basic functionality
         bind "Ctrl Shift s" { SwitchToMode "Scroll"; }
+
+        // Handoff: copy last pi response, exit pi, launch pi-write
+        bind "Ctrl Shift y" {
+            Run "pi-handoff" {
+                floating true
+                no_focus true
+                close_on_exit true
+            }
+        }
     }
 
     scroll {

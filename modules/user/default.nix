@@ -108,7 +108,7 @@ in
         "audio/ogg" = [ "vlc.desktop" ];
         "inode/directory" = [ "yazi-kitty.desktop" ];
         "x-directory/normal" = [ "yazi-kitty.desktop" ];
-        "x-scheme-handler/terminal" = [ "kitty.desktop" ];
+        "x-scheme-handler/terminal" = [ "Alacritty.desktop" ];
       };
     };
 
@@ -130,7 +130,7 @@ in
       NPM_PREFIX = "${home.homeDirectory}/.npm-packages";
       PATH = "${home.homeDirectory}/.npm-packages/bin:${home.homeDirectory}/.cargo/bin:$PATH";
       NIXOS_OZONE_WL = "1";
-      TERMINAL = "kitty";
+      TERMINAL = "alacritty";
     };
   };
 
