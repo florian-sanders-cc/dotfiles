@@ -42,13 +42,13 @@
   security.pam.services.gdm.enableGnomeKeyring = true;
   services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
-  # Set default terminal to kitty
+  # Set default terminal
   programs.dconf.enable = true;
   programs.dconf.profiles.user.databases = [
     {
       settings = {
         "org/gnome/desktop/default-applications/terminal" = {
-          exec = "kitty";
+          exec = "alacritty";
           exec-arg = "-e";
         };
       };

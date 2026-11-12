@@ -94,8 +94,8 @@ hotkey-overlay {
 binds {
     Mod+Shift+Colon { show-hotkey-overlay; }
 
-    Mod+ampersand { spawn "niri-focus-or-run" "kitty"; }
-    Mod+Shift+ampersand { spawn "kitty"; }
+    Mod+ampersand { spawn "niri-focus-or-run" "alacritty" "Alacritty"; }
+    Mod+Shift+ampersand { spawn "alacritty"; }
     Mod+eacute { spawn "niri-focus-or-run" "firefox"; }
     Mod+Shift+eacute { spawn "firefox"; }
     Mod+quotedbl { spawn "niri-focus-or-run" "chromium"; }

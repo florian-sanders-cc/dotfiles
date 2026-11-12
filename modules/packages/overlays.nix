@@ -88,6 +88,18 @@
       # });
 
       zed-delta = inputs.delta.packages.${prev.stdenv.hostPlatform.system}.delta;
+
+      # mitos v0.2.1 lacks the aws-lc build inputs that upstream main added;
+      # needed since nixpkgs (26.11pre) cargo-setup-hook exports AWS_LC_SYS_USE_SYSTEM=1
+      mitos = (inputs.mitos.packages.${prev.stdenv.hostPlatform.system}.mitos).overrideAttrs (old: {
+        buildInputs = (old.buildInputs or [ ]) ++ [ prev.aws-lc ];
+        nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ prev.pkg-config ];
+      });
+
+      nono = prev.nono.overrideAttrs (old: {
+        buildInputs = (old.buildInputs or [ ]) ++ [ prev.aws-lc ];
+      });
+
     })
   ];
 }

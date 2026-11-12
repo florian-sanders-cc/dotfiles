@@ -1,0 +1,162 @@
+[[language]]
+name = "typescript"
+language-servers = ["tsgo", "eslint"]
+code-actions-on-save = ["source.fixAll.eslint"]
+
+[[language]]
+name = "javascript"
+language-servers = [{ name = "tsgo" }, "eslint"]
+code-actions-on-save = ["source.fixAll.eslint"]
+auto-format = true
+
+[language.formatter]
+command = "prettier"
+
+[[language]]
+name = "nix"
+scope = "source.nix"
+injection-regex = "nix"
+file-types = ["nix"]
+shebangs = []
+comment-token = "#"
+language-servers = ["nil", "nixd"]
+
+[language.formatter]
+command = "nixfmt"
+args = []
+
+[language.indent]
+tab-width = 2
+unit = "  "
+
+[[language]]
+name = "html"
+language-servers = ["wc-language-server", "vscode-html-language-server"]
+
+[language-server.tsgo]
+command = "tsc"
+args = ["--lsp", "--stdio"]
+
+[language-server.vtsls]
+command = "vtsls"
+args = ["--stdio"]
+required-root-patterns = ["tsconfig.json"]
+
+[language-server.vtsls.config]
+enableMoveToFileCodeAction = true
+
+[language-server.vtsls.config.vtsls]
+enableMoveToFileCodeAction = true
+autoUseWorkspaceTsdk = true
+
+[language-server.vtsls.config.tsserver]
+maxTsServerMemory = 8192
+
+[language-server.vtsls.config.experimental.completion]
+enableServerSideFuzzyMatch = true
+entriesLimit = 50
+
+[language-server.vtsls.config.typescript.preferences]
+importModuleSpecifier = "relative"
+useAliasesForRenames = false
+
+[language-server.vtsls.config.typescript.preferences.format]
+enable = false
+
+[language-server.vtsls.config.typescript.suggest]
+completeFunctionCalls = true
+
+
+[language-server.vtsls.config.javascript.preferences]
+importModuleSpecifier = "relative"
+useAliasesForRenames = false
+
+[language-server.vtsls.config.javascript.preferences.format]
+enable = false
+
+[language-server.vtsls.config.javascript.suggest]
+completeFunctionCalls = true
+
+
+[language-server.eslint]
+command = "vscode-eslint"
+args = ["--stdio"]
+# Gate startup on an eslint config existing at the project root.
+# `root_file` used to sit under `.config`, but that whole table is passed
+# verbatim to the server as settings — vscode-eslint has no such setting,
+# so it was inert. This is the actual mitos mechanism.
+required-root-patterns = [
+  ".eslintrc",
+  ".eslintrc.js",
+  ".eslintrc.cjs",
+  ".eslintrc.yaml",
+  ".eslintrc.yml",
+  ".eslintrc.json",
+  "eslint.config.js",
+  "eslint.config.mjs",
+  "eslint.config.cjs",
+  "eslint.config.ts",
+  "eslint.config.mts",
+  "eslint.config.cts",
+]
+
+[language-server.eslint.config]
+format = true
+onIgnoredFiles = "off"
+quiet = false
+run = "onType"
+validate = "on"
+# Must be set (even to ""). The vscode-eslint server feeds `nodePath` into Node's `path`
+# API while resolving settings; if the key is absent it's `undefined` and the server throws
+# `The "path" argument must be of type string` on textDocument/diagnostic & codeAction.
+# Helix (unlike Neovim's eslint.lua) does not default this, so we set it explicitly.
+nodePath = ""
+# Server 3.x reads `workingDirectory` (singular, a table) — the old plural
+# `workingDirectories` array is ignored. `mode = "auto"` matches the eslint.lua
+# config used in Neovim: use the nearest eslint config file's directory.
+workingDirectory = { mode = "auto" }
+
+[language-server.eslint.config.codeAction.disableRuleComment]
+enable = true
+location = "separateLine"
+
+[language-server.eslint.config.codeAction.showDocumentation]
+enable = true
+
+# [language-server.eslint.config.codeActionOnSave]
+# enable = false
+# mode = "all"
+
+[language-server.eslint.config.experimental]
+useFlatConfig = false
+
+[language-server.eslint.config.problems]
+shortenToSingleLine = false
+
+
+[language-server.stylelint]
+command = "stylelint-ls"
+args = ["--stdio"]
+required-root-patterns = [
+  ".stylelintrc",
+  ".stylelintrc.json",
+  ".stylelintrc.yaml",
+  ".stylelintrc.yml",
+  ".stylelintrc.js",
+  ".stylelintrc.mjs",
+  "stylelint.config.js",
+  "stylelint.config.mjs",
+  "package.json",
+]
+
+[language-server.stylelint.config.stylelint]
+ignoreDisables = false
+packageManager = "npm"
+snippet = ["css", "postcss"]
+
+[language-server.nixd]
+command = "nixd"
+
+[language-server.wc-language-server]
+command = "wc-language-server"
+args = ["--stdio"]

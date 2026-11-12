@@ -3,10 +3,10 @@
   "extends": "default",
   "meta": {
     "name": "pi-write",
-    "description": "pi write mode: read-write project, network limited to LLM providers only"
+    "description": "pi write mode: read-write project, network limited to LLM providers only",
   },
   "groups": {
-    "include": ["nix_runtime"]
+    "include": ["nix_runtime"],
   },
   "filesystem": {
     // Out-of-store symlinks under ~/.pi/agent and ~/.agents/skills resolve to
@@ -34,7 +34,7 @@
       "$HOME/.local/state/playwright-cli",
       // In-place skill editing lives here (plan mode grants read only —
       // writable skills = persistent prompt-injection vector).
-      "$HOME/.agents/skills"
+      "$HOME/.agents/skills",
     ],
     // Symlinked FILES → dotfiles/pi/{APPEND_SYSTEM.md,settings.json,
     // keybindings.json}. nono rejects non-dirs in `allow`, so these must be
@@ -42,7 +42,7 @@
     "allow_file": [
       "$HOME/.pi/agent/APPEND_SYSTEM.md",
       "$HOME/.pi/agent/settings.json",
-      "$HOME/.pi/agent/keybindings.json"
+      "$HOME/.pi/agent/keybindings.json",
     ],
     // mise JS toolchain installs = nix-store-equivalent runtime (read → exec,
     // verified via /nix/store). pi-write has no general net, so the agent can't
@@ -54,8 +54,8 @@
       "~/.local/share/mise/installs/npm",
       // ms-playwright chromium binaries (chromium-1071, -1187). read → exec
       // suffices; installs happen outside the sandbox.
-      "~/.cache/ms-playwright"
-    ]
+      "~/.cache/ms-playwright",
+    ],
   },
   "network": {
     "block": false,
@@ -93,6 +93,7 @@
       "api.individual.githubcopilot.com",
       "api.business.githubcopilot.com",
       "api.enterprise.githubcopilot.com",
+      "api.mistral.ai",
       // GitHub Copilot 2/2 — the token exchange. The long-lived GitHub OAuth
       // token in auth.json is swapped for a ~30-min Copilot token at
       // GET https://api.github.com/copilot_internal/v2/token, on every session
@@ -108,13 +109,13 @@
       // (request forwarded), /user → 403 from the nono proxy (L7 blocked).
       {
         "domain": "api.github.com",
-        "endpoints": [{ "method": "GET", "path": "/copilot_internal/**" }]
-      }
+        "endpoints": [{ "method": "GET", "path": "/copilot_internal/**" }],
+      },
       // Deliberately NOT granted: github.com/login/device/code and
       // /login/oauth/access_token (the `pi auth login` device flow). That is a
       // one-time HOST action — run `pi auth login` outside the sandbox. The
       // credential lands in ~/.pi/agent/auth.json, which pi-write already
       // grants R+W, so in-sandbox token refreshes persist normally.
-    ]
-  }
+    ],
+  },
 }

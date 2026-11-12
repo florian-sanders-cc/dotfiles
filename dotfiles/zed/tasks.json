@@ -14,7 +14,7 @@
   },
   {
     "label": "Yazi File Manager",
-    "command": "kitty -e yazi",
+    "command": "alacritty -e yazi",
     "args": [],
     "env": { "EDITOR": "zed --wait" },
     "use_new_terminal": false,

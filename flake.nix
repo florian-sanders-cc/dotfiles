@@ -60,6 +60,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    mitos = {
+      url = "github:mitos-editor/mitos?ref=v0.2.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # --- Stable channels ---
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     # home-manager.url = "github:nix-community/home-manager/release-23.11";
