@@ -55,11 +55,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    delta = {
-      url = "github:zed-industries/delta-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     mitos = {
       url = "github:mitos-editor/mitos?ref=v0.2.1";
       inputs.nixpkgs.follows = "nixpkgs";

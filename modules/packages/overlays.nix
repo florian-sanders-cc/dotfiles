@@ -59,6 +59,10 @@
 
       pi-handoff = prev.callPackage ./pi-handoff.nix { };
 
+      nono = prev.nono.overrideAttrs (old: {
+        buildInputs = (old.buildInputs or [ ]) ++ [ prev.aws-lc ];
+      });
+
       # Enable VA-API hardware video encoding for WebRTC + Vulkan rendering
       # See: https://wiki.archlinux.org/title/Chromium#Hardware_video_acceleration
       google-chrome = prev.google-chrome.override {
@@ -78,16 +82,6 @@
           "--use-angle=gl-egl"
         ];
       };
-
-      # Fix cosmic-osd polkit authentication (https://github.com/pop-os/cosmic-osd/issues/170)
-      # Point to the SUID-wrapped helper in /run/wrappers/bin/ (set up by security.wrappers)
-      # cosmic-osd = prev.cosmic-osd.overrideAttrs (old: {
-      #   env = (old.env or { }) // {
-      #     POLKIT_AGENT_HELPER_1 = "/run/wrappers/bin/polkit-agent-helper-1";
-      #   };
-      # });
-
-      zed-delta = inputs.delta.packages.${prev.stdenv.hostPlatform.system}.delta;
 
       # mitos v0.2.1 lacks the aws-lc build inputs that upstream main added;
       # needed since nixpkgs (26.11pre) cargo-setup-hook exports AWS_LC_SYS_USE_SYSTEM=1
